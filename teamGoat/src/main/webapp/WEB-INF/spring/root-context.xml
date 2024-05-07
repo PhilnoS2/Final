@@ -4,5 +4,27 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+	    <property name="driverClassName" value="${spring.datasource.driverClassName}" />
+	    <property name="url" value="${spring.datasource.url}" />
+	    <property name="username" value="${spring.datasource.username}" />
+	    <property name="password" value="${spring.datasource.password}" />
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
+	 	<property name="configLocation" value="classpath:mybatis-config.xml" />
+	 	<property name="dataSource" ref="dataSource" />
+	</bean>
+	  
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+	  	<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+		  id="multipartResolver">
+		<property name="maxUploadSize" value="100000000" />
+		<property name="maxInMemorySize" value="100000000" />	  
+	</bean>
+	
 </beans>
