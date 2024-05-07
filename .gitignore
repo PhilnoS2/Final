@@ -78,8 +78,6 @@ config.properties
 *_REMOTE_*.txt
 
 ### Java ###
-# Compiled class file
-*.class
 
 # Log file
 *.log
