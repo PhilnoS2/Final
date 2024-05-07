@@ -1,5 +1,5 @@
 package com.kh.goty;
 
-public class asdf {
+public class temp {
 
 }
