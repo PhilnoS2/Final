@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Index</title>
+<title>Main</title>
 </head>
 <body>
 
-	<jsp:forward page="WEB-INF/views/main.jsp" />
-
+	<h1>Main</h1>
+	
 </body>
 </html>
