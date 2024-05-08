@@ -151,3 +151,4 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/git,java,maven,windows,eclipse
+teamGoat/src/main/webapp/WEB-INF/spring/root-context.xml
