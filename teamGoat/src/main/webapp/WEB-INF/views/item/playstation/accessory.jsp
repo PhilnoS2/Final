@@ -5,9 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>PlayStation Accessory</title>
 </head>
 <body>
+
+	<jsp:include page="../../common/menubar.jsp" />
 
 </body>
 </html>
