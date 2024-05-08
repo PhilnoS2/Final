@@ -34,7 +34,7 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-	.regExRuleId, .regExRulePwd{
+	.regExRuleId, .regExRulePwd {
 		font-size: 12px;
 		color: red;
 		display: none;
