@@ -5,11 +5,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- 	<!-- jQuery 라이브러리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
 <title>menubar</title>
@@ -126,7 +123,7 @@
 	<nav id="nav">
 		<ul id="nav-ul">
 			<li>
-		     	<a>닌텐도</a>
+		     	<a>Nintendo</a>
 		      	<ul id="option-ul">
 		      		<li><a href="#">게임 본체</a></li>
 		      		<li><a href="#">게임 타이틀</a></li>
@@ -134,7 +131,7 @@
 		      	</ul> 
 		    </li>
 		    <li>
-		     	<a>플스</a>
+		     	<a>PlayStation</a>
 		      	<ul id="option-ul">
 		      		<li><a href="#">게임 본체</a></li>
 		      		<li><a href="#">게임 타이틀</a></li>
@@ -142,7 +139,7 @@
 		      	</ul> 
 		    </li>
 		    <li>
-		     	<a>엑박</a>
+		     	<a>X Box</a>
 		      	<ul id="option-ul">
 		      		<li><a href="#">게임 본체</a></li>
 		      		<li><a href="#">게임 타이틀</a></li>
@@ -150,13 +147,13 @@
 		      	</ul> 
 		    </li>
 		    <li>
-		      <a href="#">리뷰</a>
+		      <a href="#">Metacritic</a>
 		    </li>
 		    <li>
 		      <a href="#">자유게시판</a>
 		    </li>
 		    <li>
-		      <a href="#">고객관련</a>
+		      <a href="#">고객센터</a>
 		      <ul id="option-ul">
 		      		<li><a href="#">공지사항</a></li>
 		      		<li><a href="#">FAQ</a></li>
