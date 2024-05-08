@@ -9,7 +9,7 @@
 </head>
 <body>
 
-	<h1>Main</h1>
+	<jsp:include page="common/menubar.jsp" />
 	
 </body>
 </html>

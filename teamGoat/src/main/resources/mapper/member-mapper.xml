@@ -5,4 +5,62 @@
   
 <mapper namespace="memberMapper">
 
+<select id="login"
+  		parameterType="member"
+		resultType="member"
+  	>
+  		SELECT
+  		      MEMBER_NO memberNo,
+  		      MEMBER_ID memberId,
+  		      MEMBER_PWD memberPwd,
+  		      MEMBER_NAME memberName,
+  		      NICKNAME nickname,
+  		      BORNDATE bornDate,
+  		      EMAIL email,
+  		      PHONE phone,
+  		      ADDRESS address,
+  		      ADDR_DETAIL addrDetatil
+  		  FROM
+  		      MEMBER       
+  	     WHERE	      
+  		      MEMBER_ID = #{memberId}
+  		   AND
+  		      DELETE_YN = 'N'       
+  	</select>
+  	
+  	<insert id="insertMember"
+  		parameterType="member"
+  	>
+  	INSERT
+  	  INTO
+  	 MEMBER
+  	       (
+  	       	MEMBER_NO,
+  	       	MEMBER_ID,
+  	       	MEMBER_PWD,
+  	       	MEMBER_NAME,
+  	       	NICKNAME,
+  	       	EMAIL,
+  	       	BORNDATE,
+  	       	PHONE,
+  	       	ADDRESS,
+  	       	ADDR_DETAIL
+  	       )
+  	 VALUES
+  	  	   (
+  	  	   SEQ_MEMBER.NEXTVAL,
+  	  	   #{memberId},
+  	  	   #{memberPwd},
+  	  	   #{memberName},
+  	  	   #{nickname},
+  	  	   #{email},
+  	  	   #{bornDate},
+  	  	   #{phone},
+  	  	   #{address},
+  	  	   #{addrDetail}
+  	  	   )    
+  	</insert>
+  
+  
+  
 </mapper>
