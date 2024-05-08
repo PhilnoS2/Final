@@ -64,8 +64,6 @@ public class MemberController {
 		
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
-		log.info("info", member);
-		
 		
 		if(memberService.insertMember(member) > 0) {
 			session.setAttribute("alertMsg", "회원가입 성공");
