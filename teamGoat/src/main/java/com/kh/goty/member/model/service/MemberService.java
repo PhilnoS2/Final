@@ -8,5 +8,7 @@ public interface MemberService {
 	
 	public int insertMember(Member member);
 	
-	public int idChekc(String checkId); 
+	public int idChekc(String checkId);
+
+	public String findId(Member member); 
 }

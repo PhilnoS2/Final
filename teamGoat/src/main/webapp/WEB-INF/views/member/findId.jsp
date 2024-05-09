@@ -27,7 +27,7 @@
 		justify-content: flex-end;
 	}
 	
-	.regExRuleId, .regExRulePwd {
+	.checkName, .phone, .regExRulePwd {
 		font-size: 12px;
 		color: red;
 		display: none;
@@ -36,89 +36,81 @@
 	
 </head>
 <body>
-<jsp:include page="../common/menubar.jsp" />
-	<div id="login-div">
-		<form action="login.member" method="post">
-			<div id="inner-div">
-				<h3>아이디찾기</h3>
-				<div class="form-group">
-				  <label for="id">이름</label>
-				  <input type="text" class="form-control" id="id" placeholder="이름을 입력하세요."
-				   onkeyup="regExpCheckId();" name="memberId">
-				  <span class="regExRuleId">첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.</span>
+	<jsp:include page="../common/menubar.jsp" />
+		<div id="login-div">
+			<form action="findId.member" method="post">
+				<div id="inner-div">
+					<h3>아이디 찾기</h3>
+					
+					<div class="form-group">
+					  <label for="name">이름</label>
+					  <input type="text" class="form-control" id="name" name="memberName" onkeyup="regExpCheckName();"
+					  	maxlength="5" required placeholder="이름을 입력해주세요.">
+					  <span class="checkName">최소 2글자 한글로입력해주세요.</span>
+					</div>
+					
+					<div class="form-group">
+					  <label for="phone">전화번호</label>
+					  <input type="text" class="form-control" id="phone" name="phone" maxlength="11"
+					  	onkeyup="reqExpPhone();" required placeholder=" - 제외하고 입력해주세요.">
+					  <span class="phone">- 제외한 11자리 숫자로 입력해주세요.</span>
+					</div>
+					
+					<div id="btn-option">
+						<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">찾기</button>
+					</div>
+					
 				</div>
-				
-				<div class="form-group">
-				  <label for="pwd">전화번호</label>
-				  <input type="text" class="form-control" id="pwd" 
-				  onkeyup="" name="phone" placeholder="전화번호를를입력하세요.">
-				  <span class=""></span>
-				</div>
-				
-				<div class="form-group">
-				  <label for="pwd">비밀번호</label>
-				  <input type="password" class="form-control" id="pwd"
-				   onkeyup="regExpCheckPwd();" name="memberPwd" placeholder="비밀번호를 입력하세요.">
-				  <span class="regExRulePwd">영문과 숫자 8~15 자리로 입력해주세요. 특수문자(!@#)만 가능</span>
-				</div>
-				
-				
-				<div id="btn-option">
-					<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">찾기</button>
-				</div>
-				
-			</div>
-		</form>
-	</div>
+			</form>
+		</div>
 	
-	<script>
-		let regExpId = /^[a-zA-Z0-9]{5,15}$/;
-		let regExpPw = /^[a-zA-Z0-9!@#$%^&*]{8,15}$/;
-		
-		// 아이디와 비밀번호
-		const $id = $('#id');
-		const $pwd = $('#pwd');
-		const $submitBtn = $('#submitBtn');
-		
-		const $regExRuleId = $('.regExRuleId');
-		const $regExRulePwd = $('.regExRulePwd');
-		
- 		function regExpCheckId(){
- 			
- 			if(regExpId.test($id.val())){
- 				$regExRuleId.css('display', 'none');
- 			} else {
- 				$regExRuleId.css('display', 'block');
- 			}
- 			
- 			if($id.val() === ''){
- 				$regExRuleId.css('display', 'none');
- 			}
- 			submitCheck();
- 		} 
- 		
- 		function regExpCheckPwd(){
- 		
- 			if(regExpPw.test($pwd.val())){
- 				$regExRulePwd.css('display', 'none');
- 			} else {
- 				$regExRulePwd.css('display', 'block');
- 			}
- 			if($pwd.val() === ''){
- 				$regExRulePwd.css('display', 'none');
- 			}
- 			submitCheck();
- 		} 
-		
- 		
- 		function submitCheck(){
- 			if(regExpPw.test($pwd.val()) && regExpId.test($id.val())){
- 				$submitBtn.attr('disabled', false);
- 			} else {
- 				$submitBtn.attr('disabled', true);
- 			}
- 		}
-		
-	</script>
+		<script>
+			const regExpName = /^[ㄱ-ㅎ가-힣]{2,}$/;
+			const regExpPhone = /^[0-9]{1,11}$/;			
+			
+			const $name = $('#name');
+			const $phone =$('#phone');
+			const $submitBtn = $('#submitBtn');
+			
+			const $checkName = $('.checkName');
+			const $checkPhone = $('.phone')
+			
+			//이름확인
+			function regExpCheckName(){
+				if(regExpName.test($name.val())){
+					$checkName.css('display', 'none');
+				} else {
+					$checkName.css('display', 'block');
+				}
+				
+				submitCheck();
+				if($name.val() === ''){
+					$checkName.css('display', 'none');
+				}
+			}
+	 		
+			//전화번호확인
+			function reqExpPhone(){
+				if(regExpPhone.test($phone.val())){
+					$checkPhone.css('display', 'none');
+				} else {
+					$checkPhone.css('display', 'block');
+				}
+				submitCheck();
+				if($phone.val() === ''){
+					$checkPhone.css('display', 'none');
+				}
+			}
+			
+	 		function submitCheck(){
+	 			if(regExpName.test($name.val())
+	 			   && regExpPhone.test($phone.val())) {
+	 				$submitBtn.attr('disabled', false);
+	 			} else {
+	 				$submitBtn.attr('disabled', true);
+	 			}
+	 		}
+			
+		</script>
 </body>
 </html>

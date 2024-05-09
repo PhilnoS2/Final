@@ -103,6 +103,14 @@
 		</script>
 		<c:remove var="alertMsg" scope="session" />
 	</c:if>
+	
+	<c:if test="${ not empty findId }">
+		<script>
+			alert('찾으신 아이디는 : ${findId} 입니다.');
+		</script>
+		<c:remove var="findId" scope="session" />
+	</c:if>
+	
 	<div id="header">
 		<div id="logoOpt">
 			<img width="200px" height="200px" src="resources\img\logo2.png">

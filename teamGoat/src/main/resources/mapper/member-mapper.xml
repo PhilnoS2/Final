@@ -76,6 +76,39 @@
   	      MEMBER_ID = #{checkId} 
   	</select>
   
+  	<select id="findId"
+  		parameterType="member"
+  		resultType="string"
+  	>
+  	SELECT
+  		  MEMBER_ID
+  	  FROM
+  	      MEMBER
+  	 WHERE
+  	      MEMBER_NAME = #{memberName}
+  	   AND
+  	      PHONE = #{phone}
+  	   AND
+  	      DELETE_YN = 'N'               	  
+  	</select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
 </mapper>

@@ -1,5 +1,6 @@
 package com.kh.goty.member.controller;
 
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -86,5 +87,28 @@ public class MemberController {
 	public String findId() {
 		return "member/findId";
 	}
+	
+	@PostMapping("findId.member")
+	public ModelAndView findId(Member member, ModelAndView mv, HttpSession session) {
+		
+		// 이름/전화번호/비밀번호 조건 아이디찾기
+		// 응답 / alert로 아이디 보여주고 로그인 페이지로 이동
+		
+		String findId = memberService.findId(member);
+		
+		if( findId != null) {
+			session.setAttribute("findId", findId);
+			mv.setViewName("member/loginForm");
+			
+		} else {
+			mv.addObject("errorMsg", "아이디 찾기 실패").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	
 	
 }

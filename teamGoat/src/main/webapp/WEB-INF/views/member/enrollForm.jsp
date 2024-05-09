@@ -122,7 +122,7 @@
 				  <label for="phone">전화번호</label>
 				  <input type="text" class="form-control" id="phone" name="phone" maxlength="11"
 				  	onkeyup="reqExpPhone();" required placeholder=" - 제외하고 입력해주세요.">
-				  <span class="phone">숫자만 11자리로 입력해주세요.</span>
+				  <span class="phone">- 제외한 11자리 숫자로 입력해주세요.</span>
 				</div>
 				
 				<div class="address-div">

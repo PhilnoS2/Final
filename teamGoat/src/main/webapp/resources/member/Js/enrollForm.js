@@ -1,12 +1,12 @@
         
-        let regExpId = /^[a-zA-Z][a-zA-Z0-9]{4,15}$/;
-		let regExpPw = /^[a-zA-Z0-9!@#]{8,15}$/;
-		let regExpName = /^[ㄱ-ㅎ가-힣]{2,}$/;
-		let regExpNickname = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{1,5}$/;
-		let regExpBornDate = /^[0-9]{1,8}$/;
-		let regEmail =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
-		let regExpPhone = /^[0-9]{1,11}$/;
-		let regDetailAddr = /^[ㄱ-ㅎ가-힣0-9]{1,15}$/;
+        const regExpId = /^[a-zA-Z][a-zA-Z0-9]{4,15}$/;
+		const regExpPw = /^[a-zA-Z0-9!@#]{8,15}$/;
+		const regExpName = /^[ㄱ-ㅎ가-힣]{2,}$/;
+		const regExpNickname = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{1,5}$/;
+		const regExpBornDate = /^[0-9]{1,8}$/;
+		const regEmail =  /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i;
+		const regExpPhone = /^[0-9]{1,11}$/;
+		const regDetailAddr = /^[ㄱ-ㅎ가-힣0-9]{1,15}$/;
 		
 		let flag = false;
 		

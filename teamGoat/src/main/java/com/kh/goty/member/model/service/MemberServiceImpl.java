@@ -30,5 +30,10 @@ public class MemberServiceImpl implements MemberService {
 	public int idChekc(String checkId) {
 		return memberRepository.idCheck(sqlSession, checkId);
 	}
+
+	@Override
+	public String findId(Member member) {
+		return memberRepository.findId(sqlSession, member);
+	}
 	
 }

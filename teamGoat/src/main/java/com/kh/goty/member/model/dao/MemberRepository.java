@@ -19,4 +19,8 @@ public class MemberRepository {
 	public int idCheck(SqlSessionTemplate sqlSession, String checkId) {
 		return sqlSession.selectOne("memberMapper.idCheck", checkId);
 	}
+	
+	public String findId(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.selectOne("memberMapper.findId", member);
+	}
 }
