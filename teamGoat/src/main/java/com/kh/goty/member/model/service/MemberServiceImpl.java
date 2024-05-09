@@ -25,5 +25,10 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member member) {
 		return memberRepository.insertMember(sqlSession, member);
 	}
+
+	@Override
+	public int idChekc(String checkId) {
+		return memberRepository.idCheck(sqlSession, checkId);
+	}
 	
 }

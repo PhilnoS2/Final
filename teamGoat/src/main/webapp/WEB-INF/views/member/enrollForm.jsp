@@ -76,7 +76,7 @@
 				<div class="form-group">
 					  <label for="id">아이디</label>
 					  <input type="text" class="form-control" id="id" name="memberId" required onkeyup="regExpCheckId();" placeholder="아이디를입력해주세요.">
-					  <span class="regExRuleId">영문과 숫자 5~15 자리로 입력해주세요.</span>
+					  <span class="regExRuleId">첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.</span>
 				</div>
 					
 				<div class="form-group">

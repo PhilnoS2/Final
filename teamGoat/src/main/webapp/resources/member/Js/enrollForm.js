@@ -8,6 +8,7 @@
 		let regExpPhone = /^[0-9]{1,11}$/;
 		let regDetailAddr = /^[ㄱ-ㅎ가-힣0-9]{1,15}$/;
 		
+		let flag = false;
 		
 	    //입력양식접근
 		const $id = $('#id');
@@ -36,10 +37,19 @@
  		function regExpCheckId(){
  			if(regExpId.test($id.val())){
  				$regExRuleId.css('display', 'none');
+ 				
+ 				// idCheck() / 아이디 중복체크
+ 				idCheck();
  			} else {
+ 				$regExRuleId.text('첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.');
  				$regExRuleId.css('display', 'block');
  			}
+ 			
  			submitCheck();
+ 			
+ 			if($id.val() === ''){
+ 				$regExRuleId.css('display', 'none');
+ 			}
  		} 
  		
  		//비밀번호
@@ -50,8 +60,13 @@
 			} else {
 				$regExRulePwd.css('display', 'block');
 				$pwdCheck.attr('readonly', true);
+				$pwdCheck.val('');
 			}
 			submitCheck();
+			
+			if($pwd.val() === ''){
+				$regExRulePwd.css('display', 'none');
+			}
 		} 
  		
  		//비밀번호 확인
@@ -62,6 +77,10 @@
 				$checkPwd.css('display', 'block');
 			}
 			submitCheck();
+			
+			if($pwdCheck.val() === ''){
+				$checkPwd.css('display', 'none');
+			}
 		} 
 		
 		//이름확인
@@ -72,6 +91,10 @@
 				$checkName.css('display', 'block');
 			}
 			submitCheck();
+			
+			if($name.val() === ''){
+				$checkName.css('display', 'none');
+			}
 		}
 		
 		//닉네임확인
@@ -82,6 +105,10 @@
  				$checkNickname.css('display', 'block');
  			}
  			submitCheck();
+ 			
+ 			if($nickname.val() === ''){
+ 				$checkNickname.css('display', 'none');
+ 			}
  		}
  		
  		//생년월일확인
@@ -92,6 +119,10 @@
  				$checkBornDate.css('display', 'block');
  			}
  			submitCheck();
+ 			
+ 			if($bornDate.val() === ''){
+ 				$checkBornDate.css('display', 'none');
+ 			}
  		}
  		
  		//이메일확인
@@ -102,6 +133,10 @@
  				$checkEmail.css('display', 'block');
  			}
  			submitCheck();
+ 			
+ 			if($email.val() === ''){
+ 				$checkEmail.css('display', 'none');
+ 			}
  		}
  		
  		//전화번호확인
@@ -112,6 +147,10 @@
 				$checkPhone.css('display', 'block');
 			}
 			submitCheck();
+			
+			if($phone.val() === ''){
+				$checkPhone.css('display', 'none');
+			}
 		}
 		
 		//상세주소확인
@@ -121,24 +160,60 @@
 			} else{
 				$checkDetail.css('borderColor', 'red');
 			}
-			submitCheck()
+			submitCheck();
+			
+			if($detailAddress.val() === ''){
+				$checkDetail.css('borderColor', '#ced4da');
+			}
 		}
 
  		
  		// 가입버튼 활성화
  		function submitCheck(){
- 			if(regExpPw.test($pwd.val())
- 			   && regExpId.test($id.val())
+ 			
+ 			if(regExpId.test($id.val())
+ 			   && regExpPw.test($pwd.val())
  			   && regExpName.test($name.val())
  			   && regExpNickname.test($nickname.val())
  			   && regExpBornDate.test($bornDate.val())
  			   && regExpPhone.test($phone.val())
  			   && regEmail.test($email.val())
  			   && regDetailAddr.test($detailAddress.val())
- 			   ) {
+ 			   && !flag
+ 			) {
  				$submitBtn.attr('disabled', false);
- 			} else {
+ 			} else{
  				$submitBtn.attr('disabled', true);
- 			}
+ 				
+			} 		
  		}
+ 		
+ 		
+ 		// 아이디중복체크 함수
+ 		function idCheck(){
+	 		$.ajax({
+	 			url: 'idCheck.member',
+	 			type:'get',
+	 			data: { 
+	 				checkId: $id.val(),
+	 			},
+	 			success: (data) => {
+	 				if(data == 'YD'){
+	 					$regExRuleId.text('중복된 아이디입니다.');
+	 					$regExRuleId.css('display', 'block');
+	 					flag = true;
+	 					submitCheck();
+	 				} else {
+	 					$regExRuleId.css('display', 'none');
+	 					flag = false;
+	 					submitCheck();
+	 				}
+	 			},
+	 			error: (err) => {
+	 				console.log(err);
+	 			}
+	 		});
+ 		}
+ 		
+ 		
 		

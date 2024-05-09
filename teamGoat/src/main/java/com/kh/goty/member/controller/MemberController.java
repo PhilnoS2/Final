@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goty.member.model.service.MemberService;
@@ -73,6 +74,12 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@GetMapping("idCheck.member")
+	public String idCheck(String checkId) {
+		return memberService.idChekc(checkId) > 0? "YD": "ND";
 	}
 	
 }

@@ -28,6 +28,7 @@
   		      DELETE_YN = 'N'       
   	</select>
   	
+  	
   	<insert id="insertMember"
   		parameterType="member"
   	>
@@ -60,6 +61,20 @@
   	  	   #{addrDetail}
   	  	   )    
   	</insert>
+  
+  
+  	<select id="idCheck"
+  		parameterType="string"
+  		resultType="_int"
+  	>
+
+  	SELECT
+  	      COUNT(*)
+  	  FROM
+  	      MEMBER
+  	 WHERE
+  	      MEMBER_ID = #{checkId} 
+  	</select>
   
   
   

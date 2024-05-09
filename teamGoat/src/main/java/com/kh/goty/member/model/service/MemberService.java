@@ -7,4 +7,6 @@ public interface MemberService {
 	public Member login(Member member);
 	
 	public int insertMember(Member member);
+	
+	public int idChekc(String checkId); 
 }
