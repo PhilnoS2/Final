@@ -34,7 +34,7 @@ public class MemberController {
 	@PostMapping("login.member")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
-		System.out.println(loginMember);
+		// System.out.println(loginMember);
 		
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
@@ -80,6 +80,11 @@ public class MemberController {
 	@GetMapping("idCheck.member")
 	public String idCheck(String checkId) {
 		return memberService.idChekc(checkId) > 0? "YD": "ND";
+	}
+	
+	@GetMapping(value="findIdForm.member")
+	public String findId() {
+		return "member/findId";
 	}
 	
 }

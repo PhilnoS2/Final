@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- jQuery 라이브러리 -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>find Id</title>
 <style>
 	#login-div{
 		width: 1200px;
@@ -28,60 +21,52 @@
 		border-radius: 5px;
 		padding: 10px;	
 	}
-	#login-option{
+	#btn-option{
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-end;
 	}
-	#social-option {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		margin-top: 10px;
-	}
-	#social-option a {
-		width: 80%;
-		margin-top: 10px;
-	}
+	
 	.regExRuleId, .regExRulePwd {
 		font-size: 12px;
 		color: red;
 		display: none;
 	}
+	</style>
 	
-</style>
 </head>
 <body>
-	<jsp:include page="../common/menubar.jsp" />
+<jsp:include page="../common/menubar.jsp" />
 	<div id="login-div">
 		<form action="login.member" method="post">
 			<div id="inner-div">
+				<h3>아이디찾기</h3>
 				<div class="form-group">
-				  <label for="id">Id</label>
-				  <input type="text" class="form-control" id="id" onkeyup="regExpCheckId();" name="memberId">
+				  <label for="id">이름</label>
+				  <input type="text" class="form-control" id="id" placeholder="이름을 입력하세요."
+				   onkeyup="regExpCheckId();" name="memberId">
 				  <span class="regExRuleId">첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.</span>
 				</div>
 				
 				<div class="form-group">
-				  <label for="pwd">Password</label>
-				  <input type="password" class="form-control" id="pwd" onkeyup="regExpCheckPwd();" name="memberPwd">
+				  <label for="pwd">전화번호</label>
+				  <input type="text" class="form-control" id="pwd" 
+				  onkeyup="" name="phone" placeholder="전화번호를를입력하세요.">
+				  <span class=""></span>
+				</div>
+				
+				<div class="form-group">
+				  <label for="pwd">비밀번호</label>
+				  <input type="password" class="form-control" id="pwd"
+				   onkeyup="regExpCheckPwd();" name="memberPwd" placeholder="비밀번호를 입력하세요.">
 				  <span class="regExRulePwd">영문과 숫자 8~15 자리로 입력해주세요. 특수문자(!@#)만 가능</span>
 				</div>
 				
-				<div id="login-option">
-					<div>
-						<a class="btn btn-sm btn-secondary" href="findIdForm.member">아이디찾기</a>
-					</div>
-					<div >
-						<a class="btn btn-sm btn-info" href="enrollForm.member">회원가입</a>
-						<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">로그인</button>
-					</div>
+				
+				<div id="btn-option">
+					<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">찾기</button>
 				</div>
-				<div id="social-option">
-					<a class="btn btn-sm btn-success">네이버</a>
-					<a class="btn btn-sm btn-warning">카카오</a>
-				</div>
+				
 			</div>
 		</form>
 	</div>
