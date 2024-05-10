@@ -19,7 +19,8 @@
   		      EMAIL email,
   		      PHONE phone,
   		      ADDRESS address,
-  		      ADDR_DETAIL addrDetatil
+  		      ADDR_DETAIL addrDetatil,
+  		      EMPTY_CODEYN emptyCodeYN
   		  FROM
   		      MEMBER       
   	     WHERE	      
