@@ -13,4 +13,15 @@ public class CustomerServiceController {
 		return "customerService/csMain";
 	}
 	
+	@GetMapping("questions")
+	public String forwardQuestion() {
+	
+		return "customerService/question/questionMain";
+	}
+	
+	@GetMapping("notices")
+	public String forwardNotice() {
+		return "customerService/notice/noticeMain";
+	}
+	
 }
