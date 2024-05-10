@@ -10,5 +10,9 @@ public interface MemberService {
 	
 	public int idChekc(String checkId);
 
-	public String findId(Member member); 
+	public String findId(Member member);
+
+	public int phoneCheck(Member member);
+
+	public int findPwd(Member member); 
 }

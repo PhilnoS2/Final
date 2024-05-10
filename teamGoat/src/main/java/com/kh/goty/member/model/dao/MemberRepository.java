@@ -23,4 +23,15 @@ public class MemberRepository {
 	public String findId(SqlSessionTemplate sqlSession, Member member) {
 		return sqlSession.selectOne("memberMapper.findId", member);
 	}
+	
+	public int phoneCheck(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.selectOne("memberMapper.phoneCheck", member);
+	}
+	
+	public int findPwd(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.selectOne("memberMapper.findPwd", member);
+	}
+	
+	
+	
 }

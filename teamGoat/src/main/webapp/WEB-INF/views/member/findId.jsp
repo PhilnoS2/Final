@@ -57,6 +57,7 @@
 					</div>
 					
 					<div id="btn-option">
+						<a class="btn btn-sm btn-secondary" href="findPwdForm.member">비밀번호찾기</a>
 						<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">찾기</button>
 					</div>
 					
@@ -73,7 +74,7 @@
 			const $submitBtn = $('#submitBtn');
 			
 			const $checkName = $('.checkName');
-			const $checkPhone = $('.phone')
+			const $checkPhone = $('.phone');
 			
 			//이름확인
 			function regExpCheckName(){

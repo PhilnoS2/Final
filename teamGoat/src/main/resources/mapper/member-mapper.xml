@@ -92,8 +92,23 @@
   	      DELETE_YN = 'N'               	  
   	</select>
   
-  
-  
+  <select id="findPwd"
+  	parameterType="member"
+  	resultType="_int"
+  >
+  	SELECT
+  	      COUNT(*)
+	  FROM
+	      MEMBER
+	 WHERE
+	      DELETE_YN = 'N'
+	   AND
+	      MEMBER_ID = #{memberId}
+	   AND
+	       MEMBER_NAME = #{memberName}
+	    AND
+	       EMAIL = #{email}       	  
+  </select>
   
   
   

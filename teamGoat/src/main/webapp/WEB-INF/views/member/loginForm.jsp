@@ -72,6 +72,7 @@
 				<div id="login-option">
 					<div>
 						<a class="btn btn-sm btn-secondary" href="findIdForm.member">아이디찾기</a>
+						<a class="btn btn-sm btn-secondary" href="findPwdForm.member">비밀번호찾기</a>
 					</div>
 					<div >
 						<a class="btn btn-sm btn-info" href="enrollForm.member">회원가입</a>

@@ -173,6 +173,6 @@
 	</script>
 
 	
-	<script src="resources/member/Js/enrollForm.js"></script>
+	<script src="resources/member/Js/regExp.js"></script>
 </body>
 </html>

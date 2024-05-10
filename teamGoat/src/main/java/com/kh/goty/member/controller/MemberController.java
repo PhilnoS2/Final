@@ -1,9 +1,14 @@
 package com.kh.goty.member.controller;
 
-import javax.servlet.http.HttpServlet;
+import java.util.Properties;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,7 +23,11 @@ import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @Slf4j
+@PropertySource("classpath:key.properties")
 public class MemberController {
+	
+	@Autowired
+	Environment env;
 	
 	@Autowired
 	MemberService memberService;
@@ -35,7 +44,6 @@ public class MemberController {
 	@PostMapping("login.member")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
-		// System.out.println(loginMember);
 		
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
@@ -44,7 +52,6 @@ public class MemberController {
 		} else {
 			mv.addObject("errorMsg", "로그인 실패").setViewName("common/errorPage");
 		}
-		
 		return mv;
 	}
 	
@@ -83,7 +90,7 @@ public class MemberController {
 		return memberService.idChekc(checkId) > 0? "YD": "ND";
 	}
 	
-	@GetMapping(value="findIdForm.member")
+	@GetMapping("findIdForm.member")
 	public String findId() {
 		return "member/findId";
 	}
@@ -103,12 +110,56 @@ public class MemberController {
 		} else {
 			mv.addObject("errorMsg", "아이디 찾기 실패").setViewName("common/errorPage");
 		}
-		
 		return mv;
 	}
 	
+	@GetMapping("findPwdForm.member")
+	public String findPwd() {
+		return "member/findPwd";
+	}
 	
-	
-	
-	
+	@PostMapping("findPwd.member")
+	public ModelAndView findPwd(Member member, ModelAndView mv, HttpSession session)  {
+		// 입력한 이메일로 생성코드보내기
+		// 생성코드로 이메일 변경하기 / 회원 상태변경
+		// 로그인시 비밀번호 변경으로 페이지 이동시키기 
+		// 아이디/이름/이메일
+
+		
+		if(memberService.findPwd(member) > 0) { // 입력한회원 존재함
+			JavaMailSenderImpl sender;
+			
+			JavaMailSenderImpl impl = new JavaMailSenderImpl();
+			// - 계정 설정
+			impl.setHost("smtp.gmail.com");
+			impl.setPort(587);
+			impl.setUsername(env.getProperty("email"));
+			impl.setPassword(env.getProperty("password"));
+			
+			// - 옵션 설정
+			Properties prop = new Properties();
+			prop.put("mail.smtp.starttls.enable", true);
+			prop.put("mail.smtp.auth", true);
+			
+			impl.setJavaMailProperties(prop);
+			sender = impl;
+			
+			SimpleMailMessage message = new SimpleMailMessage();
+			
+			message.setSubject("안녕하세요. goty 비밀번호 찾기 이메일입니다.");
+			message.setText("abcdef");
+
+			String[] to = { member.getEmail() };
+			
+			message.setTo(to);
+			sender.send(message);
+			
+			session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
+		} else {
+			session.setAttribute("alertMsg", "회원 정보가 존재하지 않습니다.");
+		}
+		mv.setViewName("redirect:/");
+		
+		return mv;
+	}
 }
