@@ -45,5 +45,10 @@ public class MemberServiceImpl implements MemberService {
 	public int findPwd(Member member) {
 		return memberRepository.findPwd(sqlSession, member);
 	}
+
+	@Override
+	public int updatePwd(Member member) {
+		return memberRepository.updatePwd(sqlSession, member);
+	}
 	
 }

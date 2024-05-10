@@ -1,6 +1,7 @@
 package com.kh.goty.member.controller;
 
 import java.util.Properties;
+import java.util.Random;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,6 +45,12 @@ public class MemberController {
 	@PostMapping("login.member")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
+		System.out.println(loginMember);
+		// 임시코드발급상태
+		if(loginMember.getEmptyCodeYN() == "Y") {
+			mv.setViewName("redirect:/member/updatePwdForm");
+			return mv;
+		}
 		
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
@@ -146,15 +153,32 @@ public class MemberController {
 			
 			SimpleMailMessage message = new SimpleMailMessage();
 			
+			//코드 생성
+			 StringBuilder sb = new StringBuilder();
+			    Random rd = new Random();
+
+			    for(int i=0;i < 8;i++){
+			        if(rd.nextBoolean()){
+			            sb.append(rd.nextInt(10));
+			        }else {
+			            sb.append((char)(rd.nextInt(26)+65));
+			        }
+			    }
+			
 			message.setSubject("안녕하세요. goty 비밀번호 찾기 이메일입니다.");
-			message.setText("abcdef");
+			message.setText("임시 비밀번호 : "+ sb);
 
 			String[] to = { member.getEmail() };
+			member.setMemberPwd(sb.toString());
 			
-			message.setTo(to);
-			sender.send(message);
+			if(memberService.updatePwd(member) > 0) {
+				message.setTo(to);
+				sender.send(message);
+				session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
+			} else {
+				mv.addObject("errorMsg", "비밀번호 변경 실패").setViewName("common/errorPage");
+			}
 			
-			session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
 		} else {
 			session.setAttribute("alertMsg", "회원 정보가 존재하지 않습니다.");
 		}
