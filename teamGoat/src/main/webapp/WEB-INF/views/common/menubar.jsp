@@ -161,7 +161,7 @@
 		      <a href="#">자유게시판</a>
 		    </li>
 		    <li>
-		      <a href="#">고객센터</a>
+		      <a href="customer-service">고객센터</a>
 		      <ul id="option-ul">
 		      		<li><a href="#">공지사항</a></li>
 		      		<li><a href="#">FAQ</a></li>
