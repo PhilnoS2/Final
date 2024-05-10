@@ -14,5 +14,7 @@ public interface MemberService {
 
 	public int phoneCheck(Member member);
 
-	public int findPwd(Member member); 
+	public int findPwd(Member member);
+
+	public int updatePwd(Member member); 
 }
