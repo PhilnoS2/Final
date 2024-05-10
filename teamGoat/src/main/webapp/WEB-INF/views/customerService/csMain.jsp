@@ -299,7 +299,7 @@
         <div id="cs-content"> <!--고객서비스 컨텐트 영역-->
             <div id="notice"> <!--공지사항 영역-->
                 <div id="notice-title">
-                    <h3><a href="#">공지사항</a></h3>
+                    <h3><a href="notices">공지사항</a></h3>
                 </div>
                 <div id="notice-content">
                     <div id="notice-content1">
@@ -372,7 +372,7 @@
 
             <div id="question"> <!-- 1:1문의 영역-->
                 <div id="question-title">
-                    <h3><a href="#">1:1 문의</a></h3>
+                    <h3><a href="questions">1:1 문의</a></h3>
                 </div>
                 <div id="question-content">
                     <div id="question-content1">
