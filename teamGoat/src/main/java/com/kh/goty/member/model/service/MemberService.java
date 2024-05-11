@@ -10,11 +10,15 @@ public interface MemberService {
 	
 	public int idChekc(String checkId);
 
+	public int emailCheck(String checkEmail);
+	
 	public String findId(Member member);
 
 	public int phoneCheck(Member member);
 
 	public int findPwd(Member member);
 
-	public int updatePwd(Member member); 
+	public int updatePwd(Member member);
+
+	 
 }

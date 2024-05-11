@@ -79,6 +79,22 @@
   	      DELETE_YN = 'N'  
   	</select>
   
+  	<select id="emailCheck"
+  		parameterType="string"
+  		resultType="_int"
+  	>
+
+  	SELECT
+  	      COUNT(*)
+  	  FROM
+  	      MEMBER
+  	 WHERE
+  	      EMAIL = #{email}
+  	   AND
+  	      DELETE_YN = 'N'  
+  	</select>
+  
+  
   	<select id="findId"
   		parameterType="member"
   		resultType="string"
