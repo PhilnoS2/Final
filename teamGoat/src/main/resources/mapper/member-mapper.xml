@@ -130,20 +130,12 @@
   </select>
   
   <update id="updatePwd"
-  parameterType="member"
-  >
+  parameterType="member">
   UPDATE
   		MEMBER
   	 SET	
         MEMBER_PWD = #{memberPwd},
-        <choose>
-	        <when test="emptyCodeYN == 'N'">
-	        	EMPTY_CODEYN = 'Y'
-	        </when>
-	        <otherwise>
-	        	EMPTY_CODEYN = 'N'
-	        </otherwise>
-        </choose>
+       	EMPTY_CODEYN = 'Y'
    WHERE
 	    MEMBER_NAME = #{memberName}
 	 AND   
@@ -154,6 +146,18 @@
   	    DELETE_YN = 'N' 
   </update>
   
+  <update id="changePwd"
+  parameterType="member">
+  UPDATE
+  		MEMBER
+  	 SET	
+        MEMBER_PWD = #{memberPwd},
+       	EMPTY_CODEYN = 'N'
+   WHERE
+        MEMBER_ID = #{memberId}
+     AND
+  	    DELETE_YN = 'N' 
+  </update>
   
   
   

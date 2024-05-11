@@ -56,7 +56,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 		<div id="login-div">
-			<form action="updatePwd.member" method="post">
+			<form action="changePwd.member" method="post">
 				<div id="inner-div">
 					<h3>비밀번호 변경하기</h3>
 					<p class="inner-div-p">회원님은 현재 <b style="font-size: 15px;">임시 인증</b> 상태입니다.</p>
@@ -79,8 +79,6 @@
 					  <span class="checkPwd">입력한 비밀번호가 다릅니다. 다시 확인해주세요.</span>
 					</div>
 					
-					<input type="hidden" name="email" value="${ loginMember.email }" />
-					<input type="hidden" name="memberName" value="${ loginMember.memberName }" />
 					<div id="btn-option">
 						<button class="btn btn-sm btn-primary" id="updatePwdBtn" disabled type="submit">비밀번호 변경</button>
 					</div>
@@ -144,7 +142,6 @@
 			function updatePwdBtn(){				
 				if($id.val() != ''
 				   && regExpPw.test($pwd.val()) && flag) {
-					console.log('test');
 					$updatePwdBtn.attr('disabled', false);
 	 			} else{
 	 				$updatePwdBtn.attr('disabled', true);

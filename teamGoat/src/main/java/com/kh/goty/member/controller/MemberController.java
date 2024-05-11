@@ -47,7 +47,7 @@ public class MemberController {
 		Member loginMember = memberService.login(member);
 		
 		// 임시코드발급상태확인
-		if(loginMember.getEmptyCodeYN().equals("Y")) {
+		if(loginMember.getEmptyCodeYn().equals("Y")) {
 			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
 			return mv;
 		}
@@ -182,13 +182,13 @@ public class MemberController {
 		return mv;
 	}
 	
-	@PostMapping("updatePwd.member")
+	@PostMapping("changePwd.member")
 	public ModelAndView updatePwd(ModelAndView mv, Member member, HttpSession session) {
 		
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
 		
-		if(memberService.updatePwd(member) > 0) {
+		if(memberService.changePwd(member) > 0) {
 			session.setAttribute("alertMsg", "비밀번호 변경이 완료되었습니다.");
 			mv.setViewName("redirect:loginForm.member");			
 		} else {

@@ -20,5 +20,7 @@ public interface MemberService {
 
 	public int updatePwd(Member member);
 
+	public int changePwd(Member member);
+
 	 
 }

@@ -19,7 +19,7 @@ public class Member {
 	private Date enrollDate;
 	private Date modifyDate;
 	private String memLevel;
-	private String emptyCodeYN;
+	private String emptyCodeYn;
 	private int totalPrice;
 	
 	public Member() {
@@ -28,7 +28,7 @@ public class Member {
 	
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, String nickname, String email,
 			String bornDate, String phone, String address, String addrDetail, String deleteYN, String memberPoint,
-			Date enrollDate, Date modifyDate, String memLevel, String emptyCodeYN, int totalPrice) {
+			Date enrollDate, Date modifyDate, String memLevel, String emptyCodeYn, int totalPrice) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -45,7 +45,7 @@ public class Member {
 		this.enrollDate = enrollDate;
 		this.modifyDate = modifyDate;
 		this.memLevel = memLevel;
-		this.emptyCodeYN = emptyCodeYN;
+		this.emptyCodeYn = emptyCodeYn;
 		this.totalPrice = totalPrice;
 	}
 
@@ -169,12 +169,12 @@ public class Member {
 		this.memLevel = memLevel;
 	}
 
-	public String getEmptyCodeYN() {
-		return emptyCodeYN;
+	public String getEmptyCodeYn() {
+		return emptyCodeYn;
 	}
 
-	public void setEmptyCodeYN(String emptyCodeYN) {
-		this.emptyCodeYN = emptyCodeYN;
+	public void setEmptyCodeYn(String emptyCodeYN) {
+		this.emptyCodeYn = emptyCodeYN;
 	}
 
 	public int getTotalPrice() {
@@ -191,7 +191,7 @@ public class Member {
 				+ memberName + ", nickname=" + nickname + ", email=" + email + ", bornDate=" + bornDate + ", phone="
 				+ phone + ", address=" + address + ", addrDetail=" + addrDetail + ", deleteYN=" + deleteYN
 				+ ", memberPoint=" + memberPoint + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate
-				+ ", memLevel=" + memLevel + ", emptyCodeYN=" + emptyCodeYN + ", totalPrice=" + totalPrice + "]";
+				+ ", memLevel=" + memLevel + ", emptyCodeYN=" + emptyCodeYn + ", totalPrice=" + totalPrice + "]";
 	}
 	
 }

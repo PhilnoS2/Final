@@ -45,7 +45,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 		<div id="login-div">
-			<form onsubmit="submitForm(event);" action="findPwd.member" method="post">
+			<form onsubmit="submitForm();" action="findPwd.member" method="post">
 				<div id="inner-div">
 					<h3 id="pwd-title">비밀번호 찾기</h3>
 					<p id="pwd-p">회원가입시 기입했던 정보와 <b>똑같이</b> 입력해주세요.</p>
@@ -151,13 +151,13 @@
 				} 		
 	 		}
 			
-			function submitForm(event){
-				console.log(event);			
+			function submitForm(){
 				$id.attr('readonly', true);
 				$name.attr('readonly', true);
 				$email.attr('readonly', true);
 				$ment.css('display', 'block');
 				$('#pwd-title').css('display', 'none');
+				$('#pwd-p').css('display', 'none');
 				$('#inner-div').css('border', '1px solid red');
 			}
 		</script>

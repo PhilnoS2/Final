@@ -24,7 +24,7 @@
 		//회원가입버튼
 		const $submitBtn = $('#submitBtn');
 
-		//표시문구
+		//에러표시태그접근
 		const $regExRuleId = $('.regExRuleId');
 		const $regExRulePwd = $('.regExRulePwd');
 		const $checkPwd = $('.checkPwd');

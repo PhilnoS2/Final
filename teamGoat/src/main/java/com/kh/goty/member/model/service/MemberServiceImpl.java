@@ -55,5 +55,10 @@ public class MemberServiceImpl implements MemberService {
 	public int emailCheck(String checkEmail) {
 		return memberRepository.emailCheck(sqlSession, checkEmail);
 	}
+
+	@Override
+	public int changePwd(Member member) {
+		return memberRepository.changePwd(sqlSession, member);
+	}
 	
 }

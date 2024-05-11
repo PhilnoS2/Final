@@ -39,6 +39,10 @@ public class MemberRepository {
 	public int emailCheck(SqlSessionTemplate sqlSession, String checkEmail) {
 		return sqlSession.selectOne("memberMapper.emailCheck", checkEmail);
 	}
+
+	public int changePwd(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.update("memberMapper.changePwd", member);
+	}
 	
 	
 }
