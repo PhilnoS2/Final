@@ -37,7 +37,7 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	
-	@GetMapping(value="loginForm.member")
+	@GetMapping("loginForm.member")
 	public String loginForm() {
 		return "member/loginForm";
 	}
@@ -46,9 +46,9 @@ public class MemberController {
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
 		
-		// 임시코드발급상태
+		// 임시코드발급상태확인
 		if(loginMember.getEmptyCodeYN().equals("Y")) {
-			mv.addObject("memberId", loginMember.getMemberId()).setViewName("member/updatePwdForm");
+			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
 			return mv;
 		}
 		
@@ -57,7 +57,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인 성공");
 			mv.setViewName("redirect:/");
 		} else {
-			mv.addObject("errorMsg", "로그인 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -104,10 +104,6 @@ public class MemberController {
 	
 	@PostMapping("findId.member")
 	public ModelAndView findId(Member member, ModelAndView mv, HttpSession session) {
-		
-		// 이름/전화번호/비밀번호 조건 아이디찾기
-		// 응답 / alert로 아이디 보여주고 로그인 페이지로 이동
-		
 		String findId = memberService.findId(member);
 		
 		if( findId != null) {
@@ -115,7 +111,7 @@ public class MemberController {
 			mv.setViewName("member/loginForm");
 			
 		} else {
-			mv.addObject("errorMsg", "아이디 찾기 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "아이디 찾기 실패했습니다.").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -127,12 +123,6 @@ public class MemberController {
 	
 	@PostMapping("findPwd.member")
 	public ModelAndView findPwd(Member member, ModelAndView mv, HttpSession session)  {
-		// 입력한 이메일로 생성코드보내기
-		// 생성코드로 이메일 변경하기 / 회원 상태변경
-		// 로그인시 비밀번호 변경으로 페이지 이동시키기 
-		// 아이디/이름/이메일
-
-		
 		if(memberService.findPwd(member) > 0) { // 입력한회원 존재함
 			JavaMailSenderImpl sender;
 			
@@ -186,4 +176,59 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	@PostMapping("updatePwd.member")
+	public ModelAndView updatePwd(ModelAndView mv, Member member, HttpSession session) {
+		
+		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+		member.setMemberPwd(encPwd);
+		
+		if(memberService.updatePwd(member) > 0) {
+			session.setAttribute("alertMsg", "비밀번호 변경이 완료되었습니다.");
+			mv.setViewName("redirect:loginForm.member");			
+		} else {
+			mv.addObject("errorMsg", "비밀번호 변경이 실패했습니다.").setViewName("common/errorPage");
+		}
+		
+		return mv;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

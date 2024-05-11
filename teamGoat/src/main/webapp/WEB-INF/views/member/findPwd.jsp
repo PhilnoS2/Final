@@ -11,24 +11,27 @@
 		z-index: 1;
 	}
 	#inner-div {
-		width: 50%;
-		height: 50%;
+		width: 55%;
+		height: 55%;
 		margin: auto;
 		margin-top: 150px;
 		border: 1px solid grey;
 		border-radius: 5px;
-		padding: 10px;	
+		padding: 15px;	
 	}
 	#btn-option{
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
 	}
-	
 	.regExRuleId, .checkName, .email {
 		font-size: 12px;
 		color: red;
 		display: none;
+	}
+	#pwd-p{
+		font-size: 14px;
+		font-style: italic;
 	}
 	#ment {
 		text-align:center;
@@ -45,6 +48,7 @@
 			<form onsubmit="submitForm(event);" action="findPwd.member" method="post">
 				<div id="inner-div">
 					<h3 id="pwd-title">비밀번호 찾기</h3>
+					<p id="pwd-p">회원가입시 기입했던 정보와 <b>똑같이</b> 입력해주세요.</p>
 					<h2 id="ment">잠시만 기다려주세요.</h2>
 					<div class="form-group">
 					  <label for="id">아이디</label>
