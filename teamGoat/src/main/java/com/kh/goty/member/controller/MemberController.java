@@ -48,7 +48,7 @@ public class MemberController {
 		
 		// 임시코드발급상태
 		if(loginMember.getEmptyCodeYN().equals("Y")) {
-			mv.setViewName("member/updatePwdForm");
+			mv.addObject("memberId", loginMember.getMemberId()).setViewName("member/updatePwdForm");
 			return mv;
 		}
 		

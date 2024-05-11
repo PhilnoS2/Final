@@ -58,13 +58,13 @@
 		<form action="login.member" method="post">
 			<div id="inner-div">
 				<div class="form-group">
-				  <label for="id">Id</label>
+				  <label for="id">아이디</label>
 				  <input type="text" class="form-control" id="id" onkeyup="regExpCheckId();" name="memberId">
 				  <span class="regExRuleId">첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.</span>
 				</div>
 				
 				<div class="form-group">
-				  <label for="pwd">Password</label>
+				  <label for="pwd">비밀번호</label>
 				  <input type="password" class="form-control" id="pwd" onkeyup="regExpCheckPwd();" name="memberPwd">
 				  <span class="regExRulePwd">문자와 숫자 8~15 자리로 입력해주세요. 특수문자(!@#)만 가능</span>
 				</div>

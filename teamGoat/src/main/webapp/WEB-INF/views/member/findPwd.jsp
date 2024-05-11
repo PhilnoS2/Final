@@ -30,7 +30,11 @@
 		color: red;
 		display: none;
 	}
-	</style>
+	#ment {
+		text-align:center;
+		display: none;
+	}
+</style>
 <meta charset="UTF-8">
 <title>find Pwd</title>
 
@@ -38,10 +42,10 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 		<div id="login-div">
-			<form onsubmit="submitForm();" action="findPwd.member" method="post">
+			<form onsubmit="submitForm(event);" action="findPwd.member" method="post">
 				<div id="inner-div">
-					<h3>비밀번호 찾기</h3>
-					
+					<h3 id="pwd-title">비밀번호 찾기</h3>
+					<h2 id="ment">잠시만 기다려주세요.</h2>
 					<div class="form-group">
 					  <label for="id">아이디</label>
 					  <input type="text" class="form-control" id="id" name="memberId" required onkeyup="regExpCheckId();" placeholder="아이디를입력해주세요.">
@@ -65,7 +69,6 @@
 					<div id="btn-option">
 						<button class="btn btn-sm btn-primary" id="findPwdBtn" disabled type="submit">찾기</button>
 					</div>
-					
 				</div>
 			</form>
 		</div>
@@ -79,7 +82,7 @@
 		  const $id = $('#id');
 		  const $name = $('#name');
 		  const $email = $('#email');	
-		  
+		  const $ment = $('#ment');
 		  
 		  const $regExRuleId = $('.regExRuleId');
 		  const $checkName= $('.checkName');
@@ -138,15 +141,20 @@
 	 			   && regEmail.test($email.val())
 	 			) {
 					$findPwdBtn.attr('disabled', false);
+					
 	 			} else{
 					$findPwdBtn.attr('disabled', true);
 				} 		
 	 		}
 			
-			function submitForm(){
+			function submitForm(event){
+				console.log(event);			
 				$id.attr('readonly', true);
 				$name.attr('readonly', true);
 				$email.attr('readonly', true);
+				$ment.css('display', 'block');
+				$('#pwd-title').css('display', 'none');
+				$('#inner-div').css('border', '1px solid red');
 			}
 		</script>
 </body>
