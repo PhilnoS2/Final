@@ -82,7 +82,7 @@
 				<div class="form-group">
 				  <label for="pwd">비밀번호</label>
 				  <input type="password" class="form-control" id="pwd" name="memberPwd" required onkeyup="regExpCheckPwd();" placeholder="비밀번호를입력해주세요.">
-				  <span class="regExRulePwd">영문과 숫자 8~15 자리로 입력해주세요. 특수문자(!@#)만 가능</span>
+				  <span class="regExRulePwd">문자와 숫자 8~15 자리로 입력해주세요. 특수문자(!@#)만 가능</span>
 				</div>
 				
 				<div class="form-group">

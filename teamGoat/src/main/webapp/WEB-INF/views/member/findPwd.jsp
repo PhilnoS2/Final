@@ -38,14 +38,14 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 		<div id="login-div">
-			<form action="findPwd.member" method="post">
+			<form onsubmit="submitForm();" action="findPwd.member" method="post">
 				<div id="inner-div">
 					<h3>비밀번호 찾기</h3>
 					
 					<div class="form-group">
 					  <label for="id">아이디</label>
 					  <input type="text" class="form-control" id="id" name="memberId" required onkeyup="regExpCheckId();" placeholder="아이디를입력해주세요.">
-					  <span class="regExRuleId">첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.</span>
+					  <span class="regExRuleId">첫 글자는 문자, 문자와 숫자 5~15 자리로 입력해주세요.</span>
 					</div>
 					
 					<div class="form-group">
@@ -142,6 +142,12 @@
 					$findPwdBtn.attr('disabled', true);
 				} 		
 	 		}
+			
+			function submitForm(){
+				$id.attr('readonly', true);
+				$name.attr('readonly', true);
+				$email.attr('readonly', true);
+			}
 		</script>
 </body>
 </html>

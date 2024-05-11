@@ -45,10 +45,10 @@ public class MemberController {
 	@PostMapping("login.member")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
-		System.out.println(loginMember);
+		
 		// 임시코드발급상태
-		if(loginMember.getEmptyCodeYN() == "Y") {
-			mv.setViewName("redirect:/member/updatePwdForm");
+		if(loginMember.getEmptyCodeYN().equals("Y")) {
+			mv.setViewName("member/updatePwdForm");
 			return mv;
 		}
 		
