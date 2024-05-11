@@ -109,10 +109,6 @@ public class MemberController {
 	
 	@PostMapping("findId.member")
 	public ModelAndView findId(Member member, ModelAndView mv, HttpSession session) {
-		
-		// 이름/전화번호/비밀번호 조건 아이디찾기
-		// 응답 / alert로 아이디 보여주고 로그인 페이지로 이동
-		
 		String findId = memberService.findId(member);
 		
 		if( findId != null) {
@@ -132,12 +128,6 @@ public class MemberController {
 	
 	@PostMapping("findPwd.member")
 	public ModelAndView findPwd(Member member, ModelAndView mv, HttpSession session)  {
-		// 입력한 이메일로 생성코드보내기
-		// 생성코드로 이메일 변경하기 / 회원 상태변경
-		// 로그인시 비밀번호 변경으로 페이지 이동시키기 
-		// 아이디/이름/이메일
-
-		
 		if(memberService.findPwd(member) > 0) { // 입력한회원 존재함
 			JavaMailSenderImpl sender;
 			
@@ -192,6 +182,7 @@ public class MemberController {
 		return mv;
 	}
 	
+
 	
 	
 	
@@ -200,42 +191,7 @@ public class MemberController {
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	 
 	
 	
 	
