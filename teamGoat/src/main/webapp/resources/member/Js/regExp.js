@@ -23,11 +23,6 @@
 
 		//회원가입버튼
 		const $submitBtn = $('#submitBtn');
-		
-		// findPwdBtn 비밀번호찾기버튼 /아이디/이름/이메일
-		const $findPwdBtn = $('#findPwdBtn');
-
-
 
 		//표시문구
 		const $regExRuleId = $('.regExRuleId');
@@ -44,14 +39,17 @@
  		function regExpCheckId(){
  			if(regExpId.test($id.val())){
  				$regExRuleId.css('display', 'none');
+ 				
  				// idCheck() / 아이디 중복체크
- 				idCheck();
+ 				if($id.val().length > 4){
+ 					idCheck();
+ 				}
  			} else {
  				$regExRuleId.text('첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.');
  				$regExRuleId.css('display', 'block');
  			}
  			submitCheck();
-			findPwdBtn();
+			
  			if($id.val() === ''){
  				$regExRuleId.css('display', 'none');
  			}
@@ -97,7 +95,6 @@
 			}
 
 			submitCheck();
-			findPwdBtn();
 			if($name.val() === ''){
 				$checkName.css('display', 'none');
 			}
@@ -135,12 +132,16 @@
  		function reqExpEmail(){
  			if(regEmail.test($email.val())){
  				$checkEmail.css('display', 'none');
+ 			
+ 				//이메일중복확인
+ 				if($email.val().substring($email.val().lastIndexOf('.')).length >= 2){
+ 					emailCheck();
+ 				}
  			} else{
  				$checkEmail.css('display', 'block');
  			}
 
  			submitCheck();
- 			findPwdBtn();
  			if($email.val() === ''){
  				$checkEmail.css('display', 'none');
  			}
@@ -221,16 +222,31 @@
 	 		});
  		}
  		
-		// 비밀번호찾기버튼함수
-		function findPwdBtn(){
-			if(regExpId.test($id.val())
- 			   && regExpName.test($name.val())
- 			   && regEmail.test($email.val())
- 			) {
-				$findPwdBtn.attr('disabled', false);
- 			} else{
-				$findPwdBtn.attr('disabled', true);
-			} 		
+ 		// 이메일중복체크요청함수
+ 		function emailCheck(){
+	 		$.ajax({
+	 			url: 'emailCheck.member',
+	 			type:'get',
+	 			data: { 
+	 				checkEmail: $email.val(),
+	 			},
+	 			success: (data) => {
+	 				console.log(data);
+	 				if(data == 'YD'){
+	 					$checkEmail.text('중복된 이메일이 존재합니다.');
+	 					$checkEmail.css('display', 'block');
+	 					flag = true;
+	 					submitCheck();
+	 				} else {
+	 					$checkEmail.css('display', 'none');
+	 					flag = false;
+	 					submitCheck();
+	 				}
+	 			},
+	 			error: (err) => {
+	 				console.log(err);
+	 			}
+	 		});
  		}
  		
  		

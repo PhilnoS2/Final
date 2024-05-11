@@ -86,8 +86,7 @@ public class MemberController {
 			mv.setViewName("redirect:/");
 		} else {
 			mv.addObject("errorMsg", "회원가입 실패").setViewName("common/errorPage");
-		}
-		
+		}		
 		return mv;
 	}
 	
@@ -95,6 +94,12 @@ public class MemberController {
 	@GetMapping("idCheck.member")
 	public String idCheck(String checkId) {
 		return memberService.idChekc(checkId) > 0? "YD": "ND";
+	}
+	
+	@ResponseBody
+	@GetMapping("emailCheck.member")
+	public String emailCheck(String checkEmail) {
+		return memberService.emailCheck(checkEmail) > 0? "YD": "ND";
 	}
 	
 	@GetMapping("findIdForm.member")
@@ -186,4 +191,55 @@ public class MemberController {
 		
 		return mv;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
