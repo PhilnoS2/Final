@@ -20,13 +20,13 @@
 		z-index: 1;
 	}
 	#inner-div {
-		width: 50%;
-		height: 50%;
+		width: 55%;
+		height: 55%;
 		margin: auto;
 		margin-top: 150px;
 		border: 1px solid grey;
 		border-radius: 5px;
-		padding: 10px;	
+		padding: 15px;	
 	}
 	#login-option{
 		display: flex;

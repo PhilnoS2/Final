@@ -37,7 +37,7 @@ public class MemberController {
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	
-	@GetMapping(value="loginForm.member")
+	@GetMapping("loginForm.member")
 	public String loginForm() {
 		return "member/loginForm";
 	}
@@ -46,9 +46,9 @@ public class MemberController {
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
 		
-		// 임시코드발급상태
+		// 임시코드발급상태확인
 		if(loginMember.getEmptyCodeYN().equals("Y")) {
-			mv.addObject("memberId", loginMember.getMemberId()).setViewName("member/updatePwdForm");
+			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
 			return mv;
 		}
 		
@@ -57,7 +57,7 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인 성공");
 			mv.setViewName("redirect:/");
 		} else {
-			mv.addObject("errorMsg", "로그인 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -116,7 +116,7 @@ public class MemberController {
 			mv.setViewName("member/loginForm");
 			
 		} else {
-			mv.addObject("errorMsg", "아이디 찾기 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "아이디 찾기 실패했습니다.").setViewName("common/errorPage");
 		}
 		return mv;
 	}
@@ -193,9 +193,8 @@ public class MemberController {
 			mv.setViewName("redirect:loginForm.member");			
 		} else {
 			mv.addObject("errorMsg", "비밀번호 변경이 실패했습니다.").setViewName("common/errorPage");
-		}
-		
+    }
 		return mv;
   }
-	
+
 }

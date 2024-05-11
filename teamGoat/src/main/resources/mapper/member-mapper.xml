@@ -136,7 +136,14 @@
   		MEMBER
   	 SET	
         MEMBER_PWD = #{memberPwd},
-        EMPTY_CODEYN = 'Y'
+        <choose>
+	        <when test="emptyCodeYN == 'N'">
+	        	EMPTY_CODEYN = 'Y'
+	        </when>
+	        <otherwise>
+	        	EMPTY_CODEYN = 'N'
+	        </otherwise>
+        </choose>
    WHERE
 	    MEMBER_NAME = #{memberName}
 	 AND   

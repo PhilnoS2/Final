@@ -11,13 +11,13 @@
 		z-index: 1;
 	}
 	#inner-div {
-		width: 50%;
-		height: 50%;
+		width: 55%;
+		height: 55%;
 		margin: auto;
 		margin-top: 150px;
 		border: 1px solid grey;
 		border-radius: 5px;
-		padding: 10px;	
+		padding: 15px;	
 	}
 	#login-option{
 		display: flex;
@@ -64,7 +64,7 @@
 					
 					<div class="form-group">
 					  <label for="id">아이디</label>
-					  <input type="text" class="form-control" id="id" readonly name="memberId" value="${memberId}">
+					  <input type="text" class="form-control" id="id" readonly name="memberId" value="${loginMember.memberId}">
 					</div>
 				
 					<div class="form-group">
@@ -79,6 +79,8 @@
 					  <span class="checkPwd">입력한 비밀번호가 다릅니다. 다시 확인해주세요.</span>
 					</div>
 					
+					<input type="hidden" name="email" value="${ loginMember.email }" />
+					<input type="hidden" name="memberName" value="${ loginMember.memberName }" />
 					<div id="btn-option">
 						<button class="btn btn-sm btn-primary" id="updatePwdBtn" disabled type="submit">비밀번호 변경</button>
 					</div>
