@@ -45,10 +45,18 @@ public class MemberController {
 	@PostMapping("login.member")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
+<<<<<<< Updated upstream
 		
 		// 임시코드발급상태확인
 		if(loginMember.getEmptyCodeYn().equals("Y")) {
 			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
+=======
+		System.out.println(loginMember);
+		
+		// 임시코드발급상태
+		if(loginMember.getEmptyCodeYN() == "Y") {
+			mv.setViewName("redirect:/member/updatePwdForm");
+>>>>>>> Stashed changes
 			return mv;
 		}
 		
