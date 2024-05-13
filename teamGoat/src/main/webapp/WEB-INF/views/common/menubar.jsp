@@ -149,9 +149,9 @@
 		    <li>
 		     	<a>X Box</a>
 		      	<ul id="option-ul">
-		      		<li><a href="#">게임 본체</a></li>
-		      		<li><a href="#">게임 타이틀</a></li>
-		      		<li><a href="#">게임주변기기</a></li>
+		      		<li><a href="xboxMachine">게임 본체</a></li>
+		      		<li><a href="xboxGame">게임 타이틀</a></li>
+		      		<li><a href="xboxAccessory">게임주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
