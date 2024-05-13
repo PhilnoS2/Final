@@ -24,4 +24,9 @@ public class CustomerServiceController {
 		return "customerService/notice/noticeMain";
 	}
 	
+	@GetMapping("faqs")
+	public String forwardFaq() {
+		return "customerService/faq/faqMain";
+	}
+	
 }
