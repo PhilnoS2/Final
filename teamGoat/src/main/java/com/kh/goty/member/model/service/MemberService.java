@@ -8,9 +8,11 @@ public interface MemberService {
 	
 	public int insertMember(Member member);
 	
-	public int idChekc(String checkId);
+	public int idCheck(String checkId);
 
 	public int emailCheck(String checkEmail);
+	
+	public int phoneCheck(String checkPhone);
 	
 	public String findId(Member member);
 
@@ -21,6 +23,7 @@ public interface MemberService {
 	public int updatePwd(Member member);
 
 	public int changePwd(Member member);
+
 
 	 
 }

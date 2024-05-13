@@ -56,7 +56,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 		<div id="login-div">
-			<form action="changePwd.member" method="post">
+			<form action="/goty/member/changePwd" method="post">
 				<div id="inner-div">
 					<h3>비밀번호 변경하기</h3>
 					<p class="inner-div-p">회원님은 현재 <b style="font-size: 15px;">임시 인증</b> 상태입니다.</p>

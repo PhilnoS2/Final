@@ -44,5 +44,9 @@ public class MemberRepository {
 		return sqlSession.update("memberMapper.changePwd", member);
 	}
 	
+	public int phoneCheck(SqlSessionTemplate sqlSession, String checkPhone) {
+		return sqlSession.selectOne("memberMapper.phoneCheck", checkPhone);
+	}
+	
 	
 }

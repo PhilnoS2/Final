@@ -38,7 +38,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 		<div id="login-div">
-			<form action="findId.member" method="post">
+			<form action="/goty/member/findId" method="post">
 				<div id="inner-div">
 					<h3>아이디 찾기</h3>
 					
@@ -57,7 +57,7 @@
 					</div>
 					
 					<div id="btn-option">
-						<a class="btn btn-sm btn-secondary mr-2" href="findPwdForm.member">비밀번호찾기</a>
+						<a class="btn btn-sm btn-secondary mr-2" href="/goty/member/findPwdForm">비밀번호찾기</a>
 						<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">찾기</button>
 					</div>
 					

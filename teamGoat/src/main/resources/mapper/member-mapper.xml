@@ -83,7 +83,6 @@
   		parameterType="string"
   		resultType="_int"
   	>
-
   	SELECT
   	      COUNT(*)
   	  FROM
@@ -152,14 +151,27 @@
   		MEMBER
   	 SET	
         MEMBER_PWD = #{memberPwd},
-       	EMPTY_CODEYN = 'N'
+       	EMPTY_CODEYN = 'N',
+       	MODIFYDATE = SYSDATE
    WHERE
         MEMBER_ID = #{memberId}
      AND
   	    DELETE_YN = 'N' 
   </update>
   
-  
+  <select id="phoneCheck"
+  		parameterType="string"
+  		resultType="_int"
+  	>
+  	SELECT
+  	      COUNT(*)
+  	  FROM
+  	      MEMBER
+  	 WHERE
+  	      PHONE = #{phone}
+  	   AND
+  	      DELETE_YN = 'N'  
+  	</select>
   
   
   

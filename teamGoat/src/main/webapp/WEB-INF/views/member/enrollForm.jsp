@@ -71,7 +71,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="enrollForm-div">
-		<form action="insert.member" method="post">
+		<form action="/goty/member/insert" method="post">
 			<div id="inner-div">
 				<div class="form-group">
 					  <label for="id">아이디</label>
@@ -173,6 +173,6 @@
 	</script>
 
 	
-	<script src="resources/member/Js/regExp.js"></script>
+	<script src="/goty/resources/member/Js/regExp.js"></script>
 </body>
 </html>

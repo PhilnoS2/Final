@@ -11,52 +11,52 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.goty.member.model.service.MemberService;
 import com.kh.goty.member.model.vo.Member;
-
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
-@Slf4j
 @PropertySource("classpath:key.properties")
+@Slf4j
+@RestController
+@RequestMapping("/member")
 public class MemberController {
 	
 	@Autowired
-	Environment env;
+	private Environment env;
 	
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
 	
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
-	
-	@GetMapping("loginForm.member")
-	public String loginForm() {
-		return "member/loginForm";
+	@GetMapping("/login")
+	public ModelAndView loginForm(ModelAndView mv) {
+		mv.setViewName("member/loginForm");
+		return mv;
 	}
 	
-	@PostMapping("login.member")
+	@PostMapping("/login")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
-		
+	
 		// 임시코드발급상태확인
-		if(loginMember.getEmptyCodeYn().equals("Y")) {
+		if(loginMember != null 
+		   && loginMember.getEmptyCodeYn().equals("Y")
+		   && loginMember.getMemberPwd().equals(member.getMemberPwd())) {
 			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
 			return mv;
 		}
-		
-		System.out.println(loginMember);
-			if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			session.setAttribute("loginMember", loginMember);
-			session.setAttribute("alertMsg", "로그인 성공");
-			mv.setViewName("redirect:/");
+	
+		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+		session.setAttribute("loginMember", loginMember);
+		session.setAttribute("alertMsg", "로그인 성공");
+		mv.setViewName("redirect:/");
 			
 		} else {
 			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
@@ -64,18 +64,20 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("logout.member")
-	public String logout(HttpSession session) {
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpSession session, ModelAndView mv) {
 		session.removeAttribute("loginMember");
-		return "redirect:/";
+		mv.setViewName("redirect:/");
+		return mv;
 	}
 	
-	@GetMapping("enrollForm.member")
-	public String enrollForm() {
-		return "member/enrollForm";
+	@GetMapping("/enrollForm")
+	public ModelAndView enrollForm(ModelAndView mv) {
+		mv.setViewName("member/enrollForm");
+		return mv;
 	}
 	
-	@PostMapping("insert.member")
+	@PostMapping("/insert")
 	public ModelAndView insertMember(Member member, 
 									 ModelAndView mv, 
 									 HttpSession session) {
@@ -92,24 +94,28 @@ public class MemberController {
 		return mv;
 	}
 	
-	@ResponseBody
-	@GetMapping("idCheck.member")
+	@GetMapping("/idCheck")
 	public String idCheck(String checkId) {
-		return memberService.idChekc(checkId) > 0? "YD": "ND";
+		return memberService.idCheck(checkId) > 0? "YD": "ND";
 	}
 	
-	@ResponseBody
-	@GetMapping("emailCheck.member")
+	@GetMapping("/emailCheck")
 	public String emailCheck(String checkEmail) {
 		return memberService.emailCheck(checkEmail) > 0? "YD": "ND";
 	}
 	
-	@GetMapping("findIdForm.member")
-	public String findId() {
-		return "member/findId";
+	@GetMapping("/phoneCheck")
+	public String phoneCheck(String checkPhone) {
+		return memberService.phoneCheck(checkPhone) > 0? "YD": "ND";
 	}
 	
-	@PostMapping("findId.member")
+	@GetMapping("/findIdForm")
+	public ModelAndView findId(ModelAndView mv) {
+		mv.setViewName("member/findId");
+		return mv;
+	}
+	
+	@PostMapping("/findId")
 	public ModelAndView findId(Member member, ModelAndView mv, HttpSession session) {
 		String findId = memberService.findId(member);
 		
@@ -123,12 +129,13 @@ public class MemberController {
 		return mv;
 	}
 	
-	@GetMapping("findPwdForm.member")
-	public String findPwd() {
-		return "member/findPwd";
+	@GetMapping("/findPwdForm")
+	public ModelAndView findPwd(ModelAndView mv) {
+		mv.setViewName("member/findPwd");
+		return mv;
 	}
 	
-	@PostMapping("findPwd.member")
+	@PostMapping("/findPwd")
 	public ModelAndView findPwd(Member member, ModelAndView mv, HttpSession session)  {
 		if(memberService.findPwd(member) > 0) { // 입력한회원 존재함
 			JavaMailSenderImpl sender;
@@ -184,7 +191,7 @@ public class MemberController {
 		return mv;
 	}
 	
-	@PostMapping("changePwd.member")
+	@PostMapping("/changePwd")
 	public ModelAndView updatePwd(ModelAndView mv, Member member, HttpSession session) {
 		
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
@@ -192,7 +199,7 @@ public class MemberController {
 		
 		if(memberService.changePwd(member) > 0) {
 			session.setAttribute("alertMsg", "비밀번호 변경이 완료되었습니다.");
-			mv.setViewName("redirect:loginForm.member");			
+			mv.setViewName("redirect:login");			
 		} else {
 			mv.addObject("errorMsg", "비밀번호 변경이 실패했습니다.").setViewName("common/errorPage");
     }

@@ -112,17 +112,18 @@
 	</c:if>
 	
 	<div id="header">
+		
 		<div id="logoOpt">
-			<img width="200px" height="200px" src="resources\img\logo2.png">
+			<img width="200px" height="200px" src="${pageContext.request.contextPath}/resources\img\logo2.png">
 			<div id="logins">
 				
 				<c:choose>
 					<c:when test="${ sessionScope.loginMember != null }">
-						<a class="btn btn-sm btn-primary" href="logout.member">로그아웃</a>
+						<a class="btn btn-sm btn-primary" href="/goty/member/logout">로그아웃</a>
 					</c:when>
 					<c:otherwise>
-						<a class="btn btn-sm btn-info" href="enrollForm.member">회원가입</a>
-						<a class="btn btn-sm btn-primary" href="loginForm.member">로그인</a>
+						<a class="btn btn-sm btn-info" href="/goty/member/enrollForm">회원가입</a>
+						<a class="btn btn-sm btn-primary" href="/goty/member/login">로그인</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -164,7 +165,7 @@
 		      <a href="customer-service">고객센터</a>
 		      <ul id="option-ul">
 		      		<li><a href="notices">공지사항</a></li>
-		      		<li><a href="#">FAQ</a></li>
+		      		<li><a href="faqs">FAQ</a></li>
 		      		<li><a href="questions">1:1 문의</a></li>
 		      	</ul> 
 		    </li>
