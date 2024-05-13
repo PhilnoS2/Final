@@ -27,7 +27,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int idChekc(String checkId) {
+	public int idCheck(String checkId) {
 		return memberRepository.idCheck(sqlSession, checkId);
 	}
 
@@ -59,6 +59,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int changePwd(Member member) {
 		return memberRepository.changePwd(sqlSession, member);
+	}
+
+	@Override
+	public int phoneCheck(String checkPhone) {
+		return memberRepository.phoneCheck(sqlSession, checkPhone);
 	}
 	
 }

@@ -55,7 +55,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="login-div">
-		<form action="login.member" method="post">
+		<form action="/goty/member/login" method="post">
 			<div id="inner-div">
 				<div class="form-group">
 				  <label for="id">아이디</label>
@@ -71,11 +71,11 @@
 				
 				<div id="login-option">
 					<div>
-						<a class="btn btn-sm btn-secondary" href="findIdForm.member">아이디찾기</a>
-						<a class="btn btn-sm btn-secondary" href="findPwdForm.member">비밀번호찾기</a>
+						<a class="btn btn-sm btn-secondary" href="/goty/member/findIdForm">아이디찾기</a>
+						<a class="btn btn-sm btn-secondary" href="/goty/member/findPwdForm">비밀번호찾기</a>
 					</div>
 					<div >
-						<a class="btn btn-sm btn-info" href="enrollForm.member">회원가입</a>
+						<a class="btn btn-sm btn-info" href="/goty/member/enrollForm">회원가입</a>
 						<button class="btn btn-sm btn-primary" id="submitBtn" disabled type="submit">로그인</button>
 					</div>
 				</div>

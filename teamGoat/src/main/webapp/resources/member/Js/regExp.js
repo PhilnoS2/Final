@@ -8,7 +8,9 @@
 		const regExpPhone = /^[0-9]{1,11}$/;
 		const regDetailAddr = /^[ㄱ-ㅎ가-힣0-9]{1,15}$/;
 		
-		let flag = false;
+		let idFlag = false;
+		let emailFlag = false;
+		let phoneFlag = false;
 		
 	    //입력양식접근
 		const $id = $('#id');
@@ -138,6 +140,7 @@
  					emailCheck();
  				}
  			} else{
+ 				$checkEmail.text('이메일형식으로 입력해주세요.');
  				$checkEmail.css('display', 'block');
  			}
 
@@ -151,7 +154,11 @@
 		function reqExpPhone(){
 			if(regExpPhone.test($phone.val())){
 				$checkPhone.css('display', 'none');
+				if($phone.val().length >=11){
+					phoneCheck();
+				}
 			} else {
+				$checkPhone.text('- 제외한 11자리 숫자로 입력해주세요.');
 				$checkPhone.css('display', 'block');
 			}
 			submitCheck();
@@ -186,7 +193,9 @@
  			   && regExpPhone.test($phone.val())
  			   && regEmail.test($email.val())
  			   && regDetailAddr.test($detailAddress.val())
- 			   && !flag
+ 			   && !idFlag 
+ 			   && !emailFlag 
+ 			   && !phoneFlag
  			) {
  				$submitBtn.attr('disabled', false);
  			} else{
@@ -199,7 +208,7 @@
  		// 아이디중복체크요청함수
  		function idCheck(){
 	 		$.ajax({
-	 			url: 'idCheck.member',
+	 			url: '/goty/member/idCheck',
 	 			type:'get',
 	 			data: { 
 	 				checkId: $id.val(),
@@ -208,11 +217,11 @@
 	 				if(data == 'YD'){
 	 					$regExRuleId.text('중복된 아이디입니다.');
 	 					$regExRuleId.css('display', 'block');
-	 					flag = true;
+	 					idFlag = true;
 	 					submitCheck();
 	 				} else {
 	 					$regExRuleId.css('display', 'none');
-	 					flag = false;
+	 					idFlag = false;
 	 					submitCheck();
 	 				}
 	 			},
@@ -225,21 +234,21 @@
  		// 이메일중복체크요청함수
  		function emailCheck(){
 	 		$.ajax({
-	 			url: 'emailCheck.member',
+	 			url: '/goty/member/emailCheck',
 	 			type:'get',
 	 			data: { 
 	 				checkEmail: $email.val(),
 	 			},
 	 			success: (data) => {
-	 				console.log(data);
+	 				
 	 				if(data == 'YD'){
 	 					$checkEmail.text('중복된 이메일이 존재합니다.');
 	 					$checkEmail.css('display', 'block');
-	 					flag = true;
+	 					emailFlag = true;
 	 					submitCheck();
 	 				} else {
 	 					$checkEmail.css('display', 'none');
-	 					flag = false;
+	 					emailFlag = false;
 	 					submitCheck();
 	 				}
 	 			},
@@ -249,6 +258,31 @@
 	 		});
  		}
  		
+ 		// 전화번호중복체크요청함수
+ 		function phoneCheck(){
+	 		$.ajax({
+	 			url: '/goty/member/phoneCheck',
+	 			type:'get',
+	 			data: { 
+	 				checkPhone: $phone.val(),
+	 			},
+	 			success: (data) => {
+	 				if(data == 'YD'){
+	 					$checkPhone.text('중복된 전화번호가 존재합니다.');
+	 					$checkPhone.css('display', 'block');
+	 					phoneFlag = true;
+	 					submitCheck();
+	 				} else {
+	 					$checkPhone.css('display', 'none');
+	 					phoneFlag = false;
+	 					submitCheck();
+	 				}
+	 			},
+	 			error: (err) => {
+	 				console.log(err);
+	 			}
+	 		});
+ 		}
  		
 		
 		
