@@ -34,20 +34,25 @@
 		justify-content: space-between;
 	}
 	#social-option {
+		width: 50%;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: flex-start;
 		flex-direction: column;
 		margin-top: 10px;
 	}
 	#social-option a {
-		width: 80%;
+		width: 100%;
 		margin-top: 10px;
 	}
 	.regExRuleId, .regExRulePwd {
 		font-size: 12px;
 		color: red;
 		display: none;
+	}
+	.btn-img{
+		width:100%;
+		height:50px;
 	}
 	
 </style>
@@ -80,8 +85,8 @@
 					</div>
 				</div>
 				<div id="social-option">
-					<a class="btn btn-sm btn-success">네이버</a>
-					<a class="btn btn-sm btn-warning">카카오</a>
+					<a id="kakao-login-btn"><img class="btn-img"  src="/goty/resources/member/images/kakao_btn.png" /></a>
+					<a id="naver-login-btn"><img class="btn-img" src="/goty/resources/member/images/naver_btn.png" /></a>
 				</div>
 			</div>
 		</form>
@@ -134,7 +139,22 @@
  				$submitBtn.attr('disabled', true);
  			}
  		}
-		
+ 		
+ 		$('#kakao-login-btn').click(() =>{
+			location.href= 'https://kauth.kakao.com/oauth/authorize'
+				+'?client_id=${kakao_client_id}'
+				+'&redirect_uri=http://localhost:8083/goty/kakaologin'
+				+'&response_type=code'
+				+'&scope=profile_image,profile_nickname';
+		});
+ 		
+ 		$('#naver-login-btn').click(() => {
+ 			location.href = 'https://nid.naver.com/oauth2.0/authorize'
+			 			  + '?response_type=code'
+			 			  + '&client_id=${naver_client_id}'
+			 			  + '&state=${state}'
+			 			  + '&redirect_uri=http://localhost:8083/goty/naverlogin';
+ 		});
 	</script>
 </body>
 </html>

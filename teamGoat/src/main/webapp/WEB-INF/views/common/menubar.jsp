@@ -27,18 +27,17 @@
 		width:60%;
 		display:flex;
 		align-items:center;
-		justify-content:center;
-		margin-left:auto;
+		justify-content:space-between;
+		margin-left: auto;
 	}
 	#header h1 {
 		width:85px;
 		display:inline-block;
 	}
 	#logins {
-		width:140px;
 		display:inline-block;
 		margin-left: auto;
-		margin-right: 10px;
+		margin-right: 20px;
 	}
 	#nav {
 		width: 1200px;
@@ -94,6 +93,9 @@
    	font-size: 24px; 
    	color: #17a2b8;
    }
+   .admin{
+   	disply : in
+   }
 </style>
 </head>
 <body>
@@ -116,9 +118,11 @@
 		<div id="logoOpt">
 			<img width="200px" height="200px" src="${pageContext.request.contextPath}/resources\img\logo2.png">
 			<div id="logins">
-				
 				<c:choose>
 					<c:when test="${ sessionScope.loginMember != null }">
+						<c:if test="${ sessionScope.loginMember.memLevel eq 'A' }">
+							<a class="btn btn-sm btn-warning admin">관리자페이지</a>
+						</c:if>
 						<a class="btn btn-sm btn-primary" href="/goty/member/logout">로그아웃</a>
 					</c:when>
 					<c:otherwise>

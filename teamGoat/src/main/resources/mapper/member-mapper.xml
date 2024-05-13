@@ -20,7 +20,8 @@
   		      PHONE phone,
   		      ADDRESS address,
   		      ADDR_DETAIL addrDetatil,
-  		      EMPTY_CODEYN emptyCodeYN
+  		      EMPTY_CODEYN emptyCodeYN,
+  		      MEM_LEVEL memLevel
   		  FROM
   		      MEMBER       
   	     WHERE	      

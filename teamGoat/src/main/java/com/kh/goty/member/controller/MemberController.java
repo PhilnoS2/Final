@@ -1,5 +1,7 @@
 package com.kh.goty.member.controller;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.Random;
 
@@ -16,8 +18,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.kh.goty.member.model.service.MemberService;
 import com.kh.goty.member.model.vo.Member;
+
 import lombok.extern.slf4j.Slf4j;
 
 @PropertySource("classpath:key.properties")
@@ -37,14 +41,20 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public ModelAndView loginForm(ModelAndView mv) {
-		mv.setViewName("member/loginForm");
+		SecureRandom random = new SecureRandom();
+		String state = new BigInteger(130, random).toString();
+		
+		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
+		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
+		  .addObject("state", state)
+		  .setViewName("member/loginForm");
 		return mv;
 	}
 	
 	@PostMapping("/login")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
-	
+		
 		// 임시코드발급상태확인
 		if(loginMember != null 
 		   && loginMember.getEmptyCodeYn().equals("Y")
