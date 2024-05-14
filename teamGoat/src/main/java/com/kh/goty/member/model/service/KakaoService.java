@@ -11,11 +11,13 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.kh.goty.member.model.dao.KakaoRepository;
 import com.kh.goty.member.model.vo.KakaoMember;
 
 @Service
@@ -24,6 +26,13 @@ public class KakaoService {
 
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	KakaoRepository kakaoRepository;
+	
+	@Autowired
+	SqlSessionTemplate sqlSession;
+	
 	
 	public String getToken(String code) throws IOException, ParseException {
 		
@@ -98,17 +107,26 @@ public class KakaoService {
 		
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseData);
 		
-		KakaoMember sm = new KakaoMember();
+		KakaoMember km = new KakaoMember();
 		
-		sm.setId(responseObj.get("id").toString());
+		km.setId(responseObj.get("id").toString());
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
-		sm.setNickName(propObj.get("nickname").toString());
-		sm.setThumbnailImage(propObj.get("thumbnail_image").toString());
+		km.setNickName(propObj.get("nickname").toString());
+		km.setThumbnailImage(propObj.get("thumbnail_image").toString());
+		km.setStatus("KM");
 		
-		return sm;
+		return km;
 	}
 
+	public int checkKakaoId(KakaoMember km) {
+		return kakaoRepository.checkKakaoId(sqlSession, km);
+	}
+	
+	public int insertKakao(KakaoMember km) {
+		return kakaoRepository.insertKakao(sqlSession, km);
+	}
 
+	
 
 
 

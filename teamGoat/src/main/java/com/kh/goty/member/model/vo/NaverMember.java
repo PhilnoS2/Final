@@ -7,6 +7,9 @@ public class NaverMember {
 	private String name;
 	private String birthyear;
 	
+	private String status;
+	private String memLevel;
+	
 	public NaverMember() {
 		super();
 	}
@@ -18,6 +21,22 @@ public class NaverMember {
 		this.mobile = mobile;
 		this.name = name;
 		this.birthyear = birthyear;
+	}
+	
+	public String getMemLevel() {
+		return memLevel;
+	}
+
+	public void setMemLevel(String memLevel) {
+		this.memLevel = memLevel;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public String getId() {

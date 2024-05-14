@@ -1,27 +1,56 @@
 package com.kh.goty.member.model.vo;
 
 public class KakaoMember {
-	private String id;
+	private String kakaoId;
 	private String nickName;
 	private String thumbnailImage;
+	private String accessToken;
+	
+	private String status;
+	private String memLevel;
+	
 	
 	public KakaoMember() {
 		super();
 	}
 
-	public KakaoMember(String id, String nickName, String thumbnailImage) {
+	public KakaoMember(String kakaoId, String nickName, String thumbnailImage) {
 		super();
-		this.id = id;
+		this.kakaoId = kakaoId;
 		this.nickName = nickName;
 		this.thumbnailImage = thumbnailImage;
 	}
-
-	public String getId() {
-		return id;
+	
+	public String getAccessToken() {
+		return accessToken;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
+	public String getMemLevel() {
+		return memLevel;
+	}
+
+	public void setMemLevel(String memLevel) {
+		this.memLevel = memLevel;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getId() {
+		return kakaoId;
+	}
+
+	public void setId(String kakaoId) {
+		this.kakaoId = kakaoId;
 	}
 
 	public String getNickName() {
@@ -42,7 +71,7 @@ public class KakaoMember {
 
 	@Override
 	public String toString() {
-		return "KakaoMember [id=" + id + ", nickName=" + nickName + ", thumbnailImage=" + thumbnailImage + "]";
+		return "KakaoMember [kakaoId=" + kakaoId + ", nickName=" + nickName + ", thumbnailImage=" + thumbnailImage + "]";
 	}
 
 

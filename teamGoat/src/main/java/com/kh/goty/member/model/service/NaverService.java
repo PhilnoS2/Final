@@ -99,7 +99,7 @@ public class NaverService {
 		nm.setNickname(res.get("nickname").toString());
 		nm.setMobile(res.get("mobile").toString());
 		nm.setBirthyear(res.get("birthyear").toString());
-		
+		nm.setStatus("NM");
 		
 		return nm;
 	}
