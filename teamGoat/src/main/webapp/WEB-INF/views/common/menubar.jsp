@@ -134,25 +134,25 @@
 			<li>
 		     	<a>Nintendo</a>
 		      	<ul id="option-ul">
-		      		<li><a href="#">게임 본체</a></li>
-		      		<li><a href="#">게임 타이틀</a></li>
-		      		<li><a href="#">게임주변기기</a></li>
+		      		<li><a href="nintendoMachine">Nintendo 게임기</a></li>
+		      		<li><a href="nintendoGame">Nintendo 게임</a></li>
+		      		<li><a href="nintendoAccessory">Nintendo 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
 		     	<a>PlayStation</a>
 		      	<ul id="option-ul">
-		      		<li><a href="#">게임 본체</a></li>
-		      		<li><a href="#">게임 타이틀</a></li>
-		      		<li><a href="#">게임주변기기</a></li>
+		      		<li><a href="playstationMachine">PlayStation 게임기</a></li>
+		      		<li><a href="playstationGame">PlayStation 게임</a></li>
+		      		<li><a href="playstationAccessory">PlayStation 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
 		     	<a>X Box</a>
 		      	<ul id="option-ul">
-		      		<li><a href="xboxMachine">게임 본체</a></li>
-		      		<li><a href="xboxGame">게임 타이틀</a></li>
-		      		<li><a href="xboxAccessory">게임주변기기</a></li>
+		      		<li><a href="xboxMachine">XBOX 게임기</a></li>
+		      		<li><a href="xboxGame">XBOX 타이틀</a></li>
+		      		<li><a href="xboxAccessory">XBOX 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>

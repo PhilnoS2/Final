@@ -5,23 +5,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class XboxController {
-
+	
+	// 메서드는 동사형으로 
+	
 	@GetMapping("xboxMachine")
-	public String xboxMachine() {
+	public String findXboxMachine() {
 		
-		return "item/xbox";	
+		return "item/xbox/machine";	
 	}
 	
 	@GetMapping("xboxGame")
-	public String xboxGame() {
+	public String findXboxGame() {
 		
-		return "item/xbox";	
+		return "item/xbox/game";	
 	}
 	
 	@GetMapping("xboxAccessory")
-	public String xboxAccessory() {
+	public String findXboxAccessory() {
 		
-		return "item/xbox";	
+		return "item/xbox/accessory";	
 	}
 	
 }

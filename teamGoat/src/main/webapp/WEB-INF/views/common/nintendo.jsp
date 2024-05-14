@@ -5,11 +5,41 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>nintendo</title>
+<title>Nintendo</title>
+<style>
+
+	#main-image{
+		width : 1140px;
+		height : 350px;
+		align-content : center;
+		margin-left : 5%;
+	}
+	
+	#main-image > img {
+		width : 43%;
+		height : 90%;
+	}
+	
+	#category {
+		display: flex; 
+		justify-content: center;
+		border-top : 1px solid black;
+		padding : 10px;
+	}
+	
+	#category > button {
+		width : 150px;
+	}
+	  
+	#item-list {
+		border-top : 1px solid black;
+	}
+	
+</style>
 </head>
 <body>
 
-	<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="menubar.jsp"/>
 	
 	<div class="container">
         <div id="main-image">
