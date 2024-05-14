@@ -101,7 +101,6 @@ public class KakaoService {
 		KakaoMember sm = new KakaoMember();
 		
 		sm.setId(responseObj.get("id").toString());
-		
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
 		sm.setNickName(propObj.get("nickname").toString());
 		sm.setThumbnailImage(propObj.get("thumbnail_image").toString());

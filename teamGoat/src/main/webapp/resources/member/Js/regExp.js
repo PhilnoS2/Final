@@ -231,6 +231,7 @@
 	 		});
  		}
  		
+ 		
  		// 이메일중복체크요청함수
  		function emailCheck(){
 	 		$.ajax({

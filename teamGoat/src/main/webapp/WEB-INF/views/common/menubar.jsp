@@ -93,9 +93,6 @@
    	font-size: 24px; 
    	color: #17a2b8;
    }
-   .admin{
-   	disply : in
-   }
 </style>
 </head>
 <body>
@@ -120,9 +117,10 @@
 			<div id="logins">
 				<c:choose>
 					<c:when test="${ sessionScope.loginMember != null }">
-						<c:if test="${ sessionScope.loginMember.memLevel eq 'A' }">
-							<a class="btn btn-sm btn-warning admin">관리자페이지</a>
+						<c:if test="${ sessionScope.loginMember.memLevel == 'A' }">
+							<a class="btn btn-sm btn-warning">관리자페이지</a>
 						</c:if>
+						<a class="btn btn-sm btn-warning" >마이페이지</a>
 						<a class="btn btn-sm btn-primary" href="/goty/member/logout">로그아웃</a>
 					</c:when>
 					<c:otherwise>

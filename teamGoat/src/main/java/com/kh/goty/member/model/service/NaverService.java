@@ -94,11 +94,11 @@ public class NaverService {
 		JSONObject res = (JSONObject)new JSONParser().parse(response);
 		
 		
-		nm.setBirthyear(res.get("birthyear").toString());
 		nm.setId(res.get("id").toString());
-		nm.setMobile(res.get("mobile").toString());
 		nm.setName(res.get("name").toString());
 		nm.setNickname(res.get("nickname").toString());
+		nm.setMobile(res.get("mobile").toString());
+		nm.setBirthyear(res.get("birthyear").toString());
 		
 		
 		return nm;
