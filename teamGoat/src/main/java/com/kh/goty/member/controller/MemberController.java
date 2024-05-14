@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goty.member.model.service.MemberService;
-import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
 
 import lombok.extern.slf4j.Slf4j;
@@ -218,5 +217,40 @@ public class MemberController {
     }
 		return mv;
   }
+	
+  @GetMapping("/mypage")
+  public ModelAndView mypage(ModelAndView mv) {
+	  mv.setViewName("member/mypage");
+	  return mv;
+  }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

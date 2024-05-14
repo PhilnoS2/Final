@@ -8,38 +8,38 @@
 <title>xbox</title>
 <style>
 
-   #main-image{
-    width : 1140px;
-    height : 350px;
-    align-content : center;
-    margin-left : 5%;
-   }
-
-   #main-image > img {
-    width : 43%;
-    height : 90%;
-   }
-
-   #category {
-	display: flex; 
-	justify-content: center;
-	border-top : 1px solid black;
-	padding : 10px;
-   }
-
-   #category > button {
-	width : 150px;
-   }
-   
-   #item-list {
-	border-top : 1px solid black;
-   }
+	#main-image{
+		width : 1140px;
+		height : 350px;
+		align-content : center;
+		margin-left : 5%;
+	}
+	
+	#main-image > img {
+		width : 43%;
+		height : 90%;
+	}
+	
+	#category {
+		display: flex; 
+		justify-content: center;
+		border-top : 1px solid black;
+		padding : 10px;
+	}
+	
+	#category > button {
+		width : 150px;
+	}
+	  
+	#item-list {
+		border-top : 1px solid black;
+	}
 	
 </style>
 </head>
 <body>
 
-	<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="menubar.jsp"/>
 	
 	<div class="container">
 	
@@ -51,16 +51,10 @@
 		<label>▶게임기 본체</label>
 		
 		<div id="category">
-			<button type="button" class="btn btn-light">Nintendo</button>
-			<button type="button" class="btn btn-light">PlayStation</button>
-			<button type="button" class="btn btn-light">XBOX</button>
+			<button type="button" class="btn btn-light">XBOX 게임기</button>
+			<button type="button" class="btn btn-light">XBOX 타이틀</button>
+			<button type="button" class="btn btn-light">XBOX 주변기기</button>
 		</div>	
-		
-		<label>▶(수량)ITEMS</label>
-		
-		<div id="item-list">
-			<br><br><br>
-		</div>
 		
     </div>
     

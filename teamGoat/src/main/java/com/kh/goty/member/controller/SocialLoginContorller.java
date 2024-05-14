@@ -8,8 +8,6 @@ import java.net.URL;
 
 import javax.servlet.http.HttpSession;
 
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -94,11 +92,19 @@ public class SocialLoginContorller {
 		String accessToken = naverService.getToken(code, state);
 		NaverMember nm = naverService.getUserInfo(accessToken);
 		
-		System.out.println(nm);
+		//System.out.println(nm);	
 		
-		session.setAttribute("loginMember", nm);
-		session.setAttribute("alertMsg", "로그인 성공");
-		mv.setViewName("redirect:/");
+		if(naverService.checkNaverId(nm) > 0) {
+			session.setAttribute("loginMember", nm);
+			session.setAttribute("alertMsg", "로그인 성공!");
+			mv.setViewName("redirect:/");
+		} else {
+			if(naverService.insertNaver(nm) > 0) {
+				session.setAttribute("alertMsg", "네이버 아이디로 회원가입 성공!");
+				mv.setViewName("redirect:/");
+			}
+		}
+		
 		return mv;
 	}
 	
