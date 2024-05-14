@@ -35,10 +35,10 @@
 				<h3>개인정보보기</h3>
 			</div>
 			<div>
-				<a href="#" >구매 내역</a>
-				<a href="#" >문의 내역</a>
-				<a href="#" >장바구니 목록</a>
-				<a href="#" >내 정보 수정</a>
+				<a class="btn btn-sm btn-info" href="#" >구매 내역</a>
+				<a class="btn btn-sm btn-info" href="#" >문의 내역</a>
+				<a class="btn btn-sm btn-info" href="#" >장바구니 목록</a>
+				<a class="btn btn-sm btn-info" href="#" >내 정보 수정</a>
 			</div>
 		</div>
 		<div id="right-side"></div>
