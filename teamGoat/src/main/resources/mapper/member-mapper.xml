@@ -20,7 +20,8 @@
   		      PHONE phone,
   		      ADDRESS address,
   		      ADDR_DETAIL addrDetatil,
-  		      EMPTY_CODEYN emptyCodeYN
+  		      EMPTY_CODEYN emptyCodeYN,
+  		      MEM_LEVEL memLevel
   		  FROM
   		      MEMBER       
   	     WHERE	      
@@ -172,6 +173,46 @@
   	   AND
   	      DELETE_YN = 'N'  
   	</select>
+  
+  	<select id="checkKakaoId"
+  		parameterType="kakaoMember"
+  		resultType="_int"
+  	>
+  	SELECT
+  	      COUNT(*)
+  	  FROM
+  	      K_MEMBER
+  	 WHERE
+  	      MEMBER_ID = #{kakaoId}
+  	</select>
+  
+  	<insert id="insertKakao"
+  		parameterType="kakaoMember"
+  	>
+  	INSERT
+  	  INTO
+  	      k_MEMBER
+  	      (
+  	      MEMBER_NO,
+  	      MEMBER_ID,
+  	      NICKNAME,
+  	      THUMBNAIL_IMAGE,
+  	      ACCESS_TOKEN,
+  	      STATUS,
+  	      MEM_LEVEL
+  	      )
+  	VALUES
+  		  (
+  	 	  SEQ_KAKAOMEMBER.NEXTVAL,
+  	 	  #{kakaoId},
+  	 	  #{nickName},
+  	 	  #{thumbnailImage},
+  	 	  #{accessToken},
+  	 	  #{status},
+  	 	  DEFAULT  	 		 
+  	 	  )	
+  	</insert>
+  
   
   
   

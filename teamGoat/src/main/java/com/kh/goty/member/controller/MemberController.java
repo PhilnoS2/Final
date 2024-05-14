@@ -1,5 +1,7 @@
 package com.kh.goty.member.controller;
 
+import java.math.BigInteger;
+import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.Random;
 
@@ -16,8 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
 import com.kh.goty.member.model.service.MemberService;
+import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
+
 import lombok.extern.slf4j.Slf4j;
 
 @PropertySource("classpath:key.properties")
@@ -37,14 +42,21 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public ModelAndView loginForm(ModelAndView mv) {
-		mv.setViewName("member/loginForm");
+		SecureRandom random = new SecureRandom();
+		String state = new BigInteger(130, random).toString();
+		
+		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
+		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
+		  .addObject("state", state)
+		  .setViewName("member/loginForm");
+		
 		return mv;
 	}
 	
 	@PostMapping("/login")
 	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
 		Member loginMember = memberService.login(member);
-	
+		
 		// 임시코드발급상태확인
 		if(loginMember != null 
 		   && loginMember.getEmptyCodeYn().equals("Y")
@@ -54,9 +66,9 @@ public class MemberController {
 		}
 	
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-		session.setAttribute("loginMember", loginMember);
-		session.setAttribute("alertMsg", "로그인 성공");
-		mv.setViewName("redirect:/");
+			session.setAttribute("loginMember", loginMember);
+			session.setAttribute("alertMsg", "로그인 성공");
+			mv.setViewName("redirect:/");
 			
 		} else {
 			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
@@ -141,6 +153,7 @@ public class MemberController {
 			JavaMailSenderImpl sender;
 			
 			JavaMailSenderImpl impl = new JavaMailSenderImpl();
+			
 			// - 계정 설정
 			impl.setHost("smtp.gmail.com");
 			impl.setPort(587);
@@ -158,16 +171,16 @@ public class MemberController {
 			SimpleMailMessage message = new SimpleMailMessage();
 			
 			//코드 생성
-			 StringBuilder sb = new StringBuilder();
-			    Random rd = new Random();
+			StringBuilder sb = new StringBuilder();
+			Random rd = new Random();
 
-			    for(int i=0;i < 8;i++){
-			        if(rd.nextBoolean()){
-			            sb.append(rd.nextInt(10));
-			        }else {
-			            sb.append((char)(rd.nextInt(26)+65));
-			        }
-			    }
+		    for(int i=0;i < 8;i++){
+		        if(rd.nextBoolean()){
+		            sb.append(rd.nextInt(10));
+		        }else {
+		            sb.append((char)(rd.nextInt(26)+65));
+		        }
+		    }
 			
 			message.setSubject("안녕하세요. goty 비밀번호 찾기 이메일입니다.");
 			message.setText("임시 비밀번호 : "+ sb);
