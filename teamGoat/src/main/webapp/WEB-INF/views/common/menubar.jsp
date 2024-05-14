@@ -120,7 +120,7 @@
 						<c:if test="${ sessionScope.loginMember.memLevel == 'A' }">
 							<a class="btn btn-sm btn-warning">관리자페이지</a>
 						</c:if>
-						<a class="btn btn-sm btn-warning" >마이페이지</a>
+						<a class="btn btn-sm btn-warning" href="/goty/member/mypage">마이페이지</a>
 						<c:choose>
 							<c:when test="${ sessionScope.loginMember.status != null 
 											&& sessionScope.loginMember.status == 'KM' }">

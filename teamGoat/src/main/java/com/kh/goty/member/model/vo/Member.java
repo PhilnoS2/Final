@@ -14,6 +14,7 @@ public class Member {
 	private String address;
 	private String addrDetail;
 	
+	private String status;
 	private String deleteYN;
 	private String memberPoint;
 	private Date enrollDate;
@@ -47,6 +48,16 @@ public class Member {
 		this.memLevel = memLevel;
 		this.emptyCodeYn = emptyCodeYn;
 		this.totalPrice = totalPrice;
+	}
+
+	
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public int getMemberNo() {

@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.goty.member.model.dao.KakaoRepository;
 import com.kh.goty.member.model.vo.KakaoMember;
+import com.kh.goty.member.model.vo.NaverMember;
 
 @Service
 @PropertySource("classpath:key.properties")
@@ -109,11 +110,10 @@ public class KakaoService {
 		
 		KakaoMember km = new KakaoMember();
 		
-		km.setId(responseObj.get("id").toString());
+		km.setKakaoId(responseObj.get("id").toString());
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
 		km.setNickName(propObj.get("nickname").toString());
 		km.setThumbnailImage(propObj.get("thumbnail_image").toString());
-		km.setStatus("KM");
 		
 		return km;
 	}
@@ -126,6 +126,7 @@ public class KakaoService {
 		return kakaoRepository.insertKakao(sqlSession, km);
 	}
 
+	
 	
 
 

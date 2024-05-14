@@ -11,11 +11,13 @@ import java.net.URL;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.kh.goty.member.model.dao.NaverRepository;
 import com.kh.goty.member.model.vo.NaverMember;
 
 @Service
@@ -24,6 +26,12 @@ public class NaverService {
 	
 	@Autowired
 	private Environment env;
+	
+	@Autowired
+	private NaverRepository naverRepositoy;
+	
+	@Autowired
+	SqlSessionTemplate sqlSession;
 	
 	public String getToken(String code, String state) throws IOException, ParseException {
 		String tokenUrl = "https://nid.naver.com/oauth2.0/token";
@@ -94,15 +102,26 @@ public class NaverService {
 		JSONObject res = (JSONObject)new JSONParser().parse(response);
 		
 		
-		nm.setId(res.get("id").toString());
+		nm.setNaverId(res.get("id").toString());
 		nm.setName(res.get("name").toString());
 		nm.setNickname(res.get("nickname").toString());
 		nm.setMobile(res.get("mobile").toString());
 		nm.setBirthyear(res.get("birthyear").toString());
-		nm.setStatus("NM");
 		
 		return nm;
 	}
+	
+	public int checkNaverId(NaverMember nm) {
+		return naverRepositoy.checkNaverId(sqlSession, nm);
+	}
+	
+	public int insertNaver(NaverMember nm) {
+		return naverRepositoy.insertNaver(sqlSession, nm);
+	}
+	
+	
+	
+	
 	
 	
 	

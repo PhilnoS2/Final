@@ -174,6 +174,7 @@
   	      DELETE_YN = 'N'  
   	</select>
   
+  
   	<select id="checkKakaoId"
   		parameterType="kakaoMember"
   		resultType="_int"
@@ -185,6 +186,7 @@
   	 WHERE
   	      MEMBER_ID = #{kakaoId}
   	</select>
+  
   
   	<insert id="insertKakao"
   		parameterType="kakaoMember"
@@ -208,10 +210,52 @@
   	 	  #{nickName},
   	 	  #{thumbnailImage},
   	 	  #{accessToken},
-  	 	  #{status},
+  	 	  DEFAULT,
   	 	  DEFAULT  	 		 
   	 	  )	
   	</insert>
+  
+  <select id="checkNaverId"
+  		parameterType="naverMember"
+  		resultType="_int"
+  	>
+  	SELECT
+  	      COUNT(*)
+  	  FROM
+  	      N_MEMBER
+  	 WHERE
+  	      MEMBER_ID = #{naverId}
+  	</select>
+  
+  <insert id="insertNaver"
+  		parameterType="naverMember"
+  	>
+  	INSERT
+  	  INTO
+  	      N_MEMBER
+  	      (
+  	      MEMBER_NO,
+  	      MEMBER_ID,
+  	      MEMBER_NAME,
+  	      NICKNAME,
+  	      BIRTH_YEAR,
+  	      PHONE,
+  	      STATUS,
+  	      MEM_LEVEL
+  	      )
+  	VALUES
+  		  (
+  	 	  SEQ_NAVERMEMBER.NEXTVAL,
+  	 	  #{naverId},
+  	 	  #{name},
+  	 	  #{nickname},
+  	 	  #{birthyear},
+  	 	  #{mobile},
+  	 	  DEFAULT,
+  	 	  DEFAULT 	 		 
+  	 	  )	
+  	</insert>
+  
   
   
   
