@@ -5,7 +5,23 @@
   
 <mapper namespace="itemMapper">
 	
-	<select id="nintendoMachineCount" resultType="_int">
+	<resultMap id="itemResultSet" type="item">
+
+		<result column="IMG_NO" property="imgNo" />
+		<result column="IMG_NAME" property="imgName" />
+		<result column="IMG_PATH" property="imgPath" />
+		<result column="ITEM_NO" property="itemNo" />
+		<result column="ITEM_CATEGORY" property="itemCategory" />
+		<result column="PRICE" property="price" />
+		<result column="ITEM_NAME" property="itemName" />
+		<result column="RATING" property="rating" />
+		<result column="DEVELOPER" property="developer" />
+		<result column="PUBLISHER" property="publisher" />
+		<result column="GENRE" property="genre" />
+		
+	</resultMap>
+	
+	<select id="findMachineCount" parameterType="string" resultType="_int">
 	
 		SELECT
 				COUNT(*)
@@ -13,7 +29,38 @@
 		  		ITEM
 		 WHERE
 		 		STATUS = 'Y'
+		   AND
+				ITEM_CATEGORIY = 1
+		   AND
+		   		DEVELOPER = #{platform}
 		
+	</select>
+	
+	<select id="findMachineList" parameterType="string" resultMap="itemResultSet">
+	
+		SELECT
+		       	ITEM_NO,
+		       	ITEM_NAME,
+		       	PRICE,
+		       	IMG_NAME,
+        		IMG_PATH,
+		       	DEVELOPER,
+		       	PUBLISHER
+		 FROM
+		       	ITEM I
+		 JOIN
+		       	ITEM_IMG II
+		   ON  	(I.IMG_NO = II.IMG_NO)
+		WHERE
+		       	STATUS = 'Y'
+		  AND
+		       	ITEM_CATEGORIY = 1
+		  AND
+		       	DEVELOPER = #{platform}
+		ORDER
+		   BY
+				ITEM_NO
+	
 	</select>
 
 </mapper>

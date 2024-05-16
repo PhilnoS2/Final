@@ -148,9 +148,9 @@
 			<li>
 		     	<a>Nintendo</a>
 		      	<ul id="option-ul">
-		      		<li><a href="nintendoMachine">Nintendo 게임기</a></li>
-		      		<li><a href="nintendoGame">Nintendo 게임</a></li>
-		      		<li><a href="nintendoAccessory">Nintendo 주변기기</a></li>
+		      		<li><a href="nintendo.machine?platform=nintendo">Nintendo 게임기</a></li>
+		      		<li><a href="nintendo.game?platform=nintendo">Nintendo 게임</a></li>
+		      		<li><a href="nintendo.accessory?platform=nintendo">Nintendo 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
