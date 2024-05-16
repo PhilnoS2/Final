@@ -1,6 +1,4 @@
         
-        const regExpId = /^[a-zA-Z][a-zA-Z0-9]{4,15}$/;
-		const regExpPw = /^[a-zA-Z0-9!@#]{8,15}$/;
 		const regExpName = /^[ㄱ-ㅎ가-힣]{2,}$/;
 		const regExpNickname = /^[ㄱ-ㅎ가-힣a-zA-Z0-9]{1,5}$/;
 		const regExpBornDate = /^[0-9]{1,8}$/;
@@ -8,14 +6,9 @@
 		const regExpPhone = /^[0-9]{1,11}$/;
 		const regDetailAddr = /^[ㄱ-ㅎ가-힣0-9]{1,15}$/;
 		
-		let idFlag = false;
 		let emailFlag = false;
 		let phoneFlag = false;
 		
-	    //입력양식접근
-		const $id = $('#id');
-		const $pwd = $('#pwd');
-		const $pwdCheck = $('#pwdCheck');
 		const $name = $('#name');
 		const $nickname = $('#nickname');
 		const $bornDate = $('#bornDate');
@@ -27,67 +20,12 @@
 		const $submitBtn = $('#submitBtn');
 
 		//에러표시태그접근
-		const $regExRuleId = $('.regExRuleId');
-		const $regExRulePwd = $('.regExRulePwd');
-		const $checkPwd = $('.checkPwd');
 		const $checkName= $('.checkName');
 		const $checkNickname = $('.nickname');
 		const $checkBornDate = $('.bornDate');
 		const $checkEmail = $('.email');
 		const $checkPhone = $('.phone');
 		const $checkDetail = $('.detail')
-		
-		//아이디
- 		function regExpCheckId(){
- 			if(regExpId.test($id.val())){
- 				$regExRuleId.css('display', 'none');
- 				
- 				// idCheck() / 아이디 중복체크
- 				if($id.val().length > 4){
- 					idCheck();
- 				}
- 				
- 			} else {
- 				$regExRuleId.text('첫글자는 영문, 영문과 숫자 5~15 자리로 입력해주세요.');
- 				$regExRuleId.css('display', 'block');
- 			}
- 			submitCheck();
-			
- 			if($id.val() === ''){
- 				$regExRuleId.css('display', 'none');
- 			}
- 		} 
- 		
- 		//비밀번호
-		 function regExpCheckPwd(){
-			if(regExpPw.test($pwd.val())){
-				$regExRulePwd.css('display', 'none');
-				$pwdCheck.attr('readonly', false);
-			} else {
-				$regExRulePwd.css('display', 'block');
-				$pwdCheck.attr('readonly', true);
-				$pwdCheck.val('');
-			}
-
-			submitCheck();
-			if($pwd.val() === ''){
-				$regExRulePwd.css('display', 'none');
-			}
-		} 
- 		
- 		//비밀번호 확인
-		function comparePwd(){
-			if($pwd.val() === $pwdCheck.val()){
-				$checkPwd.css('display', 'none');
-			} else {
-				$checkPwd.css('display', 'block');
-			}
-			
-			submitCheck();
-			if($pwdCheck.val() === ''){
-				$checkPwd.css('display', 'none');
-			}
-		} 
 		
 		//이름확인
 		function regExpCheckName(){
@@ -186,15 +124,12 @@
  		
  		// 회원가입버튼 활성화
  		function submitCheck(){
- 			if(regExpId.test($id.val())
- 			   && regExpPw.test($pwd.val())
- 			   && regExpName.test($name.val())
+ 			if(regExpName.test($name.val())
  			   && regExpNickname.test($nickname.val())
  			   && regExpBornDate.test($bornDate.val())
  			   && regExpPhone.test($phone.val())
  			   && regEmail.test($email.val())
  			   && regDetailAddr.test($detailAddress.val())
- 			   && !idFlag 
  			   && !emailFlag 
  			   && !phoneFlag
  			) {
@@ -204,35 +139,7 @@
  				
 			} 		
  		}
- 		
- 		
- 		// 아이디중복체크요청함수
- 		function idCheck(){
-	 		$.ajax({
-	 			url: '/goty/member/idCheck',
-	 			type:'get',
-	 			data: { 
-	 				checkId: $id.val(),
-	 			},
-	 			success: (data) => {
-	 				if(data == 'YD'){
-	 					$regExRuleId.text('중복된 아이디입니다.');
-	 					$regExRuleId.css('display', 'block');
-	 					idFlag = true;
-	 					submitCheck();
-	 				} else {
-	 					$regExRuleId.css('display', 'none');
-	 					idFlag = false;
-	 					submitCheck();
-	 				}
-	 			},
-	 			error: (err) => {
-	 				console.log(err);
-	 			}
-	 		});
- 		}
- 		
- 		
+	
  		// 이메일중복체크요청함수
  		function emailCheck(){
 	 		$.ajax({
@@ -285,19 +192,6 @@
 	 			}
 	 		});
  		}
- 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		

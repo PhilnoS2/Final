@@ -24,6 +24,10 @@ public interface MemberService {
 
 	public int changePwd(Member member);
 
+	public Member findUpdateMember(int memberNo);
+
+	public int updateMember(Member member);
+
 
 	 
 }

@@ -65,5 +65,17 @@ public class MemberServiceImpl implements MemberService {
 	public int phoneCheck(String checkPhone) {
 		return memberRepository.phoneCheck(sqlSession, checkPhone);
 	}
+
+	@Override
+	public Member findUpdateMember(int memberNo) {
+		return memberRepository.findUpdateMember(sqlSession, memberNo);
+	}
+
+	@Override
+	public int updateMember(Member member) {
+		return memberRepository.updateMember(sqlSession, member);
+	}
+	
+
 	
 }

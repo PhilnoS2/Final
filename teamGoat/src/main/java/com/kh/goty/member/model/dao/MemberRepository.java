@@ -48,5 +48,13 @@ public class MemberRepository {
 		return sqlSession.selectOne("memberMapper.phoneCheck", checkPhone);
 	}
 	
+	public Member findUpdateMember(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.selectOne("memberMapper.findUpdateMember", memberNo);
+	}
+
+	public int updateMember(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.update("memberMapper.updateMember", member);
+	}
+	
 	
 }

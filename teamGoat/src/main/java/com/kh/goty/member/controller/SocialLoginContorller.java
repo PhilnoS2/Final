@@ -42,6 +42,7 @@ public class SocialLoginContorller {
 		
 		// km 가지고 db id 조회/ 없으면 table에 insert /있으면 로그인
 		if(kakaoService.checkKakaoId(km) > 0) {
+			km.setStatus("KM");
 			session.setAttribute("loginMember", km);
 			session.setAttribute("alertMsg", "로그인 성공");
 			mv.setViewName("redirect:/");
@@ -95,6 +96,7 @@ public class SocialLoginContorller {
 		//System.out.println(nm);	
 		
 		if(naverService.checkNaverId(nm) > 0) {
+			nm.setStatus("NM");
 			session.setAttribute("loginMember", nm);
 			session.setAttribute("alertMsg", "로그인 성공!");
 			mv.setViewName("redirect:/");

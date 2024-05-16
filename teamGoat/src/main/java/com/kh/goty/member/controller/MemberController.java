@@ -14,6 +14,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -223,9 +224,35 @@ public class MemberController {
 	  mv.setViewName("member/mypage");
 	  return mv;
   }
-	
-	
-	
+
+  @GetMapping("/updateForm/{memberNo}")
+  public ModelAndView updateForm(@PathVariable("memberNo") int memberNo, 
+		  						 ModelAndView mv) {
+	  Member member = memberService.findUpdateMember(memberNo);
+	  
+	  if(member != null) {
+		  mv.addObject("member", member).setViewName("member/updateForm");
+	  } else {
+		  mv.addObject("errorMsg", "회원의 정보가 존재하지 않습니다.").setViewName("common/errorPage");
+	  }
+	  return mv;
+  }
+ 
+  @PostMapping("/update")
+  public ModelAndView updateMember(Member member, ModelAndView mv, HttpSession session) {
+	  // log.info("member = {}", member);
+	  
+	  if(memberService.updateMember(member) > 0) {
+		  session.setAttribute("alertMsg", "정보 수정이 성공했습니다.");
+		  session.removeAttribute("loginMember");
+		  mv.setViewName("redirect:member/login");
+	  } else {
+		  mv.addObject("errorMsg", "정보 수정에 실패했습니다.").setViewName("common/errorPage");
+	  }
+	  
+	  mv.setViewName("redirect:/");
+	  return mv;
+  }
 	
 	
 	
