@@ -15,62 +15,72 @@
          div {
             box-sizing : border-box;
         }
-        #faq-wrap {
+
+        #faq-wrap{
             margin : auto;
             width: 1200px;
             height : 900px;
-            > div {
+            > div{
                 width : 100%;
             }
         }
+
         a {
             text-decoration : none;
             color : black;
         }
-        a:hover {
+        a:hover{
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-        li {
+
+        li{
             list-style : none;
         }
-        .faq-title {
+
+        .faq-title{
             height : 10%;
-            > div {
+
+            > div{
                 height : 100%;
                 float : left;
             }
         }
-        .faq-title-title {
+
+        .faq-title-title{
             width : 40%;
             position : relative;
-            > div {
+            > div{
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 30px;
             }    
         }
-        .faq-title-insert {
+
+        .faq-title-insert{
             width : 60%;
             position : relative;
-            > div {
+            > div{
                 display : inline-block;
                 position : absolute;
                 left : 540px;
                 top : 25px;
             }    
         }
-        .faq-search {
+
+        .faq-search{
             height : 5%;
         }
-        .faq-content {
+
+        .faq-content{
             height : 85%;
             padding-left : 95px;
         }
-        .faq-q {
+
+        .faq-q{
             width : 800px;
             height : 60px;
             background-color : rgb(216, 216, 211);
@@ -82,7 +92,8 @@
             padding : 15px;
             cursor : pointer;
         }
-        .faq-a {
+
+        .faq-a{
             width : 800px;
             height : 60px;
             background-color : rgba(255, 255, 255, 0.788);
@@ -95,9 +106,9 @@
             margin-bottom : 0;
             display : none;
         }
-        .faq-q:hover {
-			background-color : yellowgreen;        
-        }
+
+        
+
     </style>
 
 </head>
@@ -115,7 +126,7 @@
             <div class="faq-title-insert">
                 <div>
                     <!--추후 로그인한 유저 + 관리자일 경우에만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <button type="button" id="insert-faq" class="btn btn-secondary">글쓰기</button>
+                    <button type="button" id="insert-faq" class="btn btn-light">글쓰기</button>
                 </div>
             </div>
         </div>
@@ -130,6 +141,7 @@
                 </select>
             </div>
         </div>
+
 
         <div class="faq-content">
             <!--DB에서 조회해온 데이터를 반복문 돌려야 함-->
@@ -157,17 +169,16 @@
 
     <script>
         $(function(){
-        	$('#insert-faq').click(function(){
-        		location.href = 'faq-enroll';
-        	})
-            
-	        $('#select-area').change(function(){
-	            //console.log($('option:selected').val());
-	            const choice = $('option:selected').val();
-	            // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
-	            console.log(choice);
-	        });
-           
+
+            $(function(){
+                $('#select-area').change(function(){
+                    //console.log($('option:selected').val());
+                    const choice = $('option:selected').val();
+                    // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
+                    console.log(choice);
+                });
+            })
+
             $('.faq-content').on('click', ('.faq-q'), function(){
                 //console.log($(this));
                 const $a = $(this).next();
