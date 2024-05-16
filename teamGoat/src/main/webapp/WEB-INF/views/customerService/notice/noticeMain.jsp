@@ -14,84 +14,71 @@
         div {
             box-sizing : border-box;
         }
-
-        #notice-wrap{
+        #notice-wrap {
             margin : auto;
             width: 1200px;
             height : 900px;
-            > div{
+            > div {
                 width : 100%;
             }
         }
-
         a {
             text-decoration : none;
             color : black;
         }
-        a:hover{
+        a:hover {
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-
-        li{
+        li {
             list-style : none;
         }
-
-        .notice-title{
+        .notice-title {
             height : 10%;
-
-            > div{
+            > div {
                 height : 100%;
                 float : left;
             }
         }
-
-        .notice-title-title{
+        .notice-title-title {
             width : 40%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 30px;
             }    
         }
-
-        .notice-title-insert{
+        .notice-title-insert {
             width : 60%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 540px;
                 top : 25px;
             }    
         }
-
-        .notice-content{
+        .notice-content {
             height : 60%;
         }
-
-        .notice-page{
+        .notice-page {
             height : 10%;
             width:fit-content; margin:auto;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 450px;
                 top : 20px;
             }
         }
-
-        .notice-search{
+        .notice-search {
             height : 20%;
         }
-
-
-
     </style>
 
 </head>
@@ -108,7 +95,7 @@
             <div class="notice-title-insert">
                 <div>
                     <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <a id="insert-notice" class="btn btn-light" href="notice/enroll">글쓰기</a>
+                    <a id="insert-notice" class="btn btn-secondary" href="notice-enroll">글쓰기</a>
                 </div>
             </div>
         </div>

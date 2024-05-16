@@ -19,7 +19,7 @@ public class CustomerServiceController {
 		return "customerService/question/questionMain";
 	}
 	
-	@GetMapping("question/enroll")
+	@GetMapping("question-enroll")
 	public String forwardInsertQuestion() {
 		return "customerService/question/questionEnrollForm";
 	}
@@ -29,7 +29,7 @@ public class CustomerServiceController {
 		return "customerService/notice/noticeMain";
 	}
 	
-	@GetMapping("notice/enroll")
+	@GetMapping("notice-enroll")
 	public String forwardInsertNotice() {
 		return "customerService/notice/noticeEnrollForm";
 	}
@@ -37,6 +37,11 @@ public class CustomerServiceController {
 	@GetMapping("faqs")
 	public String forwardFaq() {
 		return "customerService/faq/faqMain";
+	}
+	
+	@GetMapping("faq-enroll")
+	public String forwradInsertFaq() {
+		return "customerService/faq/faqEnrollForm";
 	}
 	
 }

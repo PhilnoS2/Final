@@ -11,40 +11,34 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-        div{
+        div {
             box-sizing : border-box;
         }
-
         a {
             text-decoration : none;
             color : black;
         }
-
-        a:hover{
+        a:hover {
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-
-        li{
+        li {
             list-style : none;
         }
-       
-
         #notice-wrap {
             width: 1200px;
             height : 900px;
             margin : auto;
-            > div{
+            > div {
                 width : 100%;
             }
         }
-
         .notice-title {
             height : 20%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 95px;
@@ -53,14 +47,13 @@
         }
         .notice-content {
             height : 65%;
-            > div{
+            > div {
                 width: 90%;
                 height : 100%;
                 margin-left : 90px;
             }
         }
-
-        .list-page{
+        .list-page {
             height : 5%;
             > div{
                 width: 90%;
@@ -68,29 +61,25 @@
                 margin-left : 90px;
             }
         }
-
-        .button-area{
+        .button-area {
             height : 10%;
-
-            > div{
+            > div {
                 width: 90%;
                 height : 100%;
                 margin-left : 90px;
             }
         }
-        label{
+        label {
             width : 100px;
             background-color : rgb(241, 238, 238);
             margin : 0;
             font-size : 20px;
             padding-left : 10px;
         }
-
-        textarea{
+        textarea {
             width : 1000px;
             height : 400px;
         }
-
     </style>
 
 </head>

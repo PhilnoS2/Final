@@ -11,48 +11,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-        div{
+        div {
             box-sizing : border-box;
         }
-
         a {
             text-decoration : none;
             color : black;
         }
-
-        a:hover{
+        a:hover {
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-
-        li{
+        li {
             list-style : none;
         }
-       
-
-        #question-wrap{
+        #question-wrap {
             width: 1200px;
             height : 900px;
             margin : auto;
-            > div{
+            > div {
                 width : 100%;
             }
         }
-
-        .question-title{
+        .question-title {
             height : 20%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 100px;
             }
         }
-
-        .question-content{
+        .question-content {
             height : auto;
             padding-bottom : 30px;
             > div {
@@ -60,34 +53,29 @@
                 height : 100%;
             }
         }
-
-        .answer-area{
+        .answer-area {
             margin-top : 50px;
             height : auto;
-            > div{
+            > div {
                 margin-left : 97px;
                 display : inline-block;
             }
         }
-
-        .button-area{
+        .button-area {
             height : 10%;
-            >div{
+            >div {
                 float : left;
                 width: 50%;
                 height : 100%;
             }
         }
-
-        .button-area2{
+        .button-area2 {
             position : relative;
-            >div{
+            >div {
                 position : absolute;
                 right : 97px;
             }
         }
-
-
     </style>
 
 </head>

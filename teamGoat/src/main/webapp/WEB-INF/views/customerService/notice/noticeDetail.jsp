@@ -11,48 +11,41 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <style>
-        div{
+        div {
             box-sizing : border-box;
         }
-
         a {
             text-decoration : none;
             color : black;
         }
-
-        a:hover{
+        a:hover {
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-
-        li{
+        li {
             list-style : none;
         }
-       
-
-        #notice-wrap{
+        #notice-wrap {
             width: 1200px;
             height : 900px;
             margin : auto;
-            > div{
+            > div {
                 width : 100%;
             }
         }
-
-        .notice-title{
+        .notice-title {
             height : 20%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 100px;
             }
         }
-
-        .notice-content{
+        .notice-content {
             height : auto;
             padding-bottom : 30px;
             > div {
@@ -60,46 +53,37 @@
                 height : 100%;
             }
         }
-
-
-        .button-area{
+        .button-area {
             height : 10%;
-            >div{
+            >div {
                 float : left;
                 width: 50%;
                 height : 100%;
             }
         }
-
-        .button-area2{
+        .button-area2 {
             position : relative;
-            >div{
+            >div {
                 position : absolute;
                 right : 97px;
             }
         }
-
-        th{
+        th {
             height: 50px;
             text-align : center;
         }
-
-        td{
+        td {
             padding-left : 10px;
             line-height : 3;
         }
-
-        p{
+        p {
             padding-left : 10px;
         }
-
-        .update-area{
+        .update-area {
             position : absolute;
             left : 1350px;
             top : 130px;
         }
-
-
     </style>
 
 </head>
