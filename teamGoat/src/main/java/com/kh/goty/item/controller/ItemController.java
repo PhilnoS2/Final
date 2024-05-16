@@ -36,6 +36,7 @@ public class ItemController {
 
 		List<Item> itemList = itemService.findMachineList(platform,pi);
 		
+		mv.addObject("platform", platform);
 		mv.addObject("pageInfo", pi);
 		mv.addObject("itemList", itemList);
 		

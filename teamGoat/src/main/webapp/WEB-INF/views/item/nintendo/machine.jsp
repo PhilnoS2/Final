@@ -8,7 +8,6 @@
 <title>Nintendo 게임기</title>
 <style>
    #item-list {
-	border-top : 1px solid black;
 	height : 1000px;
    }
 
@@ -17,8 +16,7 @@
 	float : left;
 	margin-top : 25px;
 	margin-left : 20px;
-    height : 400px;
-	border : 1px solid black;
+    height : auto;
 	border-radius : 10px;
     
    }
@@ -27,12 +25,13 @@
 	width : 245px;
 	padding : 10px;
 	margin-left : 2px;
+    border-bottom : 1px solid black;
    }
-   .items > p{
-	width : 235px;
-	margin : 10px;
-    border-top : 1px solid black;
+
+   .items > div{
+    border-bottom : 1px solid black;
    }
+
 
 </style>
 </head>
@@ -40,13 +39,14 @@
 
 	<jsp:include page="../../common/nintendo.jsp"/>
 
-    <div id="item-list" class="container"> 
     
+    <div id="item-list" class="container"> 
+        
     	<c:choose>
     		<c:when test="${ not empty itemList }">
 	    		<c:forEach items="${ itemList }" var="item">
                     <div class="card items">
-                        <img class="card-img-top" src="${ item.imgPath + item.imgName }" alt="Card image">
+                        <img class="card-img-top" src="${ item.imgPath }/${ item.imgName }" alt="Card image">
                         <div class="card-body">
                             <h5 class="card-title">${ item.itemName }</h5>
                             <p class="card-text">${ item.price }</p>
