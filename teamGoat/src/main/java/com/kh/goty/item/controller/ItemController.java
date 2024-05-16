@@ -28,14 +28,14 @@ public class ItemController {
 									  String platform,
 									  ModelAndView mv
 									  ) {
-		
+		 
 		PageInfo pi = Pagination.getPageInfo(itemService.findMachineCount(platform),
 											 page,
 											 8,
 											 5);
 
 		List<Item> itemList = itemService.findMachineList(platform,pi);
-
+		
 		mv.addObject("platform", platform);
 		mv.addObject("pageInfo", pi);
 		mv.addObject("itemList", itemList);
@@ -46,34 +46,13 @@ public class ItemController {
 	}
 	
 	@GetMapping("nintendo.game")
-	public String findNintendoxboxGame(@RequestParam(value="page", defaultValue="1")
-									   int page,
-									   String platform,
-									   ModelAndView mv) {
-		
-		PageInfo pi = Pagination.getPageInfo(itemService.findGameCount(platform),
-				 page,
-				 8,
-				 5);
-		
-		System.out.println(pi);
+	public String findNintendoxboxGame() {
 		
 		return "item/nintendo/game";	
 	}
 	
-	@GetMapping("nintendo.accessory")
-	public String findNintendoAccessory(@RequestParam(value="page", defaultValue="1")
-									    int page,
-									    String platform,
-									    ModelAndView mv) {
-		
-		PageInfo pi = Pagination.getPageInfo(itemService.findAccessoryCount(platform),
-				 page,
-				 8,
-				 5);
-		
-		System.out.println(pi);
-		
+	@GetMapping("nintendoAccessory")
+	public String findNintendoAccessory() {
 		
 		return "item/nintendo/accessory";	
 	}

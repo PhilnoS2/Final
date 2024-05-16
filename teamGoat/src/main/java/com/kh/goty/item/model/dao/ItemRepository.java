@@ -14,14 +14,6 @@ public class ItemRepository {
 	public int findMachineCount(SqlSession sqlSession, String platform) {
 		return sqlSession.selectOne("itemMapper.findMachineCount", platform);
 	}
-	
-	public int findGameCount(SqlSession sqlSession, String platform) {
-		return sqlSession.selectOne("itemMapper.findGameCount", platform);
-	}
-	
-	public int findAccessoryCount(SqlSession sqlSession, String platform) {
-		return sqlSession.selectOne("itemMapper.findAccessoryCount", platform);
-	}
 
 	public List<Item> findMachineList(SqlSession sqlSession, String platform, RowBounds rowBounds) {
 		return sqlSession.selectList("itemMapper.findMachineList", platform, rowBounds);
