@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<jsp:include page="../common/menubar.jsp" />
 <html>
 <head>
     <meta charset="UTF-8">
@@ -14,184 +13,227 @@
 
 
     <Style>
-        div {
+        div{
             box-sizing : border-box;
         }
-        #cs-wrap {
+
+        #cs-wrap{
             width : 1200px;
             height : 1000px;
             margin : auto;
-            > div {
+            > div{
              width : 100%;
             }
         }
-        #cs-title {
+
+        #cs-title{
             height : 15%;
             div{
                 height : 100%;
                 float: left;
             }
         }
-        #cs-title-text {
+
+        #cs-title-text{
             width : 40%;
-            > h1 {
+
+            > h1{
                 padding-top : 50px;
                 padding-left : 60px;
             }
         }
-        #cs-title-sub {
+        #cs-title-sub{
             width: 60%;
         }
-        #cs-content {
+        
+        #cs-content{
             height : 60%;
-            > div {
+
+            > div{
                 width: 50%;
                 height : 50%;
                 float : left;
             }
         }
-        #notice {
-            > div {
+
+        #notice{
+            > div{
             width: 100%;
             }
         }
-        #notice-title {
+        #notice-title{
             padding-left : 60px;
             height : 15%;
             padding-top : 10px;
         }
-        #notice-content {
+
+        #notice-content{
             height : 85%;
             line-height : 3;
-            > div {
+            > div{
                 float : left;
                 height : 100%;
             }    
         }
-        #notice-content1 {
+
+        #notice-content1{
             width: 10%;
         }
-        #notice-content2 {
+
+        #notice-content2{
             padding-top : 5px;
             padding-left : 30px;
             width: 70%;
             background-color : rgb(224, 238, 238);
 
         }
-        #notice-content3 {
+
+        #notice-content3{
             width: 20%;
             background-color : rgb(224, 238, 238);
-            > div {
+
+
+            > div{
                 width: 100%;
             }
         }
-        #notice-content3-1 {
+
+        #notice-content3-1{
             height : 80%;
         }
-        #notice-content3-2 {
+
+        #notice-content3-2{
             height : 20%;
         }
-        #cs-center {
-            > div {
+
+
+        #cs-center{
+            > div{
                 width: 100%;
             }
         }
-        #cs-center-title {
+        
+        #cs-center-title{
             padding-left : 60px;
             height : 15%;
             padding-top : 10px;
         }
-        #cs-center-content {
+        
+        #cs-center-content{
             height : 85%;
             line-height : 2;
             font-size : 25px;
-            > div {
+
+            > div{
                 float : left;
                 height : 100%;
             }  
         }
-        #cs-center-content1 {
+
+
+        #cs-center-content1{
             width: 10%;
         }
-        #cs-center-content2 {
+        
+        #cs-center-content2{
             width: 70%;
             padding-top : 25px;
             padding-left : 40px;
             background-color : rgb(224, 238, 238);
         }
-        #cs-center-content3 {
+
+        #cs-center-content3{
             width: 20%;
             background-color : rgb(224, 238, 238);
         }
-        #FAQ {
-            > div {
+
+        #FAQ{
+            > div{
                 width: 100%;
             }
         }
-        #FAQ-title {
+        
+        #FAQ-title{
             padding-left : 60px;
             height : 15%;
             padding-top : 10px;
         }
-        #FAQ-content {
+
+        #FAQ-content{
             height : 85%;
             line-height : 3;
-            > div {
+            > div{
                 float : left;
                 height : 100%;
             }   
+          
         }
-        #FAQ-content1 {
+
+        #FAQ-content1{
             width: 10%;
         }
-        #FAQ-content2 {
+
+        #FAQ-content2{
             width: 70%;
             padding-top : 5px;
             padding-left : 30px;
             background-color : rgb(224, 238, 238);
+
         }
-        #FAQ-content3 {
+
+        #FAQ-content3{
             width: 20%;
             background-color : rgb(224, 238, 238);
+
             >div {
                 width : 100%;
             }
         }
-        #FAQ-content3-1 {
+
+        #FAQ-content3-1{
             height : 80%;
         }
-        #FAQ-ceontent3-2 {
+
+        #FAQ-ceontent3-2{
             height : 20%;
         }
-        #question {
-            > div {
+
+        #question{
+            > div{
                 width: 100%;
             }
         }
-        #question-title {
+
+        #question-title{
             padding-left : 60px;
             height : 15%;
             padding-top : 10px;
         }
-        #question-content {
+
+        #question-content{
             height : 85%;
             line-height : 3;
-            > div {
+            > div{
                 float : left;
                 height : 100%;
             }   
         }
-        #question-content1 {
+
+        #question-content1{
             width: 10%;
+
         }
-        #question-content2 {
+
+        #question-content2{
             width: 70%;
             padding-top : 5px;
             padding-left : 30px;
             background-color : rgb(224, 238, 238);
             position : relative;
+
         }
-        #question-content2-1 {
+
+        #question-content2-1{
             position : absolute;
             left : 40px;
             top : 70px;
@@ -199,42 +241,53 @@
             height : 40%;
             background-color : white;
         }
-        #question-content3 {
+
+        #question-content3{
             width: 20%;
             background-color : rgb(224, 238, 238);
         }
-        #cs-map {
+
+        #cs-map{
             height : 25%;
         }
-        #map-title {
+
+        #map-title{
             height : 20%;
             padding-top : 20px;
             padding-left : 60px;
         }
-        #map-content {
+
+        #map-content{
             background-color : rgb(224, 238, 238);
             width: 95%;
             height : 80%;
             margin-left : 60px;
         }
+
         a {
             text-decoration : none;
             color : black;
         }
-        a:hover {
+        a:hover{
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-        li {
+
+        li{
             list-style : none;
         }
+
     </Style>
 
 
 </head>
 <body>
+
+	<jsp:include page="../common/menubar.jsp" />
+	
+	
     <div id="cs-wrap"> <!--전체를 감싸는 div-->
         <div id="cs-title"> <!-- 고객서비스 타이틀 영역-->
             <div id="cs-title-text">
@@ -264,7 +317,7 @@
 
                         </div>
                         <div id="notice-content3-2" align="right">
-                            <button id="notice-list" type="button" class="btn btn-light">+더보기</button>
+                            <button type="button" class="btn btn-light">+더보기</button>
                         </div>
                     </div>
                     
@@ -273,7 +326,7 @@
 
             <div id="cs-center"> <!--고객센터 영역-->
                 <div id="cs-center-title">
-                    <h3>고객센터</h3>
+                    <h3><a href="#">고객센터</a></h3>
                 </div>
                 <div id="cs-center-content">
 
@@ -295,7 +348,7 @@
 
             <div id="FAQ"> <!--FAQ 영역-->
                 <div id="FAQ-title">
-                    <h3><a href="faqs">FAQ</a></h3>
+                    <h3><a href="#">FAQ</a></h3>
                 </div>
                 <div id="FAQ-content">
                     <div id="FAQ-content1">
@@ -311,7 +364,7 @@
                     <div id="FAQ-content3">
                         <div id="FAQ-content3-1"></div>
                         <div id="FAQ-content3-2" align="right">
-                            <button id="faq-list" type="button" class="btn btn-light">+더보기</button>
+                            <button type="button" class="btn btn-light">+더보기</button>
                         </div>
                     </div>
                 </div>
@@ -327,12 +380,13 @@
                     </div>
                     <div id="question-content2">
                         <div id="question-content2-1">
-                            <h6 style="font-size:15px; margin-top : 40px;"><a href="questions">G.O.T.Y를 이용하며 궁금한 사항들이 있으신가요?</a></h6>
+                            <a><h6 style="font-size:15px; margin-top : 40px;">G.O.T.Y를 이용하며 궁금한 사항들이 있으신가요?</h6></a>
                         </div>
                     </div>
                     <div id="question-content3">
 
                     </div>
+
                 </div>
             </div>
         </div>
@@ -342,21 +396,9 @@
                 <h3><a>찾아오시는 길</a></h3>                
             </div>
             <div id="map-content">
-            
+                
             </div>
         </div>
     </div>
-    
-    <script>
-		$(function(){
-			$('#notice-list').click(function(){
-				location.href = 'notices';
-			});
-			
-			$('#faq-list').click(function(){
-				location.href = 'faqs';
-			});
-		})
-    </script>
 </body>
 </html>
