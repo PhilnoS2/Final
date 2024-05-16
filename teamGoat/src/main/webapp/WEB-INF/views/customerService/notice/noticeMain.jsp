@@ -108,7 +108,7 @@
             <div class="notice-title-insert">
                 <div>
                     <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <button id="insert-notice" type="button" class="btn btn-light">글쓰기</button>
+                    <a id="insert-notice" class="btn btn-light" href="notice/enroll">글쓰기</a>
                 </div>
             </div>
         </div>

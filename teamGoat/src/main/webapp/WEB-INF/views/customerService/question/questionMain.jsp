@@ -147,7 +147,7 @@
         <div class="question-insert">
             <div align="right">
                 <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                <button type="button" class="btn btn-secondary"> 글쓰기 </button>
+                <a class="btn btn-secondary" href="question/enroll">글쓰기</a>
             </div>
         </div>
         <div class="question-search">
