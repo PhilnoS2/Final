@@ -108,10 +108,18 @@
             <div class="notice-title-insert">
                 <div>
                     <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <button type="button" class="btn btn-light">글쓰기</button>
+                    <button id="insert-notice" type="button" class="btn btn-light">글쓰기</button>
                 </div>
             </div>
         </div>
+        
+        <script>
+        	$('#insert-notice').click(function(){
+        		location.href = '';
+        	})
+        
+        </script>
+        
         <div class="notice-content">
             <table border="1" align="center" style="width : 1000px; height: 54px;">
                 <thead align="center" style="background-color : lightgrey; height : 40px;">
