@@ -12,49 +12,55 @@
 
 
     <Style>
-        div {
+        div{
             box-sizing : border-box;
         }
-        #question-wrap {
+
+        #question-wrap{
             width: 1200px;
             height : 900px;
             margin : auto;
-            > div {
+            > div{
                 width : 100%;
             }
         }
-        .question-title {
+        .question-title{
             height : 10%;
             position : relative;
-            > div {
+            > div{
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 30px;
             }
         }
-        .guide {
+
+        .guide{
             height : 40%;
-            > div {
+            > div{
                 width : 100%;
                 height : 100%;
             }
         }
-        .question-find {
+
+        .question-find{
             height : 5%;
-            > div {
+            > div{
                 height : 100%;
             }
         }
-        .question-list {
+
+        .question-list{
             height : 25%;
         }
-        .question-insert {
+        .question-insert{
             height : 5%;
         }
-        .question-search {
+        .question-search{
             height : 15%;
         }
+
+        
     </style>        
 
 
@@ -141,7 +147,7 @@
         <div class="question-insert">
             <div align="right">
                 <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                <a class="btn btn-secondary" href="question-enroll">글쓰기</a>
+                <button type="button" class="btn btn-secondary"> 글쓰기 </button>
             </div>
         </div>
         <div class="question-search">
