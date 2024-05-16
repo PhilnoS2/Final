@@ -44,7 +44,7 @@
             <img src="https://cdn.gameple.co.kr/news/photo/202309/207054_217125_517.jpg" alt="">
         </div>
 
-		<label>▶ ${platform} 게임기</label>
+		<label>▶ ${ platform } </label>
         <div id="category">
             <a href="nintendoMachine" type="button" class="btn btn-light">Nintendo 게임기</a>
             <a href="nintendoGame" type="button" class="btn btn-light">Nintendo 타이틀</a>

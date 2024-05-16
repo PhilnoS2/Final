@@ -7,18 +7,17 @@
 	
 	<resultMap id="itemResultSet" type="item">
 
-		<result column="IMG_NO" property="imgNo" />
-		<result column="IMG_NAME" property="imgName" />
-		<result column="IMG_PATH" property="imgPath" />
-		<result column="ITEM_NO" property="itemNo" />
-		<result column="ITEM_CATEGORY" property="itemCategory" />
-		<result column="PRICE" property="price" />
-		<result column="ITEM_NAME" property="itemName" />
-		<result column="RATING" property="rating" />
-		<result column="DEVELOPER" property="developer" />
-		<result column="PUBLISHER" property="publisher" />
-		<result column="GENRE" property="genre" />
-		
+		<result column="IMG_NO" 		property="imgNo" />
+		<result column="IMG_NAME"		property="imgName" />
+		<result column="IMG_PATH" 		property="imgPath" />
+		<result column="ITEM_NO" 		property="itemNo" />
+		<result column="ITEM_CATEGORY" 	property="itemCategory" />
+		<result column="PRICE" 			property="price" />
+		<result column="ITEM_NAME" 		property="itemName" />
+		<result column="RATING" 		property="rating" />
+		<result column="DEVELOPER" 		property="developer" />
+		<result column="PUBLISHER" 		property="publisher" />
+		<result column="GENRE" 			property="genre" />
 	</resultMap>
 	
 	<select id="findMachineCount" parameterType="string" resultType="_int">
@@ -26,20 +25,68 @@
 		SELECT
 				COUNT(*)
 		  FROM
-		  		ITEM
+		  		ITEM I
+		  JOIN
+			    GAME_CATEGORY_BRIDGE G
+			ON (I.ITEM_NO = G.ITEM_NO)
+		  JOIN
+			    PLATFORM_CATEGORY P
+			ON (G.PLATFORM_NO = P.PLATFORM_NO)
 		 WHERE
 		 		STATUS = 'Y'
 		   AND
 				ITEM_CATEGORIY = 1
 		   AND
-		   		DEVELOPER = #{platform}
+		   		P.PLATFORM_NAME = #{platform}
+		
+	</select>
+	
+	<select id="findGameCount" parameterType="string" resultType="_int">
+	
+		SELECT
+				COUNT(*)
+		  FROM
+		  		ITEM I
+		  JOIN
+			    GAME_CATEGORY_BRIDGE G
+			ON (I.ITEM_NO = G.ITEM_NO)
+		  JOIN
+			    PLATFORM_CATEGORY P
+			ON (G.PLATFORM_NO = P.PLATFORM_NO)
+		 WHERE
+		 		STATUS = 'Y'
+		   AND
+				ITEM_CATEGORIY = 2
+		   AND
+		   		P.PLATFORM_NAME = #{platform}
+		
+	</select>
+	
+	<select id="findAccessoryCount" parameterType="string" resultType="_int">
+	
+		SELECT
+				COUNT(*)
+		  FROM
+		  		ITEM I
+		  JOIN
+			    GAME_CATEGORY_BRIDGE G
+			ON (I.ITEM_NO = G.ITEM_NO)
+		  JOIN
+			    PLATFORM_CATEGORY P
+			ON (G.PLATFORM_NO = P.PLATFORM_NO)
+		 WHERE
+		 		STATUS = 'Y'
+		   AND
+				ITEM_CATEGORIY = 3
+		   AND
+		   		P.PLATFORM_NAME = #{platform}
 		
 	</select>
 	
 	<select id="findMachineList" parameterType="string" resultMap="itemResultSet">
 	
 		SELECT
-		       	ITEM_NO,
+		       	I.ITEM_NO,
 		       	ITEM_NAME,
 		       	PRICE,
 		       	IMG_NAME,
@@ -51,12 +98,18 @@
 		 JOIN
 		       	ITEM_IMG II
 		   ON  	(I.IMG_NO = II.IMG_NO)
+		 JOIN
+				GAME_CATEGORY_BRIDGE G
+		   ON 	(I.ITEM_NO = G.ITEM_NO)
+		 JOIN
+			  	PLATFORM_CATEGORY P
+		   ON 	(G.PLATFORM_NO = P.PLATFORM_NO)
 		WHERE
 		       	STATUS = 'Y'
 		  AND
 		       	ITEM_CATEGORIY = 1
 		  AND
-		       	DEVELOPER = #{platform}
+		       	P.PLATFORM_NAME = #{platform}
 		ORDER
 		   BY
 				ITEM_NO

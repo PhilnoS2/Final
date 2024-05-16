@@ -18,6 +18,7 @@ public class Item {
 	private String developer;
 	private String publisher;
 	
+	private String platformName;
 	private String rating;
 	private String genre;
 
