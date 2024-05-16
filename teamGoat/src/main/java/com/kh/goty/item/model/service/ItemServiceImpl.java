@@ -2,24 +2,6 @@ package com.kh.goty.item.model.service;
 
 import java.util.List;
 
-<<<<<<< HEAD
-import com.kh.goty.common.model.vo.PageInfo;
-import com.kh.goty.item.model.vo.Item;
-
-public interface ItemService {
-
-	int findMachineCount(String platform);
-	
-	int findGameCount(String platform);
-	
-	int findAccessoryCount(String platform);
-	
-	List<Item> findMachineList(String platform, PageInfo pi);
-	
-	List<Item> findGameList(String platform, PageInfo pi);
-	
-	List<Item> findAccessoryList(String platform, PageInfo pi);
-=======
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +55,4 @@ public class ItemServiceImpl implements ItemService{
 		return null;
 	}
 
->>>>>>> parent of 251d263 (Revert "qwe")
 }
