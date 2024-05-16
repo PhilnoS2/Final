@@ -14,7 +14,6 @@
     <style>
          div {
             box-sizing : border-box;
-            border : 1px solid black;
         }
 
         #faq-wrap{
@@ -78,16 +77,45 @@
 
         .faq-content{
             height : 85%;
+            padding-left : 95px;
         }
 
-        .faq-answer{
+        .faq-q{
+            width : 800px;
+            height : 60px;
+            background-color : rgb(216, 216, 211);
+            border : 1px solid grey;
+            border-radius : 8px;
+            color : black;
+            font-size : 20px;
+            font-weight : bolder;
+            padding : 15px;
+            cursor : pointer;
+        }
+
+        .faq-a{
+            width : 800px;
+            height : 60px;
+            background-color : rgba(255, 255, 255, 0.788);
+            border : 1px solid grey;
+            border-radius : 8px;
+            color : black;
+            font-size : 20px;
+            font-weight : bolder;
+            padding : 15px;
+            margin-bottom : 0;
             display : none;
         }
+
+        
 
     </style>
 
 </head>
 <body>
+
+	<jsp:include page="../../common/menubar.jsp" />
+	
     <div id="faq-wrap">
         <div class="faq-title">
             <div class="faq-title-title">
@@ -97,8 +125,8 @@
             </div>
             <div class="faq-title-insert">
                 <div>
-                    <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <button type="button" class="btn btn-light">글쓰기</button>
+                    <!--추후 로그인한 유저 + 관리자일 경우에만 글 작성 버튼을 누를 수 있게 수정 필요-->
+                    <button type="button" id="insert-faq" class="btn btn-light">글쓰기</button>
                 </div>
             </div>
         </div>
@@ -114,60 +142,54 @@
             </div>
         </div>
 
+
         <div class="faq-content">
-            <table border="1" align="center" style="width : 800px; height : 20px;">
-                <thead align="center" style="height : 40px; background-color : lightgrey;">
-                    <th>글번호</th>
-                    <th>카테고리</th>
-                    <th>제목</th>
-                    <th>작성일</th>
-                    <th>읽기</th>
-                </thead>
-
-                <tbody id="search-area" align="center">
-                    
-                    <!--사용자가 문의한 내역이 존재하지 않을 경우-->
-                    <!-- <tr>
-                        <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
-                    </tr> -->
-
-                    <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
-                    <tr class="faq-list" style="height : 60px;">
-                        <td>15</td>
-                        <td>주문결제</td>
-                        <td>무통장 입금에 대해서</td>
-                        <td style="border-right : none;">2024-05-20</td>
-                        <input type="hidden" value="13">
-                        <td>▼</td>
-                    </tr>
-
-                    <tr class="faq-answer" id="15">
-                        <td colspan="5" style="height : 60px; background-color : rgb(224, 224, 224);">
-                            무통장 입금은 이렇습니다~~~~~~~~~~~~~~~~~~~~~~~~~
-                        </td>
-                    </tr>
-
-                    <tr class="faq-list" style="height : 60px;">
-                        <td>13</td>
-                        <td>주문결제</td>
-                        <td>무통장 입금에 대해서</td>
-                        <td style="border-right : none;">2024-05-20</td>
-                        <td><button>▼</button></td>
-                    </tr>
-
-                    <tr class="faq-answer" id="13">
-                        <td colspan="5" style="height : 60px; background-color : rgb(224, 224, 224);">
-                            무통장 입금은 이렇습니다~~~~~~~~~~~~~~~~~~~~~~~~~
-                        </td>
-                    </tr>
-            </table>
+            <!--DB에서 조회해온 데이터를 반복문 돌려야 함-->
+            <div style="margin-bottom:50px;"></div>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
+            <div class="faq-q">Q.질문입니다</div>
+            <p class="faq-a">A.답변입니다</p>
         </div>
     </div>
 
     <script>
         $(function(){
-            $('#search-area tr').on('click', function(){
-                console.log($(this).next().children().val());
+
+            $(function(){
+                $('#select-area').change(function(){
+                    //console.log($('option:selected').val());
+                    const choice = $('option:selected').val();
+                    // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
+                    console.log(choice);
+                });
+            })
+
+            $('.faq-content').on('click', ('.faq-q'), function(){
+                //console.log($(this));
+                const $a = $(this).next();
+
+                if($a.css('display') == 'none'){
+                    $a.slideDown(500);
+                    $a.siblings('p').slideUp(1000);
+                } 
+                else {
+                    $a.slideUp(500);
+                }
             })
         })
     </script>
