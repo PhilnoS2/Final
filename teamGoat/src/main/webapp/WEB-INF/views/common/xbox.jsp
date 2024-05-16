@@ -51,9 +51,9 @@
 		<label>▶게임기 본체</label>
 		
 		<div id="category">
-			<button type="button" class="btn btn-light">XBOX 게임기</button>
-			<button type="button" class="btn btn-light">XBOX 타이틀</button>
-			<button type="button" class="btn btn-light">XBOX 주변기기</button>
+			<a href="/goty/xboxMachine" type="button" class="btn btn-light">XBOX 게임기</a>
+			<a href="/goty/xboxGame" type="button" class="btn btn-light">XBOX 타이틀</a>
+			<a href="/goty/xboxAccessory" type="button" class="btn btn-light">XBOX 주변기기</a>
 		</div>	
 		
     </div>

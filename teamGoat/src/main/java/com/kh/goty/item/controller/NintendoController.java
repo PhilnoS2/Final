@@ -9,6 +9,9 @@ public class NintendoController {
 	@GetMapping("nintendoMachine")
 	public String findNintendoMachine() {
 		
+		
+	
+		
 		return "item/nintendo/machine";	
 	}
 	

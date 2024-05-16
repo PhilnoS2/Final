@@ -42,10 +42,19 @@
 	<jsp:include page="menubar.jsp"/>
 	
 	<div class="container">
+
         <div id="main-image">
             <img src="https://cdn.tgdaily.co.kr/news/photo/202402/330877_105556_5424.png" alt="">
             <img src="https://cdn.gameple.co.kr/news/photo/202309/207054_217125_517.jpg" alt="">
         </div>
+
+		<label>▶게임기 본체</label>
+		
+		<div id="category">
+			<a href="nintendoMachine" type="button" class="btn btn-light">Nintendo 게임기</a>
+			<a href="nintendoGame" type="button" class="btn btn-light">Nintendo 타이틀</a>
+			<a href="nintendoAccessory" type="button" class="btn btn-light">Nintendo 주변기기</a>
+		</div>	
     </div>
     
 </body>

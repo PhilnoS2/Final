@@ -42,10 +42,19 @@
 	<jsp:include page="menubar.jsp"/>
 	
 	<div class="container">
+
 		<div id="main-image">
             <img src="https://bsmedia.business-standard.com/_media/bs/img/article/2023-10/11/full/1697008191-1052.jpg" alt="">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSflhAeT7bya-4E5n-vQY3MOadJ6OTe6jtnm03CJkJfjQ&s" alt="">
 	    </div>
+
+		<label>▶게임기 본체</label>
+		
+		<div id="category">
+			<a href="/goty/playstationMachine" type="button" class="btn btn-light">PlayStation 게임기</a>
+			<a href="/goty/playstationGame" type="button" class="btn btn-light">PlayStation 타이틀</a>
+			<a href="/goty/playstationAccessory" type="button" class="btn btn-light">PlayStation 주변기기</a>
+		</div>	
 	</div>
 	
 </body>
