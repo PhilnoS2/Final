@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goty.member.model.service.MemberService;
+import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
+import com.kh.goty.member.model.vo.NaverMember;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -220,11 +222,35 @@ public class MemberController {
   }
 	
   @GetMapping("/mypage")
-  public ModelAndView mypage(ModelAndView mv) {
+  public ModelAndView mypage(ModelAndView mv, HttpSession session) {
 	  mv.setViewName("member/mypage");
 	  return mv;
   }
+  
+  @GetMapping("/kakaoMypage/{kakaoId}")
+	public ModelAndView kakaoMypage(@PathVariable("kakaoId") String kakaoId,ModelAndView mv) {
+	  
+	  KakaoMember km = memberService.selectKakao(kakaoId);
+	  if(km != null) {
+		  mv.addObject("km", km) .setViewName("member/mypage");
+	  } else {
+		  mv.addObject("errorMsg", "회원의 정보가 존재하지 않습니다.").setViewName("common/errorPage");
+	  }
+	  return mv;
+	}
 
+  @GetMapping("/naverMypage/{naverId}")
+ 	public ModelAndView naverMypage(@PathVariable("naverId") String naverId,ModelAndView mv) {
+ 	  NaverMember nm = memberService.selectNaver(naverId);
+ 	  
+ 	  if(nm != null) {
+ 		  mv.addObject("nm", nm) .setViewName("member/mypage");
+ 	  } else {
+ 		  mv.addObject("errorMsg", "회원의 정보가 존재하지 않습니다.").setViewName("common/errorPage");
+ 	  }
+ 	  return mv;
+ 	}
+  
   @GetMapping("/updateForm/{memberNo}")
   public ModelAndView updateForm(@PathVariable("memberNo") int memberNo, 
 		  						 ModelAndView mv) {

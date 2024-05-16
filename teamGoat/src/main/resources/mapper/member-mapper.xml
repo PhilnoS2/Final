@@ -297,6 +297,62 @@
   	   AND
   	      DELETE_YN = 'N'    
   	</update>
+	  
+	 <select id="selectKakao"
+	 parameterType="string"
+	 resultType="kakaoMember"
+	 >
+	 SELECT
+	       MEMBER_NO memberNo,
+	       MEMBER_ID kakaoId,
+	       NICKNAME nickName,
+	       THUMBNAIL_IMAGE thumbnailImage,
+	       STATUS status,
+	       MEM_LEVEL memLevel
+	   FROM
+	       K_MEMBER
+	  WHERE
+	       MEMBER_ID = #{kakaoId}   
+	 </select>
+  
+	  <select id="selectNaver"
+		 parameterType="string"
+		 resultType="naverMember"
+		 >
+		 SELECT
+		       MEMBER_NO memberNo,
+		       MEMBER_ID naverId,
+		       MEMBER_NAME name,
+		       NICKNAME nickname,
+		       BIRTH_YEAR birthyear,
+		       PHONE mobile,
+		       STATUS status,
+		       MEM_LEVEL memLevel
+		   FROM
+		       N_MEMBER
+		  WHERE
+		       MEMBER_ID = #{naverId}   
+		 </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

@@ -1,6 +1,7 @@
 package com.kh.goty.member.model.vo;
 
 public class KakaoMember {
+	private int memberNo;
 	private String kakaoId;
 	private String nickName;
 	private String thumbnailImage;
@@ -13,9 +14,10 @@ public class KakaoMember {
 		super();
 	}
 	
-	public KakaoMember(String kakaoId, String nickName, String thumbnailImage, String accessToken, String status,
-			String memLevel) {
+	public KakaoMember(int memberNo, String kakaoId, String nickName, String thumbnailImage, String accessToken,
+			String status, String memLevel) {
 		super();
+		this.memberNo = memberNo;
 		this.kakaoId = kakaoId;
 		this.nickName = nickName;
 		this.thumbnailImage = thumbnailImage;
@@ -23,7 +25,12 @@ public class KakaoMember {
 		this.status = status;
 		this.memLevel = memLevel;
 	}
-	
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public String getKakaoId() {
 		return kakaoId;
 	}
@@ -63,8 +70,9 @@ public class KakaoMember {
 	
 	@Override
 	public String toString() {
-		return "KakaoMember [kakaoId=" + kakaoId + ", nickName=" + nickName + ", thumbnailImage=" + thumbnailImage
-				+ ", accessToken=" + accessToken + ", status=" + status + ", memLevel=" + memLevel + "]";
+		return "KakaoMember [memberNo=" + memberNo + ", kakaoId=" + kakaoId + ", nickName=" + nickName
+				+ ", thumbnailImage=" + thumbnailImage + ", accessToken=" + accessToken + ", status=" + status
+				+ ", memLevel=" + memLevel + "]";
 	}
 	
 }

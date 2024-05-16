@@ -99,14 +99,16 @@
 					<div id="inner-div">
 						<div class="form-group">
 							<label for="id" >아이디</label>
-							<input  class="form-control" id="id" type="text" readonly required value="${ requestScope.member.memberId }"/>
+							<input  class="form-control" id="id" type="text" readonly required
+							value="${ requestScope.member.memberId }"/>
 							<span class="id-update">아이디 수정은 불가능 합니다.</span>
 						</div>
 						
 						<div class="form-group">
 							<label for="email">이메일</label>
 							<input type="email" class="form-control"
-							 required onkeyup="reqExpEmail();" id="email" name="email" value="${ requestScope.member.email }"/>
+							 required onkeyup="reqExpEmail();" id="email" name="email"
+							 value="${ requestScope.member.email }"/>
 							<span class="email">이메일형식으로 입력해주세요.</span>
 						</div>
 						
