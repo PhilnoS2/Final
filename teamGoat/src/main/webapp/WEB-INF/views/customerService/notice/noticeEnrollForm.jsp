@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -94,13 +95,13 @@
 
         <div class="notice-content">
             <div>
-                <form action="insert" method="post">
+                <form action="/goty/notice/insert" method="post">
                     <label for="subject" >제목</label>
                  
-                    <input type="text" id="subject" name="subject" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
-                    <textarea id="content" name="content" placeholder="내용을 입력해주세요" required></textarea>
+                    <input type="text" id="subject" name="noticeTitle" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
+                    <textarea id="content" name="noticeContent" placeholder="내용을 입력해주세요" required></textarea>
                     <div style="width: 1000px; border-bottom : 1px solid black; margin-top : 20px; margin-bottom : 20px;"></div>
-
+						<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
                     <div align="right" style="padding-right : 70px;">
                         <input id="submit-btn" type="submit" value="등록" style="width: 70px;">
                         <input class="back-btn" type="button" value="취소" style="width: 70px;" onclick="history.back();">
@@ -137,10 +138,7 @@
 
             $('.back-btn').click(function(){
                 if(!($('#content').val() == '')){
-                    if(confirm('작성중인 글을 저장되지 않습니다 취소하시겠습니까?')){
-                        location.href = 'http://naver.com';
-                    }
-                }
+                	confirm('작성중인 글을 저장되지 않습니다 취소하시겠습니까?');
             })
         })
     </script>

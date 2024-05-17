@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,11 +100,22 @@
             </div>
             <div class="notice-title-insert">
                 <div>
-                    <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <button type="button" class="btn btn-light">글쓰기</button>
+					<c:if test="${ sessionScope.loginMember != null and sessionScope.loginMember.memLevel == 'A' }">
+	                    <button id="insert-notice" type="button" class="btn btn-light">글쓰기</button>
+					</c:if>
                 </div>
             </div>
         </div>
+        
+        <script>
+        	$(function(){
+        		$('#insert-notice').click(function(){
+        			location.href = '/goty/notice/enroll';
+        		})
+        	})
+        
+        </script>
+        
         <div class="notice-content">
             <table border="1" align="center" style="width : 1000px; height: 54px;">
                 <thead align="center" style="background-color : lightgrey; height : 40px;">

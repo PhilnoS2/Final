@@ -133,7 +133,7 @@
 				<c:choose>
 					<c:when test="${ sessionScope.loginMember != null }">
 						<c:if test="${ sessionScope.loginMember.memLevel == 'A' }">
-							<a class="btn btn-sm btn-warning">관리자페이지</a>
+							<a class="btn btn-sm btn-warning" href="/goty/admin">관리자페이지</a>
 						</c:if>
 						
 						<c:choose>
@@ -196,7 +196,7 @@
 		      <a href="/goty/freeboards/all">자유게시판</a>
 		    </li>
 		    <li>
-		      <a href="customer-service">고객센터</a>
+		      <a href="/goty/customer-service">고객센터</a>
 		      <ul id="option-ul">
 		      		<li><a href="/goty/notices">공지사항</a></li>
 		      		<li><a href="/goty/faqs">FAQ</a></li>
