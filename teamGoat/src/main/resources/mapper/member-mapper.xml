@@ -19,9 +19,10 @@
   		      EMAIL email,
   		      PHONE phone,
   		      ADDRESS address,
-  		      ADDR_DETAIL addrDetatil,
+  		      ADDR_DETAIL addrDetail,
   		      EMPTY_CODEYN emptyCodeYN,
-  		      MEM_LEVEL memLevel
+  		      MEM_LEVEL memLevel,
+  		      STATUS status
   		  FROM
   		      MEMBER       
   	     WHERE	      
@@ -255,6 +256,105 @@
   	 	  DEFAULT 	 		 
   	 	  )	
   	</insert>
+  
+  	<select id="findUpdateMember"
+  	parameterType="_int"
+  	resultType="member" >
+  	SELECT
+  		  MEMBER_NO memberNo,
+  	      MEMBER_ID memberId,
+  	      MEMBER_NAME memberName,
+  	      NICKNAME,
+  	      EMAIL,
+  	      BORNDATE,
+  	      PHONE,
+  	      ADDRESS,
+  	      ADDR_DETAIL addrDetail
+  	  FROM
+  	      MEMBER
+  	 WHERE
+  	      MEMBER_NO = #{memberNo}
+  	   AND
+  	      DELETE_YN = 'N'       	  	
+  	</select>
+  
+  	
+  	<update id="updateMember"
+  	parameterType="member"
+  	>
+  	UPDATE
+  	      MEMBER
+  	   SET
+  	      MEMBER_NAME = #{memberName},
+  	      NICKNAME = #{nickname},
+  	      EMAIL = #{email},
+  	      BORNDATE = #{bornDate},
+  	      PHONE = #{phone},
+  	      ADDRESS = #{address},
+  	      ADDR_DETAIL = #{addrDetail}  
+  	 WHERE
+  	      MEMBER_NO = #{memberNo}     
+  	   AND
+  	      DELETE_YN = 'N'    
+  	</update>
+	  
+	 <select id="selectKakao"
+	 parameterType="string"
+	 resultType="kakaoMember"
+	 >
+	 SELECT
+	       MEMBER_NO memberNo,
+	       MEMBER_ID kakaoId,
+	       NICKNAME nickName,
+	       THUMBNAIL_IMAGE thumbnailImage,
+	       STATUS status,
+	       MEM_LEVEL memLevel
+	   FROM
+	       K_MEMBER
+	  WHERE
+	       MEMBER_ID = #{kakaoId}   
+	 </select>
+  
+	  <select id="selectNaver"
+		 parameterType="string"
+		 resultType="naverMember"
+		 >
+		 SELECT
+		       MEMBER_NO memberNo,
+		       MEMBER_ID naverId,
+		       MEMBER_NAME name,
+		       NICKNAME nickname,
+		       BIRTH_YEAR birthyear,
+		       PHONE mobile,
+		       STATUS status,
+		       MEM_LEVEL memLevel
+		   FROM
+		       N_MEMBER
+		  WHERE
+		       MEMBER_ID = #{naverId}   
+		 </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   
   
   

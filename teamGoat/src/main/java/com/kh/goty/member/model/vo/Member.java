@@ -200,9 +200,9 @@ public class Member {
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
 				+ memberName + ", nickname=" + nickname + ", email=" + email + ", bornDate=" + bornDate + ", phone="
-				+ phone + ", address=" + address + ", addrDetail=" + addrDetail + ", deleteYN=" + deleteYN
-				+ ", memberPoint=" + memberPoint + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate
-				+ ", memLevel=" + memLevel + ", emptyCodeYN=" + emptyCodeYn + ", totalPrice=" + totalPrice + "]";
+				+ phone + ", address=" + address + ", addrDetail=" + addrDetail + ", status=" + status + ", deleteYN="
+				+ deleteYN + ", memberPoint=" + memberPoint + ", enrollDate=" + enrollDate + ", modifyDate="
+				+ modifyDate + ", memLevel=" + memLevel + ", emptyCodeYn=" + emptyCodeYn + ", totalPrice=" + totalPrice
+				+ "]";
 	}
-	
 }

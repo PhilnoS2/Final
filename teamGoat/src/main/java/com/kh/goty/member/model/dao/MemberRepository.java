@@ -3,7 +3,9 @@ package com.kh.goty.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
+import com.kh.goty.member.model.vo.NaverMember;
 
 @Repository
 public class MemberRepository {
@@ -46,6 +48,22 @@ public class MemberRepository {
 	
 	public int phoneCheck(SqlSessionTemplate sqlSession, String checkPhone) {
 		return sqlSession.selectOne("memberMapper.phoneCheck", checkPhone);
+	}
+	
+	public Member findUpdateMember(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.selectOne("memberMapper.findUpdateMember", memberNo);
+	}
+
+	public int updateMember(SqlSessionTemplate sqlSession, Member member) {
+		return sqlSession.update("memberMapper.updateMember", member);
+	}
+
+	public KakaoMember selectKakao(SqlSessionTemplate sqlSession, String kakaoId) {
+		return sqlSession.selectOne("memberMapper.selectKakao", kakaoId);
+	}
+	
+	public NaverMember selectNaver(SqlSessionTemplate sqlSession, String kakaoId) {
+		return sqlSession.selectOne("memberMapper.selectNaver", kakaoId);
 	}
 	
 	
