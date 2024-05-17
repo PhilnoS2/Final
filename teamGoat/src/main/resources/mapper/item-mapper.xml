@@ -20,6 +20,7 @@
 		<result column="GENRE" 			property="genre" />
 	</resultMap>
 	
+	<!-- ITEM COUNT를 위한 SQL문 -->
 	<select id="findMachineCount" parameterType="string" resultType="_int">
 	
 		SELECT
@@ -82,7 +83,9 @@
 		   		P.PLATFORM_NAME = #{platform}
 		
 	</select>
+	<!-- 여기까지  -->
 	
+	<!-- ITEM LIST를 가져오기 위한 SQL문 -->
 	<select id="findMachineList" parameterType="string" resultMap="itemResultSet">
 	
 		SELECT
@@ -181,5 +184,7 @@
 				ITEM_NO
 	
 	</select>
-
+	<!-- 여기까지 -->
+	
+	
 </mapper>

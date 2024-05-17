@@ -168,25 +168,25 @@
 			<li>
 		     	<a>Nintendo</a>
 		      	<ul id="option-ul">
-		      		<li><a href="nintendo.machine?platform=Nintendo Switch">Nintendo 게임기</a></li>
-		      		<li><a href="nintendo.game?platform=Nintendo Switch">Nintendo 게임</a></li>
-		      		<li><a href="nintendo.accessory?platform=Nintendo Switch">Nintendo 주변기기</a></li>
+		      		<li><a href="/goty/nintendo.machine?platform=Nintendo Switch">Nintendo 게임기</a></li>
+		      		<li><a href="/goty/nintendo.game?platform=Nintendo Switch">Nintendo 타이틀</a></li>
+		      		<li><a href="/goty/nintendo.accessory?platform=Nintendo Switch">Nintendo 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
 		     	<a>PlayStation</a>
 		      	<ul id="option-ul">
-		      		<li><a href="playstation.machine?platform=PlayStation">PlayStation 게임기</a></li>
-		      		<li><a href="playstation.game?platform=PlayStation">PlayStation 게임</a></li>
-		      		<li><a href="playstation.accessory?platform=PlayStation">PlayStation 주변기기</a></li>
+		      		<li><a href="/goty/playstation.machine?platform=PlayStation">PlayStation 게임기</a></li>
+		      		<li><a href="/goty/playstation.game?platform=PlayStation">PlayStation 타이틀</a></li>
+		      		<li><a href="/goty/playstation.accessory?platform=PlayStation">PlayStation 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
 		     	<a>X Box</a>
 		      	<ul id="option-ul">
-		      		<li><a href="xbox.machine?platform=XBox">XBOX 게임기</a></li>
-		      		<li><a href="xbox.game?platform=XBox">XBOX 타이틀</a></li>
-		      		<li><a href="xbox.accessory?platform=XBox">XBOX 주변기기</a></li>
+		      		<li><a href="/goty/xbox.machine?platform=XBox">XBOX 게임기</a></li>
+		      		<li><a href="/goty/xbox.game?platform=XBox">XBOX 타이틀</a></li>
+		      		<li><a href="/goty/xbox.accessory?platform=XBox">XBOX 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
