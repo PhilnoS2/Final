@@ -84,10 +84,10 @@
     <div id="management-board-wrap">
         <div class="board-function" align="center">
             <div>
-                <h3><a href="#">회원 관리</a></h3>
+                <h3><a href="/goty/admin">회원 관리</a></h3>
             </div>
             <div>
-                <h3><a href="#" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
+                <h3><a href="/goty/manegement/board" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
             </div>
             <div>
                 <h3><a href="#">주문/배송 관리</a></h3>
