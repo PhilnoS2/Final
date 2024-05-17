@@ -104,7 +104,21 @@
 		</c:choose>
 	        
 	</div>
+	
+	<script>
 		
+		$(() => {
+			
+			$('.items').click((e) => {
+				
+				// console.log($(e.currentTarget).children().eq(0)[0].value);
+				location.href = 'detail.item?itemNo=' + $(e.currentTarget).children().eq(0)[0].value;
+					
+			})
+			
+		});
+		
+	</script>
 
 
 </body>

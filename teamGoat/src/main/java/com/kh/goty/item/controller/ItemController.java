@@ -91,6 +91,16 @@ public class ItemController {
 		return mv;	
 	}
 	
+	@GetMapping("detail.item")
+	public ModelAndView findNintendoDetail(int itemNo,
+										   ModelAndView mv) {
+		
+		mv.setViewName("");
+		
+		return mv;
+	}
+	
+	
 	//------------------------------------------------------------------------------------------
 	//PlayStation Controller
 	
