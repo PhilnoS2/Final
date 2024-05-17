@@ -228,9 +228,9 @@ public class MemberController {
   }
   
   @GetMapping("/kakaoMypage/{kakaoId}")
-	public ModelAndView kakaoMypage(@PathVariable("kakaoId") String kakaoId,ModelAndView mv) {
-	  
+	public ModelAndView kakaoMypage(@PathVariable("kakaoId") String kakaoId, ModelAndView mv) {
 	  KakaoMember km = memberService.selectKakao(kakaoId);
+	  
 	  if(km != null) {
 		  mv.addObject("km", km) .setViewName("member/mypage");
 	  } else {
@@ -240,7 +240,7 @@ public class MemberController {
 	}
 
   @GetMapping("/naverMypage/{naverId}")
- 	public ModelAndView naverMypage(@PathVariable("naverId") String naverId,ModelAndView mv) {
+ 	public ModelAndView naverMypage(@PathVariable("naverId") String naverId, ModelAndView mv) {
  	  NaverMember nm = memberService.selectNaver(naverId);
  	  
  	  if(nm != null) {
@@ -273,8 +273,6 @@ public class MemberController {
 	  } else {
 		  mv.addObject("errorMsg", "정보 수정에 실패했습니다.").setViewName("common/errorPage");
 	  }
-	  
-	  mv.setViewName("redirect:/");
 	  return mv;
   }
 	
