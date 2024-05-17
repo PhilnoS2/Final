@@ -68,6 +68,7 @@
 <body>
 	<jsp:include page="../../common/menubar.jsp" />
 
+
     <div id="question-wrap">
         <div class="question-title" style="border-bottom : 1px solid black;">
             <div>
@@ -76,13 +77,12 @@
         </div>
         <div class="guide" style="border-bottom : 1px solid black;"> 
             <div>
-                <img src="resources/img/info.png">
+                <img src="../안내사항.png">
             </div>
         </div>
         <div class="question-find" >
             <div>
                 <select id="category" name="category" style="margin-left : 48px; margin-top : 5px; height :30px;">
-                    <option value="a">전체</option>
                     <option value="i">상품문의</option>
                     <option value="p">주문/결제문의</option>
                     <option value="t">배송문의</option>

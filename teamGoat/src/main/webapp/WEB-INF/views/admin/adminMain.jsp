@@ -14,17 +14,15 @@
          div {
             box-sizing : border-box;
         }
-
         #admin-wrap {
             margin : auto;
             width: 1200px;
             height : 1000px;
-            > div{
+            > div {
                height : 85%;
                float : left;
             }
         }
-
         a {
             text-decoration : none;
             color : black;
@@ -35,39 +33,33 @@
             font-weight : bolder;
             cursor : pointer;
         }
-
         li {
             list-style : none;
         }
-
         .admin-function {
             margin-left : 10%;
             width : 20%;
             background-color : rgb(241, 196, 15);
-            > div{
+            > div {
                 padding-top : 50px;
                 padding-bottom : 15px;
             }
         }
-
         .admin-content {
             width : 70%;
-
             >div {
                 width: 100%;
             }
         }
-
         .admin-title {
             height : 10%;
             position : relative;
-            > div{
+            > div {
                 position : absolute;
                 top : 40px;
                 left : 30px;
             }
         }
-
         .admin-search{
             height : 20%;
             position : relative;
@@ -77,21 +69,23 @@
                 left : 30px;
             }
         }
-
-        .admin-contents{
+        .admin-contents {
             height : auto;
         }
-
-        .admin-button{
+        .admin-button {
             margin-top : 30px;
             height : 10%;
         }
 
+
+
     </style>
+
+
 </head>
 <body>
-
 	<jsp:include page="../common/menubar.jsp" />
+
 
     <div id="admin-wrap">
         
