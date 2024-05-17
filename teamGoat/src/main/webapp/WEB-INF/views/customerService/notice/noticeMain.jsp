@@ -13,89 +13,82 @@
     <style>
         div {
             box-sizing : border-box;
+            border : 1px solid black;
         }
-
-        #notice-wrap{
+        #notice-wrap {
             margin : auto;
             width: 1200px;
             height : 900px;
-            > div{
+            > div {
                 width : 100%;
             }
         }
-
         a {
             text-decoration : none;
             color : black;
         }
-        a:hover{
+        a:hover {
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-
-        li{
+        li {
             list-style : none;
         }
-
-        .notice-title{
+        .notice-title {
             height : 10%;
 
-            > div{
+            > div {
                 height : 100%;
                 float : left;
             }
         }
-
-        .notice-title-title{
+        .notice-title-title {
             width : 40%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 30px;
             }    
         }
-
-        .notice-title-insert{
+        .notice-title-insert {
             width : 60%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 540px;
                 top : 25px;
             }    
         }
-
-        .notice-content{
+        .notice-content {
             height : 60%;
         }
-
-        .notice-page{
+        .notice-page {
             height : 10%;
             width:fit-content; margin:auto;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 450px;
                 top : 20px;
             }
         }
-
-        .notice-search{
+        .notice-search {
             height : 20%;
         }
-
-
-
+        tr:hover {
+            background-color : rgb(241, 238, 238);
+        }
     </style>
 
 </head>
 <body>
+	
 	<jsp:include page="../../common/menubar.jsp" />
 	
     <div id="notice-wrap">

@@ -22,6 +22,8 @@ public class ItemController {
 	@Autowired
 	private ItemService itemService;
 	
+	//-----------------------------------------------------------------------------------------------
+	// Nintendo Controller
 	@GetMapping("nintendo.machine")
 	public ModelAndView findNintendoMachine(@RequestParam(value="page", defaultValue="1")
 									  int page,
@@ -40,13 +42,13 @@ public class ItemController {
 		mv.addObject("pageInfo", pi);
 		mv.addObject("itemList", itemList);
 		
-		mv.setViewName("item/nintendo/machine");
+		mv.setViewName("item/nintendo");
 		
 		return mv;	
 	}
 	
 	@GetMapping("nintendo.game")
-	public String findNintendoxboxGame(@RequestParam(value="page", defaultValue="1")
+	public ModelAndView findNintendoxboxGame(@RequestParam(value="page", defaultValue="1")
 									   int page,
 									   String platform,
 									   ModelAndView mv) {
@@ -56,13 +58,19 @@ public class ItemController {
 				 8,
 				 5);
 		
-		System.out.println(pi);
+		List<Item> itemList = itemService.findGameList(platform,pi);
 		
-		return "item/nintendo/game";	
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/nintendo");
+		
+		return mv;	
 	}
 	
 	@GetMapping("nintendo.accessory")
-	public String findNintendoAccessory(@RequestParam(value="page", defaultValue="1")
+	public ModelAndView findNintendoAccessory(@RequestParam(value="page", defaultValue="1")
 									    int page,
 									    String platform,
 									    ModelAndView mv) {
@@ -72,9 +80,154 @@ public class ItemController {
 				 8,
 				 5);
 		
-		System.out.println(pi);
+		List<Item> itemList = itemService.findAccessoryList(platform,pi);		
 		
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
 		
-		return "item/nintendo/accessory";	
+		mv.setViewName("item/nintendo");
+		
+		return mv;	
 	}
+	
+	//------------------------------------------------------------------------------------------
+	//PlayStation Controller
+	
+	@GetMapping("playstation.machine")
+	public ModelAndView findPlaystationMachine(@RequestParam(value="page", defaultValue="1")
+									  int page,
+									  String platform,
+									  ModelAndView mv
+									  ) {
+		
+		PageInfo pi = Pagination.getPageInfo(itemService.findMachineCount(platform),
+											 page,
+											 8,
+											 5);
+
+		List<Item> itemList = itemService.findMachineList(platform,pi);
+
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/playstation");
+		
+		return mv;	
+	}
+	
+	@GetMapping("playstation.game")
+	public ModelAndView findPlaystationGame(@RequestParam(value="page", defaultValue="1")
+									   int page,
+									   String platform,
+									   ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(itemService.findGameCount(platform),
+				 page,
+				 8,
+				 5);
+		
+		List<Item> itemList = itemService.findGameList(platform,pi);
+		
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/playstation");
+		
+		return mv;	
+	}
+	
+	@GetMapping("playstation.accessory")
+	public ModelAndView findPlaystationAccessory(@RequestParam(value="page", defaultValue="1")
+									    int page,
+									    String platform,
+									    ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(itemService.findAccessoryCount(platform),
+				 page,
+				 8,
+				 5);
+		
+		List<Item> itemList = itemService.findAccessoryList(platform,pi);		
+		
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/playstation");
+		
+		return mv;	
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	// XBox
+	@GetMapping("xbox.machine")
+	public ModelAndView findXboxMachine(@RequestParam(value="page", defaultValue="1")
+									  int page,
+									  String platform,
+									  ModelAndView mv
+									  ) {
+		
+		PageInfo pi = Pagination.getPageInfo(itemService.findMachineCount(platform),
+											 page,
+											 8,
+											 5);
+
+		List<Item> itemList = itemService.findMachineList(platform,pi);
+
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/xbox");
+		
+		return mv;	
+	}
+	
+	@GetMapping("xbox.game")
+	public ModelAndView findXboxGame(@RequestParam(value="page", defaultValue="1")
+									   int page,
+									   String platform,
+									   ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(itemService.findGameCount(platform),
+				 page,
+				 8,
+				 5);
+		
+		List<Item> itemList = itemService.findGameList(platform,pi);
+		
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/xbox");
+		
+		return mv;	
+	}
+	
+	@GetMapping("xbox.accessory")
+	public ModelAndView findXboxAccessory(@RequestParam(value="page", defaultValue="1")
+									    int page,
+									    String platform,
+									    ModelAndView mv) {
+		
+		PageInfo pi = Pagination.getPageInfo(itemService.findAccessoryCount(platform),
+				 page,
+				 8,
+				 5);
+		
+		List<Item> itemList = itemService.findAccessoryList(platform,pi);		
+		
+		mv.addObject("platform", platform);
+		mv.addObject("pageInfo", pi);
+		mv.addObject("itemList", itemList);
+		
+		mv.setViewName("item/xbox");
+		
+		return mv;	
+	}
+	
 }
