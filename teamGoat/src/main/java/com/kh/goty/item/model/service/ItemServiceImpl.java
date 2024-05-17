@@ -20,7 +20,7 @@ public class ItemServiceImpl implements ItemService{
 	@Autowired
 	private ItemRepository itemRepository;
 	
-	// List Count용 - 반환  int)
+	// List Count용 Service - 반환  int
 	@Override
 	public int findMachineCount(String platform) {
 		return itemRepository.findMachineCount(sqlSession, platform);
@@ -36,6 +36,7 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.findAccessoryCount(sqlSession, platform);
 	}
 	
+	// Item List용 Service - 반환 List<Item>
 	@Override
 	public List<Item> findMachineList(String platform, PageInfo pi){
 		
