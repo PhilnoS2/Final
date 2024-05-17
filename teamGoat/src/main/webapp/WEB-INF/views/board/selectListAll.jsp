@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +10,11 @@
 	width: 1200px;
 	height: 800px;
 	margin: auto;
-	border:1px solid red;
 }	
 #btn-categoty-div {
 	width: 50%;
 	margin-left: auto;
-	height: 80px;
-	border: 1px solid red;
+	height: 80px;	
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -23,12 +22,12 @@
 #freeboard-div{
 	width: 100%;
 	height: 90%;
-	border: 1px solid red;
+	border-top: 1px solid grey;
 }
 #freeboard-inner-div {
 	width: 80%;
-	height: 70%;
-	border: 1px solid red;
+
+	border-bottom: 1px solid grey;
 	margin: auto;
 	margin-top: 20px;
 }
@@ -37,10 +36,27 @@ thead th {
 	text-align: center;
 }
 .form-group {
-	width:20%;
+	width: 40%;
 	margin: auto;
-	
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
+
+#select-area{
+	width:30%;
+	display:inline-block;
+}
+#search-area{
+ width:50%;
+ display:inline-block;
+}
+
+#btn-list-option {
+	width:20%;
+	margin-bottom: 20px;
+}
+  #pagingArea {width:fit-content; margin:auto;}
 </style>
 <title>selectListAll</title>
 </head>
@@ -56,30 +72,120 @@ thead th {
 		
 		<div id="freeboard-div">
 			<div id="freeboard-inner-div">
+				<c:if test="${ sessionScope.loginMember ne null }">
+					<div id="btn-list-option">
+						<a class="btn btn-md btn-dark" href="#">글쓰기</a>
+					</div>
+				</c:if>
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
 							<th>글 번호</th>
-							<th>글 제목</th>
-							<th>제 목</th>
-							<th>댓글수</th>
+							<th>글 제목(댓글수)</th>
 							<th>조회수</th>
 							<th>날짜</th>
 							<th>글쓴이</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style="text-align: center;">
+						<c:choose>
+							<c:when test="${ listAll ne null }">
+								<c:forEach items="${ listAll }" var="board">
+									<tr>
+										<td>${ board.freeBoardNo }</td>
+										<td>${ board.boardTitle } ()</td>
+										<td>${ board.count }</td>
+										<td>${ board.createDate }</td>
+										<td>${ board.memberName }</td>
+									</tr>
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								<tr>
+									<td colspan="5">
+										게시글이 존재하지 않습니다.
+									</td>
+								</tr>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>
-			<div class="form-group mt-2">
-				<div style="width:70%; display:inline-block;">
-					<input type="text" class="form-control" id="" name="" placeholder="검색어를 입력하세요." />
-				</div>
-				<button class="btn btn-sm btn-primary">검색</button>
+			
+			<form class="form-group mt-3">
+			   <div id="select-area">
+	              <select class="custom-select" name="condition">
+	                  <option value="writer">작성자</option>
+	                  <option value="title">제목</option>
+	              </select>
+               </div>
+		      <div id="search-area">
+				<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요." />
+			  </div>
+			  <button type="submit" class="btn btn-sm btn-primary">검색</button>
+			</form>		
+			
+			<div id="pagingArea">
+				<ul class="pagination">
+					<c:choose>
+						<c:when test="${ pi.currentPage eq 1 }">
+							<li class="page-item disabled"><a class="page-link" href="#">뒤로</a></li>
+						</c:when>
+						<c:otherwise>
+							<li class="page-item">
+                    			<c:choose>
+                    				<c:when test="${ condition ne null }">
+                    					<a class="page-link" href="search.board?page=${ pageInfo.currentPage - 1}&condition=${condition}&keyword=${keyword}">
+	                    					뒤로
+	                    				</a>
+                    				</c:when>
+                    				<c:otherwise>
+	                    				<a class="page-link" href="/goty/freeboards/all?page=${ pi.currentPage - 1}">
+	                    					뒤로
+	                    				</a>
+                    				</c:otherwise>
+                    			</c:choose>
+                    		</li>
+						</c:otherwise>
+					</c:choose>
+					
+					<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+						<c:choose>
+                    		<c:when test="${ condition ne null }">
+	                    		<li class="page-item"><a class="page-link" href="search.board?page=${ p }&condition=${condition}&keyword=${keyword}">${ p }</a></li>
+	                    	</c:when>
+	                    	<c:otherwise>
+	                    		<li class="page-item"><a class="page-link" href="/goty/freeboards/all?page=${ p }">${ p }</a></li>
+	                    	</c:otherwise>
+	                    </c:choose>
+					
+					</c:forEach>
+					<c:choose>
+                   		<c:when test="${  pi.currentPage eq  pi.endPage}">
+                    		<li class="page-item disabled"><a class="page-link" href="">다음</a></li>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<c:choose>
+                    			<c:when test="${ condition ne null }">
+                    				<li class="page-item">
+		                    			<a class="page-link" href="search.board?page=${ pageInfo.currentPage + 1 }&condition=${condition}&keyword=${keyword}">
+		                    			다음
+		                    			</a>
+		                    		</li>
+                    			</c:when>
+                    			<c:otherwise>
+		                    		<li class="page-item">
+		                    			<a class="page-link" href="/goty/freeboards/all?page=${ pi.currentPage + 1 }">
+		                    			다음
+		                    			</a>
+		                    		</li>
+                    		</c:otherwise>
+                    		</c:choose>
+                    	</c:otherwise>
+	                </c:choose>
+				</ul>
 			</div>
-			<div>
-			</div>
+			
 		</div>
 		
 		

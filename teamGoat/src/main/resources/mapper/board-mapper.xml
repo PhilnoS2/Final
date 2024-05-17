@@ -4,5 +4,72 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="boardMapper">
+	
+	<resultMap id="boardResultSet" type="board">
+		<result column="FREE_BOARD_NO" property="freeBoardNo" />
+		<result column="BOARD_TITLE" property="boardTitle" />
+		<result column="BOARD_CONTENT" property="boardContent" />
+		<result column="CREATE_DATE" property="createDate" />
+		<result column="MEMBER_NAME" property="memberName" />
+		<result column="COUNT" property="count" />
+		<result column="PLATFORM_NAME" property="platformName" />
+	</resultMap>
+
+
+	<select id="selectListCount"
+	resultType="_int"
+	>
+	SELECT
+	      COUNT(*)
+	  FROM
+	      FREE_BOARD
+	 WHERE
+	      status = 'Y'     
+	</select>
+	
+	
+	<select id="seleltListAll"
+	resultMap="boardResultSet">
+	SELECT
+	       FREE_BOARD_NO,
+	       BOARD_TITLE,
+	       BOARD_CONTENT,
+	       CREATE_DATE,
+	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
+           COUNT,
+	       PLATFORM_NAME
+	  FROM
+	       FREE_BOARD
+	  JOIN MEMBER
+	    ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
+      JOIN PLATFORM_CATEGORY
+        ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO
+	 WHERE
+	      FREE_BOARD.STATUS = 'Y'
+	 ORDER
+	    BY
+	      FREE_BOARD_NO DESC    
+	</select>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 </mapper>

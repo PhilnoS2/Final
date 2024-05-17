@@ -67,6 +67,7 @@ public class MemberController {
 			return mv;
 		}
 	
+	
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
@@ -75,6 +76,7 @@ public class MemberController {
 		} else {
 			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
 		}
+	
 		return mv;
 	}
 	
