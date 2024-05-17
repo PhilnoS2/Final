@@ -1,6 +1,7 @@
 package com.kh.goty.member.model.vo;
 
 public class NaverMember {
+	private int memberNo;
 	private String naverId;
 	private String nickname;
 	private String mobile;
@@ -14,9 +15,10 @@ public class NaverMember {
 		super();
 	}
 	
-	public NaverMember(String naverId, String nickname, String mobile, String name, String birthyear, String status,
-			String memLevel) {
+	public NaverMember(int memberNo, String naverId, String nickname, String mobile, String name, String birthyear,
+			String status, String memLevel) {
 		super();
+		this.memberNo = memberNo;
 		this.naverId = naverId;
 		this.nickname = nickname;
 		this.mobile = mobile;
@@ -25,7 +27,12 @@ public class NaverMember {
 		this.status = status;
 		this.memLevel = memLevel;
 	}
-	
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	public String getNaverId() {
 		return naverId;
 	}
@@ -71,8 +78,9 @@ public class NaverMember {
 	
 	@Override
 	public String toString() {
-		return "NaverMember [naverId=" + naverId + ", nickname=" + nickname + ", mobile=" + mobile + ", name=" + name
-				+ ", birthyear=" + birthyear + ", status=" + status + ", memLevel=" + memLevel + "]";
+		return "NaverMember [memberNo=" + memberNo + ", naverId=" + naverId + ", nickname=" + nickname + ", mobile="
+				+ mobile + ", name=" + name + ", birthyear=" + birthyear + ", status=" + status + ", memLevel="
+				+ memLevel + "]";
 	}
-	
+
 }

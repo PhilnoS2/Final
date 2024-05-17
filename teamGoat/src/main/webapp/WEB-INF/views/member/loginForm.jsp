@@ -54,7 +54,9 @@
 		width:100%;
 		height:50px;
 	}
-	
+	.btn-img:hover {
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
