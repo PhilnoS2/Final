@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<jsp:include page="../common/menubar.jsp" />
+
+
 <html>
 <head>
     <meta charset="UTF-8">
@@ -283,10 +286,7 @@
 
 
 </head>
-<body>
-
-	<jsp:include page="../common/menubar.jsp" />
-	
+<body>	
 	
     <div id="cs-wrap"> <!--전체를 감싸는 div-->
         <div id="cs-title"> <!-- 고객서비스 타이틀 영역-->
@@ -372,7 +372,7 @@
 
             <div id="question"> <!-- 1:1문의 영역-->
                 <div id="question-title">
-                    <h3><a href="questions">1:1 문의</a></h3>
+                    <h3><a href="/goty/questions">1:1 문의</a></h3>
                 </div>
                 <div id="question-content">
                     <div id="question-content1">

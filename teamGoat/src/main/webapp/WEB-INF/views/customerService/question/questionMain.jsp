@@ -77,7 +77,7 @@
         </div>
         <div class="guide" style="border-bottom : 1px solid black;"> 
             <div>
-                <img src="../안내사항.png">
+                <img src="resources/img/info.png">
             </div>
         </div>
         <div class="question-find" >
