@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,72 +14,62 @@
          div {
             box-sizing : border-box;
         }
-
-        #faq-wrap{
+        #faq-wrap {
             margin : auto;
             width: 1200px;
             height : 900px;
-            > div{
+            > div {
                 width : 100%;
             }
         }
-
         a {
             text-decoration : none;
             color : black;
         }
-        a:hover{
+        a:hover {
             text-decoration : none;
             color : black;
             font-weight : bolder;
             cursor : pointer;
         }
-
-        li{
+        li {
             list-style : none;
         }
-
-        .faq-title{
+        .faq-title {
             height : 10%;
-
-            > div{
+            > div {
                 height : 100%;
                 float : left;
             }
         }
-
-        .faq-title-title{
+        .faq-title-title {
             width : 40%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 95px;
                 top : 30px;
             }    
         }
-
-        .faq-title-insert{
+        .faq-title-insert {
             width : 60%;
             position : relative;
-            > div{
+            > div {
                 display : inline-block;
                 position : absolute;
                 left : 540px;
                 top : 25px;
             }    
         }
-
-        .faq-search{
+        .faq-search {
             height : 5%;
         }
-
-        .faq-content{
+        .faq-content {
             height : 85%;
             padding-left : 95px;
         }
-
-        .faq-q{
+        .faq-q {
             width : 800px;
             height : 60px;
             background-color : rgb(216, 216, 211);
@@ -92,8 +81,7 @@
             padding : 15px;
             cursor : pointer;
         }
-
-        .faq-a{
+        .faq-a {
             width : 800px;
             height : 60px;
             background-color : rgba(255, 255, 255, 0.788);
@@ -106,16 +94,14 @@
             margin-bottom : 0;
             display : none;
         }
-
-        
-
+        .faq-q:hover {
+            background-color : yellowgreen;
+        }
     </style>
-
 </head>
 <body>
-
 	<jsp:include page="../../common/menubar.jsp" />
-	
+
     <div id="faq-wrap">
         <div class="faq-title">
             <div class="faq-title-title">
