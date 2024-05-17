@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="faqMapper">
+
+	<resultMap id="categoryResultSet" type="questionCategory">
+		<result column="CATEGORY_NO" property="categoryNo"/>
+		<result column="CATEGORY_NAME" property="categoryName"/>
+	</resultMap>
+
+
+
+	<select id="selectCategoryList" resultMap="categoryResultSet">
+		SELECT
+		       CATEGORY_NO,
+		       CATEGORY_NAME
+		  FROM
+		       QUESTION_CATEGORY
+	</select>
+</mapper>

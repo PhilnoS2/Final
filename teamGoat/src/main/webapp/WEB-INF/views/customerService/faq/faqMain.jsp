@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -111,11 +112,21 @@
             </div>
             <div class="faq-title-insert">
                 <div>
-                    <!--추후 로그인한 유저 + 관리자일 경우에만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                    <button type="button" id="insert-faq" class="btn btn-light">글쓰기</button>
+                    <c:if test="${ sessionScope.loginMember != null and sessionScope.loginMember.memLevel == 'A' }">
+                    	<button type="button" id="insert-faq" class="btn btn-light">글쓰기</button>
+                    </c:if>
                 </div>
             </div>
         </div>
+        
+        <script>
+        	$(function(){
+        		$('#insert-faq').click(function(){
+        			location.href = '/goty/faq/enroll';
+        		})
+        	})
+        
+        </script>
         <div class="faq-search">
             <div>
                 <select id="select-area" name="select" style="width : 100px; height : 40px; margin-left: 90px;">
