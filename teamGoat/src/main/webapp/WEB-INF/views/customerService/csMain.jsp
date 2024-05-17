@@ -372,7 +372,7 @@
 
             <div id="question"> <!-- 1:1문의 영역-->
                 <div id="question-title">
-                    <h3><a href="questions">1:1 문의</a></h3>
+                    <h3><a href="/goty/questions">1:1 문의</a></h3>
                 </div>
                 <div id="question-content">
                     <div id="question-content1">
