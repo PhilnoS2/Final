@@ -36,4 +36,9 @@ public class ItemRepository {
 	public List<Item> findAccessoryList(SqlSession sqlSession, String platform, RowBounds rowBounds) {
 		return sqlSession.selectList("itemMapper.findAccessoryList", platform, rowBounds);
 	}
+	
+	// Item Detail용
+	public Item findItemDetail(SqlSession sqlSession, int itemNo) {
+		return sqlSession.selectOne("itemMapper.findItemDetail", itemNo);
+	}
 }

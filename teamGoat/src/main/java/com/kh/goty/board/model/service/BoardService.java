@@ -1,9 +1,14 @@
 package com.kh.goty.board.model.service;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import com.kh.goty.board.model.vo.Board;
+import com.kh.goty.common.model.vo.PageInfo;
 
 public interface BoardService {
 
-	public ArrayList selectListAll();
+	public List<Board> selectListAll(PageInfo pageInfo);
+
+	public int selectListCount();
 
 }

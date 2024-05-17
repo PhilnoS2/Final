@@ -63,4 +63,9 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.findAccessoryList(sqlSession, platform , rowBounds);
 	}
 
+	@Override
+	public Item findItemDetail(int itemNo) {
+		return itemRepository.findItemDetail(sqlSession, itemNo);
+	}
+
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -94,7 +95,7 @@
 					<img class="card-img-top" src="${ item.imgPath }/${ item.imgName }" alt="Card image">
 						<div class="card-body">
 							<h6 class="card-title">${ item.itemName }</h6>
-							<p class="card-text">${ item.price }</p>
+							<p class="card-text"> <fmt:formatNumber value="${ item.price }" type="number" /> 원 </p>
 						</div>
 					</div>
 				</c:forEach>
