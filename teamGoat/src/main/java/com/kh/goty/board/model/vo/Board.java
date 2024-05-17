@@ -7,65 +7,87 @@ public class Board {
 	private String boardTitle;
 	private String boardContent;
 	private Date createDate;
-	private String MemberId;
+	private String memberName;
+	private int count;
 	private String platformName;
 	
 	public Board() {
 		super();
 	}
-	
-	public Board(int freeBoardNo, String boardTitle, String boardContent, Date createDate, String memberId,
+
+	public Board(int freeBoardNo, String boardTitle, String boardContent, Date createDate, String memberName, int count,
 			String platformName) {
 		super();
 		this.freeBoardNo = freeBoardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.createDate = createDate;
-		MemberId = memberId;
+		this.memberName = memberName;
+		this.count = count;
 		this.platformName = platformName;
 	}
-	
+
 	public int getFreeBoardNo() {
 		return freeBoardNo;
 	}
+
 	public void setFreeBoardNo(int freeBoardNo) {
 		this.freeBoardNo = freeBoardNo;
 	}
+
 	public String getBoardTitle() {
 		return boardTitle;
 	}
+
 	public void setBoardTitle(String boardTitle) {
 		this.boardTitle = boardTitle;
 	}
+
 	public String getBoardContent() {
 		return boardContent;
 	}
+
 	public void setBoardContent(String boardContent) {
 		this.boardContent = boardContent;
 	}
+
 	public Date getCreateDate() {
 		return createDate;
 	}
+
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
 	}
-	public String getMemberId() {
-		return MemberId;
+
+	public String getMemberName() {
+		return memberName;
 	}
-	public void setMemberId(String memberId) {
-		MemberId = memberId;
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
 	public String getPlatformName() {
 		return platformName;
 	}
+
 	public void setPlatformName(String platformName) {
 		this.platformName = platformName;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "Board [freeBoardNo=" + freeBoardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", createDate=" + createDate + ", MemberId=" + MemberId + ", platformName=" + platformName + "]";
-	}	
-
+				+ ", createDate=" + createDate + ", memberName=" + memberName + ", count=" + count + ", platformName="
+				+ platformName + "]";
+	}
+	
 }
