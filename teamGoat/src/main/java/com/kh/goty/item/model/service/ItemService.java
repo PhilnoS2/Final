@@ -19,4 +19,6 @@ public interface ItemService {
 	
 	List<Item> findAccessoryList(String platform, PageInfo pi);
 	
+	Item findItemDetail(int itemNo);
+	
 }

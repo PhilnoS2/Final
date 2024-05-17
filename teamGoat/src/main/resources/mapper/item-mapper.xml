@@ -18,9 +18,11 @@
 		<result column="DEVELOPER" 		property="developer" />
 		<result column="PUBLISHER" 		property="publisher" />
 		<result column="GENRE" 			property="genre" />
+		<result column="PLATFORM_NAME"	property="platformName" />
+		
 	</resultMap>
 	
-	<!-- ITEM COUNT를 위한 SQL문 -->
+	<!-- List Count용 SQL문 -->
 	<select id="findMachineCount" parameterType="string" resultType="_int">
 	
 		SELECT
@@ -85,7 +87,7 @@
 	</select>
 	<!-- 여기까지  -->
 	
-	<!-- ITEM LIST를 가져오기 위한 SQL문 -->
+	<!-- Item List용 SQL문-->
 	<select id="findMachineList" parameterType="string" resultMap="itemResultSet">
 	
 		SELECT
@@ -186,5 +188,36 @@
 	</select>
 	<!-- 여기까지 -->
 	
+	<!-- Item Detail용 SQL문 -->
+	<select id="findItemDetail" parameterType="_int" resultMap="itemResultSet">
+		
+		SELECT 
+		        I.ITEM_NO,
+		        IMG_NAME,
+        		IMG_PATH,
+		        ITEM_NAME,
+		        PRICE,
+		        PLATFORM_NAME,
+		        DEVELOPER,
+		        PUBLISHER,
+		        RATING,
+		        GENRE
+		  FROM
+		        ITEM I
+		  JOIN
+		       	ITEM_IMG II
+		    ON (I.IMG_NO = II.IMG_NO)
+		  JOIN
+		        GAME_CATEGORY_BRIDGE G
+		    ON (I.ITEM_NO = G.ITEM_NO)
+		  JOIN
+		        PLATFORM_CATEGORY P
+		    ON (G.PLATFORM_NO = P.PLATFORM_NO)
+		 WHERE
+		        STATUS = 'Y'
+		   AND
+		        I.ITEM_NO = #{itemNo}
+		
+	</select>
 	
 </mapper>

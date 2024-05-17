@@ -94,8 +94,14 @@ public class ItemController {
 	@GetMapping("detail.item")
 	public ModelAndView findNintendoDetail(int itemNo,
 										   ModelAndView mv) {
+
+		Item item = itemService.findItemDetail(itemNo);
 		
-		mv.setViewName("");
+		System.out.println(item);
+		
+		mv.addObject("item", item);
+		
+		mv.setViewName("item/itemDetail");
 		
 		return mv;
 	}
