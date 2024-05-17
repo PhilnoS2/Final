@@ -123,24 +123,12 @@
     </div>
     <script>
         $(function(){
-            $('#list-btn').click(function(){
-                // 1:1문의 메인페이지로 이동
-                location.href = '';
-            })
-        })
-
-        $(function(){
             $('#submit-btn').click(function(){
-                if(!confirm('게시글을 등록하시겠습니까?')){
-                    return false;
-                }
-            })
-
-            $('.back-btn').click(function(){
-                if(!($('#content').val() == '')){
-                	confirm('작성중인 글을 저장되지 않습니다 취소하시겠습니까?');
-            })
-        })
+            	if(!confirm('게시글을 등록하시겠습니까?')){
+            		return false;
+            	};
+            });
+        });
     </script>
 
 </body>

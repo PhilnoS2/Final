@@ -1,5 +1,7 @@
 package com.kh.goty.customerService.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.kh.goty.customerService.model.service.CustomerService;
 import com.kh.goty.customerService.model.vo.Notice;
+import com.kh.goty.customerService.model.vo.QuestionCategory;
 
 @Controller
 public class CustomerServiceController {
@@ -59,11 +62,17 @@ public class CustomerServiceController {
 		return "redirect:/notices";
 	}
 	
-	
-	
 	@GetMapping("faqs")
 	public String forwardFaq() {
 		return "customerService/faq/faqMain";
+	}
+	
+	@GetMapping("faq/enroll")
+	public String forwardFaqEnrollForm() {
+		
+		List<QuestionCategory> list = customerService.selectCategoryList();
+		System.out.println(list);
+		return "customerService/faq/faqEnrollForm";
 	}
 	
 }
