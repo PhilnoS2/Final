@@ -10,13 +10,11 @@
 	width: 1200px;
 	height: 800px;
 	margin: auto;
-	border:1px solid red;
 }	
 #btn-categoty-div {
 	width: 50%;
 	margin-left: auto;
-	height: 80px;
-	border: 1px solid red;
+	height: 80px;	
 	display: flex;
 	align-items: center;
 	justify-content: space-evenly;
@@ -24,12 +22,12 @@
 #freeboard-div{
 	width: 100%;
 	height: 90%;
-	border: 1px solid red;
+	border-top: 1px solid grey;
 }
 #freeboard-inner-div {
 	width: 80%;
-	height: 70%;
-	border: 1px solid red;
+
+	border-bottom: 1px solid grey;
 	margin: auto;
 	margin-top: 20px;
 }
@@ -38,12 +36,25 @@ thead th {
 	text-align: center;
 }
 .form-group {
-	width: 30%;
+	width: 40%;
 	margin: auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+#select-area{
+	width:30%;
+	display:inline-block;
 }
 #search-area{
- width:70%;
+ width:50%;
  display:inline-block;
+}
+
+#btn-list-option {
+	width:20%;
+	margin-bottom: 20px;
 }
   #pagingArea {width:fit-content; margin:auto;}
 </style>
@@ -61,6 +72,11 @@ thead th {
 		
 		<div id="freeboard-div">
 			<div id="freeboard-inner-div">
+				<c:if test="${ sessionScope.loginMember ne null }">
+					<div id="btn-list-option">
+						<a class="btn btn-md btn-dark" href="#">글쓰기</a>
+					</div>
+				</c:if>
 				<table class="table table-bordered table-hover">
 					<thead>
 						<tr>
@@ -77,7 +93,7 @@ thead th {
 								<c:forEach items="${ listAll }" var="board">
 									<tr>
 										<td>${ board.freeBoardNo }</td>
-										<td>${ board.boardTitle }()</td>
+										<td>${ board.boardTitle } ()</td>
 										<td>${ board.count }</td>
 										<td>${ board.createDate }</td>
 										<td>${ board.memberName }</td>
@@ -95,17 +111,24 @@ thead th {
 					</tbody>
 				</table>
 			</div>
-			<div class="form-group mt-3">
-				<div id="search-area">
-					<input type="text" class="form-control" id="" name="" placeholder="검색어를 입력하세요." />
-				</div>
-				<button class="btn btn-sm btn-primary">검색</button>
-			</div>
+			
+			<form class="form-group mt-3">
+			   <div id="select-area">
+	              <select class="custom-select" name="condition">
+	                  <option value="writer">작성자</option>
+	                  <option value="title">제목</option>
+	              </select>
+               </div>
+		      <div id="search-area">
+				<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요." />
+			  </div>
+			  <button type="submit" class="btn btn-sm btn-primary">검색</button>
+			</form>		
 			
 			<div id="pagingArea">
 				<ul class="pagination">
 					<c:choose>
-						<c:when test="${ pi.currentPage ne 1 }">
+						<c:when test="${ pi.currentPage eq 1 }">
 							<li class="page-item disabled"><a class="page-link" href="#">뒤로</a></li>
 						</c:when>
 						<c:otherwise>
@@ -117,7 +140,7 @@ thead th {
 	                    				</a>
                     				</c:when>
                     				<c:otherwise>
-	                    				<a class="page-link" href="list.board?page=${ pageInfo.currentPage - 1}">
+	                    				<a class="page-link" href="/goty/freeboards/all?page=${ pi.currentPage - 1}">
 	                    					뒤로
 	                    				</a>
                     				</c:otherwise>
@@ -132,7 +155,7 @@ thead th {
 	                    		<li class="page-item"><a class="page-link" href="search.board?page=${ p }&condition=${condition}&keyword=${keyword}">${ p }</a></li>
 	                    	</c:when>
 	                    	<c:otherwise>
-	                    		<li class="page-item"><a class="page-link" href="list.board?page=${ p }">${ p }</a></li>
+	                    		<li class="page-item"><a class="page-link" href="/goty/freeboards/all?page=${ p }">${ p }</a></li>
 	                    	</c:otherwise>
 	                    </c:choose>
 					
@@ -152,7 +175,7 @@ thead th {
                     			</c:when>
                     			<c:otherwise>
 		                    		<li class="page-item">
-		                    			<a class="page-link" href="list.board?page=${ pageInfo.currentPage + 1 }">
+		                    			<a class="page-link" href="/goty/freeboards/all?page=${ pi.currentPage + 1 }">
 		                    			다음
 		                    			</a>
 		                    		</li>

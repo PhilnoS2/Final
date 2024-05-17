@@ -48,7 +48,7 @@
 	      FREE_BOARD.STATUS = 'Y'
 	 ORDER
 	    BY
-	      CREATE_DATE DESC    
+	      FREE_BOARD_NO DESC    
 	</select>
 	
 	

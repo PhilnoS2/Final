@@ -28,7 +28,7 @@ public class FreeBoardController {
 												  page,
 												  5,
 												  3);
-		System.out.println(pageInfo);
+		
 		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo);
 		
 		mv.addObject("listAll", listAll)
