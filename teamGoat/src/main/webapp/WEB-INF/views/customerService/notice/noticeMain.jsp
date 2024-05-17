@@ -13,7 +13,6 @@
     <style>
         div {
             box-sizing : border-box;
-            border : 1px solid black;
         }
         #notice-wrap {
             margin : auto;

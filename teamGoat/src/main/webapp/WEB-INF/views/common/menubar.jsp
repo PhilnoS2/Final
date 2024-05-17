@@ -198,9 +198,9 @@
 		    <li>
 		      <a href="customer-service">고객센터</a>
 		      <ul id="option-ul">
-		      		<li><a href="notices">공지사항</a></li>
-		      		<li><a href="faqs">FAQ</a></li>
-		      		<li><a href="questions">1:1 문의</a></li>
+		      		<li><a href="/goty/notices">공지사항</a></li>
+		      		<li><a href="/goty/faqs">FAQ</a></li>
+		      		<li><a href="/goty/questions">1:1 문의</a></li>
 		      	</ul> 
 		    </li>
 		</ul>	
