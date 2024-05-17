@@ -266,8 +266,6 @@ public class MemberController {
  
   @PostMapping("/update")
   public ModelAndView updateMember(Member member, ModelAndView mv, HttpSession session) {
-	  // log.info("member = {}", member);
-	  
 	  if(memberService.updateMember(member) > 0) {
 		  session.setAttribute("alertMsg", "정보 수정이 성공했습니다.");
 		  session.removeAttribute("loginMember");
