@@ -115,5 +115,71 @@
 				ITEM_NO
 	
 	</select>
+	
+	<select id="findGameList" parameterType="string" resultMap="itemResultSet">
+	
+		SELECT
+		       	I.ITEM_NO,
+		       	ITEM_NAME,
+		       	PRICE,
+		       	IMG_NAME,
+        		IMG_PATH,
+		       	DEVELOPER,
+		       	PUBLISHER
+		 FROM
+		       	ITEM I
+		 JOIN
+		       	ITEM_IMG II
+		   ON  	(I.IMG_NO = II.IMG_NO)
+		 JOIN
+				GAME_CATEGORY_BRIDGE G
+		   ON 	(I.ITEM_NO = G.ITEM_NO)
+		 JOIN
+			  	PLATFORM_CATEGORY P
+		   ON 	(G.PLATFORM_NO = P.PLATFORM_NO)
+		WHERE
+		       	STATUS = 'Y'
+		  AND
+		       	ITEM_CATEGORIY = 2
+		  AND
+		       	P.PLATFORM_NAME = #{platform}
+		ORDER
+		   BY
+				ITEM_NO
+	
+	</select>
+	
+	<select id="findAccessoryList" parameterType="string" resultMap="itemResultSet">
+		
+		SELECT
+		       	I.ITEM_NO,
+		       	ITEM_NAME,
+		       	PRICE,
+		       	IMG_NAME,
+        		IMG_PATH,
+		       	DEVELOPER,
+		       	PUBLISHER
+		 FROM
+		       	ITEM I
+		 JOIN
+		       	ITEM_IMG II
+		   ON  	(I.IMG_NO = II.IMG_NO)
+		 JOIN
+				GAME_CATEGORY_BRIDGE G
+		   ON 	(I.ITEM_NO = G.ITEM_NO)
+		 JOIN
+			  	PLATFORM_CATEGORY P
+		   ON 	(G.PLATFORM_NO = P.PLATFORM_NO)
+		WHERE
+		       	STATUS = 'Y'
+		  AND
+		       	ITEM_CATEGORIY = 3
+		  AND
+		       	P.PLATFORM_NAME = #{platform}
+		ORDER
+		   BY
+				ITEM_NO
+	
+	</select>
 
 </mapper>

@@ -26,4 +26,12 @@ public class ItemRepository {
 	public List<Item> findMachineList(SqlSession sqlSession, String platform, RowBounds rowBounds) {
 		return sqlSession.selectList("itemMapper.findMachineList", platform, rowBounds);
 	}
+	
+	public List<Item> findGameList(SqlSession sqlSession, String platform, RowBounds rowBounds) {
+		return sqlSession.selectList("itemMapper.findGameList", platform, rowBounds);
+	}
+	
+	public List<Item> findAccessoryList(SqlSession sqlSession, String platform, RowBounds rowBounds) {
+		return sqlSession.selectList("itemMapper.findAccessoryList", platform, rowBounds);
+	}
 }

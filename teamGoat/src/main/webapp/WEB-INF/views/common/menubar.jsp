@@ -15,14 +15,17 @@
 	div{
 		box-sizing: border-box;
 	}
+	
 	li{
 		list-style: none;
 	}
+	
 	#header {
 		width: 1200px;
 		height: 200px;
 		margin: auto;
 	}
+	
 	#logoOpt{
 		width:60%;
 		display:flex;
@@ -30,15 +33,18 @@
 		justify-content:space-between;
 		margin-left: auto;
 	}
+	
 	#header h1 {
 		width:85px;
 		display:inline-block;
 	}
+	
 	#logins {
 		display:inline-block;
 		margin-left: auto;
 		margin-right: 20px;
 	}
+	
 	#nav {
 		width: 1200px;
 		height: 75px;
@@ -46,6 +52,7 @@
 		border-top: 1px solid grey;
 		border-bottom: 1px solid grey;
 	}
+	
 	#nav-ul {
 		width:100%;
 		height:100%;
@@ -54,6 +61,7 @@
 		padding: 0px;
 		margin: 0px;
 	}
+	
 	#nav-ul > li {
       float: left;
       font-size: 28px;
@@ -62,6 +70,7 @@
       text-align: center;
       line-height: 73px;
    }
+   
    #nav-ul a {
 	text-decoration: none;
 	color: black;
@@ -69,9 +78,11 @@
     height: 100%;
     display: block;
    }
+   
    #nav-ul li:hover > a{
      color: #007bff;
    }
+   
    #option-ul{
  	 width:100%;
  	 text-align:center;
@@ -82,17 +93,21 @@
   	 background-color: white;
   	 position: relative;
    }
+   
    #nav-ul > li > a:hover + #option-ul {
     display: block;
     z-index: 1000;
    }
+   
    #nav-ul > li > ul:hover{
    	display: block;
    }
+   
    #nav-ul > li > ul a:hover{
    	font-size: 24px; 
    	color: #17a2b8;
    }
+   
 </style>
 </head>
 <body>
@@ -156,17 +171,17 @@
 		    <li>
 		     	<a>PlayStation</a>
 		      	<ul id="option-ul">
-		      		<li><a href="playstationMachine">PlayStation 게임기</a></li>
-		      		<li><a href="playstationGame">PlayStation 게임</a></li>
-		      		<li><a href="playstationAccessory">PlayStation 주변기기</a></li>
+		      		<li><a href="playstation.machine?platform=PlayStation">PlayStation 게임기</a></li>
+		      		<li><a href="playstation.game?platform=PlayStation">PlayStation 게임</a></li>
+		      		<li><a href="playstation.accessory?platform=PlayStation">PlayStation 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>
 		     	<a>X Box</a>
 		      	<ul id="option-ul">
-		      		<li><a href="xboxMachine">XBOX 게임기</a></li>
-		      		<li><a href="xboxGame">XBOX 타이틀</a></li>
-		      		<li><a href="xboxAccessory">XBOX 주변기기</a></li>
+		      		<li><a href="xbox.machine?platform=XBox">XBOX 게임기</a></li>
+		      		<li><a href="xbox.game?platform=XBox">XBOX 타이틀</a></li>
+		      		<li><a href="xbox.accessory?platform=XBox">XBOX 주변기기</a></li>
 		      	</ul> 
 		    </li>
 		    <li>

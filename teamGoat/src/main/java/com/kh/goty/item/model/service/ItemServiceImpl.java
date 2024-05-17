@@ -47,12 +47,19 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<Item> findGameList(String platform, PageInfo pi) {
-		return null;
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset ,pi.getBoardLimit());
+		
+		return itemRepository.findGameList(sqlSession, platform , rowBounds);
 	}
 
 	@Override
 	public List<Item> findAccessoryList(String platform, PageInfo pi) {
-		return null;
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset ,pi.getBoardLimit());
+		
+		return itemRepository.findAccessoryList(sqlSession, platform , rowBounds);
 	}
 
 }
