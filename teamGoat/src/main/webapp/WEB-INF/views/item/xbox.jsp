@@ -90,6 +90,7 @@
 			<c:when test="${ not empty itemList }">
 				<c:forEach items="${ itemList }" var="item">
 					<div class="card items">
+					<input type="hidden" value="${ item.itemNo }" />
 					<img class="card-img-top" src="${ item.imgPath }/${ item.imgName }" alt="Card image">
 						<div class="card-body">
 							<h6 class="card-title">${ item.itemName }</h6>

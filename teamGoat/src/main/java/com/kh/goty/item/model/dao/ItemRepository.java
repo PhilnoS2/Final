@@ -1,5 +1,6 @@
 package com.kh.goty.item.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -40,5 +41,10 @@ public class ItemRepository {
 	// Item Detail용
 	public Item findItemDetail(SqlSession sqlSession, int itemNo) {
 		return sqlSession.selectOne("itemMapper.findItemDetail", itemNo);
+	}
+	
+	// Basket Insert용
+	public int addItemInBasket(SqlSession sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.insert("itemMapper.addItemInBasket", map);
 	}
 }

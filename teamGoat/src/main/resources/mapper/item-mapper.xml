@@ -220,4 +220,17 @@
 		
 	</select>
 	
+	<!-- Basket Insert용 SQL문 -->
+	<insert id="addItemInBasket" parameterType="hashmap">
+	
+		INSERT
+		  INTO
+		  		CART
+		VALUES
+				(
+				#{itemNo},
+				#{memberNo}
+				)
+				
+	</insert>
 </mapper>

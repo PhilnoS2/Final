@@ -1,5 +1,6 @@
 package com.kh.goty.item.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.goty.common.model.vo.PageInfo;
@@ -20,5 +21,7 @@ public interface ItemService {
 	List<Item> findAccessoryList(String platform, PageInfo pi);
 	
 	Item findItemDetail(int itemNo);
+	
+	int addItemInBasket(HashMap<String, Integer> map);
 	
 }

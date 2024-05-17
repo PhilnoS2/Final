@@ -20,6 +20,8 @@
 	.detail-img{
 		float : left;
 		margin-left : 30px;
+		padding-top : 60px;
+		padding-bottom : 30px;
 	}
 	.detail{
 		float : right;
@@ -27,11 +29,12 @@
 	}
 	.detail-purchase{
 		text-align: center;
-
+		padding : 40px;
 	}
 	
 	.detail-item > p{
-		margin : 30px;
+		padding-top: 40px;
+		padding-left: 40px;
 	}
 
 
@@ -69,10 +72,17 @@
 			</div>
 
 			<div class="detail-purchase">
-				<a href="" class="btn btn-dark btn-lg">구매하기</a> 
-				<a href="" class="btn btn-light btn-lg">장바구니</a>
+				<c:choose>
+					<c:when test="${ not empty loginMember }">
+						<a href="purchase" class="btn btn-dark btn-lg">구매하기</a> 
+						<a href="basket?itemNo=${ item.itemNo }&memberNo=${ loginMember.memberNo }" class="btn btn-light btn-lg">장바구니</a>
+					</c:when>
+					<c:otherwise>
+						<h3>구매를 위해서는 로그인해주세요.</h3>
+					</c:otherwise>
+				</c:choose>
 			</div>
-
+					
 		</div>
 		
 		

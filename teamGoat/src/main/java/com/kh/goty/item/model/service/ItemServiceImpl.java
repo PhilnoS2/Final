@@ -1,5 +1,6 @@
 package com.kh.goty.item.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -63,9 +64,16 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.findAccessoryList(sqlSession, platform , rowBounds);
 	}
 
+	//상세보기 페이지용
 	@Override
 	public Item findItemDetail(int itemNo) {
 		return itemRepository.findItemDetail(sqlSession, itemNo);
+	}
+
+	// Basket Insert
+	@Override
+	public int addItemInBasket(HashMap<String, Integer> map) {
+		return itemRepository.addItemInBasket(sqlSession, map);
 	}
 
 }

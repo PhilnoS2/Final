@@ -1,5 +1,6 @@
 package com.kh.goty.item.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -96,8 +97,6 @@ public class ItemController {
 										   ModelAndView mv) {
 
 		Item item = itemService.findItemDetail(itemNo);
-		
-		System.out.println(item);
 		
 		mv.addObject("item", item);
 		
@@ -244,6 +243,27 @@ public class ItemController {
 		mv.setViewName("item/xbox");
 		
 		return mv;	
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	// Basket Insert Controller
+	@GetMapping("basket")
+	public ModelAndView addItemInBasket(int memberNo,
+										int itemNo,
+										ModelAndView mv) {
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("memberNo", memberNo);
+		map.put("itemNo", itemNo);
+		
+		System.out.println(map);
+		
+		int result = itemService.addItemInBasket(map);
+		
+		System.out.println(result);
+		
+		return mv;
 	}
 	
 }
