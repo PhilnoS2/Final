@@ -13,6 +13,7 @@
 		<result column="MEMBER_NAME" property="memberName" />
 		<result column="COUNT" property="count" />
 		<result column="PLATFORM_NAME" property="platformName" />
+		<result column="REVIEW_COUNT" property="reviewCount" />
 	</resultMap>
 
 
@@ -31,24 +32,36 @@
 	<select id="seleltListAll"
 	resultMap="boardResultSet">
 	SELECT
-	       FREE_BOARD_NO,
+	       FREE_BOARD.FREE_BOARD_NO,
 	       BOARD_TITLE,
 	       BOARD_CONTENT,
 	       CREATE_DATE,
 	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
            COUNT,
-	       PLATFORM_NAME
+	       PLATFORM_NAME,
+           NVL(RCOUNT, 0) AS "REVIEW_COUNT"
 	  FROM
 	       FREE_BOARD
 	  JOIN MEMBER
 	    ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
       JOIN PLATFORM_CATEGORY
         ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO
+      LEFT  
+      JOIN (SELECT
+                 FREE_BOARD_NO,   
+                 COUNT(FREE_BOARD_NO) AS "RCOUNT"
+                 FROM    
+                     FREE_BOARD_REVIEW         
+                WHERE
+                     STATUS = 'Y'
+                GROUP     
+                   BY FREE_BOARD_NO) R
+        ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
 	 WHERE
 	      FREE_BOARD.STATUS = 'Y'
 	 ORDER
 	    BY
-	      FREE_BOARD_NO DESC    
+	      FREE_BOARD_NO DESC   
 	</select>
 	
 	

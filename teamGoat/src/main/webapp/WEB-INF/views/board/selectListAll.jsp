@@ -93,7 +93,7 @@ thead th {
 								<c:forEach items="${ listAll }" var="board">
 									<tr>
 										<td>${ board.freeBoardNo }</td>
-										<td>${ board.boardTitle } ()</td>
+										<td>${ board.boardTitle } ( ${board.reviewCount} )</td>
 										<td>${ board.count }</td>
 										<td>${ board.createDate }</td>
 										<td>${ board.memberName }</td>

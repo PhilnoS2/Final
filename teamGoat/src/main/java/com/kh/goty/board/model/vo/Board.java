@@ -10,13 +10,14 @@ public class Board {
 	private String memberName;
 	private int count;
 	private String platformName;
+	private int reviewCount;
 	
 	public Board() {
 		super();
 	}
 
 	public Board(int freeBoardNo, String boardTitle, String boardContent, Date createDate, String memberName, int count,
-			String platformName) {
+			String platformName, int reviewCount) {
 		super();
 		this.freeBoardNo = freeBoardNo;
 		this.boardTitle = boardTitle;
@@ -25,6 +26,7 @@ public class Board {
 		this.memberName = memberName;
 		this.count = count;
 		this.platformName = platformName;
+		this.reviewCount = reviewCount;
 	}
 
 	public int getFreeBoardNo() {
@@ -83,11 +85,19 @@ public class Board {
 		this.platformName = platformName;
 	}
 
+	public int getReviewCount() {
+		return reviewCount;
+	}
+
+	public void setReviewCount(int reviewCount) {
+		this.reviewCount = reviewCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Board [freeBoardNo=" + freeBoardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", createDate=" + createDate + ", memberName=" + memberName + ", count=" + count + ", platformName="
-				+ platformName + "]";
+				+ platformName + ", reviewCount=" + reviewCount + "]";
 	}
 	
 }

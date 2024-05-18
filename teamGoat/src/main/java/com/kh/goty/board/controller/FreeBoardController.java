@@ -14,6 +14,9 @@ import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping("/freeboards")
 public class FreeBoardController {
