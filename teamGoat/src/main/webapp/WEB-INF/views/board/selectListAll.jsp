@@ -90,7 +90,7 @@ thead th {
 						<c:choose>
 							<c:when test="${ listAll ne null }">
 								<c:forEach items="${ listAll }" var="board">
-									<tr>
+									<tr id="${ board.freeBoardNo }">
 										<td>${ board.freeBoardNo }</td>
 										<td>${ board.boardTitle } ( ${board.reviewCount} )</td>
 										<td>${ board.count }</td>
@@ -186,21 +186,13 @@ thead th {
 		</div>
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	</div>
 	
-	
+	<script>
+		$('tbody > tr').click((event) => {
+			location.href="/goty/freeboards/select/" + $(event.currentTarget)[0].id;
+		});
+	</script>
 	
 	
 	

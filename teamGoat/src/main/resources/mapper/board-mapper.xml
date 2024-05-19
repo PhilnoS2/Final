@@ -96,9 +96,7 @@
 	       #{originName},
 	       #{changeName},
 	       #{imagePath}  
-	      )
-	  
-	          
+	      )        
 	</insert>
 	
 	
