@@ -49,7 +49,8 @@
   	       	PHONE,
   	       	ADDRESS,
   	       	ADDR_DETAIL,
-  	       	STATUS
+  	       	STATUS,
+  	       	THUMBNAIL_IMAGE
   	       )
   	 VALUES
   	  	   (
@@ -63,7 +64,8 @@
   	  	   #{phone},
   	  	   #{address},
   	  	   #{addrDetail},
-  	  	   #{status}
+  	  	   #{status},
+  	  	   #{thumbnailImage}
   	  	   )    
   	</insert>
   
@@ -178,12 +180,56 @@
   	</select>
   
   
-  	<select id="checkKakaoId"
-  		parameterType="member"
+  	<select id="checksocialId"
+  		parameterType="string"
   		resultType="_int"
   	>
   	SELECT
   	      COUNT(*)
+  	  FROM
+  	      MEMBER
+  	  WHERE
+  	       MEMBER_ID = #{memberId}
+  	    AND
+  	       DELETE_YN = 'N'            
+  	</select>
+  	
+  	<select id="loginKakao"
+  		parameterType="string"
+  		resultType="member"
+  	>
+  	SELECT
+  	      MEMBER_NO memberNo,
+  	      MEMBER_ID memberId,
+  	      NICKNAME nickname,
+  	      STATUS status,
+  	      ACCESS_TOKEN accessToken,
+  	      THUMBNAIL_IMAGE thumbnailImage,
+  	      MEMBER_POINT memberPoint,
+  	      MEM_LEVEL memLevel,
+  	      TOTAL_PRICE totalPrice
+  	  FROM
+  	      MEMBER
+  	 WHERE
+  	      MEMBER_ID = #{memberId} 
+  	</select>
+  	
+  
+  <select id="loginNaver"
+  		parameterType="string"
+  		resultType="member"
+  	>
+  	SELECT
+  	      MEMBER_NO memberNo,
+  	      MEMBER_ID memberId,
+  	      NICKNAME nickname,
+  	      MEMBER_NAME memberName,
+  	      PHONE phone,
+  	      BORNDATE bornDate,
+  	      STATUS status,
+  	      MEMBER_POINT memberPoint,
+  	      MEM_LEVEL memLevel,
+  	      TOTAL_PRICE totalPrice
   	  FROM
   	      MEMBER
   	 WHERE
@@ -191,73 +237,6 @@
   	</select>
   
   
-  	<insert id="insertKakao"
-  		parameterType="kakaoMember"
-  	>
-  	INSERT
-  	  INTO
-  	      k_MEMBER
-  	      (
-  	      MEMBER_NO,
-  	      MEMBER_ID,
-  	      NICKNAME,
-  	      THUMBNAIL_IMAGE,
-  	      ACCESS_TOKEN,
-  	      STATUS,
-  	      MEM_LEVEL
-  	      )
-  	VALUES
-  		  (
-  	 	  SEQ_KAKAOMEMBER.NEXTVAL,
-  	 	  #{kakaoId},
-  	 	  #{nickName},
-  	 	  #{thumbnailImage},
-  	 	  #{accessToken},
-  	 	  DEFAULT,
-  	 	  DEFAULT  	 		 
-  	 	  )	
-  	</insert>
-  
-  <select id="checkNaverId"
-  		parameterType="naverMember"
-  		resultType="_int"
-  	>
-  	SELECT
-  	      COUNT(*)
-  	  FROM
-  	      N_MEMBER
-  	 WHERE
-  	      MEMBER_ID = #{naverId}
-  	</select>
-  
-  <insert id="insertNaver"
-  		parameterType="naverMember"
-  	>
-  	INSERT
-  	  INTO
-  	      N_MEMBER
-  	      (
-  	      MEMBER_NO,
-  	      MEMBER_ID,
-  	      MEMBER_NAME,
-  	      NICKNAME,
-  	      BIRTH_YEAR,
-  	      PHONE,
-  	      STATUS,
-  	      MEM_LEVEL
-  	      )
-  	VALUES
-  		  (
-  	 	  SEQ_NAVERMEMBER.NEXTVAL,
-  	 	  #{naverId},
-  	 	  #{name},
-  	 	  #{nickname},
-  	 	  #{birthyear},
-  	 	  #{mobile},
-  	 	  DEFAULT,
-  	 	  DEFAULT 	 		 
-  	 	  )	
-  	</insert>
   
   	<select id="findUpdateMember"
   	parameterType="_int"
@@ -299,43 +278,6 @@
   	   AND
   	      DELETE_YN = 'N'    
   	</update>
-	  
-	 <select id="selectKakao"
-	 parameterType="string"
-	 resultType="kakaoMember"
-	 >
-	 SELECT
-	       MEMBER_NO memberNo,
-	       MEMBER_ID kakaoId,
-	       NICKNAME nickName,
-	       THUMBNAIL_IMAGE thumbnailImage,
-	       STATUS status,
-	       MEM_LEVEL memLevel
-	   FROM
-	       K_MEMBER
-	  WHERE
-	       MEMBER_ID = #{kakaoId}   
-	 </select>
-  
-	  <select id="selectNaver"
-		 parameterType="string"
-		 resultType="naverMember"
-		 >
-		 SELECT
-		       MEMBER_NO memberNo,
-		       MEMBER_ID naverId,
-		       MEMBER_NAME name,
-		       NICKNAME nickname,
-		       BIRTH_YEAR birthyear,
-		       PHONE mobile,
-		       STATUS status,
-		       MEM_LEVEL memLevel
-		   FROM
-		       N_MEMBER
-		  WHERE
-		       MEMBER_ID = #{naverId}   
-		 </select>
-  
   
   
   

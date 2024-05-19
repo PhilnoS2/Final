@@ -14,9 +14,11 @@ public class Member {
 	private String address;
 	private String addrDetail;
 	
+	//km
 	private String thumbnailImage;
 	private String accessToken;
 	
+	//
 	private String status;
 	private String deleteYN;
 	private Date enrollDate;

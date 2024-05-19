@@ -3,18 +3,17 @@ package com.kh.goty.member.model.dao;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
 
 @Repository
 public class KakaoRepository {
 	
-	public int checkKakaoId(SqlSessionTemplate sqlSession, Member member) {
-		return sqlSession.selectOne("memberMapper.checkKakaoId", member);
+	public int checkKakaoId(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.checksocialId", memberId);
 	}
-	
-	public int insertKakao(SqlSessionTemplate sqlSession, KakaoMember km) {
-		return sqlSession.insert("memberMapper.insertKakao", km);
+
+	public Member loginKakao(SqlSessionTemplate sqlSession, String memberId) {
+		return sqlSession.selectOne("memberMapper.loginKakao", memberId);
 	}
 	
 }

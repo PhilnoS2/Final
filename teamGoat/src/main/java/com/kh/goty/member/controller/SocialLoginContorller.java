@@ -17,9 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goty.member.model.service.KakaoService;
 import com.kh.goty.member.model.service.MemberService;
 import com.kh.goty.member.model.service.NaverService;
-import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
-import com.kh.goty.member.model.vo.NaverMember;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -28,28 +27,25 @@ import lombok.extern.slf4j.Slf4j;
 public class SocialLoginContorller {
 	
 	@Autowired
-	private KakaoService kakaoService;
+	private MemberService memberService;
 	
 	@Autowired
-	private MemberService memberService;
+	private KakaoService kakaoService;
 	
 	@Autowired
 	private NaverService naverService;
 	
 	@GetMapping("/kakaologin")
-	public ModelAndView kakaologin(String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {
-		// log.info("code={}", code);
-		
+	public ModelAndView kakaologin(String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {		
 		String accessToken = kakaoService.getToken(code);
-		
 		Member member = kakaoService.getUserInfo(accessToken);
 		member.setAccessToken(accessToken);
 		member.setStatus("KM");
 		
-		log.info("k-member = {}", member);
-		if(kakaoService.checkKakaoId(member) > 0) {
-			// member객체 생성 카카오 아이디로 조회
-			session.setAttribute("loginMember", member);
+		if(kakaoService.checkKakaoId(member.getMemberId()) > 0) {
+			Member kmember = kakaoService.loginKakao(member.getMemberId());
+			kmember.setStatus("KM");
+			session.setAttribute("loginMember", kmember);
 			session.setAttribute("alertMsg", "로그인 성공");
 			mv.setViewName("redirect:/");
 		} else {
@@ -63,7 +59,7 @@ public class SocialLoginContorller {
 	
 	@GetMapping("/kakaologout")
 	public ModelAndView kakaologout(HttpSession session, ModelAndView mv) throws IOException, ParseException {
-		KakaoMember km = (KakaoMember)session.getAttribute("loginMember");
+		Member km = (Member)session.getAttribute("loginMember");
 		
 		String logoutUrl = "https://kapi.kakao.com/v1/user/logout";
 		
@@ -93,21 +89,17 @@ public class SocialLoginContorller {
 	
 	@GetMapping("/naverlogin")
 	public ModelAndView naverlogin(String state, String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {
-		// log.info("state={}", state);
-		// log.info("code={}", code);
-		
 		String accessToken = naverService.getToken(code, state);
-		NaverMember nm = naverService.getUserInfo(accessToken);
-		
-		//System.out.println(nm);	
-		
-		if(naverService.checkNaverId(nm) > 0) {
-			nm.setStatus("NM");
-			session.setAttribute("loginMember", nm);
+		Member member = naverService.getUserInfo(accessToken);		
+
+		if(naverService.checkNaverId(member.getMemberId()) > 0) {
+			Member nmember = naverService.loginNaver(member.getMemberId());
+			nmember.setStatus("NM");
+			session.setAttribute("loginMember", nmember);
 			session.setAttribute("alertMsg", "로그인 성공!");
 			mv.setViewName("redirect:/");
 		} else {
-			if(naverService.insertNaver(nm) > 0) {
+			if(memberService.insertMember(member) > 0) {
 				session.setAttribute("alertMsg", "네이버 아이디로 회원가입 성공!");
 				mv.setViewName("redirect:/");
 			}

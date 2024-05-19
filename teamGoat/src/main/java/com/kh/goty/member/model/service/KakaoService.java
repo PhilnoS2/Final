@@ -18,7 +18,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.kh.goty.member.model.dao.KakaoRepository;
-import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
 
 @Service
@@ -117,16 +116,13 @@ public class KakaoService {
 		return member;
 	}
 
-	public int checkKakaoId(Member member) {
-		return kakaoRepository.checkKakaoId(sqlSession, member);
+	public int checkKakaoId(String memberId) {
+		return kakaoRepository.checkKakaoId(sqlSession, memberId);
 	}
 	
-	public int insertKakao(KakaoMember km) {
-		return kakaoRepository.insertKakao(sqlSession, km);
+	public Member loginKakao(String memberId) {
+		return kakaoRepository.loginKakao(sqlSession, memberId);
 	}
-
-	
-	
 
 
 

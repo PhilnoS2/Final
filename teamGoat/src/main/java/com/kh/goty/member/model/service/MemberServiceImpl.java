@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.goty.member.model.dao.MemberRepository;
-import com.kh.goty.member.model.vo.KakaoMember;
 import com.kh.goty.member.model.vo.Member;
-import com.kh.goty.member.model.vo.NaverMember;
 
 @Service
 public class MemberServiceImpl implements MemberService {
@@ -77,17 +75,5 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(Member member) {
 		return memberRepository.updateMember(sqlSession, member);
 	}
-
-	@Override
-	public KakaoMember selectKakao(String kakaoId) {
-		return memberRepository.selectKakao(sqlSession, kakaoId);
-	}
-
-	@Override
-	public NaverMember selectNaver(String naverId) {
-		return memberRepository.selectNaver(sqlSession, naverId);
-	}
-	
-
 	
 }

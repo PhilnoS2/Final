@@ -18,7 +18,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
 import com.kh.goty.member.model.dao.NaverRepository;
-import com.kh.goty.member.model.vo.NaverMember;
+import com.kh.goty.member.model.vo.Member;
 
 @Service
 @PropertySource("classpath:key.properties")
@@ -28,7 +28,7 @@ public class NaverService {
 	private Environment env;
 	
 	@Autowired
-	private NaverRepository naverRepositoy;
+	private NaverRepository naverRepository;
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
@@ -76,7 +76,7 @@ public class NaverService {
 		return accessToken;
 	}
 	
-	public NaverMember getUserInfo(String accessToken) throws IOException, ParseException {
+	public Member getUserInfo(String accessToken) throws IOException, ParseException {
 		String userInfoUrl = "https://openapi.naver.com/v1/nid/me";
 		
 		URL url = new URL(userInfoUrl);
@@ -95,35 +95,30 @@ public class NaverService {
 		
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseData);
 		
-		NaverMember nm = new NaverMember();
+		Member nm = new Member();
 		
 		String response = responseObj.get("response").toString();
 		// System.out.println(response);
 		JSONObject res = (JSONObject)new JSONParser().parse(response);
 		
 		
-		nm.setNaverId(res.get("id").toString());
-		nm.setName(res.get("name").toString());
+		nm.setMemberId(res.get("id").toString());
+		nm.setMemberName(res.get("name").toString());
 		nm.setNickname(res.get("nickname").toString());
-		nm.setMobile(res.get("mobile").toString());
-		nm.setBirthyear(res.get("birthyear").toString());
+		String phone = res.get("mobile").toString().replaceAll("-", "");
+		nm.setPhone(phone);
+		nm.setBornDate(res.get("birthyear").toString());
 		
 		return nm;
 	}
 	
-	public int checkNaverId(NaverMember nm) {
-		return naverRepositoy.checkNaverId(sqlSession, nm);
+	public int checkNaverId(String memberId) {
+		return naverRepository.checkNaverId(sqlSession, memberId);
 	}
-	
-	public int insertNaver(NaverMember nm) {
-		return naverRepositoy.insertNaver(sqlSession, nm);
+
+	public Member loginNaver(String memberId) {
+		return naverRepository.loginNaver(sqlSession, memberId);
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }
