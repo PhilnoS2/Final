@@ -10,10 +10,13 @@
 		<result column="BOARD_TITLE" property="boardTitle" />
 		<result column="BOARD_CONTENT" property="boardContent" />
 		<result column="CREATE_DATE" property="createDate" />
-		<result column="MEMBER_NAME" property="memberName" />
+		<result column="NICKNAME" property="nickname" />
 		<result column="COUNT" property="count" />
 		<result column="PLATFORM_NAME" property="platformName" />
 		<result column="REVIEW_COUNT" property="reviewCount" />
+		<result column="ORIGIN_NAME" property="originName" />
+		<result column="CHANGE_NAME" property="changeName" />
+		<result column="IMAGE_PATH" property="imagePath" />
 	</resultMap>
 
 
@@ -36,7 +39,10 @@
 	       BOARD_TITLE,
 	       BOARD_CONTENT,
 	       CREATE_DATE,
-	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
+	       ORIGIN_NAME,
+	       CHANGE_NAME,
+	       IMAGE_PATH,
+	       MEMBER.NICKNAME AS "NICKNAME",
            COUNT,
 	       PLATFORM_NAME,
            NVL(RCOUNT, 0) AS "REVIEW_COUNT"
@@ -64,7 +70,36 @@
 	      FREE_BOARD_NO DESC   
 	</select>
 	
-	
+	<insert id="insertBoard"
+		parameterType="board"
+	>
+	INSERT
+	  INTO
+	      FREE_BOARD
+	      (
+	       FREE_BOARD_NO,
+	       BOARD_TITLE,
+	       BOARD_CONTENT,
+	       MEMBER_NO,
+	       PLATFORM_NO,
+	       ORIGIN_NAME,
+	       CHANGE_NAME,
+	       IMAGE_PATH
+	      )
+	VALUES
+	      (
+	       SEQ_FREE_BOARD.nextval,
+	       #{boardTitle},
+	       #{boardContent},
+	       #{memberNo},
+	       #{platformNo},
+	       #{originName},
+	       #{changeName},
+	       #{imagePath}  
+	      )
+	  
+	          
+	</insert>
 	
 	
 	

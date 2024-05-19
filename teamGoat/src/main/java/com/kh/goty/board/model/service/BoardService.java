@@ -11,4 +11,6 @@ public interface BoardService {
 
 	public int selectListCount();
 
+	public int insert(Board board);
+
 }

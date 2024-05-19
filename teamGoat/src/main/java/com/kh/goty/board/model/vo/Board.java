@@ -8,25 +8,57 @@ public class Board {
 	private String boardContent;
 	private Date createDate;
 	private String memberName;
-	private int count;
+	private String nickname;
+	private int memberNo;
 	private String platformName;
+	private String platformNo;
+	private String originName;
+	private String changeName;
+	private String imagePath;
+	
+	private int count;
 	private int reviewCount;
 	
 	public Board() {
 		super();
 	}
 
-	public Board(int freeBoardNo, String boardTitle, String boardContent, Date createDate, String memberName, int count,
-			String platformName, int reviewCount) {
+	public Board(int freeBoardNo, String boardTitle, String boardContent, Date createDate, String memberName,
+			String nickname, String platformName, String originName, String changeName, String imagePath, int count,
+			int reviewCount) {
 		super();
 		this.freeBoardNo = freeBoardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
 		this.createDate = createDate;
 		this.memberName = memberName;
-		this.count = count;
+		this.nickname = nickname;
 		this.platformName = platformName;
+		this.originName = originName;
+		this.changeName = changeName;
+		this.imagePath = imagePath;
+		this.count = count;
 		this.reviewCount = reviewCount;
+	}
+	
+	public String getPlatformNo() {
+		return platformNo;
+	}
+
+	public void setPlatformNo(String platformNo) {
+		this.platformNo = platformNo;
+	}
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+	public String getChangeName() {
+		return changeName;
 	}
 
 	public int getFreeBoardNo() {
@@ -69,12 +101,12 @@ public class Board {
 		this.memberName = memberName;
 	}
 
-	public int getCount() {
-		return count;
+	public String getNickname() {
+		return nickname;
 	}
 
-	public void setCount(int count) {
-		this.count = count;
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	public String getPlatformName() {
@@ -83,6 +115,38 @@ public class Board {
 
 	public void setPlatformName(String platformName) {
 		this.platformName = platformName;
+	}
+
+	public String getOriginName() {
+		return originName;
+	}
+
+	public void setOriginName(String originName) {
+		this.originName = originName;
+	}
+
+	public String getChageName() {
+		return changeName;
+	}
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+	public String getImagePath() {
+		return imagePath;
+	}
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	public int getReviewCount() {
@@ -96,8 +160,10 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [freeBoardNo=" + freeBoardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", createDate=" + createDate + ", memberName=" + memberName + ", count=" + count + ", platformName="
-				+ platformName + ", reviewCount=" + reviewCount + "]";
+				+ ", createDate=" + createDate + ", memberName=" + memberName + ", nickname=" + nickname + ", memberNo="
+				+ memberNo + ", platformName=" + platformName + ", platformNo=" + platformNo + ", originName="
+				+ originName + ", changeName=" + changeName + ", imagePath=" + imagePath + ", count=" + count
+				+ ", reviewCount=" + reviewCount + "]";
 	}
 	
 }

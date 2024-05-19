@@ -18,6 +18,10 @@ public int selectListCount(SqlSessionTemplate sqlSession) {
 	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
 		return sqlSession.selectList("boardMapper.seleltListAll", null, rowBounds);
 	}
+
+	public int insertBoard(SqlSessionTemplate sqlSession, Board board) {
+		return sqlSession.insert("boardMapper.insertBoard", board) ;
+	}
 	
 	
 }

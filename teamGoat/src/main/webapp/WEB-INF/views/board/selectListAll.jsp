@@ -56,7 +56,7 @@ thead th {
 	width:20%;
 	margin-bottom: 20px;
 }
-  #pagingArea {width:fit-content; margin:auto;}
+ 
 </style>
 <title>selectListAll</title>
 </head>
@@ -64,17 +64,16 @@ thead th {
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="wrapper-div">
 		<div id="btn-categoty-div">
-			<button class="btn btn-lg btn-primary" >P.S</button>
-			<button class="btn btn-lg btn-primary" >N.S</button>
-			<button class="btn btn-lg btn-primary" >X.B</button>
-			<button class="btn btn-lg btn-primary" >P.C</button>
+			<button class="btn btn-lg btn-outline-primary" >P.S</button>
+			<button class="btn btn-lg btn-outline-warning" >N.S</button>
+			<button class="btn btn-lg btn-outline-danger" >X.B</button>
 		</div>
 		
 		<div id="freeboard-div">
 			<div id="freeboard-inner-div">
 				<c:if test="${ sessionScope.loginMember ne null }">
 					<div id="btn-list-option">
-						<a class="btn btn-md btn-dark" href="#">글쓰기</a>
+						<a class="btn btn-md btn-dark" href="/goty/freeboards/insertsForm">글쓰기</a>
 					</div>
 				</c:if>
 				<table class="table table-bordered table-hover">
@@ -96,7 +95,7 @@ thead th {
 										<td>${ board.boardTitle } ( ${board.reviewCount} )</td>
 										<td>${ board.count }</td>
 										<td>${ board.createDate }</td>
-										<td>${ board.memberName }</td>
+										<td>${ board.nickname }</td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -125,8 +124,7 @@ thead th {
 			  <button type="submit" class="btn btn-sm btn-primary">검색</button>
 			</form>		
 			
-			<div id="pagingArea">
-				<ul class="pagination">
+				<ul class="pagination pagination-md  justify-content-center">
 					<c:choose>
 						<c:when test="${ pi.currentPage eq 1 }">
 							<li class="page-item disabled"><a class="page-link" href="#">뒤로</a></li>
@@ -184,7 +182,6 @@ thead th {
                     	</c:otherwise>
 	                </c:choose>
 				</ul>
-			</div>
 			
 		</div>
 		

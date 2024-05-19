@@ -128,7 +128,9 @@
 	<div id="header">
 		
 		<div id="logoOpt">
-			<img width="200px" height="200px" src="${pageContext.request.contextPath}/resources\img\logo2.png">
+			<a href="/goty">
+				<img width="200px" height="200px" src="${pageContext.request.contextPath}/resources\img\logo2.png">
+			</a>
 			<div id="logins">
 				<c:choose>
 					<c:when test="${ sessionScope.loginMember != null }">
