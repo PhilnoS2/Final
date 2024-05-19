@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goty.member.model.service.KakaoService;
+import com.kh.goty.member.model.service.MemberService;
 import com.kh.goty.member.model.service.NaverService;
 import com.kh.goty.member.model.vo.KakaoMember;
+import com.kh.goty.member.model.vo.Member;
 import com.kh.goty.member.model.vo.NaverMember;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +31,9 @@ public class SocialLoginContorller {
 	private KakaoService kakaoService;
 	
 	@Autowired
+	private MemberService memberService;
+	
+	@Autowired
 	private NaverService naverService;
 	
 	@GetMapping("/kakaologin")
@@ -37,17 +42,18 @@ public class SocialLoginContorller {
 		
 		String accessToken = kakaoService.getToken(code);
 		
-		KakaoMember km = kakaoService.getUserInfo(accessToken);
-		km.setAccessToken(accessToken);
+		Member member = kakaoService.getUserInfo(accessToken);
+		member.setAccessToken(accessToken);
+		member.setStatus("KM");
 		
-		// km 가지고 db id 조회/ 없으면 table에 insert /있으면 로그인
-		if(kakaoService.checkKakaoId(km) > 0) {
-			km.setStatus("KM");
-			session.setAttribute("loginMember", km);
+		log.info("k-member = {}", member);
+		if(kakaoService.checkKakaoId(member) > 0) {
+			// member객체 생성 카카오 아이디로 조회
+			session.setAttribute("loginMember", member);
 			session.setAttribute("alertMsg", "로그인 성공");
 			mv.setViewName("redirect:/");
 		} else {
-			if(kakaoService.insertKakao(km) > 0) {
+			if(memberService.insertMember(member) > 0) {
 				session.setAttribute("alertMsg", "카카오 아이디로 회원가입 성공!");
 				mv.setViewName("redirect:/");
 			}

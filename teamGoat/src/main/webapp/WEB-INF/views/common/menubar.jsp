@@ -138,25 +138,10 @@
 							<a class="btn btn-sm btn-warning" href="/goty/admin">관리자페이지</a>
 						</c:if>
 						
-						<c:choose>
-							<c:when test="${ sessionScope.loginMember.status != null 
-											&& sessionScope.loginMember.status == 'KM' }">
-								<a class="btn btn-sm btn-warning" href="/goty/member/kakaoMypage/${sessionScope.loginMember.kakaoId}">마이페이지</a>
-								<a class="btn btn-sm btn-warning" href="/goty/kakaologout">카카오 로그아웃</a>
-							</c:when>
-							
-							<c:when test="${ sessionScope.loginMember.status != null 
-										  && sessionScope.loginMember.status == 'NM' }">
-								<a class="btn btn-sm btn-success" href="/goty/member/naverMypage/${sessionScope.loginMember.naverId}">마이페이지</a>
-								<a class="btn btn-sm btn-success" href="/goty/naverlogout">네이버 로그아웃</a>
-							</c:when>
-							
-							<c:otherwise>
-								<a class="btn btn-sm btn-warning" href="/goty/member/mypage">마이페이지</a>
-								<a class="btn btn-sm btn-primary" href="/goty/member/logout">로그아웃</a>
-							</c:otherwise>
-						</c:choose>
+						<a class="btn btn-sm btn-warning" href="/goty/member/mypage">마이페이지</a>
+						<a class="btn btn-sm btn-primary" href="/goty/member/logout">로그아웃</a>
 					</c:when>
+					
 					<c:otherwise>
 						<a class="btn btn-sm btn-info" href="/goty/member/enrollForm">회원가입</a>
 						<a class="btn btn-sm btn-primary" href="/goty/member/login">로그인</a>

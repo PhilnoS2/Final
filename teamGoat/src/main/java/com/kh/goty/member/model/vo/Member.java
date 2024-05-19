@@ -14,13 +14,16 @@ public class Member {
 	private String address;
 	private String addrDetail;
 	
+	private String thumbnailImage;
+	private String accessToken;
+	
 	private String status;
 	private String deleteYN;
-	private String memberPoint;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String memLevel;
 	private String emptyCodeYn;
+	private String memberPoint;
 	private int totalPrice;
 	
 	public Member() {
@@ -52,6 +55,22 @@ public class Member {
 
 	
 	
+	public String getThumbnailImage() {
+		return thumbnailImage;
+	}
+
+	public void setThumbnailImage(String thumbnailImage) {
+		this.thumbnailImage = thumbnailImage;
+	}
+
+	public String getAccessToken() {
+		return accessToken;
+	}
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -200,9 +219,11 @@ public class Member {
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
 				+ memberName + ", nickname=" + nickname + ", email=" + email + ", bornDate=" + bornDate + ", phone="
-				+ phone + ", address=" + address + ", addrDetail=" + addrDetail + ", status=" + status + ", deleteYN="
-				+ deleteYN + ", memberPoint=" + memberPoint + ", enrollDate=" + enrollDate + ", modifyDate="
-				+ modifyDate + ", memLevel=" + memLevel + ", emptyCodeYn=" + emptyCodeYn + ", totalPrice=" + totalPrice
-				+ "]";
+				+ phone + ", address=" + address + ", addrDetail=" + addrDetail + ", thumbnailImage=" + thumbnailImage
+				+ ", accessToken=" + accessToken + ", status=" + status + ", deleteYN=" + deleteYN + ", memberPoint="
+				+ memberPoint + ", enrollDate=" + enrollDate + ", modifyDate=" + modifyDate + ", memLevel=" + memLevel
+				+ ", emptyCodeYn=" + emptyCodeYn + ", totalPrice=" + totalPrice + "]";
 	}
+
+	
 }

@@ -48,7 +48,8 @@
   	       	BORNDATE,
   	       	PHONE,
   	       	ADDRESS,
-  	       	ADDR_DETAIL
+  	       	ADDR_DETAIL,
+  	       	STATUS
   	       )
   	 VALUES
   	  	   (
@@ -61,7 +62,8 @@
   	  	   #{bornDate},
   	  	   #{phone},
   	  	   #{address},
-  	  	   #{addrDetail}
+  	  	   #{addrDetail},
+  	  	   #{status}
   	  	   )    
   	</insert>
   
@@ -177,15 +179,15 @@
   
   
   	<select id="checkKakaoId"
-  		parameterType="kakaoMember"
+  		parameterType="member"
   		resultType="_int"
   	>
   	SELECT
   	      COUNT(*)
   	  FROM
-  	      K_MEMBER
+  	      MEMBER
   	 WHERE
-  	      MEMBER_ID = #{kakaoId}
+  	      MEMBER_ID = #{memberId}
   	</select>
   
   

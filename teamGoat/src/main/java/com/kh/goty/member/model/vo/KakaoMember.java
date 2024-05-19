@@ -6,9 +6,7 @@ public class KakaoMember {
 	private String nickName;
 	private String thumbnailImage;
 	private String accessToken;
-	
 	private String status;
-	private String memLevel;
 	
 	public KakaoMember() {
 		super();
@@ -22,9 +20,16 @@ public class KakaoMember {
 		this.nickName = nickName;
 		this.thumbnailImage = thumbnailImage;
 		this.accessToken = accessToken;
-		this.status = status;
-		this.memLevel = memLevel;
 	}
+	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public int getMemberNo() {
 		return memberNo;
 	}
@@ -55,24 +60,11 @@ public class KakaoMember {
 	public void setAccessToken(String accessToken) {
 		this.accessToken = accessToken;
 	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getMemLevel() {
-		return memLevel;
-	}
-	public void setMemLevel(String memLevel) {
-		this.memLevel = memLevel;
-	}
-	
+
 	@Override
 	public String toString() {
 		return "KakaoMember [memberNo=" + memberNo + ", kakaoId=" + kakaoId + ", nickName=" + nickName
-				+ ", thumbnailImage=" + thumbnailImage + ", accessToken=" + accessToken + ", status=" + status
-				+ ", memLevel=" + memLevel + "]";
+				+ ", thumbnailImage=" + thumbnailImage + ", accessToken=" + accessToken + ", status=" + status + "]";
 	}
-	
+
 }

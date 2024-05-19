@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.goty.member.model.dao.KakaoRepository;
 import com.kh.goty.member.model.vo.KakaoMember;
-import com.kh.goty.member.model.vo.NaverMember;
+import com.kh.goty.member.model.vo.Member;
 
 @Service
 @PropertySource("classpath:key.properties")
@@ -87,7 +87,7 @@ public class KakaoService {
 		return accessToken;
 	}
 	
-	public KakaoMember getUserInfo(String accessToken) throws IOException, ParseException {
+	public Member getUserInfo(String accessToken) throws IOException, ParseException {
 		String userInfoUrl = "https://kapi.kakao.com/v2/user/me";
 		
 		URL url = new URL(userInfoUrl);
@@ -108,18 +108,17 @@ public class KakaoService {
 		
 		JSONObject responseObj = (JSONObject)new JSONParser().parse(responseData);
 		
-		KakaoMember km = new KakaoMember();
-		
-		km.setKakaoId(responseObj.get("id").toString());
+		Member member = new Member();
+		member.setMemberId(responseObj.get("id").toString());
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
-		km.setNickName(propObj.get("nickname").toString());
-		km.setThumbnailImage(propObj.get("thumbnail_image").toString());
+		member.setNickname(propObj.get("nickname").toString());
+		member.setThumbnailImage(propObj.get("thumbnail_image").toString());
 		
-		return km;
+		return member;
 	}
 
-	public int checkKakaoId(KakaoMember km) {
-		return kakaoRepository.checkKakaoId(sqlSession, km);
+	public int checkKakaoId(Member member) {
+		return kakaoRepository.checkKakaoId(sqlSession, member);
 	}
 	
 	public int insertKakao(KakaoMember km) {

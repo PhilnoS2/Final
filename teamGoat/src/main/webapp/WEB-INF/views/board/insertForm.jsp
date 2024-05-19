@@ -21,7 +21,9 @@
 .titls {
 	width:50%;
 }
-
+.selects {
+	width:30%;
+}
 
 </style>
 <meta charset="UTF-8">
@@ -34,7 +36,7 @@
 		 class="shadow-lg p-4 mb-4 bg-white" enctype="multipart/form-data" >
 			<div class="form-group">
 				<label for="category" >카테고리</label>
-				<select id="category" class="custom-select" name="platformNo">
+				<select id="category" class="custom-select selects" name="platformNo">
 					<option selected value="1">play station</option>
 					<option value="2">nintendo</option>
 					<option value="3">xbox</option>

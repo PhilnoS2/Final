@@ -136,27 +136,27 @@
 					</div>	
 				</c:when>
 				
-				<c:when test="${ requestScope.km != null 
-				                && requestScope.km.status == 'KM'}">
+				<c:when test="${ sessionScope.loginMember != null 
+				                && sessionScope.loginMember.status == 'KM'}">
 					<div class="userInfo-div">
 						<h6 style="color: #ffc107;">카카오 로그인 회원입니다.</h6>
 					</div>
 					<div class="userInfo-div">
 						<label>카카오 발급 아이디 : </label>
-						<h6>${ requestScope.km.kakaoId }</h6>
+						<h6>${ sessionScope.loginMember.memberId }</h6>
 					</div>
 					<div class="userInfo-div">
 						<label>닉네임 : </label>
-						<h6>${ requestScope.km.nickName }</h6>
+						<h6>${ sessionScope.loginMember.nickname }</h6>
 					</div>
 					<div class="userInfo-div">
 						<label>프로필 사진</label>
 						<br/>
-						<img src="${ requestScope.km.thumbnailImage }" width="150px" height="150px"/>
+						<img src="${ sessionScope.loginMember.thumbnailImage }" width="150px" height="150px"/>
 					</div>
 					<div class="userInfo-div">
 						<label>회원 등급 : </label>
-						<h6>${ requestScope.km.memLevel }</h6>
+						<h6>${ sessionScope.loginMember.memLevel }</h6>
 					</div>
 				</c:when>
 				

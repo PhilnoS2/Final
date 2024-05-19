@@ -100,12 +100,13 @@ public class MemberController {
 		
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
-		
+		member.setStatus("GT");
 		if(memberService.insertMember(member) > 0) {
 			session.setAttribute("alertMsg", "회원가입 성공");
 			mv.setViewName("redirect:/");
 		} else {
-			mv.addObject("errorMsg", "회원가입 실패").setViewName("common/errorPage");
+			mv.addObject("errorMsg", "회원가입 실패")
+			  .setViewName("common/errorPage");
 		}		
 		return mv;
 	}
