@@ -5,6 +5,8 @@ import java.security.SecureRandom;
 import java.util.Properties;
 import java.util.Random;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,10 +15,12 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,14 +40,20 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
-	
+		
 	@Autowired
 	private BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@GetMapping("/login")
-	public ModelAndView loginForm(ModelAndView mv) {
+	public ModelAndView loginForm(@RequestParam(value="reqUri", required=false) String reqUri,
+								 ModelAndView mv,
+								 HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
+		
+		Cookie cookie = new Cookie("reqUri", reqUri);
+		cookie.setMaxAge(1 * 60 * 60);
+		response.addCookie(cookie);
 		
 		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
 		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
@@ -54,7 +64,10 @@ public class MemberController {
 	}
 	
 	@PostMapping("/login")
-	public ModelAndView login(Member member, HttpSession session, ModelAndView mv) {
+	public ModelAndView login(Member member,
+							  HttpSession session,
+							  ModelAndView mv,
+							  @CookieValue("reqUri") String reqUri) {
 		Member loginMember = memberService.login(member);
 		
 		// 임시코드발급상태확인
@@ -69,7 +82,11 @@ public class MemberController {
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
-			mv.setViewName("redirect:/");
+			if(!reqUri.equals("")) {
+				mv.setViewName("redirect:/"+reqUri);
+			} else {
+				mv.setViewName("redirect:/");
+			}
 			
 		} else {
 			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
