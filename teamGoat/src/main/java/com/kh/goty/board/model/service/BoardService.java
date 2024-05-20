@@ -13,4 +13,8 @@ public interface BoardService {
 
 	public int insert(Board board);
 
+	public Board selectBoard(int boardNo);
+
+	public int increaseCount(int boardNo);
+
 }

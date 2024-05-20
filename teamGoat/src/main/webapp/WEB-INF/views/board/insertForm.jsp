@@ -8,21 +8,19 @@
 	width: 1200px;
 	height: 800px;
 	margin: auto;
-	border: 1px solid red;
 }	
 #form-area {
 	width:70%;
 	height: 80%;
 	margin: auto;
 	margin-top: 82px;
-	border: 1px solid red;
 }
 
-.titls {
+.titles {
 	width:50%;
 }
 .selects {
-	width:30%;
+	width: 20%;
 }
 
 </style>
@@ -34,16 +32,16 @@
 	<div id="wrapper-div">
 		<form action="/goty/freeboards/inserts" method="post"  id="form-area"
 		 class="shadow-lg p-4 mb-4 bg-white" enctype="multipart/form-data" >
-			<div class="form-group">
+			<div class="form-group selects">
 				<label for="category" >카테고리</label>
-				<select id="category" class="custom-select selects" name="platformNo">
+				<select id="category" class="custom-select" name="platformNo">
 					<option selected value="1">play station</option>
 					<option value="2">nintendo</option>
 					<option value="3">xbox</option>
 				</select>
 			</div>
 			
-			<div class="form-group titls"> 
+			<div class="form-group titles"> 
 				<label class="mr-2" for="boardTitle">제목</label>
 				<input class="form-control" type="text" id="boardTitle" name="boardTitle" required />
 			</div>

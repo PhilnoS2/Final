@@ -22,6 +22,14 @@ public int selectListCount(SqlSessionTemplate sqlSession) {
 	public int insertBoard(SqlSessionTemplate sqlSession, Board board) {
 		return sqlSession.insert("boardMapper.insertBoard", board) ;
 	}
+
+	public Board selectBoard(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.selectBoard", boardNo);
+	}
+
+	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.update("boardMapper.increaseCount", boardNo);
+	}
 	
 	
 }
