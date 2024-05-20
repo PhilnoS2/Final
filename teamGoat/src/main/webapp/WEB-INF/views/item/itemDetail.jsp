@@ -75,7 +75,7 @@
 				<c:choose>
 					<c:when test="${ not empty loginMember }">
 						<a href="purchase" class="btn btn-dark btn-lg">구매하기</a> 
-						<a href="basket?itemNo=${ item.itemNo }&memberNo=${ loginMember.memberNo }" class="btn btn-light btn-lg">장바구니</a>
+						<a href="cart?itemNo=${ item.itemNo }&memberNo=${ loginMember.memberNo }" class="btn btn-light btn-lg">장바구니</a>
 					</c:when>
 					<c:otherwise>
 						<h3>구매를 위해서는 로그인해주세요.</h3>

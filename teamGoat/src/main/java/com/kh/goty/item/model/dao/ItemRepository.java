@@ -44,7 +44,7 @@ public class ItemRepository {
 	}
 	
 	// Basket Insert용
-	public int addItemInBasket(SqlSession sqlSession, HashMap<String, Integer> map) {
-		return sqlSession.insert("itemMapper.addItemInBasket", map);
+	public int addItemInCart(SqlSession sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.insert("itemMapper.addItemInCart", map);
 	}
 }

@@ -92,19 +92,6 @@ public class ItemController {
 		return mv;	
 	}
 	
-	@GetMapping("detail.item")
-	public ModelAndView findNintendoDetail(int itemNo,
-										   ModelAndView mv) {
-
-		Item item = itemService.findItemDetail(itemNo);
-		
-		mv.addObject("item", item);
-		
-		mv.setViewName("item/itemDetail");
-		
-		return mv;
-	}
-	
 	
 	//------------------------------------------------------------------------------------------
 	//PlayStation Controller
@@ -246,24 +233,53 @@ public class ItemController {
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	// Basket Insert Controller
-	@GetMapping("basket")
-	public ModelAndView addItemInBasket(int memberNo,
-										int itemNo,
-										ModelAndView mv) {
+	// Find Item Controller
+	@GetMapping("detail.item")
+	public ModelAndView findNintendoDetail(int itemNo,
+										   ModelAndView mv) {
+
+		Item item = itemService.findItemDetail(itemNo);
+		
+		mv.addObject("item", item);
+		
+		mv.setViewName("item/itemDetail");
+		
+		return mv;
+	}
+	
+	//----------------------------------------------------------------------------------------------
+	// Cart Insert Controller
+	@GetMapping("cart")
+	public ModelAndView addItemInCart(int memberNo,
+									  int itemNo,
+									  ModelAndView mv) {
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
 		map.put("memberNo", memberNo);
 		map.put("itemNo", itemNo);
 		
-		System.out.println(map);
+		int result = itemService.addItemInCart(map);
 		
-		int result = itemService.addItemInBasket(map);
+		if(result > 0) {
+			
+			mv.addObject(itemService.findItemDetail(itemNo));
+			
+			mv.addObject("");
+			
+			mv.setViewName("item/itemCart");
+			
+			return mv;
+			
+		} else {
+			
+			mv.addObject("errorMsg", "Process has been Failed");
+			mv.setViewName("common/errorPage");
+			
+			return mv;
+			
+		}
 		
-		System.out.println(result);
-		
-		return mv;
 	}
 	
 }
