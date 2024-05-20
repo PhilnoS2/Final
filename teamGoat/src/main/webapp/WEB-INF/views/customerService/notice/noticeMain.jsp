@@ -65,7 +65,7 @@
             }    
         }
         .notice-content {
-            height : 60%;
+            height : auto;
         }
         .notice-page {
             height : 10%;
@@ -83,6 +83,10 @@
         }
         tr:hover {
             background-color : rgb(241, 238, 238);
+            cursor : pointer;
+             >td {
+             	font-weight : bolder;
+             }
         }
     </style>
 
@@ -127,103 +131,54 @@
                 </thead>
                     
                 <tbody align="center" style="height : auto;">
-                    
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    
-                    
-                    <!-- 
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                    <tr style="height : 50px;">
-                        <td><a>공지</a></td>
-                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
-                        <td><a>관리자</a></td>
-                        <td><a>2024-05-10</a></td>
-                        <td><a>1</a></td>
-                    </tr>
-                     -->
+                    <c:forEach items="${noticeList}" var="notice">
+                    	<tr style="height : 50px;">
+	                        <td>${ notice.noticeNo }</td>
+	                        <td>${ notice.noticeTitle }</td>
+	                        <td>${ notice.noticeWriter }</td>
+	                        <td>${ notice.createDate }</td>
+	                        <td>${ notice.count }</td>
+                   		</tr>
+                    </c:forEach>
                 </tbody>
             </table>
         </div>
         <div class="notice-page" >
             <div>
-                <button  class="btn btn-warning"><</button>
-                <button  class="btn btn-light">1</button>
-                <button  class="btn btn-light">2</button>
-                <button  class="btn btn-light">3</button>
-                <button  class="btn btn-light">4</button>
-                <button  class="btn btn-light">5</button>
-                <button  class="btn btn-info">></button>
+            	<c:choose>
+            		<c:when test="${ pageInfo.currentPage eq 1 }">
+	                	<a  class="btn btn-warning" disabled><</a>
+            		</c:when>
+            		<c:otherwise>
+            			<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage -1 }"><</a>
+            		</c:otherwise>
+            	</c:choose>
+            	
+                <c:forEach begin="${ pageInfo.startPage}" end="${ pageInfo.endPage }" var="p">
+                	<a id="number${ p }" class="btn btn-light" href="/goty/notices?page=${ p }">${ p }</a>
+                </c:forEach>
+                
+                <c:choose>
+                	<c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
+                		<a  class="btn btn-info" disabled>></a>
+                	</c:when>
+					<c:otherwise>
+           				<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage + 1 }"><</a>
+					</c:otherwise>
+                </c:choose>
+                
             </div>
-
         </div>
+        
+        <script>
+        	$(function(){
+        		$('.notice-content tbody > tr').click(function(){
+        			
+        			location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).html();
+					/*location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).val();*/
+        		})
+        	})
+        </script>
 
         <div class="notice-search">
             <form action="notice-find" style="padding-left : 100px; padding-top : 50px;">
