@@ -127,6 +127,17 @@
                 </thead>
                     
                 <tbody align="center" style="height : auto;">
+                    
+                    <tr style="height : 50px;">
+                        <td><a>공지</a></td>
+                        <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
+                        <td><a>관리자</a></td>
+                        <td><a>2024-05-10</a></td>
+                        <td><a>1</a></td>
+                    </tr>
+                    
+                    
+                    <!-- 
                     <tr style="height : 50px;">
                         <td><a>공지</a></td>
                         <td><a>goat를 이용하는 고객분들을 위한 안내</a></td>
@@ -197,6 +208,7 @@
                         <td><a>2024-05-10</a></td>
                         <td><a>1</a></td>
                     </tr>
+                     -->
                 </tbody>
             </table>
         </div>
