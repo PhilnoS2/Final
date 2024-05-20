@@ -221,7 +221,7 @@
 	</select>
 	
 	<!-- Basket Insert용 SQL문 -->
-	<insert id="addItemInBasket" parameterType="hashmap">
+	<insert id="addItemInCart" parameterType="hashmap">
 	
 		INSERT
 		  INTO

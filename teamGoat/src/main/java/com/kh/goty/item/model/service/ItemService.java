@@ -22,6 +22,6 @@ public interface ItemService {
 	
 	Item findItemDetail(int itemNo);
 	
-	int addItemInBasket(HashMap<String, Integer> map);
+	int addItemInCart(HashMap<String, Integer> map);
 	
 }

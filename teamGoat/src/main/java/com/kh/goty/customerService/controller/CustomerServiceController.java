@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.goty.common.model.vo.PageInfo;
+import com.kh.goty.common.template.Pagination;
 import com.kh.goty.customerService.model.service.CustomerService;
 import com.kh.goty.customerService.model.vo.Notice;
 import com.kh.goty.customerService.model.vo.QuestionCategory;
@@ -42,7 +45,14 @@ public class CustomerServiceController {
 	}
 	
 	@GetMapping("notices")
-	public String forwardNotice() {
+	public String forwardNotice(@RequestParam(value="page", defaultValue="1") int page) {
+		PageInfo pageInfo = Pagination.getPageInfo(customerService.selectNoticeListCount(), page, 5, 5);
+		
+		List<Notice> noticeList = customerService.selectNoticeListAll(pageInfo);
+		
+		System.out.println(noticeList);
+		
+		
 		return "customerService/notice/noticeMain";
 	}
 	
