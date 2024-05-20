@@ -28,7 +28,7 @@
 #title-div-2 {
 	display:flex;
 	align-items:center; 
-	justify-content: center;
+	justify-content: space-evenly;
 }
 .wrapper-div-title2 {
 	width: 60%;
@@ -44,9 +44,17 @@
 }
 #content-div-boardcontent {
 	width:100%;
-	height: 170px;
+	height: 150px;
 	margin-top: 20px;
 	padding: 10px;
+}
+#review-area {
+	width: 720px;
+	height: 400px;
+	margin: auto;
+	padding : 10px;
+	border : 1px solid grey;
+	border-radius: 10px;
 }
 </style>
 <title>selectBoard</title>
@@ -61,14 +69,19 @@
 				<h4>${ board.boardTitle }</h4>
 			</div>
 			<div id="title-div-2">
-				<div style="width:40%;">
+				<div>
 					<label>카테고리</label>
 					<h6>${ board.platformName }</h6>
 				</div>
-				<div style="width:40%;">
+				<div>
 					<label >글쓴이</label>
 					<h6>${ board.nickname }</h6>
 				</div>
+				<c:if test="${ sessionScope.loginMember.memberNo == board.memberNo }">
+					<div>
+						<a class="btn btn-sm btn-danger" href="#">글 수정</a>
+					</div>
+				</c:if>
 			</div>
 		</div>
 		
@@ -98,6 +111,62 @@
 				</div>
 			</div>
 		</div>
+		
+		<div id="review-area">
+			<p class="m-3">리뷰</p>
+			<c:choose>
+				<c:when test="${ not empty board.replies }">
+					<c:forEach items="${ board.replies }" var="reply">
+						<div class="shadow p-4 mb-4 bg-white border border-warning rounded-lg">
+							<p>${ reply.reviewContent }</p>
+							작성자<h5 style="display: inline-block;">${ reply.reviewWriter }</h5>
+						</div>
+					</c:forEach>
+				</c:when>
+				
+				<c:otherwise>
+					<div class="mx-auto" style="width:50%;">
+						<h3>리뷰가 존재하지 않습니다.</h3>
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</div>
+		
 	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </body>
 </html>

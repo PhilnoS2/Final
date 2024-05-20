@@ -95,6 +95,14 @@ public class FreeBoardController {
 	}
 	
 	
+	@GetMapping("/category/{categoryNo}")
+	public ModelAndView selectCategory(@PathVariable("categoryNo") int categoryNo,
+									   ModelAndView mv) {
+		log.info("categoryNo = {}", categoryNo);
+		mv.setViewName("redirect:/");
+		return mv;
+	}
+	
 	
 	
 	

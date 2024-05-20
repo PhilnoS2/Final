@@ -1,6 +1,7 @@
 package com.kh.goty.board.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Board {
 	private int freeBoardNo;
@@ -15,6 +16,7 @@ public class Board {
 	private String originName;
 	private String changeName;
 	private String imagePath;
+	private List<Reply> replies;
 	
 	private int count;
 	private int reviewCount;
@@ -24,8 +26,8 @@ public class Board {
 	}
 
 	public Board(int freeBoardNo, String boardTitle, String boardContent, Date createDate, String memberName,
-			String nickname, String platformName, String originName, String changeName, String imagePath, int count,
-			int reviewCount) {
+			String nickname, int memberNo, String platformName, String platformNo, String originName, String changeName,
+			String imagePath, List<Reply> replies, int count, int reviewCount) {
 		super();
 		this.freeBoardNo = freeBoardNo;
 		this.boardTitle = boardTitle;
@@ -33,14 +35,25 @@ public class Board {
 		this.createDate = createDate;
 		this.memberName = memberName;
 		this.nickname = nickname;
+		this.memberNo = memberNo;
 		this.platformName = platformName;
+		this.platformNo = platformNo;
 		this.originName = originName;
 		this.changeName = changeName;
 		this.imagePath = imagePath;
+		this.replies = replies;
 		this.count = count;
 		this.reviewCount = reviewCount;
 	}
-	
+
+	public List<Reply> getReplies() {
+		return replies;
+	}
+
+	public void setReplies(List<Reply> replies) {
+		this.replies = replies;
+	}
+
 	public String getPlatformNo() {
 		return platformNo;
 	}
@@ -162,8 +175,8 @@ public class Board {
 		return "Board [freeBoardNo=" + freeBoardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
 				+ ", createDate=" + createDate + ", memberName=" + memberName + ", nickname=" + nickname + ", memberNo="
 				+ memberNo + ", platformName=" + platformName + ", platformNo=" + platformNo + ", originName="
-				+ originName + ", changeName=" + changeName + ", imagePath=" + imagePath + ", count=" + count
-				+ ", reviewCount=" + reviewCount + "]";
+				+ originName + ", changeName=" + changeName + ", imagePath=" + imagePath + ", replies=" + replies
+				+ ", count=" + count + ", reviewCount=" + reviewCount + "]";
 	}
-	
+
 }

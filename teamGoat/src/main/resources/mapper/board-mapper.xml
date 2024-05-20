@@ -11,12 +11,21 @@
 		<result column="BOARD_CONTENT" property="boardContent" />
 		<result column="CREATE_DATE" property="createDate" />
 		<result column="NICKNAME" property="nickname" />
+		<result column="MEMBER_NO" property="memberNo" />
+		<result column="MEMBER_NAME" property="memberName"/>
 		<result column="COUNT" property="count" />
 		<result column="PLATFORM_NAME" property="platformName" />
 		<result column="REVIEW_COUNT" property="reviewCount" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
 		<result column="IMAGE_PATH" property="imagePath" />
+		
+		<collection property="replies" ofType="Reply">
+			<result column="REVIEW_NO" property="reviewNo" />
+			<result column="REVIEW_CONTENT" property="reviewContent" />
+			<result column="REVIEWCREATEDATE" property="createDate" />
+			<result column="REVIEWWRITER" property="reviewWriter" />
+		</collection>
 	</resultMap>
 
 
@@ -28,7 +37,7 @@
 	  FROM
 	      FREE_BOARD
 	 WHERE
-	      status = 'Y'     
+	      DELETE_YN = 'N'     
 	</select>
 	
 	
@@ -59,12 +68,12 @@
                  FROM    
                      FREE_BOARD_REVIEW         
                 WHERE
-                     STATUS = 'Y'
+                     DELETE_YN = 'N'
                 GROUP     
                    BY FREE_BOARD_NO) R
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
 	 WHERE
-	      FREE_BOARD.STATUS = 'Y'
+	      FREE_BOARD.DELETE_YN = 'N'
 	 ORDER
 	    BY
 	      FREE_BOARD_NO DESC   
@@ -115,34 +124,52 @@
 	
 	<select id="selectBoard"
 		parameterType="_int"
-		resultType="board"
+		resultMap="boardResultSet"
 	>
 	SELECT
-	       FREE_BOARD.FREE_BOARD_NO freeBoardNo,
-	       BOARD_TITLE boardTitle,
-	       BOARD_CONTENT boardContent,
-	       CREATE_DATE createDate,
-	       ORIGIN_NAME originName,
-	       CHANGE_NAME changeName,
-	       IMAGE_PATH imagePath,
-	       MEMBER.MEMBER_NO memberNo,
-	       MEMBER.MEMBER_NAME memberName,
+	       FREE_BOARD.FREE_BOARD_NO,
+	       BOARD_TITLE,
+	       BOARD_CONTENT,
+	       FREE_BOARD.CREATE_DATE,
+	       ORIGIN_NAME,
+	       CHANGE_NAME,
+	       IMAGE_PATH,
+	       MEMBER.MEMBER_NO AS "MEMBER_NO",
+	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
 	       MEMBER.NICKNAME AS "NICKNAME",
-           COUNT count,
-           PLATFORM_CATEGORY.PLATFORM_NO platformNo,
-	       PLATFORM_NAME platformName
+           COUNT,
+           PLATFORM_CATEGORY.PLATFORM_NO,
+	       PLATFORM_NAME,
+           REVIEW_CONTENT,
+           REVIEWCREATEDATE,
+           REVIEWWRITER,
+           REVIEW_NO
 	  FROM
 	       FREE_BOARD
 	  JOIN MEMBER
 	    ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
       JOIN PLATFORM_CATEGORY
-        ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO    
+        ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO
+      LEFT  
+      JOIN (SELECT
+                 REVIEW_NO,
+                 FREE_BOARD_NO,
+                 REVIEW_CONTENT,
+                 CREATE_DATE AS "REVIEWCREATEDATE",
+                 MEMBER.MEMBER_NAME AS "REVIEWWRITER"
+                 FROM    
+                     FREE_BOARD_REVIEW
+                 JOIN MEMBER
+                   ON MEMBER.MEMBER_NO = FREE_BOARD_REVIEW.MEMBER_NO
+                WHERE
+                     FREE_BOARD_REVIEW.DELETE_YN = 'N') R
+        ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO
 	 WHERE
-	      FREE_BOARD.DELETE_YN = 'Y'
+	      FREE_BOARD.DELETE_YN = 'N'
        AND
           MEMBER.DELETE_YN = 'N'
 	   AND
-	      FREE_BOARD_NO = #{boardNo}            
+	      FREE_BOARD.FREE_BOARD_NO  = #{boardNo}            
 	</select>
 	
 	

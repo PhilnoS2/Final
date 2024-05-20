@@ -64,9 +64,9 @@ thead th {
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="wrapper-div">
 		<div id="btn-categoty-div">
-			<button class="btn btn-lg btn-outline-primary" >P.S</button>
-			<button class="btn btn-lg btn-outline-warning" >N.S</button>
-			<button class="btn btn-lg btn-outline-danger" >X.B</button>
+			<a class="btn btn-lg btn-outline-primary" href="/goty/freeboards/category/1" >P.S</a>
+			<a class="btn btn-lg btn-outline-warning" href="/goty/freeboards/category/2" >N.S</a>
+			<a class="btn btn-lg btn-outline-danger" href="/goty/freeboards/category/3" >X.B</a>
 		</div>
 		
 		<div id="freeboard-div">
@@ -173,13 +173,14 @@ thead th {
 			                    			</a>
 			                    		</li>
 		                   			</c:when>
+		                   			
 		                   			<c:otherwise>
 			                    		<li class="page-item">
 			                    			<a class="page-link" href="/goty/freeboards/all?page=${ pi.currentPage + 1 }">
 			                    			다음
 			                    			</a>
 			                    		</li>
-		                   		</c:otherwise>
+		                   			</c:otherwise>
 		                   		</c:choose>
 		                   	</c:otherwise>
 		                </c:choose>
