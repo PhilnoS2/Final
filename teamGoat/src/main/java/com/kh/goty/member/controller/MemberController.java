@@ -83,6 +83,7 @@ public class MemberController {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
 			if(!reqUri.equals("")) {
+				//
 				mv.setViewName("redirect:/"+reqUri);
 			} else {
 				mv.setViewName("redirect:/");

@@ -72,8 +72,8 @@ public class ItemServiceImpl implements ItemService{
 
 	// Basket Insert
 	@Override
-	public int addItemInBasket(HashMap<String, Integer> map) {
-		return itemRepository.addItemInBasket(sqlSession, map);
+	public int addItemInCart(HashMap<String, Integer> map) {
+		return itemRepository.addItemInCart(sqlSession, map);
 	}
 
 }

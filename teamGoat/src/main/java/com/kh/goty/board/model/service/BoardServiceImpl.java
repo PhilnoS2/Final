@@ -39,5 +39,15 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.insertBoard(sqlSession, board);
 	}
 
+	@Override
+	public Board selectBoard(int boardNo) {
+		return boardRepository.selectBoard(sqlSession, boardNo);
+	}
+
+	@Override
+	public int increaseCount(int boardNo) {
+		return boardRepository.increaseCount(sqlSession, boardNo);
+	}
+
 
 }

@@ -70,6 +70,7 @@
 	      FREE_BOARD_NO DESC   
 	</select>
 	
+	
 	<insert id="insertBoard"
 		parameterType="board"
 	>
@@ -100,6 +101,49 @@
 	</insert>
 	
 	
+	<update id="increaseCount"
+		parameterType="_int"
+	>
+	UPDATE
+	      FREE_BOARD
+	   SET
+	      COUNT = COUNT + 1
+	 WHERE
+	      FREE_BOARD_NO = #{boardNo}
+	</update>
+	
+	
+	<select id="selectBoard"
+		parameterType="_int"
+		resultType="board"
+	>
+	SELECT
+	       FREE_BOARD.FREE_BOARD_NO freeBoardNo,
+	       BOARD_TITLE boardTitle,
+	       BOARD_CONTENT boardContent,
+	       CREATE_DATE createDate,
+	       ORIGIN_NAME originName,
+	       CHANGE_NAME changeName,
+	       IMAGE_PATH imagePath,
+	       MEMBER.MEMBER_NO memberNo,
+	       MEMBER.MEMBER_NAME memberName,
+	       MEMBER.NICKNAME AS "NICKNAME",
+           COUNT count,
+           PLATFORM_CATEGORY.PLATFORM_NO platformNo,
+	       PLATFORM_NAME platformName
+	  FROM
+	       FREE_BOARD
+	  JOIN MEMBER
+	    ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
+      JOIN PLATFORM_CATEGORY
+        ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO    
+	 WHERE
+	      FREE_BOARD.DELETE_YN = 'Y'
+       AND
+          MEMBER.DELETE_YN = 'N'
+	   AND
+	      FREE_BOARD_NO = #{boardNo}            
+	</select>
 	
 	
 	
@@ -116,6 +160,17 @@
 	
 	
 	
+	
+	
+	
+
+
+
+
+
+
+
+
 
 
 </mapper>
