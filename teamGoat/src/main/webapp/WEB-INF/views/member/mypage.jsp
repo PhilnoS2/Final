@@ -94,101 +94,103 @@
 		<div id="right-side">
 			<h3 class="side-title">개인 정보</h3>
 			<c:choose>
-				<c:when test="${ sessionScope.loginMember != null 
-				                && sessionScope.loginMember.status == 'GT'  }">
-					<div id="userInfo">
-						<div class="userInfo-div">
-							<label>아이디 : </label>
-							<h6>${ sessionScope.loginMember.memberId }</h6>
-						</div>
+				<c:when test="${ sessionScope.loginMember != null }">
+					<c:choose>
+						<c:when test="${ sessionScope.loginMember.status == 'GT' }">
+							<div id="userInfo">
+								<div class="userInfo-div">
+									<label>아이디 : </label>
+									<h6>${ sessionScope.loginMember.memberId }</h6>
+								</div>
+								
+								<div class="userInfo-div">
+									<label>이름 : </label>
+									<h6>${ sessionScope.loginMember.memberName }</h6>
+								</div>
+								
+								<div class="userInfo-div">
+									<label>닉네임 : </label>
+									<h6>${ sessionScope.loginMember.nickname }</h6>
+								</div>
+								
+								<div class="userInfo-div">
+									<label>이메일 : </label>
+									<h6>${ sessionScope.loginMember.email }</h6>
+								</div>
+								
+								<div class="userInfo-div">
+									<label>생년월일 : </label>
+									<h6>${ sessionScope.loginMember.bornDate }</h6>
+								</div>
+								
+								<div class="userInfo-div">
+									<label>전화번호 : </label>
+									<h6>${ sessionScope.loginMember.phone }</h6>
+								</div>
+								
+								<div class="userInfo-div">
+									<label>주소</label>
+									<br/>
+									<h6>${ sessionScope.loginMember.address }</h6>
+									<h6>${ sessionScope.loginMember.addrDetail }</h6>
+								</div>
+							</div>	
+						</c:when>
 						
-						<div class="userInfo-div">
-							<label>이름 : </label>
-							<h6>${ sessionScope.loginMember.memberName }</h6>
-						</div>
+						<c:when test="${ sessionScope.loginMember.status == 'KM' }">
+							<div class="userInfo-div">
+								<h6 style="color: #ffc107;">카카오 로그인 회원입니다.</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>카카오 발급 아이디 : </label>
+								<h6>${ sessionScope.loginMember.memberId }</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>닉네임 : </label>
+								<h6>${ sessionScope.loginMember.nickname }</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>프로필 사진</label>
+								<br/>
+								<img src="${ sessionScope.loginMember.thumbnailImage }" width="200px" height="200px"/>
+							</div>
+							<div class="userInfo-div">
+								<label>회원 등급 : </label>
+								<h6>${ sessionScope.loginMember.memLevel }</h6>
+							</div>
+						</c:when>
 						
-						<div class="userInfo-div">
-							<label>닉네임 : </label>
-							<h6>${ sessionScope.loginMember.nickname }</h6>
-						</div>
+						<c:when test="${ sessionScope.loginMember.status == 'NM' }">
+						    <div class="userInfo-div">
+								<h6 style="color: green;">네이버 로그인 회원입니다.</h6>
+							</div>
+						    <div class="userInfo-div">
+								<label>네이버 발급 아이디 : </label>
+								<h6>${ sessionScope.loginMember.memberId }</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>이름 : </label>
+								<h6>${ sessionScope.loginMember.memberName }</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>닉네임 : </label>
+								<h6>${ sessionScope.loginMember.nickname }</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>전화번호 : </label>
+								<h6>${ sessionScope.loginMember.phone }</h6>
+							</div>
+							<div class="userInfo-div">
+								<label>출생년도 : </label>
+								<h6>${ sessionScope.loginMember.bornDate }</h6>
+								<div class="userInfo-div">
+									<label>회원 등급 : </label>
+									<h6>${ sessionScope.loginMember.memLevel }</h6>
+								</div>
+							</div>
+						</c:when>
 						
-						<div class="userInfo-div">
-							<label>이메일 : </label>
-							<h6>${ sessionScope.loginMember.email }</h6>
-						</div>
-						
-						<div class="userInfo-div">
-							<label>생년월일 : </label>
-							<h6>${ sessionScope.loginMember.bornDate }</h6>
-						</div>
-						
-						<div class="userInfo-div">
-							<label>전화번호 : </label>
-							<h6>${ sessionScope.loginMember.phone }</h6>
-						</div>
-						
-						<div class="userInfo-div">
-							<label>주소</label>
-							<br/>
-							<h6>${ sessionScope.loginMember.address }</h6>
-							<h6>${ sessionScope.loginMember.addrDetail }</h6>
-						</div>
-					</div>	
-				</c:when>
-				
-				<c:when test="${ sessionScope.loginMember != null 
-				                && sessionScope.loginMember.status == 'KM'}">
-					<div class="userInfo-div">
-						<h6 style="color: #ffc107;">카카오 로그인 회원입니다.</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>카카오 발급 아이디 : </label>
-						<h6>${ sessionScope.loginMember.memberId }</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>닉네임 : </label>
-						<h6>${ sessionScope.loginMember.nickname }</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>프로필 사진</label>
-						<br/>
-						<img src="${ sessionScope.loginMember.thumbnailImage }" width="200px" height="200px"/>
-					</div>
-					<div class="userInfo-div">
-						<label>회원 등급 : </label>
-						<h6>${ sessionScope.loginMember.memLevel }</h6>
-					</div>
-				</c:when>
-				
-				<c:when test="${ sessionScope.loginMember != null 
-				                && sessionScope.loginMember.status == 'NM'}">
-				    <div class="userInfo-div">
-						<h6 style="color: green;">네이버 로그인 회원입니다.</h6>
-					</div>
-				    <div class="userInfo-div">
-						<label>네이버 발급 아이디 : </label>
-						<h6>${ sessionScope.loginMember.memberId }</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>이름 : </label>
-						<h6>${ sessionScope.loginMember.memberName }</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>닉네임 : </label>
-						<h6>${ sessionScope.loginMember.nickname }</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>전화번호 : </label>
-						<h6>${ sessionScope.loginMember.phone }</h6>
-					</div>
-					<div class="userInfo-div">
-						<label>출생년도 : </label>
-						<h6>${ sessionScope.loginMember.bornDate }</h6>
-						<div class="userInfo-div">
-						<label>회원 등급 : </label>
-						<h6>${ sessionScope.loginMember.memLevel }</h6>
-					</div>
-					</div>
+					</c:choose>					
 				</c:when>
 				
 				<c:otherwise>
@@ -196,6 +198,7 @@
 						<h6>표시할 정보가 없습니다.</h6>
 					</div>
 				</c:otherwise>
+				
 			</c:choose>
 		</div>
 	</div>
