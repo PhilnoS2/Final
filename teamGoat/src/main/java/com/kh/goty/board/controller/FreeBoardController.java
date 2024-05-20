@@ -60,7 +60,7 @@ public class FreeBoardController {
 								Board board, 
 								MultipartFile upFile, 
 								HttpSession session) {
-	
+		
 		// 첨부 파일 확인
 		if(!upFile.getOriginalFilename().equals("")) {
 			board.setOriginName(upFile.getOriginalFilename());
@@ -79,11 +79,18 @@ public class FreeBoardController {
 		return mv;
 	}
 	
-	
-	@GetMapping("/select/{id}")
-	public ModelAndView selectBoard(@PathVariable("id") int id, ModelAndView mv) {
-		System.out.println(id);
-		mv.setViewName("board/selectBoard");
+	@GetMapping("/select/{boardNo}")
+	public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo, ModelAndView mv) {
+		
+		if(boardService.increaseCount(boardNo) > 0) {
+			Board board = boardService.selectBoard(boardNo);
+			mv.addObject("board",board)
+			  .setViewName("board/selectBoard");
+		} else {
+			mv.addObject("errorMsg", "게시글을 조회하지 못했습니다.")
+			.setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 	

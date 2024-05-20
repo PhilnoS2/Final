@@ -47,6 +47,26 @@ public class CustomerServiceImpl implements CustomerService {
 		
 		return customerServiceRepository.selectNoticeListAll(sqlSession, rowBounds);
 	}
+
+	@Override
+	public Notice selectNotice(int noticeNo) {
+		return customerServiceRepository.selectNotice(sqlSession, noticeNo);
+	}
+
+	@Override
+	public int increaseNoticeCount(int noticeNo) {
+		return customerServiceRepository.increaseNoticeCount(sqlSession, noticeNo);
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return customerServiceRepository.deleteNotice(sqlSession, noticeNo);
+	}
+
+	@Override
+	public int updateNotice(Notice notice) {
+		return customerServiceRepository.updateNotice(sqlSession, notice);
+	}
 	
 
 	

@@ -11,7 +11,16 @@ public class Notice {
 	private Date createDate;
 	private String status;
 	private int count;
+	private String noticeWriter;
 	
+	public String getNoticeWriter() {
+		return noticeWriter;
+	}
+
+	public void setNoticeWriter(String noticeWriter) {
+		this.noticeWriter = noticeWriter;
+	}
+
 	public Notice() {
 		super();
 	}
@@ -88,8 +97,10 @@ public class Notice {
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", memberNo=" + memberNo + ", noticeTitle=" + noticeTitle
 				+ ", noticeContent=" + noticeContent + ", createDate=" + createDate + ", status=" + status + ", count="
-				+ count + "]";
+				+ count + ", noticeWriter=" + noticeWriter + "]";
 	}
+
+	
 
 	
 	
