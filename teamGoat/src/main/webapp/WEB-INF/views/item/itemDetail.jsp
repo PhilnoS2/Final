@@ -73,13 +73,12 @@
 
 			<div class="detail-purchase">
 				<c:choose>
-					<c:when test="${ not empty loginMember }">
+					<c:when test="${ not empty sessionScope.loginMember }">
 						<a href="purchase" class="btn btn-dark btn-lg">구매하기</a> 
-						<a href="cart?itemNo=${ item.itemNo }&memberNo=${ loginMember.memberNo }" class="btn btn-light btn-lg">장바구니</a>
+						<a href="insert.cart?itemNo=${ requestScope.item.itemNo }&memberNo=${ sessionScope.loginMember.memberNo }" class="btn btn-light btn-lg">장바구니</a>
 					</c:when>
 					<c:otherwise>
-						<h3>구매를 위해서는 로그인해주세요.</h3>
-						<a class="btn btn-info btn-md" href="/goty/member/login?reqUri=detail.item?itemNo=${item.itemNo}">로그인</a>
+						<a class="btn btn-info btn-md" href="/goty/member/login?reqUri=detail.item?itemNo=${item.itemNo}">구매를 위해서는 로그인해주세요.</a>
 					</c:otherwise>
 				</c:choose>
 			</div>

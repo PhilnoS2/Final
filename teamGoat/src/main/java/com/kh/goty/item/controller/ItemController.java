@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 import com.kh.goty.item.model.service.ItemService;
@@ -248,37 +250,71 @@ public class ItemController {
 	}
 	
 	//----------------------------------------------------------------------------------------------
-	// Cart Insert Controller
+	// Cart Select Controller
 	@GetMapping("cart")
-	public ModelAndView addItemInCart(int memberNo,
-									  int itemNo,
-									  ModelAndView mv) {
+	public ModelAndView findItemListInCart(int memberNo,
+									 	   ModelAndView mv) {
+	
+		mv.addObject("itemList", itemService.findItemListInCart(memberNo));
 		
+		mv.setViewName("item/itemCart");
+		
+		return mv;
+		
+	}
+	
+	//---------------------------------------------------------------------------------------------
+	@GetMapping("insert.cart")
+	public ModelAndView addItemInCart(int itemNo,
+									  int memberNo,
+									  ModelAndView mv) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
-		map.put("memberNo", memberNo);
 		map.put("itemNo", itemNo);
+		map.put("memberNo", memberNo);
 		
-		int result = itemService.addItemInCart(map);
-		
-		if(result > 0) {
+		if(itemService.addItemInCart(map) > 0) {
 			
-			mv.addObject(itemService.findItemDetail(itemNo));
-			
-			mv.addObject("");
-			
-			mv.setViewName("item/itemCart");
+			mv.setViewName("redirect:cart?memberNo=" + memberNo);
 			
 			return mv;
 			
 		} else {
 			
-			mv.addObject("errorMsg", "Process has been Failed");
+			mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.");
+			
 			mv.setViewName("common/errorPage");
 			
 			return mv;
-			
 		}
+	}
+	
+	// Cart Delete Controller
+	@GetMapping("delete.cart")
+	public ModelAndView deleteItemInCart(int itemNo,
+										 int memberNo,
+										 ModelAndView mv) {
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+		map.put("itemNo", itemNo);
+		map.put("memberNo", memberNo);
+		
+		if(itemService.deleteItemInCart(map) > 0) {
+			
+			mv.setViewName("redirect:cart?memberNo=" + memberNo);
+			
+			return mv;
+			
+		} else {
+			
+			mv.addObject("errorMsg", "장바구니 목록 삭제에 실패했습니다.");
+			
+			mv.setViewName("common/errorPage");
+			
+			return mv;
+		}
+		
 		
 	}
 	

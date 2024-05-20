@@ -82,7 +82,7 @@
 						<a class="btn btn-lg btn-info" href="#" >문의 내역</a>
 					</li>
 					<li class="li-option">
-						<a class="btn btn-md btn-info" href="#" style="white-space: nowrap;" >장바구니 목록</a>
+						<a class="btn btn-md btn-info" href="/goty/cart?memberNo=${ sessionScope.loginMember.memberNo }" style="white-space: nowrap;" >장바구니 목록</a>
 					</li>
 					<c:if test="${ sessionScope.loginMember.status == 'GT' }">
 						<li class="li-option">

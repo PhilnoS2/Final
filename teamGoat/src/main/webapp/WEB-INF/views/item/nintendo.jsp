@@ -91,12 +91,14 @@
 			<c:when test="${ not empty itemList }">
 				<c:forEach items="${ itemList }" var="item">
 					<div class="card items">
-					<input type="hidden" value="${ item.itemNo }" />
-					<img class="card-img-top" src="${ item.imgPath }/${ item.imgName }" alt="Item Image">
+						<input type="hidden" value="${ item.itemNo }" />
+						<img class="card-img-top" src="${ item.imgPath }/${ item.imgName }" alt="Item Image">
+						
 						<div class="card-body">
 							<h6 class="card-title">${ item.itemName }</h6>
 							<p class="card-text"> <fmt:formatNumber value="${ item.price }" type="number" /> 원 </p>
 						</div>
+						
 					</div>
 				</c:forEach>
 			</c:when>
