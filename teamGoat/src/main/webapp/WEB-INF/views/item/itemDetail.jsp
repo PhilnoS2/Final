@@ -79,6 +79,7 @@
 					</c:when>
 					<c:otherwise>
 						<h3>구매를 위해서는 로그인해주세요.</h3>
+						<a class="btn btn-info btn-md" href="/goty/member/login?reqUri=detail.item?itemNo=${item.itemNo}">로그인</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
