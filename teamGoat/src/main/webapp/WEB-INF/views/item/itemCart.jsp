@@ -51,16 +51,17 @@
 						<c:forEach items="${ itemList }" var="item">
 							<tr style=>
 								<td class="cart-detail">
-									<img class="cart-img" src="${ item.imgPath }/${ item.imgName }">
+									<img class="cart-img" src="${ pageScope.item.imgPath }/${ pageScope.item.imgName }">
 								</td>
 								<td class="cart-detail">
-									${ item.itemName }
+									
+									<a href="detail.item?itemNo=${ pageScope.item.itemNo }">${ item.itemName }</a>
 								</td>
 								<td class="cart-detail cart-price">
-									<fmt:formatNumber value="${ item.price }" type="number" /> 원
+									<fmt:formatNumber value="${ pageScope.item.price }" type="number" /> 원
 								</td>
 								<td class="cart-detail cart-price">
-									<fmt:formatNumber value="${ item.price * 0.01  }" type="number" /> 원
+									<fmt:formatNumber value="${ pageScope.item.price * 0.01  }" type="number" /> 원
 								</td>
 								<td class="cart-detail">
 									<a href="" class="btn btn-sm btn-outline-success" >주문하기</a> <br>
