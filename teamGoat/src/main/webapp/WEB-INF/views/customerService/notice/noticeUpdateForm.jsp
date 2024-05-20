@@ -94,11 +94,11 @@
 
         <div class="notice-content">
             <div>
-                <form action="insert" method="post">
+                <form action="/goty/notice/update" method="post">
                     <label for="subject" >제목</label>
-                 
-                    <input type="text" id="subject" name="subject" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
-                    <textarea id="content" name="content" placeholder="내용을 입력해주세요" required></textarea>
+                 	<input type="hidden" name="noticeNo" value="${notice.noticeNo}">
+                    <input type="text" id="subject" name="noticeTitle" value="${ notice.noticeTitle}" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
+                    <textarea id="content" name="noticeContent" placeholder="내용을 입력해주세요" required>${ notice.noticeContent } </textarea>
                     <div style="width: 1000px; border-bottom : 1px solid black; margin-top : 20px; margin-bottom : 20px;"></div>
 
                     <div align="right" style="padding-right : 70px;">
@@ -111,7 +111,7 @@
 
         <div class="list-page">
             <div>
-                <button id="list-btn" class="back-btn" onclick="history.back();">목록</button>
+                <button id="list-btn" class="back-btn">목록</button>
             </div>
 
         </div>
@@ -123,10 +123,14 @@
     <script>
         $(function(){
             $('#submit-btn').click(function(){
-                if(!confirm('게시글을 등록하시겠습니까?')){
-                    return false;
+                if(!confirm('수정한 게시글을 등록하시겠습니까?')){
+					return false;
                 }
-            })
+            });
+            
+            $('#list-btn').click(function(){
+            	location.href = '/goty/notices';
+            });
         })
     </script>
 

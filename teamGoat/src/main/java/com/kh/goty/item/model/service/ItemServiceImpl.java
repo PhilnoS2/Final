@@ -76,4 +76,14 @@ public class ItemServiceImpl implements ItemService{
 		return itemRepository.addItemInCart(sqlSession, map);
 	}
 
+	@Override
+	public List<Item> findItemListInCart(int memberNo) {
+		return itemRepository.findItemListInCart(sqlSession, memberNo);
+	}
+
+	@Override
+	public int deleteItemInCart(HashMap<String, Integer> map) {
+		return itemRepository.deleteItemInCart(sqlSession, map);
+	}
+
 }

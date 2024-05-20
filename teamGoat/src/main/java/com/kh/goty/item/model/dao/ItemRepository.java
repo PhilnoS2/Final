@@ -47,4 +47,14 @@ public class ItemRepository {
 	public int addItemInCart(SqlSession sqlSession, HashMap<String, Integer> map) {
 		return sqlSession.insert("itemMapper.addItemInCart", map);
 	}
+	
+	// Cart List조회용
+	public List<Item> findItemListInCart(SqlSession sqlSession, int memberNo){
+		return sqlSession.selectList("itemMapper.findItemListInCart", memberNo);
+	}
+	
+	// Cart Delete용
+	public int deleteItemInCart(SqlSession sqlSession, HashMap<String, Integer> map) {
+		return sqlSession.delete("itemMapper.deleteItemInCart", map);
+	}
 }

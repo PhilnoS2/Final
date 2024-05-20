@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+
+<jsp:include page="../../common/menubar.jsp" />
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -82,37 +85,41 @@
         .update-area {
             position : absolute;
             left : 1350px;
-            top : 130px;
+            top : 400px;
         }
     </style>
 
 </head>
 <body>
-	<jsp:include page="../../common/menubar.jsp" />
+	
 
     <div id="notice-wrap">
         <div class="notice-title">
             <div><h3>공지사항</h3></div>
         </div>
-        <div class="update-area">
-            <button class="btn btn-sm btn-warning" onclick="submit(0);">수정</button> 
-            <button class="btn btn-sm btn-warning" onclick="submit(1);">삭제</button> 
-            
-            <form action="" method="post" id="update-form">
-                <input type="hidden" name="noticeNo" value="">
-            </form>
-        </div>
+        
+        <c:if test="${ sessionScope.loginMember != null and sessionScope.loginMember.memLevel == 'A' }">
+	        <div class="update-area">
+	            <button class="btn btn-sm btn-success" onclick="submit(0);">수정</button> 
+	            <button class="btn btn-sm btn-danger" onclick="submit(1);">삭제</button> 
+	            
+	            <form action="" method="post" id="update-form">
+	                <input type="hidden" name="noticeNo" value="${ notice.noticeNo }">
+	            </form>
+	        </div>
+        </c:if>
 
         <script>
             function submit(num){
                 if(num == 0){
-                    $('#update-form').attr('action', 'update').submit();
+                    $('#update-form').attr('action', '/goty/notice/update/forward').submit();
                 }
                 else {
-                    $('#update-form').attr('action', 'delete').submit();
+                	if(confirm('게시글을 삭제하시겠습니까??')){
+	                    $('#update-form').attr('action', '/goty/notice/delete').submit();
+                	};
                 }
             }
-
         </script>
 
         <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom : 20px; margin-left : 100px;"></div>
@@ -122,32 +129,28 @@
                 <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
                     <thead>
                         <th width="100px;">제목</th>
-                        <td colspan="9">공지입니다</td>
+                        <td colspan="9">${notice.noticeTitle }</td>
                     </thead>
     
                     <tbody>
                         <tr>
                             <th>작성자</th>
-                            <td colspan="3">관리자</td>
+                            <td colspan="3">${ notice.noticeWriter }</td>
                         </tr>
                         
                         <tr>
                             <th>작성일</th>
-                            <td>2024-05-10</td>
+                            <td>${ notice.createDate }</td>
                             <th style="width : 100px;" padding-left : 15px;>조회수</th>
-                            <td style="width: 650px; padding-left : 15px;">5</td>
+                            <td style="width: 650px; padding-left : 15px;">${ notice.count }</td>
                         </tr>
 
                         <tr>
-                            <td colspan="10"><p>(서울=연합뉴스) 곽민서 기자 = 윤석열 대통령은 14일 기득권 세력의 정치적 반대 때문에 개혁 과제 추진이 어렵다는 인식을 밝히면서 노동·의료 등 4대 개혁에 대한 의지를 거듭 확인했다.
-
-                                윤 대통령은 이날 서울고용복지플러스센터에서 열린 스물다섯번째 '국민과 함께하는 민생토론회'에서 "우리 정부는 추상적인 어떤 무슨 경제 슬로건이 아니고 교육 개혁, 노동 개혁, 연금 개혁, 의료 개혁이라는 이 4가지 개혁을 추진하고 있다"고 말했다.
-                                
-                                윤 대통령은 "이 개혁이라고 하는 것은 지금 같은 세상에서는 적을 많이 만드는 일"이라며 "왜냐하면 개혁을 하게 되면 결국 많은 국민들에게 이롭지만, 또 누군가는 어떤 기득권을 뺏긴다"고 짚었다.
-                                
-                                이어 "이로움을 누리게 되는 사람들은 거기에 대해서 별로 인식을 못 하고, 조금씩 나아지는 걸 잘 못 느끼지만 뭔가를 빼앗기는 쪽에서는 정말 정권 퇴진 운동을 하게 되는 것"이라며 "그래서 정말 어떤 개혁을 해 나간다는 것이 대단히 어렵다"고 말했다.(서울=연합뉴스) 곽민서 기자 = 윤석열 대통령은 14일 기득권 세력의 정치적 반대 때문에 개혁 과제 추진이 어렵다는 인식을 밝히면서 노동·의료 등 4대 개혁에 대한 의지를 거듭 확인했다.
-
-                                잘 못 느끼지만 뭔가를 빼앗기는 쪽에서는 정말 정권 퇴진 운동을 하게 되는 것"이라며 "그래서 정말 어떤 개혁을 해 나간다는 것이 대단히 어렵다"고 말했다.</p></td>
+                            <td colspan="10">
+                            	<p>
+                            		${notice.noticeContent }
+                            	</p>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -159,7 +162,7 @@
 
         <div class="button-area">
             <div class="button-area1">
-                <button style="margin-left : 97px; width: 100px;">목록</button>
+                <button id="back-btn" style="margin-left : 97px; width: 100px;">목록</button>
             </div>
             <div class="button-area2">
                 <div>
@@ -175,13 +178,21 @@
 
         <script>
             $(function(){
-                $('previous').click(function(){
-                    location.href = 'notice.noticeNo='-1;
+                $('#previous').click(function(){
+                	if(${notice.noticeNo - 1} > 0){
+	                    location.href = '/goty/notice?noticeNo='+${notice.noticeNo - 1};
+                	}
                 });
 
-                $('next').click(function(){
-                    location.href = 'notice.noticeNo='+1;
+                $('#next').click(function(){
+                	if(${notice.noticeNo + 1} > 0){
+	                    location.href = '/goty/notice?noticeNo='+${notice.noticeNo + 1};
+                	}
                 });
+                
+                $('#back-btn').click(function(){
+                	location.href = '/goty/notices';
+                })
             });
         </script>
 

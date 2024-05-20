@@ -233,4 +233,58 @@
 				)
 				
 	</insert>
+	
+	<!-- Cart 목록 조회 -->
+	<select id="findItemListInCart" parameterType="_int" resultMap="itemResultSet">
+		
+		SELECT 
+		        I.ITEM_NO,
+		        IMG_NAME,
+        		IMG_PATH,
+		        ITEM_NAME,
+		        PRICE,
+		        PLATFORM_NAME,
+		        DEVELOPER,
+		        PUBLISHER,
+		        RATING,
+		        GENRE
+		  FROM
+		        ITEM I
+		  JOIN
+		        GAME_CATEGORY_BRIDGE G
+		    ON (I.ITEM_NO = G.ITEM_NO)
+		  JOIN
+		        PLATFORM_CATEGORY P
+		    ON (G.PLATFORM_NO = P.PLATFORM_NO)
+		  JOIN
+		       	ITEM_IMG II
+		    ON (I.IMG_NO = II.IMG_NO)
+		 WHERE
+		        STATUS = 'Y'
+		   AND
+		        I.ITEM_NO
+		    IN
+		        (SELECT
+		                ITEM_NO
+		          FROM
+		                CART
+		         WHERE
+		                MEMBER_NO = #{memberNo})
+		
+	</select>
+	
+	<!-- Cart 목록 Delete용 SQL문 -->
+	<delete id="deleteItemInCart" parameterType="hashmap">
+		
+		DELETE 
+		  FROM
+		  		CART
+		 WHERE
+		 		ITEM_NO = #{itemNo}
+		   AND
+		   		MEMBER_NO = #{memberNo}
+		
+	</delete>
+	
+	
 </mapper>

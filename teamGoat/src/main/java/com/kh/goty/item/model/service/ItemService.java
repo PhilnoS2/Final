@@ -24,4 +24,8 @@ public interface ItemService {
 	
 	int addItemInCart(HashMap<String, Integer> map);
 	
+	List<Item> findItemListInCart(int memberNo);
+	
+	int deleteItemInCart(HashMap<String, Integer> map);
+	
 }
