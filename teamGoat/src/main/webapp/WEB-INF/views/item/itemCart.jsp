@@ -8,22 +8,23 @@
 <meta charset="UTF-8">
 <title>장바구니</title>
 <style>
-	.table-striped{
-	  	width : 1100px;
+	.table-hover{
+	  	width : 1150px;
 	  	text-align: center;
+	  	vertical-align : middle;
 	}
 	
-	th{
-		height: 100px;
-	}
-	
-	td{
-		height : 100px;
+	.table > tr > th{
+		height: 50px;
 	}
 	
 	.cart-img{
-		width : 140px;
-		height : 95px;
+		width : 70px;
+		height : 50px;
+	}
+	
+	.cart-price{
+		text-align : right;
 	}
 	
 </style>
@@ -34,13 +35,13 @@
 	
 	<div class="container">
 	
-		<table class="table-striped">
+		<table class="table table-hover">
 			<thead>
 				<tr>
 					<th>제품 사진</th>
 					<th>제품 이름</th>
-					<th>제품 가격</th>
-					<th>적립금</th>
+					<th class="cart-price">제품 가격</th>
+					<th class="cart-price">적립금</th>
 					<th>버튼</th>
 				</tr>
 			</thead>
@@ -48,13 +49,21 @@
 				<c:choose>
 					<c:when test="${ not empty itemList }">
 						<c:forEach items="${ itemList }" var="item">
-							<tr>
-								<td><img class="cart-img" src="${ item.imgPath }/${ item.imgName }" alt="Item Image"></td>
-								<td>${ item.itemName }</td>
-								<td><fmt:formatNumber value="${ item.price }" type="number" /> 원</td>
-								<td><fmt:formatNumber value="${ item.price * 0.01  }" type="number" />원</td>
-								<td>
-									<a href="" class="btn btn-sm btn-outline-success" >주문하기</a>
+							<tr style=>
+								<td class="cart-detail">
+									<img class="cart-img" src="${ item.imgPath }/${ item.imgName }">
+								</td>
+								<td class="cart-detail">
+									${ item.itemName }
+								</td>
+								<td class="cart-detail cart-price">
+									<fmt:formatNumber value="${ item.price }" type="number" /> 원
+								</td>
+								<td class="cart-detail cart-price">
+									<fmt:formatNumber value="${ item.price * 0.01  }" type="number" /> 원
+								</td>
+								<td class="cart-detail">
+									<a href="" class="btn btn-sm btn-outline-success" >주문하기</a> <br>
 									<a class="btn btn-sm btn-outline-danger deleteCart" >
 										<input type="hidden" value="${ pageScope.item.itemNo }" />
 										<input type="hidden" value="${ sessionScope.loginMember.memberNo }" />
@@ -66,7 +75,9 @@
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
-						<h2>장바구니에 담긴 상품이 없습니다.</h2>
+						<tr>
+							<td colspan="5">장바구니에 담긴 상품이 없습니다.</td>
+						</tr>
 					</c:otherwise>
 				</c:choose>
 			</tbody>
