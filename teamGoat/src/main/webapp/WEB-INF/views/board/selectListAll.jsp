@@ -64,9 +64,9 @@ thead th {
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="wrapper-div">
 		<div id="btn-categoty-div">
-			<a class="btn btn-lg btn-outline-primary" href="/goty/freeboards/category/1" >P.S</a>
-			<a class="btn btn-lg btn-outline-warning" href="/goty/freeboards/category/2" >N.S</a>
-			<a class="btn btn-lg btn-outline-danger" href="/goty/freeboards/category/3" >X.B</a>
+			<a class="btn btn-lg btn-outline-primary" href="/goty/freeboards/category?categoryNo=1" >P.S</a>
+			<a class="btn btn-lg btn-outline-warning" href="/goty/freeboards/category?categoryNo=2" >N.S</a>
+			<a class="btn btn-lg btn-outline-danger" href="/goty/freeboards/category?categoryNo=3" >X.B</a>
 		</div>
 		
 		<div id="freeboard-div">

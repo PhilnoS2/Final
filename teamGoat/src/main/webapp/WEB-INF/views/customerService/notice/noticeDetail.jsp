@@ -57,7 +57,7 @@
             }
         }
         .button-area {
-            height : 10%;
+            height : 5%;
             >div {
                 float : left;
                 width: 50%;
@@ -65,11 +65,8 @@
             }
         }
         .button-area2 {
-            position : relative;
-            >div {
-                position : absolute;
-                right : 97px;
-            }
+            height : 5%;
+            margin-left : 100px;
         }
         th {
             height: 50px;
