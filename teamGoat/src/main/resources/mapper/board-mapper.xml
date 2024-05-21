@@ -15,6 +15,7 @@
 		<result column="MEMBER_NAME" property="memberName"/>
 		<result column="COUNT" property="count" />
 		<result column="PLATFORM_NAME" property="platformName" />
+		<result column="PLATFORM_NO" property="platformNo" />
 		<result column="REVIEW_COUNT" property="reviewCount" />
 		<result column="ORIGIN_NAME" property="originName" />
 		<result column="CHANGE_NAME" property="changeName" />
@@ -30,23 +31,31 @@
 
 
 	<select id="selectListCount"
-	parameterType="_int"
+	parameterType="HashMap"
 	resultType="_int"
 	>
 	SELECT
 	      COUNT(*)
 	  FROM
 	      FREE_BOARD
-	 WHERE
-	      DELETE_YN = 'N'
-	  <if test="categoryNo > 0">
-	   AND PLATFORM_NO = #{categoryNo}
-	  </if>         
+	 JOIN MEMBER
+       ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
+	WHERE
+	      FREE_BOARD.DELETE_YN = 'N'
+	 <if test="categoryNo != null and categoryNo > 0">
+	 	AND PLATFORM_NO = #{categoryNo}
+	 </if>
+	 <if test="condition == 'nickname'">
+	 	AND NICKNAME LIKE '%' || #{keyword} || '%'
+	 </if>
+	 <if test="condition == 'boardTitle'">
+	 	AND BOARD_TITLE LIKE '%' || #{keyword} || '%'
+	 </if>  
 	</select>
 	
 	
 	<select id="seleltListAll"
-	parameterType="_int"
+	parameterType="HashMap"
 	resultMap="boardResultSet">
 	SELECT
 	       FREE_BOARD.FREE_BOARD_NO,
@@ -79,8 +88,14 @@
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
 	 WHERE
 	      FREE_BOARD.DELETE_YN = 'N'
-	 <if test="category > 0">
+	 <if test="categoryNo > 0">
 	 	AND FREE_BOARD.PLATFORM_NO = #{categoryNo}
+	 </if>
+	 <if test="condition == 'nickname'">
+	 	AND NICKNAME LIKE '%' || #{keyword} || '%'
+	 </if>
+	 <if test="condition == 'boardTitle'">
+	 	AND BOARD_TITLE LIKE '%' || #{keyword} || '%'
 	 </if>
 	 ORDER
 	    BY
@@ -180,6 +195,37 @@
 	      FREE_BOARD.FREE_BOARD_NO  = #{boardNo}            
 	</select>
 	
+	<select id="updateBoardForm"
+		parameterType="_int"
+		resultMap="boardResultSet"
+	>
+	SELECT
+	       FREE_BOARD.FREE_BOARD_NO,
+	       BOARD_TITLE,
+	       BOARD_CONTENT,
+	       FREE_BOARD.CREATE_DATE,
+	       ORIGIN_NAME,
+	       CHANGE_NAME,
+	       IMAGE_PATH,
+	       MEMBER.MEMBER_NO AS "MEMBER_NO",
+	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
+	       MEMBER.NICKNAME AS "NICKNAME",
+           COUNT,
+           PLATFORM_CATEGORY.PLATFORM_NO AS "PLATFORM_NO",
+	       PLATFORM_NAME
+	  FROM
+	       FREE_BOARD
+	  JOIN MEMBER
+	    ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
+      JOIN PLATFORM_CATEGORY
+        ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO
+     WHERE
+	       FREE_BOARD.DELETE_YN = 'N'
+       AND
+           MEMBER.DELETE_YN = 'N'
+	   AND
+	       FREE_BOARD.FREE_BOARD_NO  = #{boardNo}
+	</select>
 	
 	
 	
@@ -197,7 +243,11 @@
 	
 	
 	
-	
+
+
+
+
+
 
 
 

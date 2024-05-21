@@ -8,9 +8,9 @@ import com.kh.goty.common.model.vo.PageInfo;
 
 public interface BoardService {
 
-	public List<Board> selectListAll(PageInfo pageInfo, int categoryNo);
+	public List<Board> selectListAll(PageInfo pageInfo, HashMap<String, Object> map);
 
-	public int selectListCount(int categoryNo);
+	public int selectListCount(HashMap<String, Object> map);
 
 	public int insert(Board board);
 
@@ -18,6 +18,7 @@ public interface BoardService {
 
 	public int increaseCount(int boardNo);
 
-	public List<Board> searchBoards(PageInfo pageInfo, HashMap<String, String> map);
+	public Board updateBoardForm(int boardNo);
+	
 
 }
