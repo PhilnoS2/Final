@@ -7,9 +7,9 @@ import com.kh.goty.common.model.vo.PageInfo;
 
 public interface BoardService {
 
-	public List<Board> selectListAll(PageInfo pageInfo);
+	public List<Board> selectListAll(PageInfo pageInfo, int categoryNo);
 
-	public int selectListCount();
+	public int selectListCount(int categoryNo);
 
 	public int insert(Board board);
 
