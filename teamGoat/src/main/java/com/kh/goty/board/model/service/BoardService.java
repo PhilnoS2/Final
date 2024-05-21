@@ -1,5 +1,6 @@
 package com.kh.goty.board.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.goty.board.model.vo.Board;
@@ -16,5 +17,7 @@ public interface BoardService {
 	public Board selectBoard(int boardNo);
 
 	public int increaseCount(int boardNo);
+
+	public List<Board> searchBoards(PageInfo pageInfo, HashMap<String, String> map);
 
 }
