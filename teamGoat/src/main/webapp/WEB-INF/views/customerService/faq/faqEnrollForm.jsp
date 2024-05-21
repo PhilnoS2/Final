@@ -95,19 +95,18 @@
 
         <div class="question-content">
             <div>
-                <form action="insert" method="post">
-                    <label for="subject" >제목</label>
-                    <select id="select-area" name="select" style="width : 100px; height : 30px;">
-                        <option value="c">주문/결제</option>
-                        <option value="e">기타문의</option>
-                        <option value="s">서비스</option>
-                        <option value="d">배송관련</option>
+                <form action="/goty/faq/insert" method="post">
+                	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
+                    <label for="faq-a" >질문</label>
+                    <select id="select-area" name="categoryNo" style="width : 100px; height : 30px;">
+                    	<c:forEach items="${ categoryList }" var="category" varStatus="status">
+                    		<option value="${ status.index + 1 }">${ category.categoryName }</option>
+                    	</c:forEach>
                     </select>
-                    <input type="text" id="subject" name="subject" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
-                    <textarea id="faq-q" name="content" placeholder="질문 내용을 입력해주세요" required></textarea>
+                    <textarea id="faq-q" name="faqQuestion" placeholder="질문 내용을 입력해주세요" required></textarea>
                     <div style="width: 1000px; border-bottom : 1px solid black; margin-top : 20px; margin-bottom : 20px;"></div>
 
-                    <textarea id="faq-a" name="answer" placeholder="답변 내용을 입력해주세요" required></textarea>
+                    <textarea id="faq-a" name="faqAnswer" placeholder="답변 내용을 입력해주세요" required></textarea>
 
 
                     <div align="right" style="padding-right : 70px; margin-top : 50px;">

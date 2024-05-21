@@ -10,7 +10,14 @@
 		<result column="CATEGORY_NAME" property="categoryName"/>
 	</resultMap>
 
-
+	<resultMap id="faqResultSet" type="faq">
+		<result column="FAQ_NO" property="faqNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="CATEGORY_NO" property="categoryNo"/>
+		<result column="FAQ_QUESTION" property="faqQuestion"/>
+		<result column="FAQ_ANSWER" property="faqAnswer"/>
+		<result column="CREATE_DATE" property="createDate"/>
+	</resultMap>
 
 	<select id="selectCategoryList" resultMap="categoryResultSet">
 		SELECT
@@ -19,4 +26,41 @@
 		  FROM
 		       QUESTION_CATEGORY
 	</select>
+	
+	<insert id="insertFaq" parameterType="faq">
+		INSERT
+		  INTO
+		       FAQ
+		       (
+		       FAQ_NO,
+		       MEMBER_NO,
+		       CATEGORY_NO,
+		       FAQ_QUESTION,
+		       FAQ_ANSWER
+		       )
+		VALUES
+		       (
+		       SEQ_FAQ.NEXTVAL,
+		       #{memberNo},
+		       #{categoryNo},
+		       #{faqQuestion},
+		       #{faqAnswer}
+		       )
+	</insert>
+	
+	<select id="selectFaqList" resultMap="faqResultSet">
+		SELECT
+		       FAQ_NO,
+		       MEMBER_NO,
+		       CATEGORY_NO,
+		       FAQ_QUESTION,
+		       FAQ_ANSWER,
+		       TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') as "CREATE_DATE"
+		  FROM
+		       FAQ
+		 ORDER
+		    BY
+		       CREATE_DATE DESC 		       
+	</select>
+	
 </mapper>

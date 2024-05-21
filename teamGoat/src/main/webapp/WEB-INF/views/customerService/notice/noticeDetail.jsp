@@ -159,17 +159,33 @@
 
         <div class="button-area">
             <div class="button-area1">
-                <button id="back-btn" style="margin-left : 97px; width: 100px;">목록</button>
+                <button id="back-btn" style="margin-left : 97px; width : 100px; border:1px solid grey;">목록</button>
             </div>
             <div class="button-area2">
                 <div>
-                    <div style="margin-bottom:10px;">
-                        <button id="previous" class="btn btn-sm btn-warning">▲이전글</button> 
-                        <a href="/goty/notice?noticeNo=${preNotice.noticeNo }">${ preNotice.noticeTitle }</a>
+                    <div style="border:1px solid grey; border-bottom: none;">
+	                    <c:choose>
+	                    	<c:when test="${ preNotice eq null }">
+	                    		<a id="previous" class="btn btn-sm btn-warning disabled">▲이전글</a> 
+	                    	</c:when>
+	                    	<c:otherwise>
+									<a id="previous" href="/goty/notice?noticeNo=${preNotice.noticeNo }" class="btn btn-sm btn-warning">▲이전글</a> 
+		                     		<a href="/goty/notice?noticeNo=${preNotice.noticeNo }">${ preNotice.noticeTitle }</a>
+	                    	</c:otherwise>
+	                    </c:choose>
                     </div>
-                    <div>
-                        <button id="next" class="btn btn-sm btn-danger">▼다음글</button>
-                        <a href="/goty/notice?noticeNo=${ nextNotice.noticeNo }">${ nextNotice.noticeTitle }</a>
+                    <div style="border:1px solid grey;">
+                    	<c:choose>
+                    		<c:when test="${ nextNotice eq null }">
+		                        <a id="next" class="btn btn-sm btn-danger disabled">▼다음글</a>
+                    		</c:when>
+                    		<c:otherwise>
+								<a id="next" href="/goty/notice?noticeNo=${ nextNotice.noticeNo }" class="btn btn-sm btn-danger">▼다음글</a>	
+		                        <a href="/goty/notice?noticeNo=${ nextNotice.noticeNo }">${ nextNotice.noticeTitle }</a>
+                    		</c:otherwise>
+                    	</c:choose>
+                    
+                    
                     </div>
                 </div>
             </div>
@@ -177,16 +193,6 @@
 
         <script>
             $(function(){
-                $('#previous').click(function(){
-					$(this).next().click();
-                });
-
-                $('#next').click(function(){
-                	if(${notice.noticeNo + 1} > 0){
-	                    location.href = '/goty/notice?noticeNo='+${notice.noticeNo + 1};
-                	}
-                });
-                
                 $('#back-btn').click(function(){
                 	location.href = '/goty/notices';
                 })

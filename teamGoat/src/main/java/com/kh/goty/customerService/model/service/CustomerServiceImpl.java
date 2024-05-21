@@ -1,5 +1,6 @@
 package com.kh.goty.customerService.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.customerService.model.dao.CustomerServiceRepository;
+import com.kh.goty.customerService.model.vo.Faq;
 import com.kh.goty.customerService.model.vo.Notice;
 import com.kh.goty.customerService.model.vo.QuestionCategory;
 
@@ -67,7 +69,25 @@ public class CustomerServiceImpl implements CustomerService {
 	public int updateNotice(Notice notice) {
 		return customerServiceRepository.updateNotice(sqlSession, notice);
 	}
-	
+
+	@Override
+	public List<Notice> noticeSearchList(HashMap<String, String> map, PageInfo pageInfo) {
+		
+		int offset = (pageInfo.getCurrentPage() -1) * pageInfo.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pageInfo.getBoardLimit());
+		
+		return customerServiceRepository.noticeSearchList(sqlSession, map, rowBounds);
+	}
+
+	@Override
+	public int insertFaq(Faq faq) {
+		return customerServiceRepository.insertFaq(sqlSession, faq);
+	}
+
+	@Override
+	public List<Faq> selectFaqList() {
+		return customerServiceRepository.selectFaqList(sqlSession);
+	}
 
 	
 	
