@@ -12,12 +12,12 @@ import com.kh.goty.board.model.vo.Board;
 @Repository
 public class BoardRepository {
 
-public int selectListCount(SqlSessionTemplate sqlSession, int categoryNo) {
-		return sqlSession.selectOne("boardMapper.selectListCount", categoryNo);
+public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.selectOne("boardMapper.selectListCount", map);
 	}
 	
-	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, int categoryNo , RowBounds rowBounds) {
-		return sqlSession.selectList("boardMapper.seleltListAll", categoryNo, rowBounds);
+	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, HashMap<String, Object> map , RowBounds rowBounds) {
+		return sqlSession.selectList("boardMapper.seleltListAll", map, rowBounds);
 	}
 
 	public int insertBoard(SqlSessionTemplate sqlSession, Board board) {
@@ -31,9 +31,9 @@ public int selectListCount(SqlSessionTemplate sqlSession, int categoryNo) {
 	public int increaseCount(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
-	
-	public List<Board> searchBoards(SqlSessionTemplate sqlSession, HashMap<String, String> map, RowBounds rowBounds){
-		return sqlSession.selectList("boardMapper.searchBoards", map, rowBounds);
+
+	public Board updateBoardForm(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("boardMapper.updateBoardForm", boardNo);
 	}
 	
 }

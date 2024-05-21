@@ -1,6 +1,5 @@
 package com.kh.goty.board.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -24,16 +23,16 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
-	public int selectListCount(int categoryNo) {
-		return boardRepository.selectListCount(sqlSession, categoryNo);
+	public int selectListCount(HashMap<String, Object> map) {
+		return boardRepository.selectListCount(sqlSession, map);
 	}
 	
 	@Override
-	public List<Board> selectListAll(PageInfo pageInfo, int categoryNo) {
+	public List<Board> selectListAll(PageInfo pageInfo, HashMap<String, Object> map) {
 		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pageInfo.getBoardLimit());
 		
-		return boardRepository.seleltListAll(sqlSession, categoryNo ,rowBounds);
+		return boardRepository.seleltListAll(sqlSession, map ,rowBounds);
 	}
 
 	@Override
@@ -52,12 +51,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Board> searchBoards(PageInfo pageInfo, HashMap<String, String> map) {
-		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pageInfo.getBoardLimit());
-		
-		return boardRepository.searchBoards(sqlSession, map, rowBounds);
+	public Board updateBoardForm(int boardNo) {
+		return boardRepository.updateBoardForm(sqlSession, boardNo);
 	}
-
 
 }

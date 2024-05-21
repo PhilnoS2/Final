@@ -88,7 +88,7 @@ thead th {
 					</thead>
 					<tbody style="text-align: center;">
 						<c:choose>
-							<c:when test="${ listAll ne null }">
+							<c:when test="${ not empty listAll }">
 								<c:forEach items="${ listAll }" var="board">
 									<tr class="lists" id="${ board.freeBoardNo }">
 										<td>${ board.freeBoardNo }</td>
@@ -118,14 +118,14 @@ thead th {
 	                  <option value="boardTitle">제목</option>
 	              </select>
                </div>
+               
 		      <div id="search-area">
-				<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요." />
+				<input type="text" class="form-control" name="keyword" placeholder="검색어를 입력하세요." value="${ keyword }" />
 			  </div>
 			  <button type="submit" class="btn btn-sm btn-primary">검색</button>
 			</form>		
-			
-			
-			<c:if test="${ listAll ne null and pi.startPage != pi.endPage }">
+
+			<c:if test="${ not empty listAll and pi.startPage != pi.endPage }">
 				<c:choose>
 					<c:when test="${ categoryNo eq null }">
 						<ul class="pagination pagination-md  justify-content-center">
@@ -137,7 +137,7 @@ thead th {
 									<li class="page-item">
 			                   			<c:choose>
 			                   				<c:when test="${ condition ne null }">
-			                   					<a class="page-link" href="search.board?page=${ pageInfo.currentPage - 1}&condition=${condition}&keyword=${keyword}">
+			                   					<a class="page-link" href="/goty/freeboards/search?page=${ pi.currentPage - 1}&condition=${condition}&keyword=${keyword}">
 			                    					뒤로
 			                    				</a>
 			                   				</c:when>
@@ -154,7 +154,7 @@ thead th {
 							<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 								<c:choose>
 			                   		<c:when test="${ condition ne null }">
-			                    		<li class="page-item"><a class="page-link" href="search.board?page=${ p }&condition=${condition}&keyword=${keyword}">${ p }</a></li>
+			                    		<li class="page-item"><a class="page-link" href="/goty/freeboards/search?page=${ p }&condition=${condition}&keyword=${keyword}">${ p }</a></li>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    		<li class="page-item"><a class="page-link" href="/goty/freeboards/all?page=${ p }">${ p }</a></li>
@@ -170,7 +170,7 @@ thead th {
 			                   		<c:choose>
 			                   			<c:when test="${ condition ne null }">
 			                   				<li class="page-item">
-				                    			<a class="page-link" href="search.board?page=${ pageInfo.currentPage + 1 }&condition=${condition}&keyword=${keyword}">
+				                    			<a class="page-link" href="/goty/freeboards/search?page=${ pi.currentPage + 1 }&condition=${condition}&keyword=${keyword}">
 				                    			다음
 				                    			</a>
 				                    		</li>
@@ -200,7 +200,7 @@ thead th {
 									<li class="page-item">
 			                   			<c:choose>
 			                   				<c:when test="${ condition ne null }">
-			                   					<a class="page-link" href="search.board?page=${ pageInfo.currentPage - 1}&condition=${condition}&keyword=${keyword}">
+			                   					<a class="page-link" href="/goty/freeboards/search?page=${ pi.currentPage - 1}&condition=${condition}&keyword=${keyword}">
 			                    					뒤로
 			                    				</a>
 			                   				</c:when>
@@ -217,7 +217,7 @@ thead th {
 							<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
 								<c:choose>
 			                   		<c:when test="${ condition ne null }">
-			                    		<li class="page-item"><a class="page-link" href="search.board?page=${ p }&condition=${condition}&keyword=${keyword}">${ p }</a></li>
+			                    		<li class="page-item"><a class="page-link" href="/goty/freeboards/search?page=${ p }&condition=${condition}&keyword=${keyword}">${ p }</a></li>
 			                    	</c:when>
 			                    	<c:otherwise>
 			                    		<li class="page-item"><a class="page-link" href="/goty/freeboards/category?page=${ p }&categoryNo=${categoryNo}">${ p }</a></li>
@@ -233,7 +233,7 @@ thead th {
 			                   		<c:choose>
 			                   			<c:when test="${ condition ne null }">
 			                   				<li class="page-item">
-				                    			<a class="page-link" href="search.board?page=${ pageInfo.currentPage + 1 }&condition=${condition}&keyword=${keyword}">
+				                    			<a class="page-link" href="/goty/freeboards/search?page=${ pi.currentPage + 1 }&condition=${condition}&keyword=${keyword}">
 				                    			다음
 				                    			</a>
 				                    		</li>
@@ -263,8 +263,16 @@ thead th {
 		$('tbody > .lists').click((event) => {
 			location.href="/goty/freeboards/select/" + $(event.currentTarget)[0].id;
 		});
+
 		
-		
+		$(() => {
+			$('select[name=condition]').children().each((idx, item) => {
+				if($(item).val() == '${condition}'){
+					$(item).attr('selected', true);
+				}
+			});	
+		});
+
 		
 	</script>
 	
