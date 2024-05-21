@@ -5,4 +5,49 @@
   
 <mapper namespace="reviewMapper">
 
+	<resultMap id="reviewResultSet" type="review" >
+
+		<result column="REVIEW_NO"		property="reviewNo" />
+		<result column="REVIEW_TITLE"	property="reviewTitle" />
+		<result column="REVIEW_CONTENT"	property="reviewContent" />
+		<result column="CREATE_DATE"	property="createDate" />
+		<result column="Status"			property="Status" />
+		<result column="IMG_NO" 		property="imgNo" />
+		<result column="IMG_NAME" 		property="imgName" />
+		<result column="IMG_PATH" 		property="imgPath" />
+		
+	</resultMap>
+
+	<select id="findGameCount" resultType="_int">
+	
+		SELECT
+				COUNT(*)
+		  FROM
+		  		GAME_REVIEW
+		 WHERE
+		 		STATUS = 'Y'
+		
+	</select>
+	
+	<select id="findAllGames" resultMap="reviewResultSet">
+	
+		SELECT
+		        REVIEW_NO,
+		        REVIEW_TITLE,
+		        REVIEW_CONTENT,
+		        CREATE_DATE,
+		        STATUS,
+		        IMG_NAME,
+		        IMG_PATH
+		  FROM
+		        GAME_REVIEW GR
+		  JOIN
+		        ITEM_IMG II
+		    ON  (GR.IMG_NO = II.IMG_NO)
+		 ORDER
+		    BY
+		        CREATE_DATE DESC
+	
+	</select>
+
 </mapper>

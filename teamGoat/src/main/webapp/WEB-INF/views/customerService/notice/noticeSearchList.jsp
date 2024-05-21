@@ -131,14 +131,25 @@
                 </thead>
                     
                 <tbody align="center" style="height : auto;">
-                    <c:forEach items="${noticeList}" var="notice">
-                    	<tr style="height : 50px;">
-	                        <td>${ notice.noticeNo }</td>
-	                        <td>${ notice.noticeTitle }</td>
-	                        <td>${ notice.noticeWriter }</td>
-	                        <td>${ notice.createDate }</td>
-	                        <td>${ notice.count }</td>
-                   		</tr>
+                    <c:forEach items="${ searchList }" var="searchList">
+                    	
+                    	<c:choose>
+                    		<c:when test="${ empty searchList }">
+                    			<tr style="height : 50px;">
+			                        <td colspan="5">검색 결과가 존재하지 않습니다</td>
+                   				</tr>
+                    		</c:when>
+                    		<c:otherwise>
+		                    	<tr style="height : 50px;">
+			                        
+			                        <td>${ searchList.noticeNo }</td>
+			                        <td>${ searchList.noticeTitle }</td>
+			                        <td>${ searchList.noticeWriter }</td>
+			                        <td>${ searchList.createDate }</td>
+			                        <td>${ searchList.count }</td>
+		                   		</tr>
+                    		</c:otherwise>
+                    	</c:choose>                    	
                     </c:forEach>
                 </tbody>
             </table>
@@ -181,7 +192,7 @@
         </script>
 
         <div class="notice-search">
-            <form action="notices/find" style="padding-left : 100px; padding-top : 50px;">
+            <form action="/goty/notices/find" style="padding-left : 100px; padding-top : 50px;">
                 <select name="date" style="height : 35px;">
                     <option value="all">전체</option>
                     <option value="week">일주일</option>
@@ -199,10 +210,6 @@
             </form>
         </div>
     </div>
-
-
-
-
 
 </body>
 </html>

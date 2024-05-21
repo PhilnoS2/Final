@@ -177,7 +177,7 @@
 		      	</ul> 
 		    </li>
 		    <li>
-		      <a href="#">Metacritic</a>
+		      <a href="/goty/metacritic.main">Metacritic</a>
 		    </li>
 		    <li>
 		      <a href="/goty/freeboards/all">자유게시판</a>
