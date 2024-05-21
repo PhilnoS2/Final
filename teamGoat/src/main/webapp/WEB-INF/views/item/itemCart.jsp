@@ -38,7 +38,7 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
-					<th>제품 사진</th>
+					<th>이미지</th>
 					<th>제품 이름</th>
 					<th class="cart-price">제품 가격</th>
 					<th class="cart-price">적립금</th>
@@ -49,7 +49,7 @@
 				<c:choose>
 					<c:when test="${ not empty itemList }">
 						<c:forEach items="${ itemList }" var="item">
-							<tr style=>
+							<tr>
 								<td class="cart-detail">
 									<img class="cart-img" src="${ pageScope.item.imgPath }/${ pageScope.item.imgName }">
 								</td>
@@ -64,7 +64,10 @@
 									<fmt:formatNumber value="${ pageScope.item.price * 0.01  }" type="number" /> 원
 								</td>
 								<td class="cart-detail">
-									<a href="" class="btn btn-sm btn-outline-success" >주문하기</a> <br>
+									<a href="purchase?itemNo=${ pageScope.item.itemNo }" class="btn btn-sm btn-outline-success" >주문하기</a> 
+									
+									<br>
+									
 									<a class="btn btn-sm btn-outline-danger deleteCart" >
 										<input type="hidden" value="${ pageScope.item.itemNo }" />
 										<input type="hidden" value="${ sessionScope.loginMember.memberNo }" />
@@ -83,6 +86,8 @@
 				</c:choose>
 			</tbody>
 		</table>
+		
+		<a>전체 구매</a> <a>선택 구매</a>
 	</div>
 	
 	<script>

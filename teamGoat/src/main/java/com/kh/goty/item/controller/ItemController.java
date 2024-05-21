@@ -318,4 +318,13 @@ public class ItemController {
 		
 	}
 	
+	@GetMapping("purchase")
+	public ModelAndView addItemInOrder(ModelAndView mv) {
+		
+		
+		mv.setViewName("item/purchaseItem");
+		
+		return mv;
+	}
+	
 }
