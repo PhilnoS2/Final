@@ -36,12 +36,15 @@ public class FreeBoardController {
 	@GetMapping("/all")
 	public ModelAndView selectListAll(@RequestParam(value="page", defaultValue="1") int page,
 									 ModelAndView mv) {
-		PageInfo pageInfo = Pagination.getPageInfo(boardService.selectListCount(),
+		// 동적sql 조건을 위한 변수
+		int categoryNo = 0;
+		
+		PageInfo pageInfo = 
+				Pagination.getPageInfo(boardService.selectListCount(categoryNo),
 												  page,
 												  5,
 												  3);
-		
-		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo);
+		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, categoryNo);
 		
 		mv.addObject("listAll", listAll)
 		  .addObject("pi", pageInfo)
@@ -80,7 +83,8 @@ public class FreeBoardController {
 	}
 	
 	@GetMapping("/select/{boardNo}")
-	public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo, ModelAndView mv) {
+	public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
+									ModelAndView mv) {
 		
 		if(boardService.increaseCount(boardNo) > 0) {
 			Board board = boardService.selectBoard(boardNo);
@@ -95,11 +99,21 @@ public class FreeBoardController {
 	}
 	
 	
-	@GetMapping("/category/{categoryNo}")
-	public ModelAndView selectCategory(@PathVariable("categoryNo") int categoryNo,
+	@GetMapping("/category")
+	public ModelAndView selectCategory(@RequestParam("categoryNo") int categoryNo,
+									   @RequestParam(value="page", defaultValue="1") int page,
 									   ModelAndView mv) {
-		log.info("categoryNo = {}", categoryNo);
-		mv.setViewName("redirect:/");
+		PageInfo pageInfo = 
+				Pagination.getPageInfo(boardService.selectListCount(categoryNo),
+												  page,
+												  5,
+												  3);
+
+		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, categoryNo);
+		
+		mv.addObject("listAll", listAll)
+		  .addObject("pi", pageInfo)
+		  .setViewName("board/selectListAll");
 		return mv;
 	}
 	

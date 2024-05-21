@@ -22,16 +22,16 @@ public class BoardServiceImpl implements BoardService {
 
 	
 	@Override
-	public int selectListCount() {
-		return boardRepository.selectListCount(sqlSession);
+	public int selectListCount(int categoryNo) {
+		return boardRepository.selectListCount(sqlSession, categoryNo);
 	}
 	
 	@Override
-	public List<Board> selectListAll(PageInfo pageInfo) {
+	public List<Board> selectListAll(PageInfo pageInfo, int categoryNo) {
 		int offset = (pageInfo.getCurrentPage() - 1) * pageInfo.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pageInfo.getBoardLimit());
 		
-		return boardRepository.seleltListAll(sqlSession, rowBounds);
+		return boardRepository.seleltListAll(sqlSession, categoryNo ,rowBounds);
 	}
 
 	@Override

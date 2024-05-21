@@ -11,12 +11,12 @@ import com.kh.goty.board.model.vo.Board;
 @Repository
 public class BoardRepository {
 
-public int selectListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("boardMapper.selectListCount");
+public int selectListCount(SqlSessionTemplate sqlSession, int categoryNo) {
+		return sqlSession.selectOne("boardMapper.selectListCount", categoryNo);
 	}
 	
-	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, RowBounds rowBounds) {
-		return sqlSession.selectList("boardMapper.seleltListAll", null, rowBounds);
+	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, int categoryNo ,RowBounds rowBounds) {
+		return sqlSession.selectList("boardMapper.seleltListAll", categoryNo, rowBounds);
 	}
 
 	public int insertBoard(SqlSessionTemplate sqlSession, Board board) {

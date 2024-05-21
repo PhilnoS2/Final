@@ -30,6 +30,7 @@
 
 
 	<select id="selectListCount"
+	parameterType="_int"
 	resultType="_int"
 	>
 	SELECT
@@ -37,11 +38,15 @@
 	  FROM
 	      FREE_BOARD
 	 WHERE
-	      DELETE_YN = 'N'     
+	      DELETE_YN = 'N'
+	  <if test="categoryNo > 0">
+	   AND PLATFORM_NO = #{categoryNo}
+	  </if>         
 	</select>
 	
 	
 	<select id="seleltListAll"
+	parameterType="_int"
 	resultMap="boardResultSet">
 	SELECT
 	       FREE_BOARD.FREE_BOARD_NO,
@@ -74,6 +79,9 @@
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
 	 WHERE
 	      FREE_BOARD.DELETE_YN = 'N'
+	 <if test="category > 0">
+	 	AND FREE_BOARD.PLATFORM_NO = #{categoryNo}
+	 </if>
 	 ORDER
 	    BY
 	      FREE_BOARD_NO DESC   
