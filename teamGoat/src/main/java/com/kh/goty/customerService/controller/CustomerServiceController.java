@@ -64,6 +64,20 @@ public class CustomerServiceController {
 		
 		Notice notice = customerService.selectNotice(noticeNo);
 		
+		if(noticeNo > 1) {
+			customerService.increaseNoticeCount(noticeNo - 1);
+			Notice preNotice = customerService.selectNotice(noticeNo - 1);
+			if(preNotice != null) {
+				model.addAttribute("preNotice", preNotice);
+			} 
+		}
+		
+		if(customerService.selectNotice(noticeNo + 1) != null) {
+			customerService.increaseNoticeCount(noticeNo + 1);
+			Notice nextNotice = customerService.selectNotice(noticeNo + 1);
+			model.addAttribute("nextNotice", nextNotice);
+		}
+		
 		
 		if(customerService.selectNotice(noticeNo) != null) {
 			model.addAttribute("notice", notice);

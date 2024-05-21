@@ -165,9 +165,11 @@
                 <div>
                     <div style="margin-bottom:10px;">
                         <button id="previous" class="btn btn-sm btn-warning">▲이전글</button> 
+                        <a href="/goty/notice?noticeNo=${preNotice.noticeNo }">${ preNotice.noticeTitle }</a>
                     </div>
                     <div>
                         <button id="next" class="btn btn-sm btn-danger">▼다음글</button>
+                        <a href="/goty/notice?noticeNo=${ nextNotice.noticeNo }">${ nextNotice.noticeTitle }</a>
                     </div>
                 </div>
             </div>
@@ -176,9 +178,7 @@
         <script>
             $(function(){
                 $('#previous').click(function(){
-                	if(${notice.noticeNo - 1} > 0){
-	                    location.href = '/goty/notice?noticeNo='+${notice.noticeNo - 1};
-                	}
+					$(this).next().click();
                 });
 
                 $('#next').click(function(){
