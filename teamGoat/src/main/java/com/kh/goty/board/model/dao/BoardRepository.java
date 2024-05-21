@@ -1,5 +1,6 @@
 package com.kh.goty.board.model.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
@@ -15,7 +16,7 @@ public int selectListCount(SqlSessionTemplate sqlSession, int categoryNo) {
 		return sqlSession.selectOne("boardMapper.selectListCount", categoryNo);
 	}
 	
-	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, int categoryNo ,RowBounds rowBounds) {
+	public List<Board> seleltListAll(SqlSessionTemplate sqlSession, int categoryNo , RowBounds rowBounds) {
 		return sqlSession.selectList("boardMapper.seleltListAll", categoryNo, rowBounds);
 	}
 
@@ -31,5 +32,8 @@ public int selectListCount(SqlSessionTemplate sqlSession, int categoryNo) {
 		return sqlSession.update("boardMapper.increaseCount", boardNo);
 	}
 	
+	public List<Board> searchBoards(SqlSessionTemplate sqlSession, HashMap<String, String> map, RowBounds rowBounds){
+		return sqlSession.selectList("boardMapper.searchBoards", map, rowBounds);
+	}
 	
 }

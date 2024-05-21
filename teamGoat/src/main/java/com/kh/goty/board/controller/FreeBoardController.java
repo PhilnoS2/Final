@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -113,12 +114,35 @@ public class FreeBoardController {
 		
 		mv.addObject("listAll", listAll)
 		  .addObject("pi", pageInfo)
+		  .addObject("categoryNo", categoryNo)
 		  .setViewName("board/selectListAll");
 		return mv;
 	}
 	
 	
-	
+	@GetMapping("/search")
+	public ModelAndView searchBoards(@RequestParam("condition") String condition,
+									@RequestParam("keyword") String keyword,
+									ModelAndView mv) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("conditon", condition);
+		map.put("keyword", keyword);
+		
+		// 서치 데이터 페이지네이션하기
+		PageInfo pageInfo = 
+				Pagination.getPageInfo(boardService.selectListCount(categoryNo),
+												  page,
+												  5,
+												  3); 
+		
+		ArrayList<Board> listAll = (ArrayList<Board>)boardService.searchBoards(map);
+		
+		log.info("condition = {}", condition);
+		log.info("keyword = {}", keyword);
+		
+		mv.setViewName("board/selectListAll");
+		return mv;
+	}
 	
 	
 	
