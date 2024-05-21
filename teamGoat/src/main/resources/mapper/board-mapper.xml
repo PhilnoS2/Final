@@ -228,6 +228,28 @@
 	</select>
 	
 	
+	<update id="updateBoard"
+		parameterType="board"
+	>
+	UPDATE
+	      FREE_BOARD
+	  <set>
+	      BOARD_TITLE = #{boardTitle},
+	      BOARD_CONTENT = #{boardContent},
+	      PLATFORM_NO = #{platformNo},
+      
+      	<if test="originName != null">
+	      ORIGIN_NAME = #{originName},
+	      CHANGE_NAME = #{changeName},
+	      IMAGE_PATH = #{imagePath}
+      	</if>
+      
+      </set>
+	 WHERE
+	      DELETE_YN = 'N'
+	   AND
+   	      FREE_BOARD_NO = #{freeBoardNo}
+	</update>
 	
 	
 	
@@ -243,6 +265,15 @@
 	
 	
 	
+
+
+
+
+
+
+
+
+
 
 
 

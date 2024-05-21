@@ -180,7 +180,32 @@ public class FreeBoardController {
 		return mv;
 	}
 	
-	
+	@PostMapping("/update")
+	public ModelAndView updateBoard(Board board,
+									ModelAndView mv,
+									MultipartFile upFile, 
+									HttpSession session) {
+		
+		// 첨부 파일 확인
+		if(!upFile.getOriginalFilename().equals("")) {
+			board.setOriginName(upFile.getOriginalFilename());
+			board.setChangeName(saveFile(upFile, session));
+			board.setImagePath("resources/uploadFiles/" + board.getChageName());
+		}
+		
+		// log.info("board = {}", board);
+		
+		if(boardService.updateBoard(board) > 0) {
+			mv.addObject("alertMsg", "게시글 수정에 성공했습니다.")
+			  .setViewName("redirect:select/"+board.getFreeBoardNo());
+		} else {
+			mv.addObject("errorMsg", "게시글 수정에 실패했습니다.")
+			  .setViewName("common/errorPage");
+		}
+		
+		
+		return mv;
+	}
 	
 	
 	

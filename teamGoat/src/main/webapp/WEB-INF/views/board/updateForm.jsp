@@ -30,7 +30,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 	<div id="wrapper-div">
-		<form action="/goty/freeboards/inserts" method="post"  id="form-area"
+		<form action="/goty/freeboards/update" method="post"  id="form-area"
 		 class="shadow-lg p-4 mb-4 bg-white" enctype="multipart/form-data" >
 			<div class="form-group selects">
 				<label for="category" >카테고리</label>
@@ -51,17 +51,26 @@
 				<textarea class="form-control" rows="10" id="boardContent" name="boardContent" required >${ board.boardContent }</textarea>
 			</div>
 			
-			<div class="form-group">
+			<div class="form-group clearfix">
 				<label for="upfile" style="display: block;">파일첨부</label>
-				<input type="file" id="upfile" name="upFile" >
+				<input type="file" id="upfile" name="upFile">
 				<img width="100px;" height="100px;" src="/goty/${ board.imagePath }">
-				<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
-				<button class="btn btn-md btn-success ml-5" type="submit">수정하기하기</button>
+				<button class="btn btn-md btn-success float-right" type="submit">수정하기하기</button>
 			</div>
 			
+			<input type="hidden" name="freeBoardNo" value="${ board.freeBoardNo }"/>
+			
 		</form>
-	
+		
 	</div>
+	
+	<script>
+	$('select[name=platformNo]').children().each((idx,ele) => {
+		if($(ele).val() == '${ board.platformNo }'){
+			$(ele).attr('selected', true);
+		}
+	});
+	</script>
 	
 </body>
 </html>

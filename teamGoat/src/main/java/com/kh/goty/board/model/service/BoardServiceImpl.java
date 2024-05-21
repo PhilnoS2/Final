@@ -55,4 +55,9 @@ public class BoardServiceImpl implements BoardService {
 		return boardRepository.updateBoardForm(sqlSession, boardNo);
 	}
 
+	@Override
+	public int updateBoard(Board board) {
+		return boardRepository.updateBoard(sqlSession, board);
+	}
+
 }

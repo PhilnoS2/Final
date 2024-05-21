@@ -19,6 +19,8 @@ public interface BoardService {
 	public int increaseCount(int boardNo);
 
 	public Board updateBoardForm(int boardNo);
+
+	public int updateBoard(Board board);
 	
 
 }

@@ -35,5 +35,9 @@ public int selectListCount(SqlSessionTemplate sqlSession, HashMap<String, Object
 	public Board updateBoardForm(SqlSessionTemplate sqlSession, int boardNo) {
 		return sqlSession.selectOne("boardMapper.updateBoardForm", boardNo);
 	}
+
+	public int updateBoard(SqlSessionTemplate sqlSession, Board board) {
+		return sqlSession.update("boardMapper.updateBoard", board);
+	}
 	
 }
