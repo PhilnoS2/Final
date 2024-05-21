@@ -38,7 +38,7 @@
 		 WHERE
 		 		STATUS = 'Y'
 		   AND
-				ITEM_CATEGORIY = 1
+				ITEM_CATEGORY = 1
 		   AND
 		   		P.PLATFORM_NAME = #{platform}
 		
@@ -59,7 +59,7 @@
 		 WHERE
 		 		STATUS = 'Y'
 		   AND
-				ITEM_CATEGORIY = 2
+				ITEM_CATEGORY = 2
 		   AND
 		   		P.PLATFORM_NAME = #{platform}
 		
@@ -80,7 +80,7 @@
 		 WHERE
 		 		STATUS = 'Y'
 		   AND
-				ITEM_CATEGORIY = 3
+				ITEM_CATEGORY = 3
 		   AND
 		   		P.PLATFORM_NAME = #{platform}
 		
@@ -112,7 +112,7 @@
 		WHERE
 		       	STATUS = 'Y'
 		  AND
-		       	ITEM_CATEGORIY = 1
+		       	ITEM_CATEGORY = 1
 		  AND
 		       	P.PLATFORM_NAME = #{platform}
 		ORDER
@@ -145,7 +145,7 @@
 		WHERE
 		       	STATUS = 'Y'
 		  AND
-		       	ITEM_CATEGORIY = 2
+		       	ITEM_CATEGORY = 2
 		  AND
 		       	P.PLATFORM_NAME = #{platform}
 		ORDER
@@ -178,7 +178,7 @@
 		WHERE
 		       	STATUS = 'Y'
 		  AND
-		       	ITEM_CATEGORIY = 3
+		       	ITEM_CATEGORY = 3
 		  AND
 		       	P.PLATFORM_NAME = #{platform}
 		ORDER
