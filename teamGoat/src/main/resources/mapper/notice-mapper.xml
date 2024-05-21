@@ -62,7 +62,7 @@
 		       NOTICE.STATUS = 'Y'
 		 ORDER
 		    BY
-		       NOTICE_NO DESC    
+		       CREATE_DATE DESC    
 	</select>
 	
 	<select id="selectNotice" parameterType="_int" resultMap="noticeResultSet">
@@ -109,4 +109,49 @@
 		 WHERE
 		       NOTICE_NO = #{noticeNo}
 	</update>
+	
+	<select id="noticeSearchList" parameterType="hashmap" resultMap="noticeResultSet">
+		SELECT
+		       NOTICE_NO,
+		       NICKNAME,
+		       NOTICE_TITLE,
+		       NOTICE_CONTENT,
+		       TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') as "CREATE_DATE",
+		       NOTICE.STATUS,
+		       COUNT
+		  FROM
+		       NOTICE
+		  JOIN
+		       MEMBER USING(MEMBER_NO)  
+		       
+		 WHERE
+		       NOTICE.STATUS = 'Y'
+   	     <if test="date == 'week'">
+		   AND SYSDATE - NOTICE.CREATE_DATE &lt; 8   
+		 </if>
+		 <if test="date == 'month'">
+		   AND SYSDATE - NOTICE.CREATE_DATE &lt; 32   
+		 </if>
+		 <if test="date == 'treeMonth'">
+		   AND SYSDATE - NOTICE.CREATE_DATE &lt; 92   
+		 </if>
+		 <if test="condition != ''">
+			 <if test="condition == 'subject'">
+			   AND
+			      NOTICE_TITLE LIKE '%' || #{keyword} || '%'
+			 </if>
+			 <if test="condition == 'content'">
+			   AND
+			      NOTICE_CONTENT LIKE '%' || #{keyword} || '%'
+			 </if> 
+			 <if test="condition == 'writer'">
+			   AND
+			      NICKNAME LIKE '%' || #{keyword} || '%'
+			 </if>     
+		 </if>
+		 ORDER
+		    BY
+		       CREATE_DATE DESC    
+	</select>
+	
 </mapper>

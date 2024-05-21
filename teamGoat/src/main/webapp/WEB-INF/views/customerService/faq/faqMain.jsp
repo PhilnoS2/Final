@@ -131,36 +131,22 @@
             <div>
                 <select id="select-area" name="select" style="width : 100px; height : 40px; margin-left: 90px;">
                     <option value="all">전체</option>
-                    <option value="c">주문/결제</option>
-                    <option value="e">기타문의</option>
-                    <option value="s">서비스</option>
-                    <option value="d">배송관련</option>
+                    <option value="1">주문/결제</option>
+                    <option value="2">기타문의</option>
+                    <option value="3">서비스</option>
+                    <option value="4">배송관련</option>
                 </select>
             </div>
         </div>
 
 
         <div class="faq-content">
-            <!--DB에서 조회해온 데이터를 반복문 돌려야 함-->
             <div style="margin-bottom:50px;"></div>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
-            <div class="faq-q">Q.질문입니다</div>
-            <p class="faq-a">A.답변입니다</p>
+            
+            <c:forEach items="${ faqList }" var="faq">
+	            <div class="faq-q">Q.${ faq.faqQuestion }</div>
+	            <p class="faq-a">A.${ faq.faqAnswer }</p>
+            </c:forEach>
         </div>
     </div>
 
@@ -170,9 +156,17 @@
             $(function(){
                 $('#select-area').change(function(){
                     //console.log($('option:selected').val());
-                    const choice = $('option:selected').val();
+                    const category = $('option:selected').val();
                     // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
-                    console.log(choice);
+                    $.ajax({
+                    	url : 'faq/category',
+                    	type : 'get',
+                    	data : {category : category
+                    	},
+                    	success : function(result){
+                    		console.log(result);
+                    	}
+                    });
                 });
             })
 

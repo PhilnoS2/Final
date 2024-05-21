@@ -56,6 +56,9 @@
 	border : 1px solid grey;
 	border-radius: 10px;
 }
+#btn-div a {
+	margin: 3px;
+}
 </style>
 <title>selectBoard</title>
 </head>
@@ -78,8 +81,9 @@
 					<h6>${ board.nickname }</h6>
 				</div>
 				<c:if test="${ sessionScope.loginMember.memberNo == board.memberNo }">
-					<div>
-						<a class="btn btn-sm btn-danger" href="#">글 수정</a>
+					<div id="btn-div">
+						<a class="btn btn-sm btn-warning" href="/goty/freeboards/update/${ boardNo }">수정</a>
+						<a class="btn btn-sm btn-danger" href="#">삭제</a>
 					</div>
 				</c:if>
 			</div>

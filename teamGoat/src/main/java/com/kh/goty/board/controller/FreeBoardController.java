@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -25,6 +26,13 @@ import com.kh.goty.common.template.Pagination;
 
 import lombok.extern.slf4j.Slf4j;
 
+
+/*
+전체조회 -> freeboard
+검색 -> freeboard/검색어/검색조건
+하나조회 -> freeboard/보드넘버
+*/
+
 @Slf4j
 @RestController
 @RequestMapping("/freeboards")
@@ -36,15 +44,20 @@ public class FreeBoardController {
 	@GetMapping("/all")
 	public ModelAndView selectListAll(@RequestParam(value="page", defaultValue="1") int page,
 									 ModelAndView mv) {
-		// 동적sql 조건을 위한 변수
-		int categoryNo = 0;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		// 동적sql 조건
+		map.put("categoryNo", 0);
 		
 		PageInfo pageInfo = 
-				Pagination.getPageInfo(boardService.selectListCount(categoryNo),
+				Pagination.getPageInfo(boardService.selectListCount(map),
 												  page,
 												  5,
 												  3);
-		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, categoryNo);
+		
+		ArrayList<Board> listAll =
+				(ArrayList<Board>)boardService.selectListAll(pageInfo, map);
 		
 		mv.addObject("listAll", listAll)
 		  .addObject("pi", pageInfo)
@@ -103,24 +116,69 @@ public class FreeBoardController {
 	public ModelAndView selectCategory(@RequestParam("categoryNo") int categoryNo,
 									   @RequestParam(value="page", defaultValue="1") int page,
 									   ModelAndView mv) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("categoryNo", categoryNo);
+		
 		PageInfo pageInfo = 
-				Pagination.getPageInfo(boardService.selectListCount(categoryNo),
+				Pagination.getPageInfo(boardService.selectListCount(map),
 												  page,
 												  5,
 												  3);
-
-		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, categoryNo);
+		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, map);
 		
 		mv.addObject("listAll", listAll)
 		  .addObject("pi", pageInfo)
+		  .addObject("categoryNo", categoryNo)
 		  .setViewName("board/selectListAll");
+		
 		return mv;
 	}
 	
 	
 	
+	@GetMapping("/search")
+	public ModelAndView searchBoards(@RequestParam("condition") String condition,
+									@RequestParam("keyword") String keyword,
+									@RequestParam(value="page", defaultValue="1") int page,
+									ModelAndView mv) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+		
+		// 서치 데이터 페이지네이션하기
+		PageInfo pageInfo = 
+				Pagination.getPageInfo(boardService.selectListCount(map),
+												  page,
+												  5,
+												  3);
+
+		ArrayList<Board> listAll =
+				(ArrayList<Board>)boardService.selectListAll(pageInfo, map);
+		
+		mv.addObject("listAll", listAll)
+		  .addObject("pi", pageInfo)
+		  .addObject("condition", condition)
+		  .addObject("keyword", keyword)
+		  .setViewName("board/selectListAll");
+		return mv;
+	}
 	
-	
+	@GetMapping("/update/{boardNo}")
+	public ModelAndView updateBoardForm(@PathVariable("boardNo") int boardNo,
+								ModelAndView mv) {
+		Board board = boardService.updateBoardForm(boardNo);
+		
+		if(board != null) {
+			log.info("board = {}", board);
+			mv.addObject("board", board)
+			  .setViewName("board/updateForm");
+		} else {
+			mv.addObject("errorMsg", "게시글을 찾을 수 없습니다.")
+			  .setViewName("common/errorPage");
+		}
+		return mv;
+	}
 	
 	
 	
