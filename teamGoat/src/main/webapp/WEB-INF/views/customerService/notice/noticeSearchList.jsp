@@ -166,7 +166,7 @@
             	</c:choose>
             	
                 <c:forEach begin="${ pageInfo.startPage}" end="${ pageInfo.endPage }" var="p">
-                	<a id="number${ p }" class="btn btn-light" href="/goty/notices?page=${ p }">${ p }</a>
+                	<a id="number${ p }" class="btn btn-light" href="/goty/notices/find?date=${ date }&condition=${ condition }&keyword=${ keyword }&page=${ p }">${ p }</a>
                 </c:forEach>
                 
                 <c:choose>

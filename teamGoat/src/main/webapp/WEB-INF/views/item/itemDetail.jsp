@@ -75,10 +75,13 @@
 				<c:choose>
 					<c:when test="${ not empty sessionScope.loginMember }">
 						<a href="purchase" class="btn btn-dark btn-lg">구매하기</a>
-						<a href="insert.cart?itemNo=${ requestScope.item.itemNo }&memberNo=${ sessionScope.loginMember.memberNo }" class="btn btn-light btn-lg">장바구니</a>
+						<a href="insert.cart?itemNo=${ requestScope.item.itemNo }
+											&memberNo=${ sessionScope.loginMember.memberNo }
+											&platformNo=${ item.platformNo }" 
+											class="btn btn-light btn-lg">장바구니</a>
 					</c:when>
 					<c:otherwise>
-						<a class="btn btn-info btn-md" href="/goty/member/login?reqUri=detail.item?itemNo=${item.itemNo}">구매를 위해서는 로그인해주세요.</a>
+						<a class="btn btn-info btn-md" href="/goty/member/login">구매를 위해서는 로그인해주세요.</a>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -87,6 +90,24 @@
 		
 		
 	</div>
+	
+	<script>
+		
+		//console.log(window.location.search);
+		
+		var url = window.location.search;
+		
+		var setCookie = function(name, value, exp) {
+			
+			var date = new Date();
+			date.setTime(date.getTime() + exp*24*60*60*1000);
+			document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+			
+		};
+		
+		setCookie("reqUri" ,"detail.item" + url, 1);
+
+	</script>
 	
 </body>
 </html>

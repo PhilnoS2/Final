@@ -48,12 +48,19 @@ public class MemberController {
 								 HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
+<<<<<<< HEAD
+		System.out.println(reqUri);
+		Cookie cookie = new Cookie("reqUri", reqUri);
+		cookie.setMaxAge(1 * 60 * 60);
+		response.addCookie(cookie);
+=======
 		
 		if(reqUri != null) {
 			Cookie cookie = new Cookie("reqUri", reqUri);
 			cookie.setMaxAge(1 * 60);
 			response.addCookie(cookie);
 		}
+>>>>>>> 1ee60baac850b9bff81a5aad9e250ab5270ec93e
 		
 		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
 		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
@@ -69,7 +76,7 @@ public class MemberController {
 							  ModelAndView mv,
 							  @CookieValue("reqUri") String reqUri) {
 		Member loginMember = memberService.login(member);
-		
+		System.out.println(reqUri);
 		// 임시코드발급상태확인
 		if(loginMember != null 
 		   && loginMember.getEmptyCodeYn().equals("Y")
