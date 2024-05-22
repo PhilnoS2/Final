@@ -130,7 +130,7 @@
         <div class="faq-search">
             <div>
                 <select id="select-area" name="select" style="width : 100px; height : 40px; margin-left: 90px;">
-                    <option value="all">전체</option>
+                    <option value="0">전체</option>
                     <option value="1">주문/결제</option>
                     <option value="2">기타문의</option>
                     <option value="3">서비스</option>

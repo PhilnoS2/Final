@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 import com.kh.goty.customerService.model.service.CustomerService;
@@ -20,11 +21,13 @@ import com.kh.goty.customerService.model.vo.Faq;
 import com.kh.goty.customerService.model.vo.Notice;
 import com.kh.goty.customerService.model.vo.QuestionCategory;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class CustomerServiceController {
 
-	@Autowired
-	private CustomerService customerService;
+	private final CustomerService customerService;
 	
 	@GetMapping("admin")
 	public String forwardAdmin() {
@@ -176,10 +179,12 @@ public class CustomerServiceController {
 	
 	@ResponseBody
 	@GetMapping(value="faq/category", produces="application/json; charset=UTF-8")
-	public String selectFaq(String category) {
-		System.out.println(category);
+	public String selectFaq(int category) {
 		
-		return "";
+		List<Faq> searchList = customerService.faqSearchList(category);
+		System.out.println(searchList);
+		
+		return new Gson().toJson(searchList);
 	}
 	
 	

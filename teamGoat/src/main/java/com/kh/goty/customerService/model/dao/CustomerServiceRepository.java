@@ -58,4 +58,9 @@ public class CustomerServiceRepository {
 	public List<Faq> selectFaqList(SqlSessionTemplate sqlSession){
 		return sqlSession.selectList("faqMapper.selectFaqList");
 	}
+	
+	public List<Faq> faqSearchList(SqlSessionTemplate sqlSession, int category){
+		return sqlSession.selectList("faqMapper.faqSearchList", category);
+	}
+	
 }

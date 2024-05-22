@@ -14,18 +14,18 @@ import com.kh.goty.customerService.model.vo.Faq;
 import com.kh.goty.customerService.model.vo.Notice;
 import com.kh.goty.customerService.model.vo.QuestionCategory;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class CustomerServiceImpl implements CustomerService {
 
 	
-	@Autowired
-	private SqlSessionTemplate sqlSession;
+	private final SqlSessionTemplate sqlSession;
 	
-	@Autowired
-	private CustomerServiceRepository customerServiceRepository;
+	private final CustomerServiceRepository customerServiceRepository;
 	
-	@Override
-	public int noticeInsert(Notice notice) {
+	public final int noticeInsert(Notice notice) {
 		
 		return customerServiceRepository.noticeInsert(sqlSession, notice);
 	}
@@ -89,8 +89,8 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerServiceRepository.selectFaqList(sqlSession);
 	}
 
-	
-	
-	
-	
+	@Override
+	public List<Faq> faqSearchList(int category) {
+		return customerServiceRepository.faqSearchList(sqlSession, category);
+	}
 }
