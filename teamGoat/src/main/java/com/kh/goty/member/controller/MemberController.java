@@ -9,7 +9,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
@@ -27,22 +26,21 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goty.member.model.service.MemberService;
 import com.kh.goty.member.model.vo.Member;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @PropertySource("classpath:key.properties")
 @Slf4j
 @RestController
 @RequestMapping("/member")
+@RequiredArgsConstructor
 public class MemberController {
 	
-	@Autowired
-	private Environment env;
+	private final Environment env;
 	
-	@Autowired
-	private MemberService memberService;
+	private final MemberService memberService;
 		
-	@Autowired
-	private BCryptPasswordEncoder bcryptPasswordEncoder;
+	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@GetMapping("/login")
 	public ModelAndView loginForm(@RequestParam(value="reqUri", required=false) String reqUri,
@@ -51,9 +49,11 @@ public class MemberController {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
 		
-		Cookie cookie = new Cookie("reqUri", reqUri);
-		cookie.setMaxAge(1 * 60 * 60);
-		response.addCookie(cookie);
+		if(reqUri != null) {
+			Cookie cookie = new Cookie("reqUri", reqUri);
+			cookie.setMaxAge(1 * 60);
+			response.addCookie(cookie);
+		}
 		
 		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
 		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
@@ -68,6 +68,7 @@ public class MemberController {
 							  HttpSession session,
 							  ModelAndView mv,
 							  @CookieValue("reqUri") String reqUri) {
+		
 		Member loginMember = memberService.login(member);
 		
 		// 임시코드발급상태확인
@@ -76,7 +77,7 @@ public class MemberController {
 		   && loginMember.getMemberPwd().equals(member.getMemberPwd())) {
 			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
 			return mv;
-		}
+	}
 	
 	
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {

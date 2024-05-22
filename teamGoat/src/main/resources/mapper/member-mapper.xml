@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="memberMapper">
+<mapper namespace="com.kh.goty.member.model.dao.MemberMapper">
 
 <select id="login"
   		parameterType="member"
@@ -178,65 +178,6 @@
   	   AND
   	      DELETE_YN = 'N'  
   	</select>
-  
-  
-  	<select id="checksocialId"
-  		parameterType="string"
-  		resultType="_int"
-  	>
-  	SELECT
-  	      COUNT(*)
-  	  FROM
-  	      MEMBER
-  	  WHERE
-  	       MEMBER_ID = #{memberId}
-  	    AND
-  	       DELETE_YN = 'N'            
-  	</select>
-  	
-  	<select id="loginKakao"
-  		parameterType="string"
-  		resultType="member"
-  	>
-  	SELECT
-  	      MEMBER_NO memberNo,
-  	      MEMBER_ID memberId,
-  	      NICKNAME nickname,
-  	      STATUS status,
-  	      ACCESS_TOKEN accessToken,
-  	      THUMBNAIL_IMAGE thumbnailImage,
-  	      MEMBER_POINT memberPoint,
-  	      MEM_LEVEL memLevel,
-  	      TOTAL_PRICE totalPrice
-  	  FROM
-  	      MEMBER
-  	 WHERE
-  	      MEMBER_ID = #{memberId} 
-  	</select>
-  	
-  
-  <select id="loginNaver"
-  		parameterType="string"
-  		resultType="member"
-  	>
-  	SELECT
-  	      MEMBER_NO memberNo,
-  	      MEMBER_ID memberId,
-  	      NICKNAME nickname,
-  	      MEMBER_NAME memberName,
-  	      PHONE phone,
-  	      BORNDATE bornDate,
-  	      STATUS status,
-  	      MEMBER_POINT memberPoint,
-  	      MEM_LEVEL memLevel,
-  	      TOTAL_PRICE totalPrice
-  	  FROM
-  	      MEMBER
-  	 WHERE
-  	      MEMBER_ID = #{memberId}
-  	</select>
-  
-  
   
   	<select id="findUpdateMember"
   	parameterType="_int"

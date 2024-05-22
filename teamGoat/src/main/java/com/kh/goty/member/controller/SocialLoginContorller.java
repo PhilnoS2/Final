@@ -9,41 +9,37 @@ import java.net.URL;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.parser.ParseException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.goty.member.model.service.KakaoService;
 import com.kh.goty.member.model.service.MemberService;
-import com.kh.goty.member.model.service.NaverService;
+import com.kh.goty.member.model.service.SocialMemberService;
 import com.kh.goty.member.model.vo.Member;
 
-
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class SocialLoginContorller {
 	
-	@Autowired
-	private MemberService memberService;
 	
-	@Autowired
-	private KakaoService kakaoService;
+	private final MemberService memberService;
 	
-	@Autowired
-	private NaverService naverService;
+	private final SocialMemberService socialMemberService;	
+	
 	
 	@GetMapping("/kakaologin")
 	public ModelAndView kakaologin(String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {		
-		String accessToken = kakaoService.getToken(code);
-		Member member = kakaoService.getUserInfo(accessToken);
+		String accessToken = socialMemberService.getToken(code);
+		Member member = socialMemberService.getUserInfoKakao(accessToken);
 		member.setAccessToken(accessToken);
 		member.setStatus("KM");
 		
-		if(kakaoService.checkKakaoId(member.getMemberId()) > 0) {
-			Member kmember = kakaoService.loginKakao(member.getMemberId());
+		if(socialMemberService.checkKakaoId(member.getMemberId()) > 0) {
+			Member kmember = socialMemberService.loginKakao(member.getMemberId());
 			kmember.setStatus("KM");
 			session.setAttribute("loginMember", kmember);
 			session.setAttribute("alertMsg", "로그인 성공");
@@ -74,11 +70,7 @@ public class SocialLoginContorller {
 			= new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		
 		String responseData = br.readLine();
-		
-		System.out.println(responseData);
-		
-		//JSONObject responseObj = (JSONObject)new JSONParser().parse(responseData);
-		
+
 		session.removeAttribute("loginMember");
 		session.setAttribute("alertMsg", "로그아웃합니다.");
 		mv.setViewName("redirect:/");
@@ -89,11 +81,11 @@ public class SocialLoginContorller {
 	
 	@GetMapping("/naverlogin")
 	public ModelAndView naverlogin(String state, String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {
-		String accessToken = naverService.getToken(code, state);
-		Member member = naverService.getUserInfo(accessToken);		
+		String accessToken = socialMemberService.getToken(code, state);
+		Member member = socialMemberService.getUserInfoNaver(accessToken);		
 
-		if(naverService.checkNaverId(member.getMemberId()) > 0) {
-			Member nmember = naverService.loginNaver(member.getMemberId());
+		if(socialMemberService.checkNaverId(member.getMemberId()) > 0) {
+			Member nmember = socialMemberService.loginNaver(member.getMemberId());
 			nmember.setStatus("NM");
 			session.setAttribute("loginMember", nmember);
 			session.setAttribute("alertMsg", "로그인 성공!");
@@ -107,7 +99,6 @@ public class SocialLoginContorller {
 		
 		return mv;
 	}
-	
 	
 	@GetMapping("/naverlogout")
 	public ModelAndView naverlogout(HttpSession session, ModelAndView mv) {
