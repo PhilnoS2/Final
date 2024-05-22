@@ -1,21 +1,89 @@
 package com.kh.goty.member.model.service;
 
-import org.mybatis.spring.SqlSessionTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.goty.member.model.dao.MemberRepository;
+import com.kh.goty.member.model.dao.MemberMapper;
 import com.kh.goty.member.model.vo.Member;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 	
+	private final MemberMapper memberMapper;
+
+	@Override
+	public Member login(Member member) {
+		return memberMapper.login(member);
+	}
+
+	@Override
+	public int insertMember(Member member) {
+		return memberMapper.insertMember(member);
+	}
+
+	@Override
+	public int idCheck(String checkId) {
+		return memberMapper.idCheck(checkId);
+	}
+
+	@Override
+	public int emailCheck(String checkEmail) {
+		return memberMapper.emailCheck(checkEmail);
+	}
+
+	@Override
+	public int phoneCheck(String checkPhone) {
+		return memberMapper.phoneCheck(checkPhone);
+	}
+
+	@Override
+	public String findId(Member member) {
+		return memberMapper.findId(member);
+	}
+
+	@Override
+	public int phoneCheck(Member member) {
+		return memberMapper.phoneCheck(member);
+	}
+
+	@Override
+	public int findPwd(Member member) {
+		return memberMapper.findPwd(member);
+	}
+
+	@Override
+	public int updatePwd(Member member) {
+		return memberMapper.updatePwd(member);
+	}
+
+	@Override
+	public int changePwd(Member member) {
+		return memberMapper.changePwd(member);
+	}
+
+	@Override
+	public Member findUpdateMember(int memberNo) {
+		return memberMapper.findUpdateMember(memberNo);
+	}
+
+	@Override
+	public int updateMember(Member member) {
+		return memberMapper.updateMember(member);
+	}
+	
+}	
+	
+	
+
+	/*
 	@Autowired
 	MemberRepository memberRepository;
 	
 	@Autowired
 	SqlSessionTemplate sqlSession;
-	
+
 	@Override
 	public Member login(Member member) {
 		return memberRepository.login(sqlSession, member);
@@ -75,5 +143,5 @@ public class MemberServiceImpl implements MemberService {
 	public int updateMember(Member member) {
 		return memberRepository.updateMember(sqlSession, member);
 	}
-	
-}
+	*/
+

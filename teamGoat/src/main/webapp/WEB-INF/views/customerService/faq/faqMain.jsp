@@ -141,9 +141,11 @@
 
 
         <div class="faq-content">
+            
             <div style="margin-bottom:50px;"></div>
             
             <c:forEach items="${ faqList }" var="faq">
+            	
 	            <div class="faq-q">Q.${ faq.faqQuestion }</div>
 	            <p class="faq-a">A.${ faq.faqAnswer }</p>
             </c:forEach>
@@ -164,25 +166,41 @@
                     	data : {category : category
                     	},
                     	success : function(result){
-                    		console.log(result);
+                    		console.log(result[0]);
+                    		let text = '<div style="margin-bottom:50px;"></div>';
+                    		for(let i in result){
+								const faq = result[i];
+								
+								text += '<div class="faq-q">Q. '
+									 + faq.faqQuestion
+								     + '</div>'
+								     + '<p class="faq-a"> A. '
+								     + faq.faqAnswer
+								     +'</p>'
+                    		};
+                    		$('.faq-content').html(text);
                     	}
                     });
                 });
-            })
-
-            $('.faq-content').on('click', ('.faq-q'), function(){
-                //console.log($(this));
-                const $a = $(this).next();
-
-                if($a.css('display') == 'none'){
-                    $a.slideDown(500);
-                    $a.siblings('p').slideUp(1000);
-                } 
-                else {
-                    $a.slideUp(500);
-                }
-            })
+            });
+             $(function(){
+	        	$('.faq-content').on('click', ('.faq-q'), function(){
+	                //console.log($(this));
+	                const $a = $(this).next();
+	
+	                if($a.css('display') == 'none'){
+	                    $a.slideDown(500);
+	                    $a.siblings('p').slideUp(1000);
+	                } 
+	                else {
+	                    $a.slideUp(500);
+	                }
+	            });
+	        })
+            
         })
+        
+       
     </script>
 
     
