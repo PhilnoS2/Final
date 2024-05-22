@@ -21,11 +21,13 @@ import com.kh.goty.customerService.model.vo.Faq;
 import com.kh.goty.customerService.model.vo.Notice;
 import com.kh.goty.customerService.model.vo.QuestionCategory;
 
+import lombok.RequiredArgsConstructor;
+
 @Controller
+@RequiredArgsConstructor
 public class CustomerServiceController {
 
-	@Autowired
-	private CustomerService customerService;
+	private final CustomerService customerService;
 	
 	@GetMapping("admin")
 	public String forwardAdmin() {
