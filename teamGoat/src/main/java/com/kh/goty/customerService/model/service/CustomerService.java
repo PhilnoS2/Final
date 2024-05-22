@@ -39,8 +39,12 @@ public interface CustomerService {
 	// 카테고리 조회
 	List<QuestionCategory> selectCategoryList();
 	
+	// FAQ 생성
 	int insertFaq(Faq faq);
 	
+	// FAQ 전체 리스트 조회
 	List<Faq> selectFaqList();
 	
+	// FAQ 카테고리별 리스트 조회
+	List<Faq> faqSearchList(int category);
 }

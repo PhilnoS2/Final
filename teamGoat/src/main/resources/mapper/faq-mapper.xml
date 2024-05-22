@@ -63,4 +63,40 @@
 		       CREATE_DATE DESC 		       
 	</select>
 	
+	<select id="faqSearchList" parameterType="_int" resultMap="faqResultSet">
+		SELECT
+		       FAQ_NO,
+		       MEMBER_NO,
+		       CATEGORY_NO,
+		       FAQ_QUESTION,
+		       FAQ_ANSWER,
+		       TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') as "CREATE_DATE"
+		  FROM
+		       FAQ
+		 <if test="category == 0">		 
+		 </if>		       
+		 <if test="category == 1">		 
+		 WHERE
+		       CATEGORY_NO = 1
+		 </if>
+		 <if test="category == 2">
+		 WHERE
+		       CATEGORY_NO = 2
+		 </if>
+		 <if test="category == 3">
+		 WHERE
+		       CATEGORY_NO = 3
+		 </if>
+		 <if test="category == 4">
+		 WHERE
+		       CATEGORY_NO = 4
+		 </if>         
+		 ORDER
+		    BY
+		       CREATE_DATE DESC 		       
+	</select>
+	
+	
+	
+	
 </mapper>

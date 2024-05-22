@@ -89,8 +89,8 @@ public class CustomerServiceImpl implements CustomerService {
 		return customerServiceRepository.selectFaqList(sqlSession);
 	}
 
-	
-	
-	
-	
+	@Override
+	public List<Faq> faqSearchList(int category) {
+		return customerServiceRepository.faqSearchList(sqlSession, category);
+	}
 }
