@@ -55,7 +55,7 @@
 								</td>
 								<td class="cart-detail">
 									
-									<a href="detail.item?itemNo=${ pageScope.item.itemNo }">${ item.itemName }</a>
+									<a href="detail.item?platformNo=${ pageScope.item.platformNo }&itemNo=${ pageScope.item.itemNo }">${ item.itemName }</a>
 								</td>
 								<td class="cart-detail cart-price">
 									<fmt:formatNumber value="${ pageScope.item.price }" type="number" /> 원
@@ -71,6 +71,7 @@
 									<a class="btn btn-sm btn-outline-danger deleteCart" >
 										<input type="hidden" value="${ pageScope.item.itemNo }" />
 										<input type="hidden" value="${ sessionScope.loginMember.memberNo }" />
+										<input type="hidden" value="${ pageScope.item.platformNo } " />
 										삭제하기
 									</a>
 								</td>
@@ -95,12 +96,16 @@
 		$(() => {
 			
 			$('.deleteCart').click((e) => {
-				//console.log($(e.currentTarget).children()[0].defaultValue);
+				
+				//console.log($(e.currentTarget).children()[2]);
+				
 				location.href = 
 					  'delete.cart?itemNo=' 
 					+ $(e.currentTarget).children()[0].defaultValue 
 					+ '&memberNo=' 
 					+ $(e.currentTarget).children()[1].defaultValue
+					+ '&platformNo='
+					+ $(e.currentTarget).children()[2].defaultValue
 				
 			});
 			

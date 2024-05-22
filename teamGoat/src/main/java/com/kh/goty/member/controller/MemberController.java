@@ -50,7 +50,7 @@ public class MemberController {
 								 HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
-		
+		System.out.println(reqUri);
 		Cookie cookie = new Cookie("reqUri", reqUri);
 		cookie.setMaxAge(1 * 60 * 60);
 		response.addCookie(cookie);
@@ -69,7 +69,7 @@ public class MemberController {
 							  ModelAndView mv,
 							  @CookieValue("reqUri") String reqUri) {
 		Member loginMember = memberService.login(member);
-		
+		System.out.println(reqUri);
 		// 임시코드발급상태확인
 		if(loginMember != null 
 		   && loginMember.getEmptyCodeYn().equals("Y")

@@ -5,36 +5,37 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.goty.common.model.vo.PageInfo;
+import com.kh.goty.item.model.dao.ItemMapper;
 import com.kh.goty.item.model.dao.ItemRepository;
 import com.kh.goty.item.model.vo.Item;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService{
 	
-	@Autowired
-	private SqlSession sqlSession;
-	
-	@Autowired
-	private ItemRepository itemRepository;
+	private final SqlSession sqlSession;
+	private final ItemRepository itemRepository;
+	private final ItemMapper itemMapper;
 	
 	// List Count용 Service - 반환  int
 	@Override
 	public int findMachineCount(String platform) {
-		return itemRepository.findMachineCount(sqlSession, platform);
+		return itemMapper.findMachineCount(platform);
 	}
 	
 	@Override
 	public int findGameCount(String platform) {
-		return itemRepository.findGameCount(sqlSession, platform);
+		return itemMapper.findGameCount(platform);
 	}
 	
 	@Override
 	public int findAccessoryCount(String platform) {
-		return itemRepository.findAccessoryCount(sqlSession, platform);
+		return itemMapper.findAccessoryCount(platform);
 	}
 	
 	// Item List용 Service - 반환 List<Item>
@@ -44,7 +45,7 @@ public class ItemServiceImpl implements ItemService{
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset ,pi.getBoardLimit());
 		
-		return itemRepository.findMachineList(sqlSession, platform , rowBounds);
+		return itemMapper.findMachineList(platform, rowBounds);
 	}
 
 	@Override
@@ -53,7 +54,7 @@ public class ItemServiceImpl implements ItemService{
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset ,pi.getBoardLimit());
 		
-		return itemRepository.findGameList(sqlSession, platform , rowBounds);
+		return itemMapper.findGameList(platform , rowBounds);
 	}
 
 	@Override
@@ -61,29 +62,29 @@ public class ItemServiceImpl implements ItemService{
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset ,pi.getBoardLimit());
 		
-		return itemRepository.findAccessoryList(sqlSession, platform , rowBounds);
+		return itemMapper.findAccessoryList(platform , rowBounds);
 	}
 
 	//상세보기 페이지용
 	@Override
-	public Item findItemDetail(int itemNo) {
-		return itemRepository.findItemDetail(sqlSession, itemNo);
+	public Item findItemDetail(HashMap<String, Integer> map) {
+		return itemMapper.findItemDetail(map);
 	}
 
 	// Basket Insert
 	@Override
 	public int addItemInCart(HashMap<String, Integer> map) {
-		return itemRepository.addItemInCart(sqlSession, map);
+		return itemMapper.addItemInCart(map);
+	}
+	@Override
+	public int deleteItemInCart(HashMap<String, Integer> map) {
+		return itemMapper.deleteItemInCart(map);
 	}
 
 	@Override
 	public List<Item> findItemListInCart(int memberNo) {
-		return itemRepository.findItemListInCart(sqlSession, memberNo);
+		return itemMapper.findItemListInCart(memberNo);
 	}
 
-	@Override
-	public int deleteItemInCart(HashMap<String, Integer> map) {
-		return itemRepository.deleteItemInCart(sqlSession, map);
-	}
 
 }
