@@ -20,6 +20,7 @@
 	align-items: center;
 	justify-content: space-between;
 	border-bottom: 1px solid grey;
+	box-sizing: border-box;
 }
 .wrapper-div-title div{
 	display:inline-block;
@@ -118,6 +119,9 @@
 		
 		<div id="review-area">
 			<p class="m-3">리뷰</p>
+			<div style="width:50%;" class="form-group">
+				<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
+			</div>
 			<c:choose>
 				<c:when test="${ not empty board.replies }">
 					<c:forEach items="${ board.replies }" var="reply">

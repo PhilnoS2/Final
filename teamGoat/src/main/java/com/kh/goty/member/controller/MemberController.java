@@ -68,7 +68,6 @@ public class MemberController {
 							  HttpSession session,
 							  ModelAndView mv,
 							  @CookieValue("reqUri") String reqUri) {
-		
 		Member loginMember = memberService.login(member);
 		
 		// 임시코드발급상태확인
@@ -77,14 +76,16 @@ public class MemberController {
 		   && loginMember.getMemberPwd().equals(member.getMemberPwd())) {
 			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
 			return mv;
-	}
+		}
 	
 	
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
+			
+			// 쿠키에서 확인하기
+			// get
 			if(!reqUri.equals("")) {
-				//
 				mv.setViewName("redirect:/"+reqUri);
 			} else {
 				mv.setViewName("redirect:/");
