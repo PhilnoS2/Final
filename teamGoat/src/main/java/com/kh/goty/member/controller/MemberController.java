@@ -43,7 +43,7 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public ModelAndView loginForm(ModelAndView mv,
-								  HttpServletResponse response) {
+								 HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
 		
@@ -79,6 +79,8 @@ public class MemberController {
 			String uri = "";
 			
 			// 쿠키에서 확인하기
+			// get
+		
 			Cookie[] cookies = req.getCookies();
 			if(cookies != null){
 		        for (Cookie c : cookies) {
@@ -91,13 +93,11 @@ public class MemberController {
 		        }
 		        Cookie cookie = new Cookie("reqUri", null);
 				cookie.setMaxAge(0);
-				res.addCookie(cookie);
-				System.out.println(uri);
-				
+				res.addCookie(cookie); 
 				mv.setViewName("redirect:/"+uri);
-		    }
-			else {
-				mv.setViewName("redirect:/");				
+				
+			} else {
+				mv.setViewName("redirect:/");
 			}
 			
 		} else {
