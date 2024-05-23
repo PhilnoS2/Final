@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.goty.board.model.vo.Board;
+import com.kh.goty.common.model.vo.PageInfo;
 
 @Repository
 public class BoardRepository {

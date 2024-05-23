@@ -59,6 +59,7 @@ public class ItemServiceImpl implements ItemService{
 
 	@Override
 	public List<Item> findAccessoryList(String platform, PageInfo pi) {
+		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset ,pi.getBoardLimit());
 		

@@ -35,6 +35,7 @@
 	
 	<div class="container">
 	
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -64,7 +65,7 @@
 									<fmt:formatNumber value="${ pageScope.item.price * 0.01  }" type="number" /> 원
 								</td>
 								<td class="cart-detail">
-									<a href="purchase?itemNo=${ pageScope.item.itemNo }" class="btn btn-sm btn-outline-success" >주문하기</a> 
+									<a href="purchase.item?itemNo=${ pageScope.item.itemNo }&platformNo=${pageScope.item.platformNo}" class="btn btn-sm btn-outline-success" >주문하기</a> 
 									
 									<br>
 									
@@ -89,6 +90,7 @@
 		</table>
 		
 		<a>전체 구매</a> <a>선택 구매</a>
+		<button onclick="test();">1</button>
 	</div>
 	
 	<script>
@@ -110,7 +112,11 @@
 			});
 			
 		})
-	
+		
+		console.log(JSON.stringify('${ itemList }'));
+		function test() {
+			//location.href= "purchase.item?"+encodeURIComponent(JSON.stringify('${ itemList }'));
+		}
 	</script>
 </body>
 </html>

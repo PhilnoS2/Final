@@ -27,10 +27,9 @@ public class ItemController {
 	// Nintendo Controller
 	@GetMapping("nintendo.machine")
 	public ModelAndView findNintendoMachine(@RequestParam(value="page", defaultValue="1")
-									  int page,
-									  String platform,
-									  ModelAndView mv
-									  ) {
+										    int page,
+										    String platform,
+										    ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(itemService.findMachineCount(platform),
 											 page,
@@ -39,21 +38,20 @@ public class ItemController {
 
 		List<Item> itemList = itemService.findMachineList(platform,pi);
 
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/nintendo");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/nintendo");
 		
 		return mv;	
 	}
 	
 	@GetMapping("nintendo.game")
 	public ModelAndView findNintendoxboxGame(@RequestParam(value="page", defaultValue="1")
-									   int page,
-									   String platform,
-									   ModelAndView mv) {
-		
+										     int page,
+										     String platform,
+										     ModelAndView mv) {
+			
 		PageInfo pi = Pagination.getPageInfo(itemService.findGameCount(platform),
 				 page,
 				 8,
@@ -61,20 +59,19 @@ public class ItemController {
 		
 		List<Item> itemList = itemService.findGameList(platform,pi);
 		
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/nintendo");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/nintendo");
 		
 		return mv;	
 	}
 	
 	@GetMapping("nintendo.accessory")
 	public ModelAndView findNintendoAccessory(@RequestParam(value="page", defaultValue="1")
-									    int page,
-									    String platform,
-									    ModelAndView mv) {
+											  int page,
+											  String platform,
+											  ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(itemService.findAccessoryCount(platform),
 				 page,
@@ -83,11 +80,10 @@ public class ItemController {
 		
 		List<Item> itemList = itemService.findAccessoryList(platform,pi);		
 		
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/nintendo");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/nintendo");
 		
 		return mv;	
 	}
@@ -98,10 +94,9 @@ public class ItemController {
 	
 	@GetMapping("playstation.machine")
 	public ModelAndView findPlaystationMachine(@RequestParam(value="page", defaultValue="1")
-									  int page,
-									  String platform,
-									  ModelAndView mv
-									  ) {
+											   int page,
+											   String platform,
+											   ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(itemService.findMachineCount(platform),
 											 page,
@@ -110,21 +105,20 @@ public class ItemController {
 
 		List<Item> itemList = itemService.findMachineList(platform,pi);
 
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/playstation");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/playstation");
 		
 		return mv;	
 	}
 	
 	@GetMapping("playstation.game")
 	public ModelAndView findPlaystationGame(@RequestParam(value="page", defaultValue="1")
-									   int page,
-									   String platform,
-									   ModelAndView mv) {
-		
+										    int page,
+										    String platform,
+										    ModelAndView mv) {
+		 
 		PageInfo pi = Pagination.getPageInfo(itemService.findGameCount(platform),
 				 page,
 				 8,
@@ -132,21 +126,20 @@ public class ItemController {
 		
 		List<Item> itemList = itemService.findGameList(platform,pi);
 		
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/playstation");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/playstation");
 		
 		return mv;	
 	}
 	
 	@GetMapping("playstation.accessory")
 	public ModelAndView findPlaystationAccessory(@RequestParam(value="page", defaultValue="1")
-									    int page,
-									    String platform,
-									    ModelAndView mv) {
-		
+											     int page,
+											     String platform,
+											     ModelAndView mv) {
+				 
 		PageInfo pi = Pagination.getPageInfo(itemService.findAccessoryCount(platform),
 				 page,
 				 8,
@@ -154,11 +147,10 @@ public class ItemController {
 		
 		List<Item> itemList = itemService.findAccessoryList(platform,pi);		
 		
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/playstation");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/playstation");
 		
 		return mv;	
 	}
@@ -167,10 +159,9 @@ public class ItemController {
 	// XBox
 	@GetMapping("xbox.machine")
 	public ModelAndView findXboxMachine(@RequestParam(value="page", defaultValue="1")
-									  int page,
-									  String platform,
-									  ModelAndView mv
-									  ) {
+									    int page,
+									    String platform,
+									    ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(itemService.findMachineCount(platform),
 											 page,
@@ -179,21 +170,20 @@ public class ItemController {
 
 		List<Item> itemList = itemService.findMachineList(platform,pi);
 
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/xbox");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/xbox");
 		
 		return mv;	
 	}
 	
 	@GetMapping("xbox.game")
 	public ModelAndView findXboxGame(@RequestParam(value="page", defaultValue="1")
-									   int page,
-									   String platform,
-									   ModelAndView mv) {
-		
+								     int page,
+								     String platform,
+								     ModelAndView mv) {
+		  
 		PageInfo pi = Pagination.getPageInfo(itemService.findGameCount(platform),
 				 page,
 				 8,
@@ -201,20 +191,19 @@ public class ItemController {
 		
 		List<Item> itemList = itemService.findGameList(platform,pi);
 		
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/xbox");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/xbox");
 		
 		return mv;	
 	}
 	
 	@GetMapping("xbox.accessory")
 	public ModelAndView findXboxAccessory(@RequestParam(value="page", defaultValue="1")
-									    int page,
-									    String platform,
-									    ModelAndView mv) {
+									      int page,
+									      String platform,
+									      ModelAndView mv) {
 		
 		PageInfo pi = Pagination.getPageInfo(itemService.findAccessoryCount(platform),
 				 page,
@@ -223,11 +212,10 @@ public class ItemController {
 		
 		List<Item> itemList = itemService.findAccessoryList(platform,pi);		
 		
-		mv.addObject("platform", platform);
-		mv.addObject("pageInfo", pi);
-		mv.addObject("itemList", itemList);
-		
-		mv.setViewName("item/xbox");
+		mv.addObject("platform", platform)
+		  .addObject("pageInfo", pi)
+		  .addObject("itemList", itemList)
+		  .setViewName("item/xbox");
 		
 		return mv;	
 	}
@@ -245,9 +233,8 @@ public class ItemController {
 		
 		Item item = itemService.findItemDetail(map);
 		
-		mv.addObject("item", item);
-		
-		mv.setViewName("item/itemDetail");
+		mv.addObject("item", item)
+		  .setViewName("item/itemDetail");
 		
 		return mv;
 	}
@@ -258,9 +245,8 @@ public class ItemController {
 	public ModelAndView findItemListInCart(int memberNo,
 									 	   ModelAndView mv) {
 	
-		mv.addObject("itemList", itemService.findItemListInCart(memberNo));
-		
-		mv.setViewName("item/itemCart");
+		mv.addObject("itemList", itemService.findItemListInCart(memberNo))
+		  .setViewName("item/itemCart");
 		
 		return mv;
 		
@@ -287,9 +273,8 @@ public class ItemController {
 			
 		} else {
 			
-			mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.");
-			
-			mv.setViewName("common/errorPage");
+			mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.")
+			  .setViewName("common/errorPage");
 			
 			return mv;
 		}
@@ -316,9 +301,8 @@ public class ItemController {
 			
 		} else {
 			
-			mv.addObject("errorMsg", "장바구니 목록 삭제에 실패했습니다.");
-			
-			mv.setViewName("common/errorPage");
+			mv.addObject("errorMsg", "장바구니 목록 삭제에 실패했습니다.")
+			  .setViewName("common/errorPage");
 			
 			return mv;
 		}
@@ -326,11 +310,33 @@ public class ItemController {
 		
 	}
 	
-	@GetMapping("purchase")
-	public ModelAndView addItemInOrder(ModelAndView mv) {
+	@GetMapping("purchase.item")
+	public ModelAndView addItemInOrder(int itemNo,
+									   int platformNo,
+									   ModelAndView mv) {
+<<<<<<< HEAD
 		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
-		mv.setViewName("item/purchaseItem");
+		map.put("itemNo", itemNo);
+		map.put("platformNo", platformNo);
+		
+		mv.addObject(itemService.findItemDetail(map))
+		  .setViewName("item/purchaseItem");
+=======
+>>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		
+<<<<<<< HEAD
+	
+=======
+		map.put("itemNo", itemNo);
+		map.put("platformNo", platformNo);
+		
+		mv.addObject(itemService.findItemDetail(map))
+		  .setViewName("item/purchaseItem");
+>>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 		
 		return mv;
 	}

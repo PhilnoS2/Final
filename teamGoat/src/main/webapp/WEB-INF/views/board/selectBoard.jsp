@@ -60,6 +60,30 @@
 #btn-div a {
 	margin: 3px;
 }
+
+.review-div {
+	width: 70%;
+	margin: auto;
+<<<<<<< HEAD
+ 	margin-bottom: 10px;
+}
+
+
+=======
+ 	margin-bottom: 50px;
+}
+#review-content {
+	width: 40%;
+	margin: 0px;
+	display: inline-block;
+}
+#review-writer {
+	margin: 0px;
+	display: inline-block;
+	float: right;
+}
+
+>>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 </style>
 <title>selectBoard</title>
 </head>
@@ -118,16 +142,44 @@
 		</div>
 		
 		<div id="review-area">
+<<<<<<< HEAD
 			<p class="m-3">리뷰</p>
-			<div style="width:50%;" class="form-group">
-				<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
-			</div>
+			<c:choose>
+				<c:when test="${ sessionScope.loginMember ne null  }">
+					<div class="review-div" class="form-group">
+						<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
+=======
+			<p class="m-2">리뷰</p>
+			<c:choose>
+				<c:when test="${ sessionScope.loginMember ne null  }">
+					<div class="review-div" class="form-group clearfix inline">
+						<textarea id="reviewArea" class="form-control mb-1" rows="3"
+						  placeholder="댓글을 입력해주세요."></textarea>
+						 <button class="btn btn-sm btn-dark float-right" onclick="insertReview();">댓글등록</button>
+>>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
+					</div>
+				</c:when>
+				
+				<c:otherwise>
+					<div class="review-div" class="form-group">
+<<<<<<< HEAD
+						<textarea class="form-control" rows="3" placeholder="리뷰를 입력하려면 로그인해야 합니다." readonly></textarea>
+					</div>
+				</c:otherwise>
+=======
+						<textarea class="form-control" rows="3"
+						placeholder="댓글를 입력하시려면 로그인해야 합니다." readonly></textarea>
+					</div>
+				</c:otherwise>
+				
+>>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
+			</c:choose>
 			<c:choose>
 				<c:when test="${ not empty board.replies }">
 					<c:forEach items="${ board.replies }" var="reply">
-						<div class="shadow p-4 mb-4 bg-white border border-warning rounded-lg">
-							<p>${ reply.reviewContent }</p>
-							작성자<h5 style="display: inline-block;">${ reply.reviewWriter }</h5>
+						<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">
+							<p id="review-content">${ reply.reviewContent }</p>
+							<h5 id="review-writer">${ reply.reviewWriter }</h5>
 						</div>
 					</c:forEach>
 				</c:when>
@@ -142,6 +194,34 @@
 		
 	</div>
 	
+	<script>
+	
+	function insertReview() {
+	
+		const data = 
+			{
+				'freeBoardNo': '${ board.freeBoardNo }',
+				'memberNo': '${ sessionScope.loginMember.memberNo }',
+				'reviewContent': $('#reviewArea').val()
+			};
+		
+		$.ajax({
+			url: '/goty/freeboards/review',
+			type: 'post',
+			data: JSON.stringify(data),
+			dataType:'json',
+			contentType : 'application/json; charset=utf-8',
+			success: (result) => {
+				console.log(result);
+					if(result != null){
+						alert(result.data);
+						location.href=window.location.href;
+					}
+			}
+			
+		});
+	}
+	</script>
 	
 	
 	

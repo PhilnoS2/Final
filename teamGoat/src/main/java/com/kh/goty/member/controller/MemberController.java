@@ -6,23 +6,26 @@ import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.member.model.service.MemberService;
 import com.kh.goty.member.model.vo.Member;
 
@@ -43,24 +46,10 @@ public class MemberController {
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@GetMapping("/login")
-	public ModelAndView loginForm(@RequestParam(value="reqUri", required=false) String reqUri,
-								 ModelAndView mv,
-								 HttpServletResponse response) {
+	public ModelAndView loginForm(ModelAndView mv,
+								  HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
-<<<<<<< HEAD
-		System.out.println(reqUri);
-		Cookie cookie = new Cookie("reqUri", reqUri);
-		cookie.setMaxAge(1 * 60 * 60);
-		response.addCookie(cookie);
-=======
-		
-		if(reqUri != null) {
-			Cookie cookie = new Cookie("reqUri", reqUri);
-			cookie.setMaxAge(1 * 60);
-			response.addCookie(cookie);
-		}
->>>>>>> 1ee60baac850b9bff81a5aad9e250ab5270ec93e
 		
 		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
 		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
@@ -74,9 +63,10 @@ public class MemberController {
 	public ModelAndView login(Member member,
 							  HttpSession session,
 							  ModelAndView mv,
-							  @CookieValue("reqUri") String reqUri) {
+							  HttpServletRequest req,
+							  HttpServletResponse res) {
 		Member loginMember = memberService.login(member);
-		System.out.println(reqUri);
+		
 		// 임시코드발급상태확인
 		if(loginMember != null 
 		   && loginMember.getEmptyCodeYn().equals("Y")
@@ -85,15 +75,39 @@ public class MemberController {
 			return mv;
 		}
 	
-	
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
 			
+			String uri = "";
+					
 			// 쿠키에서 확인하기
-			// get
-			if(!reqUri.equals("")) {
-				mv.setViewName("redirect:/"+reqUri);
+			Cookie[] cookies = req.getCookies();
+			if(cookies != null){
+		        for (Cookie c : cookies) {
+		        	String name = c.getName();   // 쿠키 이름 가져오기
+		        	String value = c.getValue(); // 쿠키 값 가져오기
+<<<<<<< HEAD
+		        	
+		        	System.out.println(name);
+		        	System.out.println(value);
+		        	
+=======
+		      
+>>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
+		            if (name.equals("reqUri")) {
+		            	uri = value;
+		            }
+		        }
+		    }
+			
+			Cookie cookie = new Cookie("reqUri", "");
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			res.addCookie(cookie); 
+			
+			if(!uri.equals("")) {
+				mv.setViewName("redirect:/"+uri);
 			} else {
 				mv.setViewName("redirect:/");
 			}
@@ -138,17 +152,17 @@ public class MemberController {
 	
 	@GetMapping("/idCheck")
 	public String idCheck(String checkId) {
-		return memberService.idCheck(checkId) > 0? "YD": "ND";
+		return memberService.idCheck(checkId) > 0 ? "YD": "ND";
 	}
 	
 	@GetMapping("/emailCheck")
 	public String emailCheck(String checkEmail) {
-		return memberService.emailCheck(checkEmail) > 0? "YD": "ND";
+		return memberService.emailCheck(checkEmail) > 0 ? "YD": "ND";
 	}
 	
 	@GetMapping("/phoneCheck")
 	public String phoneCheck(String checkPhone) {
-		return memberService.phoneCheck(checkPhone) > 0? "YD": "ND";
+		return memberService.phoneCheck(checkPhone) > 0 ? "YD": "ND";
 	}
 	
 	@GetMapping("/findIdForm")
@@ -279,6 +293,7 @@ public class MemberController {
 	  }
 	  return mv;
   }
+  
 	
 	
 	
