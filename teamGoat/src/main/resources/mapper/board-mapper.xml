@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
-<mapper namespace="boardMapper">
+<mapper namespace="com.kh.goty.board.model.dao.BoardMapper">
 	
 	<resultMap id="boardResultSet" type="board">
 		<result column="FREE_BOARD_NO" property="freeBoardNo" />
@@ -28,8 +28,18 @@
 			<result column="REVIEWWRITER" property="reviewWriter" />
 		</collection>
 	</resultMap>
-
-
+	
+	<sql id="board">
+	 SELECT
+	       FREE_BOARD.FREE_BOARD_NO,
+	       BOARD_TITLE,
+	       BOARD_CONTENT,
+	       FREE_BOARD.CREATE_DATE,
+	       ORIGIN_NAME,
+	       CHANGE_NAME,
+	       IMAGE_PATH,
+	</sql>
+	
 	<select id="selectListCount"
 	parameterType="HashMap"
 	resultType="_int"
@@ -54,17 +64,11 @@
 	</select>
 	
 	
-	<select id="seleltListAll"
+	<select id="selectListAll"
 	parameterType="HashMap"
 	resultMap="boardResultSet">
-	SELECT
-	       FREE_BOARD.FREE_BOARD_NO,
-	       BOARD_TITLE,
-	       BOARD_CONTENT,
-	       CREATE_DATE,
-	       ORIGIN_NAME,
-	       CHANGE_NAME,
-	       IMAGE_PATH,
+	
+	<include refid="board" />
 	       MEMBER.NICKNAME AS "NICKNAME",
            COUNT,
 	       PLATFORM_NAME,
@@ -88,7 +92,7 @@
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
 	 WHERE
 	      FREE_BOARD.DELETE_YN = 'N'
-	 <if test="categoryNo > 0">
+	 <if test="categoryNo != 0">
 	 	AND FREE_BOARD.PLATFORM_NO = #{categoryNo}
 	 </if>
 	 <if test="condition == 'nickname'">
@@ -149,14 +153,7 @@
 		parameterType="_int"
 		resultMap="boardResultSet"
 	>
-	SELECT
-	       FREE_BOARD.FREE_BOARD_NO,
-	       BOARD_TITLE,
-	       BOARD_CONTENT,
-	       FREE_BOARD.CREATE_DATE,
-	       ORIGIN_NAME,
-	       CHANGE_NAME,
-	       IMAGE_PATH,
+	<include refid="board" />
 	       MEMBER.MEMBER_NO AS "MEMBER_NO",
 	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
 	       MEMBER.NICKNAME AS "NICKNAME",
@@ -199,14 +196,7 @@
 		parameterType="_int"
 		resultMap="boardResultSet"
 	>
-	SELECT
-	       FREE_BOARD.FREE_BOARD_NO,
-	       BOARD_TITLE,
-	       BOARD_CONTENT,
-	       FREE_BOARD.CREATE_DATE,
-	       ORIGIN_NAME,
-	       CHANGE_NAME,
-	       IMAGE_PATH,
+	<include refid="board" />
 	       MEMBER.MEMBER_NO AS "MEMBER_NO",
 	       MEMBER.MEMBER_NAME AS "MEMBER_NAME",
 	       MEMBER.NICKNAME AS "NICKNAME",
@@ -251,7 +241,22 @@
    	      FREE_BOARD_NO = #{freeBoardNo}
 	</update>
 	
-	
+	<insert id="save"
+		parameterType="reply"
+	>
+	INSERT
+	  INTO
+	      FREE_BOARD_REVIEW
+	 VALUES
+	       (
+	       SEQ_FREE_BOARD_REVIEW.nextval,
+	       #{freeBoardNo},
+	       #{memberNo},
+	       #{reviewContent},
+	       DEFAULT,
+	       DEFAULT
+	       )      
+	</insert>
 	
 	
 	
