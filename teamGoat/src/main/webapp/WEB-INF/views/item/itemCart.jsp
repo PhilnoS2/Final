@@ -90,6 +90,7 @@
 		</table>
 		
 		<a>전체 구매</a> <a>선택 구매</a>
+		<button onclick="test();">1</button>
 	</div>
 	
 	<script>
@@ -111,8 +112,11 @@
 			});
 			
 		})
+		
 		console.log(JSON.stringify('${ itemList }'));
-		console.log(encodeURIComponent(JSON.stringify('${ itemList }')));
+		function test() {
+			//location.href= "purchase.item?"+encodeURIComponent(JSON.stringify('${ itemList }'));
+		}
 	</script>
 </body>
 </html>
