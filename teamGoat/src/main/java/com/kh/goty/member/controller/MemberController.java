@@ -43,17 +43,11 @@ public class MemberController {
 	private final BCryptPasswordEncoder bcryptPasswordEncoder;
 	
 	@GetMapping("/login")
-	public ModelAndView loginForm(@RequestParam(value="reqUri", required=false) String reqUri,
-								 ModelAndView mv,
+	public ModelAndView loginForm(ModelAndView mv,
 								 HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
 
-		if(reqUri != null) {
-			Cookie cookie = new Cookie("reqUri", reqUri);
-			cookie.setMaxAge(1 * 60);
-			response.addCookie(cookie);
-		}
 		
 		mv.addObject("kakao_client_id", env.getProperty("kakao_client_id"))
 		  .addObject("naver_client_id", env.getProperty("naver_client_id"))
@@ -85,7 +79,7 @@ public class MemberController {
 			
 			// 쿠키에서 확인하기
 			// get
-			if(!reqUri.equals("")) {
+			if(reqUri != null) {
 				mv.setViewName("redirect:/"+reqUri);
 			} else {
 				mv.setViewName("redirect:/");
