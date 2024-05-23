@@ -91,23 +91,24 @@
 		
 	</div>
 	
-	<script>
-		
-		//console.log(window.location.search);
-		
-		var url = window.location.search;
-		
-		var setCookie = function(name, value, exp) {
+	<c:if test= "${ sessionScope.loginMember eq null }"> 
+		<script>
 			
-			var date = new Date();
-			date.setTime(date.getTime() + exp*24*60*60*1000);
-			document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+			//console.log(window.location.search);
 			
-		};
-		
-		setCookie("reqUri" ,"detail.item" + url, 1);
-
-	</script>
+			var url = window.location.search;
+			
+			var setCookie = function(name, value, exp) {
+				
+				var date = new Date();
+				date.setTime(date.getTime() + exp*24*60*60*1000);
+				document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+				
+			};
+			
+			setCookie("reqUri" ,"detail.item" + url, 1);
 	
+		</script>
+	</c:if>
 </body>
 </html>

@@ -71,31 +71,34 @@ public class MemberController {
 			return mv;
 		}
 	
-	
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
-			String name = "";
-			String value = "";
-			String uri = "";
 			
+			String uri = "";
+					
 			// 쿠키에서 확인하기
 			Cookie[] cookies = req.getCookies();
 			if(cookies != null){
 		        for (Cookie c : cookies) {
-		            name = c.getName(); // 쿠키 이름 가져오기
-		            value = c.getValue(); // 쿠키 값 가져오기
+		        	String name = c.getName();   // 쿠키 이름 가져오기
+		        	String value = c.getValue(); // 쿠키 값 가져오기
+		        	
+		        	System.out.println(name);
+		        	System.out.println(value);
+		        	
 		            if (name.equals("reqUri")) {
 		            	uri = value;
 		            }
 		        }
 		    }
 			
-			if(!name.equals("")) {
-				Cookie cookie = new Cookie("reqUri", null);
-				cookie.setMaxAge(0);
-				res.addCookie(cookie); 
-				
+			Cookie cookie = new Cookie("reqUri", "");
+			cookie.setMaxAge(0);
+			cookie.setPath("/");
+			res.addCookie(cookie); 
+			
+			if(!uri.equals("")) {
 				mv.setViewName("redirect:/"+uri);
 			} else {
 				mv.setViewName("redirect:/");
