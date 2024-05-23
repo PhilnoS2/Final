@@ -35,6 +35,7 @@
 	
 	<div class="container">
 	
+		
 		<table class="table table-hover">
 			<thead>
 				<tr>
@@ -110,7 +111,8 @@
 			});
 			
 		})
-	
+		console.log(JSON.stringify('${ itemList }'));
+		console.log(encodeURIComponent(JSON.stringify('${ itemList }')));
 	</script>
 </body>
 </html>

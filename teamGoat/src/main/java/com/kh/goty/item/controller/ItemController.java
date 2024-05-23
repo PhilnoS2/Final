@@ -323,9 +323,6 @@ public class ItemController {
 		mv.addObject(itemService.findItemDetail(map))
 		  .setViewName("item/purchaseItem");
 		
-		
-	
-		
 		return mv;
 	}
 	
