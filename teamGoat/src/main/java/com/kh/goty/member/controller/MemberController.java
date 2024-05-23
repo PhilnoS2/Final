@@ -43,7 +43,7 @@ public class MemberController {
 	
 	@GetMapping("/login")
 	public ModelAndView loginForm(ModelAndView mv,
-								 HttpServletResponse response) {
+								  HttpServletResponse response) {
 		SecureRandom random = new SecureRandom();
 		String state = new BigInteger(130, random).toString();
 		
@@ -75,30 +75,29 @@ public class MemberController {
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
-			
+			String name = "";
+			String value = "";
 			String uri = "";
-
+			
 			// 쿠키에서 확인하기
 			Cookie[] cookies = req.getCookies();
 			if(cookies != null){
 		        for (Cookie c : cookies) {
-		        	String name = c.getName(); // 쿠키 이름 가져오기
-		        	String value = c.getValue(); // 쿠키 값 가져오기
-		           
+		            name = c.getName(); // 쿠키 이름 가져오기
+		            value = c.getValue(); // 쿠키 값 가져오기
 		            if (name.equals("reqUri")) {
 		            	uri = value;
 		            }
 		        }
-				
-		        Cookie cookie = new Cookie("reqUri", null);
+		    }
+			
+			if(!name.equals("")) {
+				Cookie cookie = new Cookie("reqUri", null);
 				cookie.setMaxAge(0);
-				res.addCookie(cookie);	
-			}
-
-			if(!uri.equals("")) {
+				res.addCookie(cookie); 
+				
 				mv.setViewName("redirect:/"+uri);
-			}
-			else {
+			} else {
 				mv.setViewName("redirect:/");
 			}
 			
