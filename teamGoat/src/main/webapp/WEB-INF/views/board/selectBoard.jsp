@@ -195,7 +195,6 @@
 					if(result != null){
 						alert(result.data);
 						location.href=window.location.href;
-						
 					}
 			}
 			
