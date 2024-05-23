@@ -10,6 +10,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -43,13 +44,12 @@ import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
-@RequestMapping("/freeboards")
 @RequiredArgsConstructor
+@RequestMapping("/freeboards")
 public class FreeBoardController {
 	
 	//@Autowired
 	//private BoardService boardService;
-	
 	private final BoardService boardService;
 
 	@GetMapping("/all")

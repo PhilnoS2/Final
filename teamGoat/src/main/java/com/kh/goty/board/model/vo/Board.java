@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.util.List;
 
 public class Board {
+	
 	private int freeBoardNo;
 	private String boardTitle;
 	private String boardContent;

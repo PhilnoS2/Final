@@ -140,12 +140,6 @@
 			<p class="m-3">리뷰</p>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember ne null  }">
-					<div class="review-div" class="form-group">
-						<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
-
-			<p class="m-2">리뷰</p>
-			<c:choose>
-				<c:when test="${ sessionScope.loginMember ne null  }">
 					<div class="review-div" class="form-group clearfix inline">
 						<textarea id="reviewArea" class="form-control mb-1" rows="3"
 						  placeholder="댓글을 입력해주세요."></textarea>
@@ -157,10 +151,6 @@
 				<c:otherwise>
 					<div class="review-div" class="form-group">
 						<textarea class="form-control" rows="3" placeholder="리뷰를 입력하려면 로그인해야 합니다." readonly></textarea>
-					</div>
-				</c:otherwise>
-						<textarea class="form-control" rows="3"
-						placeholder="댓글를 입력하시려면 로그인해야 합니다." readonly></textarea>
 					</div>
 				</c:otherwise>
 				
