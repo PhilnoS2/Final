@@ -105,7 +105,9 @@
 			
 		};
 		
-		setCookie("reqUri" ,"detail.item" + url, 1);
+			setCookie("reqUri" ,"detail.item" + url, 1);
+
+		
 
 	</script>
 	
