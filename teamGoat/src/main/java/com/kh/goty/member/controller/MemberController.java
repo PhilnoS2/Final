@@ -77,10 +77,8 @@ public class MemberController {
 			session.setAttribute("alertMsg", "로그인 성공");
 			
 			String uri = "";
-			
+
 			// 쿠키에서 확인하기
-			// get
-		
 			Cookie[] cookies = req.getCookies();
 			if(cookies != null){
 		        for (Cookie c : cookies) {
@@ -91,12 +89,16 @@ public class MemberController {
 		            	uri = value;
 		            }
 		        }
+				
 		        Cookie cookie = new Cookie("reqUri", null);
 				cookie.setMaxAge(0);
-				res.addCookie(cookie); 
+				res.addCookie(cookie);	
+			}
+
+			if(!uri.equals("")) {
 				mv.setViewName("redirect:/"+uri);
-				
-			} else {
+			}
+			else {
 				mv.setViewName("redirect:/");
 			}
 			
