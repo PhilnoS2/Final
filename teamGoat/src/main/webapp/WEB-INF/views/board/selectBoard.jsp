@@ -60,6 +60,14 @@
 #btn-div a {
 	margin: 3px;
 }
+
+.review-div {
+	width: 70%;
+	margin: auto;
+ 	margin-bottom: 10px;
+}
+
+
 </style>
 <title>selectBoard</title>
 </head>
@@ -119,9 +127,19 @@
 		
 		<div id="review-area">
 			<p class="m-3">리뷰</p>
-			<div style="width:50%;" class="form-group">
-				<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
-			</div>
+			<c:choose>
+				<c:when test="${ sessionScope.loginMember ne null  }">
+					<div class="review-div" class="form-group">
+						<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
+					</div>
+				</c:when>
+				
+				<c:otherwise>
+					<div class="review-div" class="form-group">
+						<textarea class="form-control" rows="3" placeholder="리뷰를 입력하려면 로그인해야 합니다." readonly></textarea>
+					</div>
+				</c:otherwise>
+			</c:choose>
 			<c:choose>
 				<c:when test="${ not empty board.replies }">
 					<c:forEach items="${ board.replies }" var="reply">
