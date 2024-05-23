@@ -2,6 +2,7 @@ package com.kh.goty.board.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,10 +10,14 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,9 +26,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.goty.board.model.service.BoardService;
 import com.kh.goty.board.model.vo.Board;
+import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -36,11 +44,14 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RestController
 @RequestMapping("/freeboards")
+@RequiredArgsConstructor
 public class FreeBoardController {
 	
-	@Autowired
-	private BoardService boardService;
+	//@Autowired
+	//private BoardService boardService;
 	
+	private final BoardService boardService;
+
 	@GetMapping("/all")
 	public ModelAndView selectListAll(@RequestParam(value="page", defaultValue="1") int page,
 									 ModelAndView mv) {
@@ -202,12 +213,38 @@ public class FreeBoardController {
 			mv.addObject("errorMsg", "게시글 수정에 실패했습니다.")
 			  .setViewName("common/errorPage");
 		}
-		
-		
+
 		return mv;
 	}
 	
 	
+	 @PostMapping("review")
+	  public ResponseEntity<ResponseData> save(@RequestBody Reply reply){
+		  log.info("reply = {}", reply);
+		  ResponseData rd = null;
+		  int result = 0;
+		  
+		  try {
+			  result = boardService.save(reply);
+		  } catch(Exception e) {
+			  rd = ResponseData.builder()
+					  		   .data("서버쪽에 문제가 생겼습니다.")
+					  		   .responseCode("599")
+					  		   .message("미안;")
+					  		   .build();
+		  }
+		  // System.out.println(result);
+		  
+		  HttpHeaders headers = new HttpHeaders();
+		  headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		  rd = ResponseData.builder()
+				           .data("댓글 달기 성공")
+				           .responseCode("299")
+				           .message("성공성공!")
+				           .build();
+		  
+		  return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
+	  }
 	
 	
 	

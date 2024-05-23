@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.kh.goty.board.model.vo.Board;
+import com.kh.goty.board.model.vo.Reply;
 import com.kh.goty.common.model.vo.PageInfo;
 
 public interface BoardService {
@@ -21,6 +22,8 @@ public interface BoardService {
 	public Board updateBoardForm(int boardNo);
 
 	public int updateBoard(Board board);
+
+	public int save(Reply reply);
 	
 
 }
