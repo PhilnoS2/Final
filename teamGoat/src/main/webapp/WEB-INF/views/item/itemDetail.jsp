@@ -90,30 +90,25 @@
 		
 		
 	</div>
-	
+
+	<c:if test= "${ sessionScope.loginMember eq null }"> 
 		<script>
 			
 			//console.log(window.location.search);
 			
-			if('${ sessionScope.loginMember eq null }'){
+			var url = window.location.search;
+			
+			var setCookie = function(name, value, exp) {
 				
-				var url = window.location.search;
+				var date = new Date();
+				date.setTime(date.getTime() + exp*24*60*60*1000);
+				document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
 				
-				var setCookie = function(name, value, exp) {
-					
-					var date = new Date();
-					date.setTime(date.getTime() + exp*24*60*60*1000);
-					document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
-					
-				};
-				
-				setCookie("reqUri" ,"detail.item" + url, 1);
-			}
-			else {
-				
-			}
+			};
+			
+			setCookie("reqUri" ,"detail.item" + url, 1);
 	
 		</script>
-		
+	</c:if>
 </body>
 </html>
