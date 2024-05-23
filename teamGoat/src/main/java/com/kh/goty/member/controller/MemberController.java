@@ -6,6 +6,7 @@ import java.util.Properties;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -14,12 +15,10 @@ import org.springframework.core.env.Environment;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -60,10 +59,9 @@ public class MemberController {
 	public ModelAndView login(Member member,
 							  HttpSession session,
 							  ModelAndView mv,
-							  @CookieValue("reqUri") String reqUri) {
+							  HttpServletRequest req,
+							  HttpServletResponse res) {
 		Member loginMember = memberService.login(member);
-		
-		System.out.println(reqUri);
 		
 		// 임시코드발급상태확인
 		if(loginMember != null 
@@ -77,11 +75,26 @@ public class MemberController {
 		if(loginMember != null && bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
 			session.setAttribute("loginMember", loginMember);
 			session.setAttribute("alertMsg", "로그인 성공");
+			String name = "";
+			String value = "";
+			String uri = "";
 			
 			// 쿠키에서 확인하기
-			// get
-			if(reqUri != null) {
-				String uri = reqUri;
+			Cookie[] cookies = req.getCookies();
+			if(cookies != null){
+		        for (Cookie c : cookies) {
+		            name = c.getName(); // 쿠키 이름 가져오기
+		            value = c.getValue(); // 쿠키 값 가져오기
+		            if (name.equals("reqUri")) {
+		            	uri = value;
+		            }
+		        }
+		    }
+			
+			if(!name.equals("")) {
+				Cookie cookie = new Cookie("reqUri", null);
+				cookie.setMaxAge(0);
+				res.addCookie(cookie); 
 				
 				mv.setViewName("redirect:/"+uri);
 			} else {
