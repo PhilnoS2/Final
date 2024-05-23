@@ -64,14 +64,9 @@
 .review-div {
 	width: 70%;
 	margin: auto;
-<<<<<<< HEAD
  	margin-bottom: 10px;
 }
 
-
-=======
- 	margin-bottom: 50px;
-}
 #review-content {
 	width: 40%;
 	margin: 0px;
@@ -83,7 +78,6 @@
 	float: right;
 }
 
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 </style>
 <title>selectBoard</title>
 </head>
@@ -142,13 +136,13 @@
 		</div>
 		
 		<div id="review-area">
-<<<<<<< HEAD
+
 			<p class="m-3">리뷰</p>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember ne null  }">
 					<div class="review-div" class="form-group">
 						<textarea class="form-control" rows="3" placeholder="리뷰를 입력해주세요."></textarea>
-=======
+
 			<p class="m-2">리뷰</p>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember ne null  }">
@@ -156,23 +150,20 @@
 						<textarea id="reviewArea" class="form-control mb-1" rows="3"
 						  placeholder="댓글을 입력해주세요."></textarea>
 						 <button class="btn btn-sm btn-dark float-right" onclick="insertReview();">댓글등록</button>
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
+
 					</div>
 				</c:when>
 				
 				<c:otherwise>
 					<div class="review-div" class="form-group">
-<<<<<<< HEAD
 						<textarea class="form-control" rows="3" placeholder="리뷰를 입력하려면 로그인해야 합니다." readonly></textarea>
 					</div>
 				</c:otherwise>
-=======
 						<textarea class="form-control" rows="3"
 						placeholder="댓글를 입력하시려면 로그인해야 합니다." readonly></textarea>
 					</div>
 				</c:otherwise>
 				
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 			</c:choose>
 			<c:choose>
 				<c:when test="${ not empty board.replies }">

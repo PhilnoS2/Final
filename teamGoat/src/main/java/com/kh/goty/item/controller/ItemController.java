@@ -314,7 +314,6 @@ public class ItemController {
 	public ModelAndView addItemInOrder(int itemNo,
 									   int platformNo,
 									   ModelAndView mv) {
-<<<<<<< HEAD
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
@@ -323,21 +322,7 @@ public class ItemController {
 		
 		mv.addObject(itemService.findItemDetail(map))
 		  .setViewName("item/purchaseItem");
-=======
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
-		
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		
-<<<<<<< HEAD
-	
-=======
-		map.put("itemNo", itemNo);
-		map.put("platformNo", platformNo);
-		
-		mv.addObject(itemService.findItemDetail(map))
-		  .setViewName("item/purchaseItem");
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
-		
+
 		return mv;
 	}
 	

@@ -91,7 +91,6 @@
 							<img src="${ item.imgPath }/${ item.imgName }" />
 						</td>
 						<td>${ item.itemName }</td>
-<<<<<<< HEAD
 						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</th></td>
 						<td class="price"><fmt:formatNumber value="${ item.price * 0.01 }" type="number" />원</th></td>
 						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</th></td>
@@ -99,7 +98,6 @@
 					
 					<tr>
 						<td class="price" colspan="5"> Total Price = 100,000원 </td>
-=======
 						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</td>
 						<td class="price"><fmt:formatNumber value="${ item.price * 0.01 }" type="number" />원</td>
 						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</td>
@@ -107,7 +105,6 @@
 					
 					<tr>
 						<td class="price" colspan="5"> Total Price = <fmt:formatNumber value="${ item.price }" type="number" />원 </td>
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 					</tr>
 				</tbody>
 
@@ -151,12 +148,7 @@
 					<br>
 
 					<input type="button" 
-<<<<<<< HEAD
-						   class="btn btn-sm btn-primary mb-2" 
-						   style="width: 10%;"
-=======
 						   class="btn btn-primary mb-2" 
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 						   onclick="execDaumPostcode()" 
 						   value="주소 찾기">
 
@@ -178,7 +170,7 @@
 				</div>
 	
 			</form>
-<<<<<<< HEAD
+
 		</div>
 
 		<div class="total-price basic-border">
@@ -236,7 +228,6 @@
 		</div>
 	</div>
 	
-=======
 			</div>
 			
 			<div class="total-price basic-border">
@@ -269,7 +260,6 @@
 			</div>	
 		</div>
 		
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/goty/resources/member/Js/regExp.js"></script>
 

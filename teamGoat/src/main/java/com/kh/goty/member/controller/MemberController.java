@@ -87,14 +87,7 @@ public class MemberController {
 		        for (Cookie c : cookies) {
 		        	String name = c.getName();   // 쿠키 이름 가져오기
 		        	String value = c.getValue(); // 쿠키 값 가져오기
-<<<<<<< HEAD
-		        	
-		        	System.out.println(name);
-		        	System.out.println(value);
-		        	
-=======
-		      
->>>>>>> 58fb8bac15f008b28bff3bc623c2e624d0ef1662
+					
 		            if (name.equals("reqUri")) {
 		            	uri = value;
 		            }
