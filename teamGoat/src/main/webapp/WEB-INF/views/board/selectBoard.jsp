@@ -151,7 +151,6 @@
 		</div>
 		
 		<div id="review-area">
-
 			<p class="m-3">리뷰</p>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember ne null  }">
@@ -174,12 +173,16 @@
 				
 			</c:choose>
 			<c:choose>
+	
 				<c:when test="${ not empty board.replies }">
 					<c:forEach items="${ board.replies }" var="reply">
 						<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">
 							<div class="d-flex p-1 m-1 justify-content-between">
 								<p class="mb-0 w-25 inline">${ reply.createDate }</p>
-								<button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">신고</button>
+								<c:if test="${ sessionScope.loginMember ne null }" >
+									<button class="btn btn-sm btn-danger"
+									 data-toggle="modal" data-target="#myModal">신고</button>
+								 </c:if>
 							</div>
 							<p id="review-content" class="pl-2">${ reply.reviewContent }</p>
 							<h5 id="review-writer">${ reply.reviewWriter }</h5>
@@ -194,7 +197,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		
+			
 	</div>
 	
   <div class="modal fade" id="myModal">
@@ -207,14 +210,19 @@
         </div>
         
         <div class="modal-body">
-         <div>
+         <div class="border border-danger p-2 rounded w-100 ">
          	<h3>신고 사유</h3>
-			<select class="form-group">
+			<select id="report-reason" class="form-group">
 				<option>욕설 및 비방</option>
-				<option>그냥</option>
+				<option>광고 및 홍보물</option>
+				<option>불법적인것</option>
 				<option>기타</option>
 			</select>
-			<input class="" name="" vlaue="" placeholder="신고 사유를 적어주세요." />
+			<div id="report-input" class="form-group invisible">
+				<input class="form-control w-75 d-inline" name="report"
+				 placeholder="사유를 적어주세요." />
+				<button class="btn btn-sm btn-danger">신고</button>
+			</div>
          </div>
         </div>
 
@@ -251,16 +259,21 @@
 			contentType : 'application/json; charset=utf-8',
 			success: (result) => {
 				console.log(result);
-					if(result != null){
-						alert(result.data);
-						location.href=window.location.href;
-					}
+				if(result != null){
+					alert(result.message);
+				}
 			}
 			
 		});
 	}
 	
-	
+	$('#report-reason').change((e) => {
+		if($('select option:selected').text() === '기타'){
+			$('#report-input').removeClass('invisible');
+		} else {
+			$('#report-input').addClass('invisible');
+		}
+	});
 	
 	</script>
 	

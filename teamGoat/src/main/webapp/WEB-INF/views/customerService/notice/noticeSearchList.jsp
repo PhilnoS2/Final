@@ -66,6 +66,25 @@
         }
         .notice-content {
             height : auto;
+            .notice-table {
+            	border : 1px solid black;
+            	width : 1000px;
+            	height : 54px;
+            	
+            	>thead {
+            		background-color : lightgrey;
+            		height : 40px;
+            	}
+            	
+            	>tbody {
+            		height: auto;
+            	}
+            	
+            	>tr, td {
+            		height : 50px;	
+            	}
+            }
+            
         }
         .notice-page {
             height : 10%;
@@ -73,6 +92,7 @@
             position : relative;
             > div {
                 display : inline-block;
+	            margin : auto;
                 position : absolute;
                 left : 450px;
                 top : 20px;
@@ -88,6 +108,23 @@
              	font-weight : bolder;
              }
         }
+        .search-form {
+        	padding-left : 100px; 
+        	padding-top : 50px;
+        	
+        	.selectbox {
+        		height : 35px;
+        	}
+        }
+        .btn-find {
+        	width : 300px; 
+        	height : 35px;
+        }
+        .btn-search {
+        	height: 35px;
+        }
+        
+        
     </style>
 
 </head>
@@ -121,8 +158,8 @@
         </script>
         
         <div class="notice-content">
-            <table border="1" align="center" style="width : 1000px; height: 54px;">
-                <thead align="center" style="background-color : lightgrey; height : 40px;">
+            <table class="notice-table" border="1" align="center">
+                <thead align="center">
                     <th>번호</th>
                     <th>제목</th>
                     <th>작성자</th>
@@ -130,16 +167,18 @@
                     <th>조회수</th>
                 </thead>
                     
-                <tbody align="center" style="height : auto;">
+                <tbody align="center">
                     <c:choose>
                     	<c:when test="${ empty searchList }">
-                    		<tr style="height : 50px;">
-	                        <td colspan="5">게시물이 존재하지 않습니다</td>
-                   		</tr>
+                    		<tr>
+	                       		<td colspan="5">
+	                       			검색된 게시물이 존재하지 않습니다
+	                       		</td>
+                   		    </tr>
                     	</c:when>
                     	<c:otherwise>
 		                    <c:forEach items="${searchList}" var="notice">
-		                    	<tr style="height : 50px;">
+		                    	<tr class="noticeList">
 			                        <td>${ notice.noticeNo }</td>
 			                        <td>${ notice.noticeTitle }</td>
 			                        <td>${ notice.noticeWriter }</td>
@@ -181,7 +220,7 @@
         
         <script>
         	$(function(){
-        		$('.notice-content tbody > tr').click(function(){
+        		$('.noticeList').click(function(){
         			
         			location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).html();
 					/*location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).val();*/
@@ -190,21 +229,21 @@
         </script>
 
         <div class="notice-search">
-            <form action="/goty/notices/find" style="padding-left : 100px; padding-top : 50px;">
-                <select name="date" style="height : 35px;">
+            <form class="search-form" action="/goty/notices/find">
+                <select class="selectbox" name="date">
                     <option value="all">전체</option>
                     <option value="week">일주일</option>
                     <option value="moth">한달</option>
                     <option value="threeMonth">세달</option>
                 </select>
     
-                <select name="condition" style="height : 35px;">
+                <select class="selectbox" name="condition">
                     <option value="subject">제목</option>
                     <option value="content">내용</option>
                     <option value="writer">글쓴이</option>
                 </select>
-                <input style="width : 300px; height : 35px;" type="text" name="keyword" placeholder="내용을 입력해주세요"/>
-                <input type="submit" class="btn btn-success" value="찾기"/>
+                <input class="btn-find"  type="text" name="keyword" placeholder="내용을 입력해주세요"/>
+                <input class="btn-search" type="submit" class="btn btn-success" value="찾기"/>
             </form>
         </div>
     </div>

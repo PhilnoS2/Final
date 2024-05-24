@@ -87,9 +87,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("notice/update")
-	public String updateNotice(Notice notice) {
-		System.out.println(notice);
-		
+	public String updateNotice(Notice notice) {		
 		noticeService.updateNotice(notice);
 		
 		return "redirect:/notice?noticeNo=" + notice.getNoticeNo();
@@ -97,9 +95,7 @@ public class NoticeController {
 	
 	@PostMapping("notice/delete")
 	public String deleteNotice(int noticeNo, HttpSession session) {
-		
-		System.out.println(noticeNo);
-		
+				
 		if(noticeService.deleteNotice(noticeNo) > 0) {
 			session.setAttribute("alertMsg", "공지사항 삭제 성공");
 		} else {
@@ -125,11 +121,8 @@ public class NoticeController {
 			model.addAttribute("date", date);
 			model.addAttribute("condition", condition);
 			model.addAttribute("keyword", keyword);
-		}  else {
-			model.addAttribute("failMsg", "결과가 없습니다");
-		}
+		}  
 		
-		System.out.println(searchList);
 		return "customerService/notice/noticeSearchList";
 	}
 	
