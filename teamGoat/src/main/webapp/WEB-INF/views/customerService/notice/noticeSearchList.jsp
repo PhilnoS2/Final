@@ -131,26 +131,24 @@
                 </thead>
                     
                 <tbody align="center" style="height : auto;">
-                    <c:forEach items="${ searchList }" var="searchList">
-                    	
-                    	<c:choose>
-                    		<c:when test="${ empty searchList }">
-                    			<tr style="height : 50px;">
-			                        <td colspan="5">검색 결과가 존재하지 않습니다</td>
-                   				</tr>
-                    		</c:when>
-                    		<c:otherwise>
+                    <c:choose>
+                    	<c:when test="${ empty searchList }">
+                    		<tr style="height : 50px;">
+	                        <td colspan="5">게시물이 존재하지 않습니다</td>
+                   		</tr>
+                    	</c:when>
+                    	<c:otherwise>
+		                    <c:forEach items="${searchList}" var="notice">
 		                    	<tr style="height : 50px;">
-			                        
-			                        <td>${ searchList.noticeNo }</td>
-			                        <td>${ searchList.noticeTitle }</td>
-			                        <td>${ searchList.noticeWriter }</td>
-			                        <td>${ searchList.createDate }</td>
-			                        <td>${ searchList.count }</td>
+			                        <td>${ notice.noticeNo }</td>
+			                        <td>${ notice.noticeTitle }</td>
+			                        <td>${ notice.noticeWriter }</td>
+			                        <td>${ notice.createDate }</td>
+			                        <td>${ notice.count }</td>
 		                   		</tr>
-                    		</c:otherwise>
-                    	</c:choose>                    	
-                    </c:forEach>
+		                    </c:forEach>
+                    	</c:otherwise>
+                    </c:choose>
                 </tbody>
             </table>
         </div>

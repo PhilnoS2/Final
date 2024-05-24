@@ -91,21 +91,15 @@
 							<img src="${ item.imgPath }/${ item.imgName }" />
 						</td>
 						<td>${ item.itemName }</td>
-						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</th></td>
-						<td class="price"><fmt:formatNumber value="${ item.price * 0.01 }" type="number" />원</th></td>
-						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</th></td>
-					</tr>
-					
-					<tr>
-						<td class="price" colspan="5"> Total Price = 100,000원 </td>
 						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</td>
 						<td class="price"><fmt:formatNumber value="${ item.price * 0.01 }" type="number" />원</td>
 						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</td>
 					</tr>
-					
+				
 					<tr>
 						<td class="price" colspan="5"> Total Price = <fmt:formatNumber value="${ item.price }" type="number" />원 </td>
 					</tr>
+					
 				</tbody>
 
 			</table>
@@ -210,7 +204,7 @@
 
 						<div class="modal-header">
 							<h4 class="modal-title">결제하시겠습니까</h4>
-							<button	button type="button" class="close" data-dismiss="modal">&times;</button>
+							<button	type="button" class="close" data-dismiss="modal">&times;</button>
 						</div>
 
 						<div class="modal-body">
@@ -227,38 +221,6 @@
 			</div>
 		</div>
 	</div>
-	
-			</div>
-			
-			<div class="total-price basic-border">
-				
-				<div>포인트 사용 여부</div>
-				
-				<table class="table">
-					<thead>
-						<tr>
-							<th>제품 금액</th>
-							<th>부가 결제 금액</th>
-							<th>총 결제 금액</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td><fmt:formatNumber value="${ item.price }" type="number" />원</td>
-							<td>0 원</td>
-							<td><fmt:formatNumber value="${ item.price }" type="number" />원</td>
-						</tr>
-					</tbody>
-				</table>
-				
-			</div>
-			
-			<div class="total-price basic-border">
-				<button type="button" class="btn btn-primary">
-					결제하기
-				</button>
-			</div>	
-		</div>
 		
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="/goty/resources/member/Js/regExp.js"></script>
