@@ -84,12 +84,19 @@
             left : 1350px;
             top : 400px;
         }
+        .table {
+        	width: 1000px; 
+        	height:200px; 
+        	background-color : rgb(241, 238, 238); 
+        	border : 2px solid black;
+        	>th, tr, td {
+        		border : 1px solid black;
+        	}
+        }
     </style>
 
 </head>
 <body>
-	
-
     <div id="notice-wrap">
         <div class="notice-title">
             <div><h3>공지사항</h3></div>
@@ -123,9 +130,9 @@
 
         <div class="notice-content">
             <div align="center">
-                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
+                <table class="table">
                     <thead>
-                        <th width="100px;">제목</th>
+                        <th>제목</th>
                         <td colspan="9">${notice.noticeTitle }</td>
                     </thead>
     
