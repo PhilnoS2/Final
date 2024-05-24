@@ -65,7 +65,7 @@
 									<fmt:formatNumber value="${ pageScope.item.price * 0.01  }" type="number" /> 원
 								</td>
 								<td class="cart-detail">
-									<a href="purchase.item?itemNo=${ pageScope.item.itemNo }&platformNo=${pageScope.item.platformNo}" class="btn btn-sm btn-outline-success" >주문하기</a> 
+									<a href="item.order?itemNo=${ pageScope.item.itemNo }&platformNo=${pageScope.item.platformNo}" class="btn btn-sm btn-outline-success" >주문하기</a> 
 									
 									<br>
 									
