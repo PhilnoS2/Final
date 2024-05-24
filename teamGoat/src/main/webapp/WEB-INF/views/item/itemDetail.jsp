@@ -37,10 +37,6 @@
 		padding-left: 40px;
 	}
 
-
-
-	
-		
 </style>
 </head>
 <body>

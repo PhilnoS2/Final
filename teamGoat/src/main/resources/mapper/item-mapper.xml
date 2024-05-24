@@ -215,6 +215,17 @@
 		
 	</select>
 	
-	
+	<select id="findCartList" parameterType="hashmap" resultType="_int">
+		
+		SELECT
+				COUNT(*)
+		  FROM
+		  		CART
+		 WHERE
+		 		ITEM_NO = #{itemNo}
+		   AND
+		   		PLATFORM_NO = #{platformNo}
+		
+	</select>
 	
 </mapper>

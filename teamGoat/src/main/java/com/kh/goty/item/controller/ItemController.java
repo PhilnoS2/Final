@@ -265,20 +265,35 @@ public class ItemController {
 		map.put("itemNo", itemNo);
 		map.put("memberNo", memberNo);
 		map.put("platformNo", platformNo);
-
-		if(itemService.addItemInCart(map) > 0) {
+		
+		int result = itemService.findCartList(map);
+		
+		if(result > 0) {
 			
-			mv.setViewName("redirect:cart?memberNo=" + memberNo);
+			mv.addObject("alertMsg", "같은 제품이 장바구니에 담겨있습니다.");
+			
+			mv.setViewName("redirect:detail?platformNo="+ platformNo + "&itemNo=" + itemNo);
 			
 			return mv;
 			
 		} else {
 			
-			mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.")
-			  .setViewName("common/errorPage");
+			if(itemService.addItemInCart(map) > 0) {
+				
+				mv.setViewName("redirect:cart?memberNo=" + memberNo);
+				
+				return mv;
+				
+			} else {
+				
+				mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.")
+				.setViewName("common/errorPage");
+				
+				return mv;
+			}
 			
-			return mv;
 		}
+
 	}
 	
 	// Cart Delete Controller

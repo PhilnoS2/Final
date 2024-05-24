@@ -87,5 +87,10 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.findItemListInCart(memberNo);
 	}
 
+	@Override
+	public int findCartList(HashMap<String, Integer> map) {
+		return itemMapper.findCartList(map);
+	}
+
 
 }

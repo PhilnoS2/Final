@@ -6,8 +6,30 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+    .basic-border{
+		border : 1px solid black;
+		margin : 20px; 
+		padding : 20px;
+	}
+</style>
 </head>
 <body>
-	<h1> 구매 확정 화면 </h1>
+
+    <jsp:include page="../common/menubar.jsp"/>
+
+	<div class="container">
+
+        <div class="basic-border">
+
+
+        </div>
+        
+        <div class="basic-border">
+
+
+        </div>
+
+    </div>
 </body>
 </html>

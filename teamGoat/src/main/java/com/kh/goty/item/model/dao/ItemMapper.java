@@ -31,4 +31,6 @@ public interface ItemMapper {
 	
 	List<Item> findItemListInCart(int memberNo);
 	
+	int findCartList(HashMap<String, Integer> map);
+	
 }
