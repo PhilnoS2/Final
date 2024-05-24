@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -16,8 +17,8 @@ import com.kh.goty.item.model.vo.Item;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@Controller
 @Slf4j
+@Controller
 @RequiredArgsConstructor
 public class ItemController {
 
@@ -310,7 +311,7 @@ public class ItemController {
 		
 	}
 	
-	@GetMapping("purchase.item")
+	@GetMapping("item.order")
 	public ModelAndView addItemInOrder(int itemNo,
 									   int platformNo,
 									   ModelAndView mv) {
@@ -321,8 +322,16 @@ public class ItemController {
 		map.put("platformNo", platformNo);
 		
 		mv.addObject(itemService.findItemDetail(map))
-		  .setViewName("item/purchaseItem");
+		  .setViewName("item/itemOrder");
 
+		return mv;
+	}
+	
+	@PostMapping("item.purchase")
+	public ModelAndView addItemInPurchase(ModelAndView mv) {
+		
+		mv.setViewName("item/itemPurchase");
+		
 		return mv;
 	}
 	

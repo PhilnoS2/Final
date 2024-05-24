@@ -8,7 +8,7 @@
 <style>
 #wrapper-div{
 	width: 1200px;
-	height: 1000px;
+	height: auto;
 	margin: auto;
 }
 .wrapper-div-title {
@@ -51,8 +51,9 @@
 }
 #review-area {
 	width: 720px;
-	height: 400px;
+	height: auto;
 	margin: auto;
+	margin-bottom: 20px;
 	padding : 10px;
 	border : 1px solid grey;
 	border-radius: 10px;
@@ -65,10 +66,13 @@
 	width: 70%;
 	margin: auto;
  	margin-bottom: 10px;
+ 	display: flex;
+ 	align-items: center;
+ 	justify-content: space-between;
 }
 
 #review-content {
-	width: 40%;
+	width: 50%;
 	margin: 0px;
 	display: inline-block;
 }
@@ -76,8 +80,19 @@
 	margin: 0px;
 	display: inline-block;
 	float: right;
+	font-weight: bold;
 }
 
+#review-area-div {
+	width: 80%;
+}
+#reveiw-btn-div {
+	width: 15%;
+	margin-top: auto;
+}
+#reviewArea {
+	resize: none;
+}
 </style>
 <title>selectBoard</title>
 </head>
@@ -140,11 +155,14 @@
 			<p class="m-3">리뷰</p>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember ne null  }">
-					<div class="review-div" class="form-group clearfix inline">
-						<textarea id="reviewArea" class="form-control mb-1" rows="3"
-						  placeholder="댓글을 입력해주세요."></textarea>
-						 <button class="btn btn-sm btn-dark float-right" onclick="insertReview();">댓글등록</button>
-
+					<div class="form-group w-75 mx-auto d-flex justify-content-between">
+						<div id="review-area-div">
+							<textarea id="reviewArea" class="form-control mb-1" rows="3"
+						  	 placeholder="댓글을 입력해주세요."></textarea>
+						  </div>
+						  <div id="reveiw-btn-div">
+						 	<button class="btn btn-sm btn-dark " onclick="insertReview();">댓글등록</button>
+						 </div>
 					</div>
 				</c:when>
 				
@@ -159,7 +177,11 @@
 				<c:when test="${ not empty board.replies }">
 					<c:forEach items="${ board.replies }" var="reply">
 						<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">
-							<p id="review-content">${ reply.reviewContent }</p>
+							<div class="d-flex p-1 m-1 justify-content-between">
+								<p class="mb-0 w-25 inline">${ reply.createDate }</p>
+								<button class="btn btn-sm btn-danger" data-toggle="modal" data-target="#myModal">신고</button>
+							</div>
+							<p id="review-content" class="pl-2">${ reply.reviewContent }</p>
 							<h5 id="review-writer">${ reply.reviewWriter }</h5>
 						</div>
 					</c:forEach>
@@ -174,6 +196,41 @@
 		</div>
 		
 	</div>
+	
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h4 class="modal-title">신고하기</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+         <div>
+         	<h3>신고 사유</h3>
+			<select class="form-group">
+				<option>욕설 및 비방</option>
+				<option>그냥</option>
+				<option>기타</option>
+			</select>
+			<input class="" name="" vlaue="" placeholder="신고 사유를 적어주세요." />
+         </div>
+        </div>
+
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+	
+	
+	
+	
+	
 	
 	<script>
 	
@@ -202,6 +259,9 @@
 			
 		});
 	}
+	
+	
+	
 	</script>
 	
 	

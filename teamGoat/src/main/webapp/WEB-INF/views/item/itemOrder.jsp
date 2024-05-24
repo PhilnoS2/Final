@@ -9,6 +9,10 @@
 <title>결제페이지</title>
 <style>
 
+	#container{
+		margin-top : 20px;
+	}
+
 	.container{
 		border : 1px solid black;
 		height : auto;
@@ -42,7 +46,7 @@
 		
 	<jsp:include page="../common/menubar.jsp" />
 	
-	<div class="container">
+	<div id="container" class="container">
 	
 		
 		<div style="text-align : center;
@@ -105,36 +109,40 @@
 			</table>
 		</div>
 		
+		<form method="post" action="item.purchase">
+	
 		<div class="delivery-form basic-border">
 			
 			<label>▶ 배송지 정보</label>
-
-			<form>
 
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">받으시는 분</span>
 					</div>
-					<input type="text" class="form-control" placeholder="성함을 입력해주세요." required>
+					<input type="text" class="form-control" placeholder="성함을 입력해주세요." required onkeyup="regExpCheckName();">
 				</div>
+				
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">휴대폰</span>
 					</div>
-					<input type="text" class="form-control" placeholder="휴대폰 번호를 - 없이 입력해주세요." required>
+					<input type="text" class="form-control" placeholder="휴대폰 번호를 - 없이 입력해주세요." required onkeyup="reqExpPhone();">
 				</div>
+				
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">이메일</span>
 					</div>
-					<input type="text" class="form-control" placeholder="이메일을 입력해주세요." required>
+					<input type="text" class="form-control" placeholder="이메일을 입력해주세요." required onkeyup="reqExpEmail();">
 				</div>
+				
 				<div class="input-group mb-3">
 					<div class="input-group-prepend">
 						<span class="input-group-text">배송 메세지</span>
 					</div>
 					<input type="text" class="form-control" placeholder="배송시 전달 사항을 입력해주세요.">
 				</div>
+				
 				<div class="address-div">
 				
 					<label>▶ 배송지 주소</label>
@@ -161,65 +169,36 @@
 						   name="addrDetail" 
 						   placeholder="상세주소" required>
 						   
-				</div>
+		</div>
 	
-			</form>
 
-		</div>
-
-		<div class="total-price basic-border">
-
-			<div>포인트 사용 여부</div>
-
-			<table class="table">
-				<thead>
-					<tr>
-						<th>제품 금액</th>
-						<th>부가 결제 금액</th>
-						<th>총 결제 금액</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td><fmt:formatNumber value="${ item.price }" type="number" />원</td>
-						<td>0 원</td>
-						<td><fmt:formatNumber value="${ item.price }" type="number" />원</td>
-					</tr>
-				</tbody>
-			</table>
-
-		</div>
-
-		<div class="basic-border">
-			<button type="button" 
-					class="btn btn-primary" 
-					data-toggle="modal" 
-					data-target="#myModal">
-					결제하기
-			</button>
-
-			<div class="modal fade" id="myModal">
-				<div class="modal-dialog modal-dialog-centered">
-					<div class="modal-content">
-
-						<div class="modal-header">
-							<h4 class="modal-title">결제하시겠습니까</h4>
-							<button	type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-
-						<div class="modal-body">
-							예 / 아니오
-						</div>
-
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary" data-dismiss="modal">결제하기</button>
-							<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
-						</div>
-
-					</div>
-				</div>
 			</div>
-		</div>
+
+			<div class="total-price basic-border">
+
+				<div>포인트 사용 여부</div>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th>제품 금액</th>
+							<th>부가 결제 금액</th>
+							<th>총 결제 금액</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><fmt:formatNumber value="${ item.price }" type="number" />원</td>
+							<td>0 원</td>
+							<td><fmt:formatNumber value="${ item.price }" type="number" />원</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="basic-border">
+				<button type="submit" class="btn btn-primary"> 결제하기 </button>
+			</div>
+		</form>
 	</div>
 		
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

@@ -182,7 +182,9 @@
                  JOIN MEMBER
                    ON MEMBER.MEMBER_NO = FREE_BOARD_REVIEW.MEMBER_NO
                 WHERE
-                     FREE_BOARD_REVIEW.DELETE_YN = 'N') R
+                     FREE_BOARD_REVIEW.DELETE_YN = 'N'
+                ORDER
+                   BY REVIEW_NO DESC) R
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO
 	 WHERE
 	      FREE_BOARD.DELETE_YN = 'N'
