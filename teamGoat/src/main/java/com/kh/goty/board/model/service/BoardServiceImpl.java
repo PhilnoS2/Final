@@ -69,6 +69,11 @@ public class BoardServiceImpl implements BoardService {
 	public int save(Reply reply) {
 		return boardMapper.save(reply);
 	}
+
+	@Override
+	public List<Reply> findAllReply(int freeBoardNo) {
+		return boardMapper.findAllReply(freeBoardNo);
+	}
 	
 	
 	

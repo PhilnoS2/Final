@@ -7,10 +7,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -223,9 +223,14 @@ public class FreeBoardController {
 		  log.info("reply = {}", reply);
 		  ResponseData rd = null;
 		  int result = 0;
+		  List<Reply> replies = null;
 		  
 		  try {
 			  result = boardService.save(reply);
+			  if(result > 0) {
+				  replies = boardService.findAllReply(reply.getFreeBoardNo());
+			  }
+			  
 		  } catch(Exception e) {
 			  rd = ResponseData.builder()
 					  		   .data("서버쪽에 문제가 생겼습니다.")
@@ -233,16 +238,15 @@ public class FreeBoardController {
 					  		   .message("미안;")
 					  		   .build();
 		  }
-		  // System.out.println(result);
 		  
 		  HttpHeaders headers = new HttpHeaders();
 		  headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
 		  rd = ResponseData.builder()
-				           .data("댓글 달기 성공")
+				           .data(replies)
 				           .responseCode("299")
 				           .message("성공성공!")
 				           .build();
-		  
+		  //
 		  return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	  }
 	

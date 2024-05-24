@@ -151,7 +151,6 @@
 		</div>
 		
 		<div id="review-area">
-
 			<p class="m-3">리뷰</p>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember ne null  }">
@@ -219,7 +218,11 @@
 				<option>불법적인것</option>
 				<option>기타</option>
 			</select>
-			<input id="report-input" class="form-controll invisible" name="report" vlaue="" placeholder="신고 사유를 적어주세요." />
+			<div id="report-input" class="form-group invisible">
+				<input class="form-control w-75 d-inline" name="report"
+				 placeholder="사유를 적어주세요." />
+				<button class="btn btn-sm btn-danger">신고</button>
+			</div>
          </div>
         </div>
 
@@ -256,24 +259,20 @@
 			contentType : 'application/json; charset=utf-8',
 			success: (result) => {
 				console.log(result);
-					if(result != null){
-						alert(result.data);
-						location.href=window.location.href;
-					}
+				if(result != null){
+					alert(result.message);
+				}
 			}
 			
 		});
 	}
 	
 	$('#report-reason').change((e) => {
-		
 		if($('select option:selected').text() === '기타'){
 			$('#report-input').removeClass('invisible');
 		} else {
 			$('#report-input').addClass('invisible');
 		}
-	
-
 	});
 	
 	</script>
