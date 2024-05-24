@@ -125,7 +125,9 @@ public class NoticeController {
 			model.addAttribute("date", date);
 			model.addAttribute("condition", condition);
 			model.addAttribute("keyword", keyword);
-		} 
+		}  else {
+			model.addAttribute("failMsg", "결과가 없습니다");
+		}
 		
 		System.out.println(searchList);
 		return "customerService/notice/noticeSearchList";
