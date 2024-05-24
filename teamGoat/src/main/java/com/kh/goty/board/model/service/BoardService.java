@@ -24,6 +24,8 @@ public interface BoardService {
 	public int updateBoard(Board board);
 
 	public int save(Reply reply);
+
+	public List<Reply> findAllReply(int freeBoardNo);
 	
 
 }

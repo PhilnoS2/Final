@@ -260,7 +260,23 @@
 	       )      
 	</insert>
 	
-	
+	<select id="findAllReply"
+		parameterType="_int"
+		resultType="reply"
+	>
+	SELECT
+		  REVIEW_NO reviewNo,
+		  MEMBER_NO memberNo,
+		  REVIEW_CONTENT reviewContent
+	  FROM
+	      FREE_BOARD_REVIEW
+	 WHERE      		  
+		  DELETE_YN = 'N'
+	   AND
+	       FREE_BOARD_NO = #{freeBoardNo}
+	 ORDER
+	    BY REVIEW_NO DESC
+	</select>
 	
 	
 	
