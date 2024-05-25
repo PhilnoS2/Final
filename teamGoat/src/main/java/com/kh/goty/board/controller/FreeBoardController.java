@@ -218,9 +218,9 @@ public class FreeBoardController {
 	}
 	
 	
-	 @PostMapping("review")
+	 @PostMapping("reply")
 	  public ResponseEntity<ResponseData> save(@RequestBody Reply reply){
-		  log.info("reply = {}", reply);
+		  
 		  ResponseData rd = null;
 		  int result = 0;
 		  List<Reply> replies = null;
@@ -241,12 +241,13 @@ public class FreeBoardController {
 		  
 		  HttpHeaders headers = new HttpHeaders();
 		  headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
+		 
 		  rd = ResponseData.builder()
 				           .data(replies)
 				           .responseCode("299")
 				           .message("성공성공!")
 				           .build();
-		  //
+
 		  return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
 	  }
 	

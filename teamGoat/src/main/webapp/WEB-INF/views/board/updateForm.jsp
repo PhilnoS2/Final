@@ -25,7 +25,7 @@
 
 </style>
 <meta charset="UTF-8">
-<title>insertForm</title>
+<title>updateForm</title>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -55,7 +55,7 @@
 				<label for="upfile" style="display: block;">파일첨부</label>
 				<input type="file" id="upfile" name="upFile">
 				<img width="100px;" height="100px;" src="/goty/${ board.imagePath }">
-				<button class="btn btn-md btn-success float-right" type="submit">수정하기하기</button>
+				<button class="btn btn-md btn-success float-right" type="submit">수정하기</button>
 			</div>
 			
 			<input type="hidden" name="freeBoardNo" value="${ board.freeBoardNo }"/>

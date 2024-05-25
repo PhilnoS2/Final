@@ -151,11 +151,8 @@
 						<input type="hidden" name="memberNo" value="${ requestScope.member.memberNo }" />
 						
 						<div class="btn-options">
-							<button class="btn btn-sm btn-danger" type="button">탈퇴하기</button>
-							<div>
-								<button class="btn btn-sm btn-secondary" type="button" onclick="history.back();" >돌아가기</button>
-								<button class="btn btn-sm btn-success" id="submitBtn" type="submit" disabled >수정하기</button>
-							</div>
+							<button class="btn btn-sm btn-secondary" type="button" onclick="history.back();" >돌아가기</button>
+							<button class="btn btn-sm btn-success" id="submitBtn" type="submit" disabled >수정하기</button>
 						</div>	
 					</div>
 				</form>

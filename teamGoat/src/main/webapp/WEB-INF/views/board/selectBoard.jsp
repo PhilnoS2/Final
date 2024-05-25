@@ -24,7 +24,7 @@
 }
 .wrapper-div-title div{
 	display:inline-block;
-	width:30%;
+	width:35%;
 }
 #title-div-2 {
 	display:flex;
@@ -114,7 +114,8 @@
 					<label >글쓴이</label>
 					<h6>${ board.nickname }</h6>
 				</div>
-				<c:if test="${ sessionScope.loginMember.memberNo == board.memberNo }">
+				<c:if test="${ sessionScope.loginMember ne null and sessionScope.loginMember.memberNo == board.memberNo
+				or sessionScope.loginMember.memLevel == 'A' }">
 					<div id="btn-div">
 						<a class="btn btn-sm btn-warning" href="/goty/freeboards/update/${ boardNo }">수정</a>
 						<a class="btn btn-sm btn-danger" href="#">삭제</a>
@@ -160,7 +161,7 @@
 						  	 placeholder="댓글을 입력해주세요."></textarea>
 						  </div>
 						  <div id="reveiw-btn-div">
-						 	<button class="btn btn-sm btn-dark " onclick="insertReview();">댓글등록</button>
+						 	<button class="btn btn-sm btn-dark " onclick="insertReply();">댓글등록</button>
 						 </div>
 					</div>
 				</c:when>
@@ -173,32 +174,33 @@
 				
 			</c:choose>
 			<c:choose>
-	
 				<c:when test="${ not empty board.replies }">
-					<c:forEach items="${ board.replies }" var="reply">
-						<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">
-							<div class="d-flex p-1 m-1 justify-content-between">
-								<p class="mb-0 w-25 inline">${ reply.createDate }</p>
-								<c:if test="${ sessionScope.loginMember ne null }" >
-									<button class="btn btn-sm btn-danger"
-									 data-toggle="modal" data-target="#myModal">신고</button>
-								 </c:if>
+					<div id="replyList-area">
+						<c:forEach items="${ board.replies }" var="reply">
+							<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">
+								<div class="d-flex p-1 m-1 justify-content-between">
+									<p class="mb-0 w-25 inline">${ reply.createDate }</p>
+									<c:if test="${ sessionScope.loginMember ne null }" >
+										<button class="btn btn-sm btn-danger"
+										 data-toggle="modal" data-target="#myModal">신고</button>
+									 </c:if>
+								</div>
+								<p id="review-content" class="pl-2">${ reply.reviewContent }</p>
+								<h5 id="review-writer">${ reply.reviewWriter }</h5>
 							</div>
-							<p id="review-content" class="pl-2">${ reply.reviewContent }</p>
-							<h5 id="review-writer">${ reply.reviewWriter }</h5>
-						</div>
-					</c:forEach>
+						</c:forEach>
+					</div>
 				</c:when>
 				
 				<c:otherwise>
 					<div class="mx-auto" style="width:50%;">
-						<h3>리뷰가 존재하지 않습니다.</h3>
+						<h3>댓글이 존재하지 않습니다.</h3>
 					</div>
 				</c:otherwise>
 			</c:choose>
-		</div>
-			
+		</div>		
 	</div>
+	
 	
   <div class="modal fade" id="myModal">
     <div class="modal-dialog modal-sm">
@@ -218,14 +220,15 @@
 				<option>불법적인것</option>
 				<option>기타</option>
 			</select>
-			<div id="report-input" class="form-group invisible">
-				<input class="form-control w-75 d-inline" name="report"
-				 placeholder="사유를 적어주세요." />
+			<div class="form-group ">
+				<div id="report-input" class="form-group invisible">
+					<input class="form-control w-100 d-inline" name="report"
+					 placeholder="사유를 적어주세요." />
+				</div>
 				<button class="btn btn-sm btn-danger">신고</button>
 			</div>
          </div>
         </div>
-
 
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -242,7 +245,7 @@
 	
 	<script>
 	
-	function insertReview() {
+	function insertReply() {
 	
 		const data = 
 			{
@@ -252,7 +255,7 @@
 			};
 		
 		$.ajax({
-			url: '/goty/freeboards/review',
+			url: '/goty/freeboards/reply',
 			type: 'post',
 			data: JSON.stringify(data),
 			dataType:'json',
@@ -261,6 +264,25 @@
 				console.log(result);
 				if(result != null){
 					alert(result.message);
+					$('#reviewArea').val('');
+					$('#replyList-area').empty();
+					replies = result.data;
+					let content = '';
+					replies.forEach((item) => {
+						$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
+													 +'<div class="d-flex p-1 m-1 justify-content-between">'
+														+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
+														+'<c:if test="${ sessionScope.loginMember ne null }" >'
+														+'<button class="btn btn-sm btn-danger"'
+														+'data-toggle="modal" data-target="#myModal">신고</button>'
+											            +'</c:if>'
+										             +'</div>'
+										             +'	<p id="review-content" class="pl-2">'+item.reviewContent+'</p>'
+										             +'<h5 id="review-writer">'+item.reviewWriter+'</h5>'
+													 +'<div>'
+													);
+					});	
+					//$('#replyList-area').html(content);
 				}
 			}
 			

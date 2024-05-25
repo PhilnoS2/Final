@@ -55,7 +55,7 @@
 		width:80%;
 		margin: auto;
 		margin-top: 75px;
-		
+		margin-bottom: 30px;
 	}
 	.userInfo-div{
 		width: 50%;
@@ -92,9 +92,11 @@
 				</ul>
 		</div>
 		<div id="right-side">
+		
 			<h3 class="side-title">개인 정보</h3>
 			<c:choose>
 				<c:when test="${ sessionScope.loginMember != null }">
+						
 					<c:choose>
 						<c:when test="${ sessionScope.loginMember.status == 'GT' }">
 							<div id="userInfo">
@@ -200,7 +202,59 @@
 				</c:otherwise>
 				
 			</c:choose>
+			<div class="Clearfix">
+				<button class="btn btn-sm btn-danger float-right" type="button" data-toggle="modal" data-target="#myModal">탈퇴하기</button>
+			</div>
 		</div>
 	</div>
+	
+	<div class="modal" id="myModal">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	
+	      <div class="modal-header">
+	        <h4 class="modal-title">탈퇴 여부를 확인해주세요.</h4>
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	      </div>
+	
+	      <div class="modal-body">
+	        <p class="d-inline ">정말 <p class="d-inline text-danger font-italic">탈퇴</p> 하시겠습니까?</p>
+	        <button type="button" id="signoutMemberBtn" class="btn btn-danger" >탈퇴</button>
+	      </div>
+	
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-dark" data-dismiss="modal">닫기</button>
+	      </div>
+	
+	    </div>
+	  </div>
+
+	</div>
+
+	
+	<script>
+	
+		$('#signoutMemberBtn').click(() => {
+			console.log('${sessionScope.loginMember.memberNo }');
+			
+			$.ajax({
+				url: '/goty/member/${sessionScope.loginMember.memberNo }',
+				type: 'patch',
+				success: (result) => {
+					
+					if(result.responseCode == '299'){
+						alert('탈퇴 완료!');
+						location.href = "/goty/member/logout";
+					}
+						
+				},
+				
+			});
+		});
+	</script>
+	
+	
+	
+	
 </body>
 </html>
