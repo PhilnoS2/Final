@@ -2,18 +2,17 @@ package com.kh.goty.board.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpHeaders;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +30,7 @@ import com.kh.goty.board.model.vo.Reply;
 import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
+import com.kh.goty.common.template.RdTemplates;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -219,40 +219,78 @@ public class FreeBoardController {
 	
 	
 	 @PostMapping("reply")
-	  public ResponseEntity<ResponseData> save(@RequestBody Reply reply){
+	 public ResponseEntity<ResponseData> save(@RequestBody Reply reply){
 		  
 		  ResponseData rd = null;
 		  int result = 0;
-		  List<Reply> replies = null;
+		  Object data = null;
+		  String rCode = "";
+		  String message = ""; 
 		  
 		  try {
 			  result = boardService.save(reply);
 			  if(result > 0) {
-				  replies = boardService.findAllReply(reply.getFreeBoardNo());
+				  rCode = "299";
+				  message =  "댓글 작성 성공!";
+			  } else {
+				  rCode = "598";
+				  message = "댓글을 찾지 못했습니다.";
 			  }
 			  
 		  } catch(Exception e) {
-			  rd = ResponseData.builder()
-					  		   .data("서버쪽에 문제가 생겼습니다.")
-					  		   .responseCode("599")
-					  		   .message("미안;")
-					  		   .build();
+			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "죄송합니다."); 
 		  }
 		  
-		  HttpHeaders headers = new HttpHeaders();
-		  headers.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
-		 
-		  rd = ResponseData.builder()
-				           .data(replies)
-				           .responseCode("299")
-				           .message("성공성공!")
-				           .build();
+		  rd = RdTemplates.getRd(data, rCode, message);
 
-		  return new ResponseEntity<ResponseData>(rd, headers, HttpStatus.OK);
+		  return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	  }
 	
-	
-	
+	 
+	@GetMapping("/replyList")
+	public ResponseEntity<ResponseData> replyList(@RequestParam("boardNo") int boardNo,
+												  @RequestParam("page") int page) {
+
+		ResponseData rd = null;
+		String rCode = "";
+		String message = "";
+		int conunt = 0;
+		Map<String, Object> map = null;		
+		List<Reply> replies = null;
+		
+		conunt = boardService.replyCount(boardNo);
+		
+		PageInfo pi = Pagination.getPageInfo(conunt,
+											page,
+											3,
+											3);
+		
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		try {
+			  
+			  if(conunt > 0) {
+				  replies = boardService.findAllReply(boardNo,rowBounds);
+				  map =  new HashMap<String, Object>();
+				  map.put("pi", pi);
+				  map.put("replies", replies);
+				  
+				  rCode = "299";
+				  message =  "성공성공!";
+			  } else {
+				  rCode = "598";
+				  message = "댓글을 찾지 못했습니다.";
+			  }
+			  
+		  } catch(Exception e) {
+			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+		  }
+		  
+		  rd = RdTemplates.getRd(map, rCode, message);  
+		  
+		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
+	}
 	
 	
 	

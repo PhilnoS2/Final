@@ -41,8 +41,8 @@
 	</sql>
 	
 	<select id="selectListCount"
-	parameterType="HashMap"
-	resultType="_int"
+		parameterType="HashMap"
+		resultType="_int"
 	>
 	SELECT
 	      COUNT(*)
@@ -67,8 +67,8 @@
 	
 	
 	<select id="selectListAll"
-	parameterType="HashMap"
-	resultMap="boardResultSet">
+		parameterType="HashMap"
+		resultMap="boardResultSet">
 	
 	<include refid="board" />
 	       MEMBER.NICKNAME AS "NICKNAME",
@@ -289,7 +289,20 @@
 	    BY REVIEW_NO DESC
 	</select>
 	
+	<select id="replyCount"
+		parameterType="_int"
+		resultType="_int"
+	>
+	SELECT
+	      COUNT(*)
+	  FROM
+	      FREE_BOARD_REVIEW
+	 WHERE
+	      FREE_BOARD_NO = #{boardNo}
+	   AND
+	      DELETE_YN = 'N'         
 	
+	</select>
 	
 	
 	

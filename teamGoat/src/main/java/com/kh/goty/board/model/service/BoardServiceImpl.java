@@ -71,8 +71,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Reply> findAllReply(int freeBoardNo) {
-		return boardMapper.findAllReply(freeBoardNo);
+	public List<Reply> findAllReply(int freeBoardNo, RowBounds rowBounds) {
+		return boardMapper.findAllReply(freeBoardNo, rowBounds);
+	}
+
+	@Override
+	public int replyCount(int boardNo) {
+		return boardMapper.replyCount(boardNo);
 	}
 	
 	
