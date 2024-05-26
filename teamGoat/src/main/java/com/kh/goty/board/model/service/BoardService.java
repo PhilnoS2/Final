@@ -3,6 +3,8 @@ package com.kh.goty.board.model.service;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
+
 import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.board.model.vo.Reply;
 import com.kh.goty.common.model.vo.PageInfo;
@@ -25,7 +27,9 @@ public interface BoardService {
 
 	public int save(Reply reply);
 
-	public List<Reply> findAllReply(int freeBoardNo);
+	public List<Reply> findAllReply(int freeBoardNo, RowBounds rowBounds);
+
+	public int replyCount(int boardNo);
 	
 
 }

@@ -28,6 +28,8 @@ public interface BoardMapper {
 
 	int save(Reply reply);
 
-	List<Reply> findAllReply(int freeBoardNo);
+	List<Reply> findAllReply(int freeBoardNo, RowBounds rowBounds);
+
+	int replyCount(int boardNo);
 
 }

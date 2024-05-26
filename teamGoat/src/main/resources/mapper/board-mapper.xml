@@ -41,8 +41,8 @@
 	</sql>
 	
 	<select id="selectListCount"
-	parameterType="HashMap"
-	resultType="_int"
+		parameterType="HashMap"
+		resultType="_int"
 	>
 	SELECT
 	      COUNT(*)
@@ -52,6 +52,8 @@
        ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
 	WHERE
 	      FREE_BOARD.DELETE_YN = 'N'
+	  AND
+	      MEMBER.DELETE_YN = 'N'   
 	 <if test="categoryNo != null and categoryNo > 0">
 	 	AND PLATFORM_NO = #{categoryNo}
 	 </if>
@@ -65,8 +67,8 @@
 	
 	
 	<select id="selectListAll"
-	parameterType="HashMap"
-	resultMap="boardResultSet">
+		parameterType="HashMap"
+		resultMap="boardResultSet">
 	
 	<include refid="board" />
 	       MEMBER.NICKNAME AS "NICKNAME",
@@ -92,6 +94,8 @@
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
 	 WHERE
 	      FREE_BOARD.DELETE_YN = 'N'
+	   AND
+	      MEMBER.DELETE_YN = 'N'         
 	 <if test="categoryNo != 0">
 	 	AND FREE_BOARD.PLATFORM_NO = #{categoryNo}
 	 </if>
@@ -266,19 +270,39 @@
 	>
 	SELECT
 		  REVIEW_NO reviewNo,
-		  MEMBER_NO memberNo,
-		  REVIEW_CONTENT reviewContent
+		  FREE_BOARD_REVIEW.MEMBER_NO memberNo,
+		  REVIEW_CONTENT reviewContent,
+		  CREATE_DATE createDate,
+          MEMBER.MEMBER_NAME AS "REVIEWWRITER"
 	  FROM
 	      FREE_BOARD_REVIEW
+	  JOIN
+	      MEMBER
+	   ON FREE_BOARD_REVIEW.MEMBER_NO = MEMBER.MEMBER_NO       
 	 WHERE      		  
-		  DELETE_YN = 'N'
+		  FREE_BOARD_REVIEW.DELETE_YN = 'N'
+	   AND
+	      MEMBER.DELETE_YN = 'N'   	  
 	   AND
 	       FREE_BOARD_NO = #{freeBoardNo}
 	 ORDER
 	    BY REVIEW_NO DESC
 	</select>
 	
+	<select id="replyCount"
+		parameterType="_int"
+		resultType="_int"
+	>
+	SELECT
+	      COUNT(*)
+	  FROM
+	      FREE_BOARD_REVIEW
+	 WHERE
+	      FREE_BOARD_NO = #{boardNo}
+	   AND
+	      DELETE_YN = 'N'         
 	
+	</select>
 	
 	
 	

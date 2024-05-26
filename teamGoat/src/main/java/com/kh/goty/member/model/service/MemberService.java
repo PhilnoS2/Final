@@ -27,5 +27,7 @@ public interface MemberService {
 	public Member findUpdateMember(int memberNo);
 
 	public int updateMember(Member member);
+
+	public int deleteMember(int memberNo);
 	 
 }
