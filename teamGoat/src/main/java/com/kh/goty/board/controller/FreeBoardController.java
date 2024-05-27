@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goty.board.model.service.BoardService;
 import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.Report;
 import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
@@ -292,7 +293,15 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
-	
+	@PostMapping("/report")
+	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
+		// 댓글번호
+		// report_user
+		// report_content
+		// report_date
+		log.info("report = {}", report);
+		return null;
+	}
 	
 	
 	
