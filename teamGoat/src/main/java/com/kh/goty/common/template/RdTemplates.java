@@ -10,6 +10,7 @@ import com.kh.goty.board.model.vo.ResponseData;
 public class RdTemplates {
 	
 	public static ResponseData getRd(Object data, String rCode, String message) {
+
 		ResponseData rd = null;
 		
 		rd = ResponseData.builder()
