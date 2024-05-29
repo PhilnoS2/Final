@@ -273,18 +273,29 @@
 		  FREE_BOARD_REVIEW.MEMBER_NO memberNo,
 		  REVIEW_CONTENT reviewContent,
 		  CREATE_DATE createDate,
-          MEMBER.MEMBER_NAME AS "REVIEWWRITER"
+          MEMBER.MEMBER_NAME AS "REVIEWWRITER",
+          COUNT(REPORT_NO) reportCount
 	  FROM
 	      FREE_BOARD_REVIEW
 	  JOIN
 	      MEMBER
-	   ON FREE_BOARD_REVIEW.MEMBER_NO = MEMBER.MEMBER_NO       
+	   ON FREE_BOARD_REVIEW.MEMBER_NO = MEMBER.MEMBER_NO
+	  LEFT
+      JOIN REPLY_REPORT
+        ON REPLY_REPORT.REPORT_NO = FREE_BOARD_REVIEW.REVIEW_NO       
 	 WHERE      		  
 		  FREE_BOARD_REVIEW.DELETE_YN = 'N'
 	   AND
 	      MEMBER.DELETE_YN = 'N'   	  
 	   AND
 	       FREE_BOARD_NO = #{freeBoardNo}
+	  GROUP
+         BY 
+           REVIEW_NO ,
+		   FREE_BOARD_REVIEW.MEMBER_NO ,
+		   REVIEW_CONTENT ,
+		   CREATE_DATE ,
+           MEMBER.MEMBER_NAME     
 	 ORDER
 	    BY REVIEW_NO DESC
 	</select>
@@ -304,7 +315,21 @@
 	
 	</select>
 	
+	<insert id="insertReport"
+		    parameterType="report">
+	INSERT
+	  INTO
+	      REPLY_REPORT
+	   VALUES
+	         (
+	          #{reviewNo},
+	          #{reportUser},
+	          #{reportReason},
+	          #{etc},
+	          DEFAULT
+	         )    	    
 	
+	</insert>
 	
 	
 	

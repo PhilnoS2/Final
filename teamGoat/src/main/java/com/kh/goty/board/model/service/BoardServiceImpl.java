@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.goty.board.model.dao.BoardMapper;
 import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.Report;
 import com.kh.goty.common.model.vo.PageInfo;
 
 import lombok.RequiredArgsConstructor;
@@ -78,6 +79,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int replyCount(int boardNo) {
 		return boardMapper.replyCount(boardNo);
+	}
+
+	@Override
+	public int insertReport(Report report) {
+		return boardMapper.insertReport(report);
 	}
 	
 	

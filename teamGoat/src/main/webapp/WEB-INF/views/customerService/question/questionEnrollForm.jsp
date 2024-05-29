@@ -106,16 +106,17 @@
         <div class="question-content">
             <div>
                 <form action="insert" method="post" enctype="multipart/form-data">
+                	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
                     <label for="subject" >제목</label>
-                    <select id="category" name="category" style= "margin-top : 5px; height :30px;">
-                        <option value="i">상품문의</option>
-                        <option value="p">주문/결제문의</option>
-                        <option value="t">배송문의</option>
-                        <option value="e">기타</option>
-                    </select>
-                    <input type="text" id="subject" name="subject" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
-                    <textarea id="content" name="content" placeholder="내용을 입력해주세요" required></textarea>
-                    <input type="file" style="margin-top : 5px; margin-bottom : 3px;" name="upfile1"> <br>
+                    <select id="category" name="categoryNo" style= "margin-top : 5px; height :30px;">
+	                    <option value="1">주문/결제</option>
+	                    <option value="2">기타문의</option>
+	                    <option value="3">서비스</option>
+	                    <option value="4">배송관련</option>
+                    </select>            
+                    <input type="text" id="subject" name="questionTitle" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
+                    <textarea id="content" name="questionContent" placeholder="내용을 입력해주세요" required></textarea>
+                    <input type="file" style="margin-top : 5px; margin-bottom : 3px;" name="upfile"> <br>
                     <div style="width: 1000px; border-bottom : 1px solid black; margin-top : 20px; margin-bottom : 20px;"></div>
 
                     <div align="right" style="padding-right : 70px;">

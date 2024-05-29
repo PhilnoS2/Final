@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.Report;
 import com.kh.goty.common.model.vo.PageInfo;
 
 public interface BoardService {
@@ -30,6 +31,8 @@ public interface BoardService {
 	public List<Reply> findAllReply(int freeBoardNo, RowBounds rowBounds);
 
 	public int replyCount(int boardNo);
+
+	public int insertReport(Report report);
 	
 
 }

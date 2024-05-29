@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.Report;
 
 @Mapper
 public interface BoardMapper {
@@ -31,5 +32,7 @@ public interface BoardMapper {
 	List<Reply> findAllReply(int freeBoardNo, RowBounds rowBounds);
 
 	int replyCount(int boardNo);
+
+	int insertReport(Report report);
 
 }

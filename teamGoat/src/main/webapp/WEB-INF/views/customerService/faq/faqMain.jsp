@@ -112,7 +112,7 @@
             </div>
             <div class="faq-title-insert">
                 <div>
-                    <c:if test="${ sessionScope.loginMember != null and sessionScope.loginMember.memLevel == 'A' }">
+                    <c:if test="${ sessionScope.loginMember ne null and sessionScope.loginMember.memLevel == 'A' }">
                     	<button type="button" id="insert-faq" class="btn btn-light">글쓰기</button>
                     </c:if>
                 </div>
@@ -189,11 +189,14 @@
 	                const $a = $(this).next();
 	
 	                if($a.css('display') == 'none'){
+	                	$(this).css('background-color', 'yellowgreen');
+	                	$(this).siblings('div').css('background-color', 'rgb(216, 216, 211)');
 	                    $a.slideDown(500);
 	                    $a.siblings('p').slideUp(1000);
 	                } 
 	                else {
-	                    $a.slideUp(500);
+	                	
+	                	$a.slideUp(500);
 	                }
 	            });
 	        })

@@ -27,6 +27,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kh.goty.board.model.service.BoardService;
 import com.kh.goty.board.model.vo.Board;
 import com.kh.goty.board.model.vo.Reply;
+import com.kh.goty.board.model.vo.Report;
 import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
@@ -254,13 +255,13 @@ public class FreeBoardController {
 		ResponseData rd = null;
 		String rCode = "";
 		String message = "";
-		int conunt = 0;
+		int count = 0;
 		Map<String, Object> map = null;		
 		List<Reply> replies = null;
 		
-		conunt = boardService.replyCount(boardNo);
+		count = boardService.replyCount(boardNo);
 		
-		PageInfo pi = Pagination.getPageInfo(conunt,
+		PageInfo pi = Pagination.getPageInfo(count,
 											page,
 											3,
 											3);
@@ -270,7 +271,7 @@ public class FreeBoardController {
 		
 		try {
 			  
-			  if(conunt > 0) {
+			  if(count > 0) {
 				  replies = boardService.findAllReply(boardNo,rowBounds);
 				  map =  new HashMap<String, Object>();
 				  map.put("pi", pi);
@@ -292,7 +293,31 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
-	
+	@PostMapping("/report")
+	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
+		log.info("report = {}" , report);
+		ResponseData rd = null;
+		String rCode = "";
+		String message = "";
+		int result = 0;
+		
+		try {
+			if(boardService.insertReport(report) > 0) {
+			  // result = boardService.reportCount(report.getReviewNo());
+			  rCode = "299";
+			  message =  "댓글 신고 성공";
+			} else {
+			  rCode = "297";
+			  message =  "댓글 신고 실패..";
+			}
+			
+		} catch(Exception e) {
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+		}
+		  rd = RdTemplates.getRd(result, rCode, message);  
+		
+		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
+	}
 	
 	
 	
