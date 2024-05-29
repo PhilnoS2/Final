@@ -331,8 +331,8 @@ public class ItemController {
 	
 	@GetMapping("item.order")
 	public ModelAndView showOrder(int itemNo,
-									   int platformNo,
-									   ModelAndView mv) {
+								  int platformNo,
+								  ModelAndView mv) {
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		
@@ -346,7 +346,7 @@ public class ItemController {
 	}
 	
 	@PostMapping("item.purchase")
-	public ModelAndView addItemInPurchase(int memberNo,
+	public ModelAndView addItemOrder(int memberNo,
 										  int itemNo,
 										  String toName,
 										  String toContact,
@@ -367,11 +367,25 @@ public class ItemController {
 		order.setDetailAddress(detailAddress);
 		order.setMessage(message);
 		
-		System.out.println(order);
-		
-		mv.setViewName("item/itemPurchase");
-		
-		return mv;
+		if(itemService.addOrder(order) > 0) {
+			
+			List<Order> items = itemService.findOrderList(memberNo);
+			
+			System.out.println(items);
+			
+			mv.setViewName("item/itemPurchase");
+			
+			return mv;
+			
+		} else {
+			
+			mv.addObject("errorMsg", "주문서 작성을 실패했습니다.");
+			
+			mv.setViewName("common/errorPage");
+			
+			return mv;
+		}
+
 		
 	}
 	
