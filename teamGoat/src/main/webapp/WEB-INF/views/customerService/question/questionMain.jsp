@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,10 +85,10 @@
         <div class="question-find" >
             <div>
                 <select id="category" name="category" style="margin-left : 48px; margin-top : 5px; height :30px;">
-                    <option value="i">상품문의</option>
-                    <option value="p">주문/결제문의</option>
-                    <option value="t">배송문의</option>
-                    <option value="e">기타</option>
+                    <option value="1">주문/결제</option>
+                    <option value="2">기타문의</option>
+                    <option value="3">서비스</option>
+                    <option value="4">배송관련</option>
                 </select>
             </div>
         </div>
@@ -146,8 +148,7 @@
         </div>
         <div class="question-insert">
             <div align="right">
-                <!--추후 로그인한 유저만 글 작성 버튼을 누를 수 있게 수정 필요-->
-                <button type="button" class="btn btn-secondary"> 글쓰기 </button>
+                <button id="btn1" type="button" class="btn btn-secondary"> 글쓰기 </button>
             </div>
         </div>
         <div class="question-search">
@@ -169,6 +170,21 @@
             </form>
         </div>
     </div>
+    
+    <script>
+    	$(function(){
+    		$('#btn1').click(function(){
+    			if(${sessionScope.loginMember eq null}){
+    				alert('로그인 후 이용 가능한 서비스입니다');
+    			} 
+    			else {
+	    			location.href = '/goty/question/enroll';
+    			}
+    			
+    		})
+    	})
+    
+    </script>
     
     
 </body>

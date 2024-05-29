@@ -141,7 +141,7 @@
             </div>
             <div class="notice-title-insert">
                 <div>
-					<c:if test="${ sessionScope.loginMember != null and sessionScope.loginMember.memLevel == 'A' }">
+					<c:if test="${ sessionScope.loginMember ne null and sessionScope.loginMember.memLevel == 'A' }">
 	                    <button id="insert-notice" type="button" class="btn btn-light">글쓰기</button>
 					</c:if>
                 </div>
