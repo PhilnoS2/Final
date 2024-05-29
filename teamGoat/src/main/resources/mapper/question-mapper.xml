@@ -5,6 +5,49 @@
   
 <mapper namespace="com.kh.goty.customerService.model.repository.QuestionRepository">
 
+	<insert id="insertQuestion" parameterType="question">
+		INSERT
+		  INTO
+		       QUESTION
+			  (
+			  QUESTION_NO,
+			  MEMBER_NO,
+			  CATEGORY_NO,
+			  QUESTION_TITLE,
+			  QUESTION_CONTENT
+			  )
+		VALUES
+		      (
+		      SEQ_QUESTION.NEXTVAL,
+		      #{memberNo},
+		      #{categoryNo},
+		      #{questionTitle},
+		      #{questionContent}
+		      )
+		<selectKey keyProperty="questionNo" resultType="int" order="AFTER">
+	    	SELECT SEQ_QUESTION.CURRVAL FROM DUAL
+	    </selectKey>		      
+	</insert>
 	
+	<insert id="insertFile" parameterType="questionAttach">
+		INSERT
+		  INTO
+		       QUESTION_ATTACH
+		       (
+		      QUESTION_ATTACH_NO,
+		      QUESTION_NO,
+		      FILE_ORIGIN_NAME,
+		      FILE_CHANGE_NAME,
+		      QUESTION_ATTACH_PATH
+		       )
+		VALUES
+		      (
+		      SEQ_QUESTION_ATTACH.NEXTVAL,
+		      #{questionNo},
+		      #{fileOriginName},
+		      #{fileChangeName},
+		      #{attachPath}
+		      )      
+	</insert>
 
 </mapper>
