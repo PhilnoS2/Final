@@ -12,13 +12,20 @@ import lombok.ToString;
 public class Order {
 
 	private int orderNo;
-	private int memberNo;
-	private int itemNo;
 	private String toName;
 	private String toContact;
 	private String toEmail;
 	private String address;
 	private String detailAddress;
 	private String message;
-
+	
+	private int memberNo;
+	private String memberName;
+	
+	private int itemNo;
+	private String itemName;
+	private String platformName;
+	private String imgPath;
+	private String imgName;
+	private int price;
 }
