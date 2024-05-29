@@ -7,7 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
 import com.kh.goty.item.model.vo.Item;
-import com.kh.goty.item.model.vo.Purchase;
 
 @Mapper
 public interface ItemMapper {
@@ -33,9 +32,5 @@ public interface ItemMapper {
 	List<Item> findItemListInCart(int memberNo);
 	
 	int findCartList(HashMap<String, Integer> map);
-	
-	int addItemInPurchase(Purchase pc);
-	
-	Purchase findItemInPurchase(int memberNo);
 	
 }

@@ -1,7 +1,5 @@
 package com.kh.goty.item.model.vo;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -11,20 +9,16 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Purchase {
+public class Order {
 
-	private int purchaseNo;
+	private int orderNo;
 	private int memberNo;
 	private int itemNo;
-	private String address;
 	private String toName;
-	private int toContact;
+	private String toContact;
 	private String toEmail;
+	private String address;
+	private String detailAddress;
 	private String message;
-	private int totalPrice;
-	private int usedPoint;
-	private int addPoint;
-	private String refund;
-	private Date purchaseDate;
-	
+
 }

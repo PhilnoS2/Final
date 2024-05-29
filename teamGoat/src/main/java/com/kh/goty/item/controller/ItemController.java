@@ -15,7 +15,7 @@ import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 import com.kh.goty.item.model.service.ItemService;
 import com.kh.goty.item.model.vo.Item;
-import com.kh.goty.item.model.vo.Purchase;
+import com.kh.goty.item.model.vo.Order;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -330,7 +330,7 @@ public class ItemController {
 	}
 	
 	@GetMapping("item.order")
-	public ModelAndView addItemInOrder(int itemNo,
+	public ModelAndView showOrder(int itemNo,
 									   int platformNo,
 									   ModelAndView mv) {
 		
@@ -348,48 +348,30 @@ public class ItemController {
 	@PostMapping("item.purchase")
 	public ModelAndView addItemInPurchase(int memberNo,
 										  int itemNo,
-										  String address,
-										  String addrDetail,
 										  String toName,
-										  int toContact,
+										  String toContact,
 										  String toEmail,
+										  String address,
+										  String detailAddress,
 										  String message,
-										  int totalPrice,
-										  int usedPoint,
-										  int addPoint,
 										  ModelAndView mv) {
+
+		Order order = new Order();
 		
-		System.out.println(address + addrDetail);
+		order.setMemberNo(memberNo);
+		order.setItemNo(itemNo);
+		order.setToName(toName);
+		order.setToContact(toContact);
+		order.setToEmail(toEmail);
+		order.setAddress(address);
+		order.setDetailAddress(detailAddress);
+		order.setMessage(message);
 		
-		Purchase pc = new Purchase();
+		System.out.println(order);
 		
-		pc.setMemberNo(memberNo);
-		pc.setItemNo(itemNo);
-		pc.setAddress(address);
-		pc.setToName(toName);
-		pc.setToContact(toContact);
-		pc.setToEmail(toEmail);
-		pc.setMessage(message);
-		pc.setTotalPrice(totalPrice);
-		pc.setUsedPoint(usedPoint);
-		pc.setAddPoint(addPoint);
+		mv.setViewName("item/itemPurchase");
 		
-		if(itemService.addItemInPurchase(pc) > 0) {
-			
-			Purchase purchase = itemService.findItemInPurchase(memberNo);
-			
-			mv.setViewName("item/itemPurchase");
-			
-			return mv;
-			
-		} else {
-			
-			
-			mv.setViewName("");
-			
-			return mv;
-			
-		}
+		return mv;
 		
 	}
 	

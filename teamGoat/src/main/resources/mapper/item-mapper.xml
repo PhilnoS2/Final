@@ -227,32 +227,5 @@
 		   		PLATFORM_NO = #{platformNo}
 		
 	</select>
-	
-	<insert id="addItemInPurchase" parameterType="purchase">
-	
-		INSERT
-		  INTO
-		  		PURCHASE
-		VALUES
-				(
-				SEQ_PURCHASE.NEXTVAL,
-				#{memberNo},
-				#{itemNo},
-				#{totalPrice},
-				#{address},
-				#{message},
-				#{usedPoint},
-				#{addPoint},
-				DEFAULT,
-				SYSDATE
-				)
-				
-	</insert>
-	
-	<select id="findItemInPurchase" parameterType="_int">
-	
-		SELECT
-				
-	
-	</select>
+
 </mapper>

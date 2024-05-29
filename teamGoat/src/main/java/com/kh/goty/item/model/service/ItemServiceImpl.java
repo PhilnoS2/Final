@@ -5,11 +5,11 @@ import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.dao.ItemMapper;
 import com.kh.goty.item.model.vo.Item;
-import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
 
@@ -82,7 +82,11 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
+	@Transactional
 	public List<Item> findItemListInCart(int memberNo) {
+		
+		
+		
 		return itemMapper.findItemListInCart(memberNo);
 	}
 
@@ -91,15 +95,6 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.findCartList(map);
 	}
 
-	@Override
-	public int addItemInPurchase(Purchase pc) {
-		return itemMapper.addItemInPurchase(pc);
-	}
-
-	@Override
-	public Purchase findItemInPurchase(int memberNo) {
-		return itemMapper.findItemInPurchase(memberNo);
-	}
 
 
 }

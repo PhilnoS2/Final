@@ -117,7 +117,7 @@
 				
 					<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }" />
 					<input type="hidden" name="itemNo" value="${ requestScope.item.itemNo }" />
-	
+					
 					<div class="input-group mb-3">
 						<div class="input-group-prepend">
 							<span class="input-group-text">받으시는 분</span>
@@ -169,7 +169,7 @@
 							   onkeyup="reqDetailAddr();"
 							   style="width: 100%; display: inline-block;" 
 							   id="detailAddress" 
-							   name="addrDetail" 
+							   name="detailAddress" 
 							   placeholder="상세주소" required>
 							   
 					</div>
