@@ -23,6 +23,26 @@
 		
 	</resultMap>
 	
+	<resultMap id="orderResultSet" type="order">
+		
+		<result column="ORDER_NO" 		property="orderNo" />
+		<result column="MEMBER_NO" 		property="memberNo" />
+		<result column="MEMBER_NAME" 	property="memberName" />
+		<result column="ITEM_NO" 		property="itemNo" />
+		<result column="ITEM_NAME" 		property="itemName" />
+		<result column="PLATFORM_NAME"	property="platformName" />
+		<result column="IMG_NAME"		property="imgName" />
+		<result column="IMG_PATH" 		property="imgPath" />
+		<result column="PRICE" 			property="price" />
+		<result column="TO_NAME" 		property="toName" />
+		<result column="TO_CONTACT" 	property="toContact" />
+		<result column="T0_EMAIL" 		property="toEmail" />
+		<result column="ADDRESS" 		property="address" />
+		<result column="DETAIL_ADDRESS" property="detailAddress" />
+		<result column="MESSAGE" 		property="message" />
+	
+	</resultMap>
+	
 	<sql id="commonSql">
 	
 		SELECT 
@@ -227,5 +247,65 @@
 		   		PLATFORM_NO = #{platformNo}
 		
 	</select>
-
+	
+	<insert id="addOrder" parameterType="order">
+	
+		INSERT
+		  INTO
+		        TB_ORDER
+		VALUES
+		        (
+		        SEQ_TB_ORDER.NEXTVAL,
+		        #{memberNo},
+		        #{itemNo},
+		        #{toName},
+		        #{toContact},
+		        #{toEmail},
+		        #{address},
+		        #{detailAddress},
+		        #{message}
+		        )
+		        
+	</insert>
+	
+	<select id="findOrderList" parameterType="_int" resultMap="orderResultSet" >
+	
+		SELECT
+		        MEMBER_NAME,
+		        ITEM_NAME,
+		        PLATFORM_NAME,
+		        PRICE,
+		        IMG_NAME,
+		        IMG_PATH,
+		        TO_NAME,
+		        TO_CONTACT,
+		        TO_EMAIL,
+		        O.ADDRESS,
+		        DETAIL_ADDRESS,
+		        MESSAGE
+		  FROM
+		        TB_ORDER O
+		  JOIN
+		        MEMBER M
+		    ON (O.MEMBER_NO = M.MEMBER_NO)
+		  JOIN
+		        ITEM I
+		    ON (O.ITEM_NO = I.ITEM_NO)
+		  JOIN
+		        ITEM_IMG II
+		    ON  (I.IMG_NO = II.IMG_NO)
+		  JOIN
+		        GAME_CATEGORY_BRIDGE G
+		    ON (I.ITEM_NO = G.ITEM_NO)
+		  JOIN
+		        PLATFORM_CATEGORY P
+		    ON (G.PLATFORM_NO = P.PLATFORM_NO)
+		 WHERE
+		        O.MEMBER_NO = #{memberNo}
+		 ORDER
+		 	BY
+		 		ORDER_NO DESC
+	
+	</select>
+	
 </mapper>

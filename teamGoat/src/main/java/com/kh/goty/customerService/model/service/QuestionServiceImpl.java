@@ -26,7 +26,6 @@ public class QuestionServiceImpl implements QuestionService {
 			System.out.println(question.getQuestionNo());
 			new QuestionAttach().setQuestionNo(question.getQuestionNo());
 			questionRepository.insertFile(questionAttach);
-			
 		}
 		
 		return 1;

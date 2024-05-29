@@ -49,7 +49,7 @@ public class QuestionController {
 			QuestionAttach questionAttach = new QuestionAttach();
 			questionAttach.setFileOriginName(upfile.getOriginalFilename());
 			questionAttach.setFileChangeName(saveFile(upfile, session));
-			questionAttach.setAttachPath(session.getServletContext().getRealPath("resources/questionUpfiles/"));
+			questionAttach.setAttachPath("AA");
 			questionService.insertQuestion(question, questionAttach);
 		} else {
 			questionService.insertQuestion(question, null);

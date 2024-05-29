@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.dao.ItemMapper;
 import com.kh.goty.item.model.vo.Item;
+import com.kh.goty.item.model.vo.Order;
 
 import lombok.RequiredArgsConstructor;
 
@@ -82,11 +83,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	@Transactional
 	public List<Item> findItemListInCart(int memberNo) {
-		
-		
-		
 		return itemMapper.findItemListInCart(memberNo);
 	}
 
@@ -95,6 +92,15 @@ public class ItemServiceImpl implements ItemService{
 		return itemMapper.findCartList(map);
 	}
 
+	@Override
+	public int addOrder(Order order) {
+		return itemMapper.addOrder(order);
+	}
+
+	@Override
+	public List<Order> findOrderList(int memberNo) {
+		return itemMapper.findOrderList(memberNo);
+	}
 
 
 }
