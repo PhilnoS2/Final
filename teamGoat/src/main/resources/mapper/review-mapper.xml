@@ -17,7 +17,7 @@
 		<result column="IMG_PATH" 		property="imgPath" />
 		
 	</resultMap>
-
+<!-- 
 	<select id="findGameCount" resultType="_int">
 	
 		SELECT
@@ -28,7 +28,7 @@
 		 		STATUS = 'Y'
 		
 	</select>
-	
+-->
 	<select id="findAllGames" resultMap="reviewResultSet">
 	
 		SELECT

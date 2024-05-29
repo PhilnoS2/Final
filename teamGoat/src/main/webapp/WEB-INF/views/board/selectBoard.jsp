@@ -218,7 +218,7 @@
 					<input class="form-control w-100 d-inline" id="reportInput" name="report"
 					 placeholder="사유를 적어주세요." />
 				</div>
-				<button class="btn btn-sm btn-danger" onclick="report();" >신고</button>
+				<button class="btn btn-sm btn-danger" onclick="report();" data-dismiss="modal" >신고</button>
 			</div>
          </div>
         </div>
@@ -258,7 +258,6 @@
 			dataType:'json',
 			contentType : 'application/json; charset=utf-8',
 			success: (result) => {
-					console.log(result);
 					alert(result.message);
 					$('#reviewArea').val('');
 					replyList(1);
@@ -277,7 +276,6 @@
 			},
 			type: 'get',
 			success: (result) => {
-				// console.log(result);
 				
 				if(result != null){
 					$('#replyList-area').empty();
@@ -292,10 +290,11 @@
 						$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
 													 +'<div class="d-flex p-1 m-1 justify-content-between">'
 														+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
-														+'<c:if test="${ sessionScope.loginMember ne null }" >'
-														+'<button class="btn btn-sm btn-danger"'
-														+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')";>신고</button>'
-											            +'</c:if>'
+														+'<div class="d-flex justify-content-between"><p class="mb-0 mr-1 inline">신고('+item.reportCount+')</p>'
+														+'<c:if test="${ sessionScope.loginMember ne null}" >'
+															+'<button class="btn btn-sm btn-danger"'
+															+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')";>신고</button>'
+											            +'</c:if></div>'
 										             +'</div>'
 										             +'<p id="review-content" class="pl-2">'+item.reviewContent+'</p>'
 										             +'<h5 id="review-writer">'+item.reviewWriter+'</h5>'
@@ -348,7 +347,6 @@
 			'etc': $('#reportInput').val()
 		};
 		
-		console.log(data);
 		$.ajax({
 			url:'/goty/freeboards/report',
 			type:'post',
@@ -356,7 +354,8 @@
 			contentType : 'application/json; charset=utf-8',
 			data: JSON.stringify(data),
 			success: (result) => {
-				console.log(result);
+				alert(result.message);
+				replyList(1);
 			},
 		
 		});
