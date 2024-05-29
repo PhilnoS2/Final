@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -284,38 +285,38 @@ public class FreeBoardController {
 				  message = "댓글을 찾지 못했습니다.";
 			  }
 			  
+			  rd = RdTemplates.getRd(map, rCode, message); 
 		  } catch(Exception e) {
 			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
-		  }
-		  
-		  rd = RdTemplates.getRd(map, rCode, message);  
+		  }	 
 		  
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/report")
 	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
-		log.info("report = {}" , report);
+		// log.info("report = {}" , report);
 		ResponseData rd = null;
 		String rCode = "";
 		String message = "";
-		int result = 0;
+		String result = "";
 		
 		try {
 			if(boardService.insertReport(report) > 0) {
-			  // result = boardService.reportCount(report.getReviewNo());
+			  result = "댓글신고성공";
 			  rCode = "299";
-			  message =  "댓글 신고 성공";
+			  message =  "댓글 신고에 성공했습니다.";
 			} else {
+			  result = "댓글신고실패";
 			  rCode = "297";
-			  message =  "댓글 신고 실패..";
+			  message =  "댓글 신고에 실패했습니다.";
 			}
+			rd = RdTemplates.getRd(result, rCode, message); 
 			
 		} catch(Exception e) {
 			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
 		}
-		  rd = RdTemplates.getRd(result, rCode, message);  
-		
+		  	
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
@@ -336,7 +337,7 @@ public class FreeBoardController {
 		
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());
 		
-		int ranNum = (int)Math.random() * 90000 + 10000;
+		int ranNum = ((int)Math.random() * 90000) + 10000;
 		
 		String changeName = currentTime + ranNum + ext;
 		

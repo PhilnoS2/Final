@@ -5,40 +5,73 @@ public class QuestionAttach {
 	
 	private int questionAttachNo;
 	private int questionNo;
-	private String questionAttachPath;
+	private String fileOriginName;
+	private String fileChangeName;
+	private String attachPath;
 	
 	public QuestionAttach() {
 		super();
 	}
-	
-	public QuestionAttach(int questionAttachNo, int questionNo, String questionAttachPath) {
+
+	public QuestionAttach(int questionAttachNo, int questionNo, String fileOriginName, String fileChangeName,
+			String attachPath) {
 		super();
 		this.questionAttachNo = questionAttachNo;
 		this.questionNo = questionNo;
-		this.questionAttachPath = questionAttachPath;
+		this.fileOriginName = fileOriginName;
+		this.fileChangeName = fileChangeName;
+		this.attachPath = attachPath;
 	}
+
 	public int getQuestionAttachNo() {
 		return questionAttachNo;
 	}
+
 	public void setQuestionAttachNo(int questionAttachNo) {
 		this.questionAttachNo = questionAttachNo;
 	}
+
 	public int getQuestionNo() {
 		return questionNo;
 	}
+
 	public void setQuestionNo(int questionNo) {
 		this.questionNo = questionNo;
 	}
-	public String getQuestionAttachPath() {
-		return questionAttachPath;
+
+	public String getFileOriginName() {
+		return fileOriginName;
 	}
-	public void setQuestionAttachPath(String questionAttachPath) {
-		this.questionAttachPath = questionAttachPath;
+
+	public void setFileOriginName(String fileOriginName) {
+		this.fileOriginName = fileOriginName;
 	}
-	
+
+	public String getFileChangeName() {
+		return fileChangeName;
+	}
+
+	public void setFileChangeName(String fileChangeName) {
+		this.fileChangeName = fileChangeName;
+	}
+
+	public String getAttachPath() {
+		return attachPath;
+	}
+
+	public void setAttachPath(String attachPath) {
+		this.attachPath = attachPath;
+	}
+
 	@Override
 	public String toString() {
 		return "QuestionAttach [questionAttachNo=" + questionAttachNo + ", questionNo=" + questionNo
-				+ ", questionAttachPath=" + questionAttachPath + "]";
+				+ ", fileOriginName=" + fileOriginName + ", fileChangeName=" + fileChangeName + ", attachPath="
+				+ attachPath + "]";
 	}
+
+	
+	
+	
+
 }

@@ -286,7 +286,6 @@
 					let content = '';
 					
 					replies.forEach((item) => {
-						console.log(item);
 						$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
 													 +'<div class="d-flex p-1 m-1 justify-content-between">'
 														+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
