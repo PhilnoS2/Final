@@ -111,72 +111,77 @@
 		
 		<form method="post" action="item.purchase">
 	
-		<div class="delivery-form basic-border">
-			
-			<label>▶ 배송지 정보</label>
-
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">받으시는 분</span>
+			<div class="delivery-form basic-border">
+				
+				<label>▶ 배송지 정보</label>
+				
+					<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }" />
+					<input type="hidden" name="itemNo" value="${ requestScope.item.itemNo }" />
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">받으시는 분</span>
+						</div>
+						<input type="text" name="toName" class="form-control" placeholder="성함을 입력해주세요." required onkeyup="regExpCheckName();">
 					</div>
-					<input type="text" class="form-control" placeholder="성함을 입력해주세요." required onkeyup="regExpCheckName();">
-				</div>
-				
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">휴대폰</span>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">휴대폰</span>
+						</div>
+						<input type="text" name="toContact" class="form-control" placeholder="휴대폰 번호를 - 없이 입력해주세요." required onkeyup="reqExpPhone();">
 					</div>
-					<input type="text" class="form-control" placeholder="휴대폰 번호를 - 없이 입력해주세요." required onkeyup="reqExpPhone();">
-				</div>
-				
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">이메일</span>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">이메일</span>
+						</div>
+						<input type="text" name="toEmail" class="form-control" placeholder="이메일을 입력해주세요." required onkeyup="reqExpEmail();">
 					</div>
-					<input type="text" class="form-control" placeholder="이메일을 입력해주세요." required onkeyup="reqExpEmail();">
-				</div>
-				
-				<div class="input-group mb-3">
-					<div class="input-group-prepend">
-						<span class="input-group-text">배송 메세지</span>
+					
+					<div class="input-group mb-3">
+						<div class="input-group-prepend">
+							<span class="input-group-text">배송 메세지</span>
+						</div>
+						<input type="text" name="message" class="form-control" placeholder="배송시 전달 사항을 입력해주세요.">
 					</div>
-					<input type="text" class="form-control" placeholder="배송시 전달 사항을 입력해주세요.">
-				</div>
-				
-				<div class="address-div">
-				
-					<label>▶ 배송지 주소</label>
+					
+					<div class="address-div">
+					
+						<label>▶ 배송지 주소</label>
+		
+						<br>
 	
-					<br>
-
-					<input type="button" 
-						   class="btn btn-primary mb-2" 
-						   onclick="execDaumPostcode()" 
-						   value="주소 찾기">
-
-					<input type="text" 
-						   class="form-control d-inline" 
-						   style="width: 100%;" 
-						   id="roadAddress" 
-						   name="address" 
-						   placeholder="도로명주소" readonly required>
-						   
-					<input type="text" 
-						   class="form-control mt-2 d-inline detail" 
-						   onkeyup="reqDetailAddr();"
-						   style="width: 100%; display: inline-block;" 
-						   id="detailAddress" 
-						   name="addrDetail" 
-						   placeholder="상세주소" required>
-						   
-		</div>
+						<input type="button" 
+							   class="btn btn-primary mb-2" 
+							   onclick="execDaumPostcode()" 
+							   value="주소 찾기">
+	
+						<input type="text" 
+							   class="form-control d-inline" 
+							   style="width: 100%;" 
+							   id="roadAddress" 
+							   name="address" 
+							   placeholder="도로명주소" readonly required>
+							   
+						<input type="text" 
+							   class="form-control mt-2 d-inline detail" 
+							   onkeyup="reqDetailAddr();"
+							   style="width: 100%; display: inline-block;" 
+							   id="detailAddress" 
+							   name="detailAddress" 
+							   placeholder="상세주소" required>
+							   
+					</div>
 	
 
 			</div>
 
 			<div class="total-price basic-border">
 
-				<div>포인트 사용 여부</div>
+				<div>
+					
+				</div>
 
 				<table class="table">
 					<thead>
@@ -195,6 +200,7 @@
 					</tbody>
 				</table>
 			</div>
+			
 			<div class="basic-border">
 				<button type="submit" class="btn btn-primary"> 결제하기 </button>
 			</div>
