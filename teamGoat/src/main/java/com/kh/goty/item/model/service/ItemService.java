@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.vo.Item;
+import com.kh.goty.item.model.vo.Purchase;
 
 public interface ItemService {
 	
@@ -29,4 +30,8 @@ public interface ItemService {
 	List<Item> findItemListInCart(int memberNo);
 	
 	int findCartList(HashMap<String, Integer> map);
+	
+	int addItemInPurchase(Purchase pc);
+	
+	Purchase findItemInPurchase(int memberNo);
 }

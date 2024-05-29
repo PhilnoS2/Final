@@ -4,13 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.RowBounds;
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.dao.ItemMapper;
-import com.kh.goty.item.model.dao.ItemRepository;
 import com.kh.goty.item.model.vo.Item;
+import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
 
@@ -18,8 +17,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ItemServiceImpl implements ItemService{
 	
-	private final SqlSession sqlSession;
-	private final ItemRepository itemRepository;
+	// private final SqlSession sqlSession;
+	// private final ItemRepository itemRepository;
 	private final ItemMapper itemMapper;
 	
 	// List Count용 Service - 반환  int
@@ -90,6 +89,16 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public int findCartList(HashMap<String, Integer> map) {
 		return itemMapper.findCartList(map);
+	}
+
+	@Override
+	public int addItemInPurchase(Purchase pc) {
+		return itemMapper.addItemInPurchase(pc);
+	}
+
+	@Override
+	public Purchase findItemInPurchase(int memberNo) {
+		return itemMapper.findItemInPurchase(memberNo);
 	}
 
 

@@ -3,6 +3,8 @@ package com.kh.goty.item.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +15,7 @@ import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 import com.kh.goty.item.model.service.ItemService;
 import com.kh.goty.item.model.vo.Item;
+import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -258,6 +261,7 @@ public class ItemController {
 	public ModelAndView addItemInCart(int itemNo,
 									  int memberNo,
 									  int platformNo,
+									  HttpSession session,
 									  ModelAndView mv) {
 		
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -266,13 +270,11 @@ public class ItemController {
 		map.put("memberNo", memberNo);
 		map.put("platformNo", platformNo);
 		
-		int result = itemService.findCartList(map);
-		
-		if(result > 0) {
+		if(itemService.findCartList(map) > 0) {
 			
-			mv.addObject("alertMsg", "같은 제품이 장바구니에 담겨있습니다.");
+			session.setAttribute("alertMsg", "이미 장바구니에 포함된 상품입니다.");
 			
-			mv.setViewName("redirect:detail?platformNo="+ platformNo + "&itemNo=" + itemNo);
+			mv.setViewName("redirect:detail.item?platformNo=" + platformNo + "&itemNo=" + itemNo);
 			
 			return mv;
 			
@@ -286,8 +288,9 @@ public class ItemController {
 				
 			} else {
 				
-				mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.")
-				.setViewName("common/errorPage");
+				mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.");
+				
+				mv.setViewName("common/errorPage");
 				
 				return mv;
 			}
@@ -343,11 +346,51 @@ public class ItemController {
 	}
 	
 	@PostMapping("item.purchase")
-	public ModelAndView addItemInPurchase(ModelAndView mv) {
+	public ModelAndView addItemInPurchase(int memberNo,
+										  int itemNo,
+										  String address,
+										  String addrDetail,
+										  String toName,
+										  int toContact,
+										  String toEmail,
+										  String message,
+										  int totalPrice,
+										  int usedPoint,
+										  int addPoint,
+										  ModelAndView mv) {
 		
-		mv.setViewName("item/itemPurchase");
+		System.out.println(address + addrDetail);
 		
-		return mv;
+		Purchase pc = new Purchase();
+		
+		pc.setMemberNo(memberNo);
+		pc.setItemNo(itemNo);
+		pc.setAddress(address);
+		pc.setToName(toName);
+		pc.setToContact(toContact);
+		pc.setToEmail(toEmail);
+		pc.setMessage(message);
+		pc.setTotalPrice(totalPrice);
+		pc.setUsedPoint(usedPoint);
+		pc.setAddPoint(addPoint);
+		
+		if(itemService.addItemInPurchase(pc) > 0) {
+			
+			Purchase purchase = itemService.findItemInPurchase(memberNo);
+			
+			mv.setViewName("item/itemPurchase");
+			
+			return mv;
+			
+		} else {
+			
+			
+			mv.setViewName("");
+			
+			return mv;
+			
+		}
+		
 	}
 	
 }
