@@ -281,8 +281,8 @@ public class FreeBoardController {
 				  rCode = "299";
 				  message =  "성공성공!";
 			  } else {
-				  rCode = "598";
-				  message = "댓글을 찾지 못했습니다.";
+				  rCode = "298";
+				  message = "댓글이 존재하지 않습니다.";
 			  }
 			  
 			  rd = RdTemplates.getRd(map, rCode, message); 

@@ -173,18 +173,8 @@
 				</c:otherwise>
 				
 			</c:choose>
-			<c:choose>
-				<c:when test="${ not empty board.replies }">
-					<div id="replyList-area">
-					</div>
-				</c:when>
-				
-				<c:otherwise>
-					<div class="mx-auto" style="width:50%;">
-						<h3>댓글이 존재하지 않습니다.</h3>
-					</div>
-				</c:otherwise>
-			</c:choose>
+			<div id="replyList-area">
+			</div>
 			
 			<div class="container w-50 mx-auto d-flex justify-content-center">
 				<ul id="pg" class="pagination"></ul>
@@ -277,7 +267,7 @@
 			type: 'get',
 			success: (result) => {
 				
-				if(result != null){
+				if(result.data != null){
 					$('#replyList-area').empty();
 					$('#pg').empty();
 					
@@ -285,6 +275,7 @@
 					replies = result.data.replies;
 					let content = '';
 					
+					console.log(replies);
 					replies.forEach((item) => {
 						$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
 													 +'<div class="d-flex p-1 m-1 justify-content-between">'
@@ -318,6 +309,9 @@
 						$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+(pi.currentPage+1)+')" >다음</button/></li>')
 					}
 					
+				} else {
+					console.log(result);
+					$('#replyList-area').append('<p class="mx-auto font-italic font-weight-bold" style="width:250px">'+result.message+'</p>');
 				}
 			},
 		});
