@@ -256,13 +256,13 @@ public class FreeBoardController {
 		ResponseData rd = null;
 		String rCode = "";
 		String message = "";
-		int conunt = 0;
+		int count = 0;
 		Map<String, Object> map = null;		
 		List<Reply> replies = null;
 		
-		conunt = boardService.replyCount(boardNo);
+		count = boardService.replyCount(boardNo);
 		
-		PageInfo pi = Pagination.getPageInfo(conunt,
+		PageInfo pi = Pagination.getPageInfo(count,
 											page,
 											3,
 											3);
@@ -272,7 +272,7 @@ public class FreeBoardController {
 		
 		try {
 			  
-			  if(conunt > 0) {
+			  if(count > 0) {
 				  replies = boardService.findAllReply(boardNo,rowBounds);
 				  map =  new HashMap<String, Object>();
 				  map.put("pi", pi);
@@ -285,23 +285,39 @@ public class FreeBoardController {
 				  message = "댓글을 찾지 못했습니다.";
 			  }
 			  
+			  rd = RdTemplates.getRd(map, rCode, message); 
 		  } catch(Exception e) {
 			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
-		  }
-		  
-		  rd = RdTemplates.getRd(map, rCode, message);  
+		  }	 
 		  
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
 	@PostMapping("/report")
 	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
-		// 댓글번호
-		// report_user
-		// report_content
-		// report_date
-		log.info("report = {}", report);
-		return null;
+		// log.info("report = {}" , report);
+		ResponseData rd = null;
+		String rCode = "";
+		String message = "";
+		String result = "";
+		
+		try {
+			if(boardService.insertReport(report) > 0) {
+			  result = "댓글신고성공";
+			  rCode = "299";
+			  message =  "댓글 신고에 성공했습니다.";
+			} else {
+			  result = "댓글신고실패";
+			  rCode = "297";
+			  message =  "댓글 신고에 실패했습니다.";
+			}
+			rd = RdTemplates.getRd(result, rCode, message); 
+			
+		} catch(Exception e) {
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+		}
+		  	
+		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
 	
@@ -321,7 +337,7 @@ public class FreeBoardController {
 		
 		String currentTime = new SimpleDateFormat("yyyyMMddHHmmSS").format(new Date());
 		
-		int ranNum = (int)Math.random() * 90000 + 10000;
+		int ranNum = ((int)Math.random() * 90000) + 10000;
 		
 		String changeName = currentTime + ranNum + ext;
 		
