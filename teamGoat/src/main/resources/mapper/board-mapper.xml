@@ -67,7 +67,7 @@
 	
 	
 	<select id="selectListAll"
-		parameterType="HashMap"
+		parameterType="hashMap"
 		resultMap="boardResultSet">
 	
 	<include refid="board" />
