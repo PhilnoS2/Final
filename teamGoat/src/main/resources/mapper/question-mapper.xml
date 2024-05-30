@@ -82,6 +82,8 @@
 		       QUESTION_CATEGORY USING(CATEGORY_NO) 
 		 WHERE
 		       QUESTION.STATUS = 'Y'
+		    OR
+		       QUESTION.STATUS = 'E' 
 		 ORDER
 		    BY
 		       QUESTION_NO DESC   
@@ -108,5 +110,33 @@
 		       QUESTION_NO DESC  
 	</select>
 	
+	<update id="updateQuestion" parameterType="question">
+		UPDATE
+			   QUESTION
+		   SET
+		       QUESTION_TITLE = #{questionTitle},
+		       QUESTION_CONTENT = #{questionContent},
+		       CATEGORY_NO = #{categoryNo}
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+	</update>
+	
+	<update id="deleteQuestion" parameterType="int">
+		UPDATE
+		       QUESTION
+		   SET
+		       STATUS = 'N'
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+	</update>
+	
+	<select id="selectAnswer" parameterType="int" resultType="question">
+		SELECT
+      		   QUESTION_NO
+ 		  FROM
+     	       QUESTION_ATTACH
+         WHERE 
+               QUESTION_NO = #{questionNo}		
+	</select>	
 
 </mapper>

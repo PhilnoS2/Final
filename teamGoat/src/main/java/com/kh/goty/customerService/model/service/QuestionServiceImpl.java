@@ -39,6 +39,21 @@ public class QuestionServiceImpl implements QuestionService {
 	public Question selectQuestion(int questionNo) {
 		return questionRepository.selectQuestion(questionNo);
 	}
+
+	@Override
+	public int updateQuestion(Question question) {
+		return questionRepository.updateQuestion(question);
+	}
+
+	@Override
+	public int deleteQuestion(int questionNo) {
+		return questionRepository.deleteQuestion(questionNo);
+	}
+
+	@Override
+	public Question selectAnswer(int questionNo) {
+		return questionRepository.selectAnswer(questionNo);
+	}
 	
 	
 

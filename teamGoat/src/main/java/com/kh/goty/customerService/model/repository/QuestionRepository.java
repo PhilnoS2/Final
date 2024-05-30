@@ -19,4 +19,9 @@ public interface QuestionRepository {
 
 	Question selectQuestion(int questionNo);
 	
+	int updateQuestion(Question question);
+	
+	int deleteQuestion(int questionNo);
+	
+	Question selectAnswer(int questionNo);
 }

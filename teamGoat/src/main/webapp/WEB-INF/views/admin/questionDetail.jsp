@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,7 +93,7 @@
 
 </head>
 <body>
-	<jsp:include page="../../common/menubar.jsp" />
+	<jsp:include page="../common/menubar.jsp" />
 
     <div id="question-wrap">
         <div class="question-title">
@@ -112,8 +113,8 @@
                         <tr>
                             <th>작성자</th>
                             <td colspan="3">${ question.questionWriter }</td>
-                            <th width="100px;">답변상태</th>
-                            <td colspan="5" width="200px;" style="padding-left : 30px;">${ answer }</td>
+                            <th width="100px;">답변여부</th>
+                            <td colspan="5" width="200px;" style="padding-left : 30px;">X</td>
                         </tr>
                         
                         <tr>
@@ -123,9 +124,6 @@
 
                         <tr>
                             <th colspan="10"><p>${question.questionContent }</p></th>
-                        </tr>
-                        <tr>
-                        	<th colspan="10">첨부파일 : 없음</th>
                         </tr>
                     </tbody>
                 </table>
@@ -168,16 +166,16 @@
 
         <div class="button-area">
             <div class="button-area1">
-                <button id="backbtn" style="margin-left : 97px; width: 100px;">목록</button>
+                <button style="margin-left : 97px; width: 100px;">목록</button>
             </div>
             <div class="button-area2">
                 <div>
                     <!--참조게시글이 없는 경우에만 버튼 활성화 시켜야 함-->
-                    <button class="btn btn-sm btn-warning" onclick="submit(0);">수정</button>
+                    <button class="btn btn-sm btn-warning" onclick="submit(0);">답변</button>
                     <button class="btn btn-sm btn-danger" onclick="submit(1);">삭제</button>
                 </div>
 
-                <form action="" method="post" id="update-form">
+                <form action="" method="get" id="update-form">
                     <input type="hidden" name="questionNo" value="${ question.questionNo }">
                 </form>
             </div>
@@ -191,17 +189,10 @@
                 $('#update-form').attr('action', '/goty/question/updateForm').submit();
             }
             else {
-            	if(confirm('게시글을 삭제하시겠습니까??')){
-                	$('#update-form').attr('action', '/goty/question/delete').submit();
-            	};
+                $('#update-form').attr('action', '/goty/question/deleteForm').submit();
             }
-        };
-        
-        $(function(){
-        	$('#backbtn').click(function(){
-            	location.href = '/goty/questions';
-        	})
-        })
+        }
+
     </script>
 
 

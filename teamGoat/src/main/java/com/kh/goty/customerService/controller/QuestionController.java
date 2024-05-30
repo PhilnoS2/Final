@@ -42,11 +42,20 @@ public class QuestionController {
 			model.addAttribute("questionList", questionList);
 			model.addAttribute("pageInfo", pageInfo);
 		}
+		System.out.println(questionList);
 		return "customerService/question/questionMain";
 	}
 	
 	@GetMapping("question")
 	public String selectQuestion(int questionNo, Model model) {
+		
+		// 답변여부
+		if(questionService.selectAnswer(questionNo) != null) {
+			model.addAttribute("answer", "완료");
+		} else {
+			model.addAttribute("answer", "대기중");
+		}
+		
 		
 		Question question = questionService.selectQuestion(questionNo);
 		
@@ -85,6 +94,43 @@ public class QuestionController {
 		}
 		return "redirect:/questions";
 	}
+	
+	@PostMapping("question/updateForm")
+	public String forwardUpdateForm(int questionNo, Model model) {
+		model.addAttribute("question", questionService.selectQuestion(questionNo));
+		return "customerService/question/questionUpdateForm";
+	}
+	
+	@PostMapping("question/update")
+	public String updateQuestion(Question question) {
+		
+		
+		questionService.updateQuestion(question);
+		
+		return "redirect:/question?questionNo=" + question.getQuestionNo();
+	}
+	
+	@PostMapping("question/delete")
+	public String deleteQuestion(int questionNo, HttpSession session) {
+		
+		if(questionService.deleteQuestion(questionNo) > 0) {
+			session.setAttribute("alertMsg", "게시물 삭제 완료");
+		} else {
+			session.setAttribute("alertMsg", "게시물 삭제 실패");
+		}
+		
+		return "redirect:/questions";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
