@@ -26,11 +26,42 @@
 </style>
 <meta charset="UTF-8">
 <title>insertForm</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/goty/resources/smartEditor/workspace/static/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+	
+	<script type="text/javascript">
+	let oEditors = [];
+
+    	$(() => {
+           nhn.husky.EZCreator.createInIFrame({
+               oAppRef: oEditors,
+               elPlaceHolder: "editorTxt0", //textarea에 부여한 아이디와 동일해야한다.
+               sSkinURI: "/goty/resources/smartEditor/workspace/static/SmartEditor2Skin.html", //자신의 프로젝트에 맞게 경로 수
+               fCreator: "createSEditor2"
+           })
+       });
+
+    function submitContents(elClickedObj) {
+    	 // 에디터의 내용이 textarea에 적용된다.
+    	 oEditors.getById["editorTxt0"].exec("UPDATE_CONTENTS_FIELD", []);
+
+    	 // 에디터의 내용에 대한 값 검증은 이곳에서
+    	 //document.getElementById("editorTxt0").value를 이용해서 처리한다.
+		 console.log(document.getElementById("editorTxt0").value);
+    	 try {
+    	     elClickedObj.form.submit();
+    	 } catch(e) {
+    		 
+    	 }
+    }
+	</script>
+
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
+	
 	<div id="wrapper-div">
-		<form action="/goty/freeboards/inserts" method="post"  id="form-area"
+		<form action="/goty/freeboards/inserts" onsubmit="submitContents();" method="post"  id="form-area"
 		 class="shadow-lg p-4 mb-4 bg-white" enctype="multipart/form-data" >
 			<div class="form-group selects">
 				<label for="category" >카테고리</label>
@@ -48,9 +79,9 @@
 			
 			<div class="form-group">
 				<label for="boardContent" >본문</label>
-				<textarea class="form-control" rows="10" id="boardContent" name="boardContent" required ></textarea>
+				<textarea id="editorTxt0" class="form-control" rows="10"  name="boardContent" ></textarea>
 			</div>
-			
+			<!-- name="boardContent" id="boardContent" -->
 			<div class="form-group">
 				<label for="upfile" style="display: block;">파일첨부</label>
 				<input type="file" id="upfile" name="upFile" >
@@ -60,6 +91,7 @@
 		</form>
 	
 	</div>
+	
 	
 </body>
 </html>

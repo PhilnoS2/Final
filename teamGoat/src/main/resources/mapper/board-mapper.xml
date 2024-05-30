@@ -111,7 +111,7 @@
 	</select>
 	
 	
-	<insert id="insertBoard"
+	<insert id="insert"
 		parameterType="board"
 	>
 	INSERT
