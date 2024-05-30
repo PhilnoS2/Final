@@ -1,12 +1,18 @@
 package com.kh.goty.customerService.model.service;
 
+import java.util.HashMap;
+import java.util.List;
+
+import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.customerService.model.vo.Question;
-import com.kh.goty.customerService.model.vo.QuestionAttach;
+
 
 public interface QuestionService {
-
+	int insertQuestion(HashMap<String, Object> map);
 	
-	int insertQuestion(Question question, QuestionAttach questionAttach);
-
+	int selectQuestionListCount();
 	
+	Question selectQuestion(int questionNo);
+	
+	List<Question> selectQuestionListAll(PageInfo pageInfo);
 }

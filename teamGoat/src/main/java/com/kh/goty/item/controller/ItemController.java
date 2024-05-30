@@ -345,16 +345,18 @@ public class ItemController {
 		return mv;
 	}
 	
+	// 결제 관련 페이지 - item.result까지 묶어서 
+	
 	@PostMapping("item.purchase")
-	public ModelAndView addItemOrder(int memberNo,
-										  int itemNo,
-										  String toName,
-										  String toContact,
-										  String toEmail,
-										  String address,
-										  String detailAddress,
-										  String message,
-										  ModelAndView mv) {
+	public ModelAndView addOrder(int memberNo,
+								     int itemNo,
+								     String toName,
+								     String toContact,
+								     String toEmail,
+								     String address,
+								     String detailAddress,
+								     String message,
+								     ModelAndView mv) {
 
 		Order order = new Order();
 		
@@ -369,24 +371,33 @@ public class ItemController {
 		
 		if(itemService.addOrder(order) > 0) {
 			
-			List<Order> items = itemService.findOrderList(memberNo);
-			
-			System.out.println(items);
-			
-			mv.setViewName("item/itemPurchase");
+			mv.setViewName("redirect:item.result?memberNo="+memberNo);
 			
 			return mv;
 			
 		} else {
 			
-			mv.addObject("errorMsg", "주문서 작성을 실패했습니다.");
+			mv.addObject("errorMsg", "ㅈ댐");
 			
 			mv.setViewName("common/errorPage");
 			
 			return mv;
+			
 		}
 
+	}
+
+	@GetMapping("item.result")
+	public ModelAndView findOrderList(int memberNo, 
+									  ModelAndView mv) {
 		
+		List<Order> orderList = itemService.findOrderList(memberNo);
+		
+		mv.addObject("orderList", orderList);
+		
+		mv.setViewName("item/itemPurchase");
+		
+		return mv;
 	}
 	
 }
