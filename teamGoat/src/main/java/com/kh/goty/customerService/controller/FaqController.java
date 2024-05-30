@@ -50,8 +50,6 @@ public class FaqController {
 	public String selectFaq(int category) {
 		
 		List<Faq> searchList = faqService.faqSearchList(category);
-		System.out.println(searchList);
-		
 		return new Gson().toJson(searchList);
 	}
 	

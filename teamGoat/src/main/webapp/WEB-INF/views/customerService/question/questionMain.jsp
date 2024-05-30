@@ -61,7 +61,15 @@
         .question-search{
             height : 15%;
         }
-
+		
+		tr:hover {
+            background-color : rgb(241, 238, 238);
+            cursor : pointer;
+             >td {
+             	font-weight : bolder;
+             }
+        }
+	
         
     </style>        
 
@@ -101,16 +109,33 @@
                         <th>제목</th>
                         <th>작성자</th>
                         <th>작성일</th>
-                        <th>조회수</th>
+                        <th>답변상태</th>
                     </thead>
 
                     <tbody align="center">
                         
                         <!--사용자가 문의한 내역이 존재하지 않을 경우-->
-                        <tr>
-                            <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
-                        </tr>
-
+                        
+                        <c:choose>
+                        	<c:when test="${ empty questionList }">
+		                        <tr>
+		                            <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
+		                        </tr>
+                        	</c:when>
+                        	<c:otherwise>
+								<c:forEach items="${ questionList }" var="question">
+									<tr style="height : 40px;" class="questionList">
+			                            <td>${question.questionNo }</td>
+			                            <td>${question.categoryName }</td>
+			                            <td>${question.questionTitle }</td>
+			                            <td>${question.questionWriter }</td>
+			                            <td>${question.createDate }</td>
+			                            <td>답변완료</td>
+		                       		</tr>
+								</c:forEach>
+                        	</c:otherwise>
+                        </c:choose>
+                        
                         <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
                         <!-- <tr style="height : 40px;">
                             <td>1</td>
@@ -120,29 +145,33 @@
                             <td>2024-05-10</td>
                             <td>1</td>
                         </tr>
-                        <tr style="height : 40px;">
-                            <td>1</td>
-                            <td>상품문의</td>
-                            <td>상품 재입고 문의드려요</td>
-                            <td>최진영</td>
-                            <td>2024-05-10</td>
-                            <td>1</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td>1</td>
-                            <td>상품문의</td>
-                            <td>상품 재입고 문의드려요</td>
-                            <td>최진영</td>
-                            <td>2024-05-10</td>
-                            <td>1</td>
-                        </tr> -->
+                        -->
                     </tbody>
                 </table>
                 <div align="center" style="margin-top : 20px;">
-                    <button type="button" class="btn btn-warning"> < </button>
-                    <button type="button" class="btn btn-light"> 1 </button>
-                    <button type="button" class="btn btn-light"> 2 </button>
-                    <button type="button" class="btn btn-info"> > </button>
+                    
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq  1}">
+	                    	<button type="button" class="btn btn-warning disabled"> < </button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" class="btn btn-warning"> < </button>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                   	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage }" var="p">
+                   		<a id="number${ p }" class="btn btn-light" href="/goty/questions?page=${ p }">${ p }</a>
+                   	</c:forEach>
+                   	
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq pageInfo.endPage }">
+                    		<button type="button" class="btn btn-warning disabled"> > </button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" class="btn btn-warning"> > </button>
+                    	</c:otherwise>
+                    </c:choose>
+                
                 </div>
             </div>
         </div>
@@ -182,8 +211,17 @@
     			}
     			
     		})
+    	});
+    	
+    	$(function(){
+    		$('.questionList').click(function(){
+    			location.href = '/goty/question?questionNo=' + $(this).children().eq(0).html();
+    			consol.log((this).children().eq(0).html());
+    		})
     	})
-    
+    	
+    	
+    	
     </script>
     
     

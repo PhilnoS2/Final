@@ -222,7 +222,7 @@
         <script>
         	$(function(){
 	        		$('.noticeList').click(function(){
-	        			location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).html();
+	        			location.href = '/goty/notice?noticeNo=' + $(this).children().eq(0).html();
 						/*location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).val();*/
 	        		})
         		

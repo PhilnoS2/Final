@@ -109,10 +109,10 @@
                 	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
                     <label for="subject" >제목</label>
                     <select id="category" name="categoryNo" style= "margin-top : 5px; height :30px;">
-	                    <option value="1">주문/결제</option>
-	                    <option value="2">기타문의</option>
-	                    <option value="3">서비스</option>
-	                    <option value="4">배송관련</option>
+	                    <option value="1">상품문의</option>
+	                    <option value="2">주문/결제문의</option>
+	                    <option value="3">배송문의</option>
+	                    <option value="4">기타</option>
                     </select>            
                     <input type="text" id="subject" name="questionTitle" style="width : 400px; margin-bottom : 10px;" placeholder="제목을 입력해주세요"  required> <br>
                     <textarea id="content" name="questionContent" placeholder="내용을 입력해주세요" required></textarea>
