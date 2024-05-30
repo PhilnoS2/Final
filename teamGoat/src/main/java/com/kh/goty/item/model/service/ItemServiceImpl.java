@@ -101,6 +101,7 @@ public class ItemServiceImpl implements ItemService{
 	public List<Order> findOrderList(int memberNo) {
 		return itemMapper.findOrderList(memberNo);
 	}
-
+	
+	
 
 }
