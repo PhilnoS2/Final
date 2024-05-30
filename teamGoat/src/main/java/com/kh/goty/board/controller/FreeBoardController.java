@@ -154,10 +154,11 @@ public class FreeBoardController {
 									@RequestParam("keyword") String keyword,
 									@RequestParam(value="page", defaultValue="1") int page,
 									ModelAndView mv) {
-		
+
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("condition", condition);
 		map.put("keyword", keyword);
+		map.put("categoryNo", 0);
 		
 		// 서치 데이터 페이지네이션하기
 		PageInfo pageInfo = 
@@ -179,7 +180,7 @@ public class FreeBoardController {
 	
 	@GetMapping("/update/{boardNo}")
 	public ModelAndView updateBoardForm(@PathVariable("boardNo") int boardNo,
-								ModelAndView mv) {
+								       ModelAndView mv) {
 		Board board = boardService.updateBoardForm(boardNo);
 		
 		if(board != null) {
@@ -205,8 +206,6 @@ public class FreeBoardController {
 			board.setChangeName(saveFile(upFile, session));
 			board.setImagePath("resources/uploadFiles/" + board.getChageName());
 		}
-		
-		// log.info("board = {}", board);
 		
 		if(boardService.updateBoard(board) > 0) {
 			mv.addObject("alertMsg", "게시글 수정에 성공했습니다.")
