@@ -202,13 +202,10 @@
 			</div>
 			
 			<div class="basic-border">
-				<button type="submit" class="btn btn-primary"> 결제하기 </button>
+				<button type="submit" class="btn btn-primary"> 주문서 작성 완료 </button>
 			</div>
 		</form>
 	</div>
-		
-	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="/goty/resources/member/Js/regExp.js"></script>
 
 	<script>
 
@@ -240,5 +237,9 @@
 	    }
 
 	</script>
+	
+	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="/goty/resources/member/Js/regExp.js"></script>
+	
 </body>
 </html>

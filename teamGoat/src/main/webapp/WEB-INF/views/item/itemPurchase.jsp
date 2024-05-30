@@ -8,11 +8,43 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-    .basic-border{
+
+    #container{
+		margin-top : 20px;
+	}
+
+	.container{
+		border : 1px solid black;
+		height : auto;
+	}
+	
+	.table{
+		text-align : center
+	}
+	
+	.container > label {
+		margin-top : 10px;
+	}
+	
+	.price{
+		text-align : right;
+	}
+	
+	tr > td > img{
+		width : 50px;
+		height : 50px;
+	}
+
+	.basic-border{
 		border : 1px solid black;
 		margin : 20px; 
 		padding : 20px;
 	}
+
+	#payment{
+		float:right;
+	}
+
 </style>
 </head>
 <body>
@@ -22,7 +54,7 @@
 	<div class="container">
 
         <div class="basic-border">
-			
+
 			<table class="table">
 
 				<thead>
@@ -36,18 +68,26 @@
 				</thead>
 
 				<tbody>
+					<c:set var="total" value="0" />
+
+					<c:forEach items="${ orderList }" var="order">
+
+						<c:set var="totalPrice" value="${total + order.price}"/>
+
+						<tr>
+							<td>
+								<img src="${ order.imgPath }/${ order.imgName }" alt=""/>
+							</td>
+							<td>${ order.itemName }</td>
+							<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
+							<td class="price"><fmt:formatNumber value="${ order.price * 0.01 }" type="number" />원</td>
+							<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
+						</tr>
+
+					</c:forEach>
+
 					<tr>
-						<td>
-							<img src="${ item.imgPath }/${ item.imgName }" />
-						</td>
-						<td>${ item.itemName }</td>
-						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</td>
-						<td class="price"><fmt:formatNumber value="${ item.price * 0.01 }" type="number" />원</td>
-						<td class="price"><fmt:formatNumber value="${ item.price }" type="number" />원</td>
-					</tr>
-				
-					<tr>
-						<td class="price" colspan="5"> Total Price = <fmt:formatNumber value="${ item.price }" type="number" />원 </td>
+						<td class="price" colspan="5"> Total Price = ${totalPrice} 원 </td>
 					</tr>
 					
 				</tbody>
@@ -56,12 +96,30 @@
 
         </div>
         
-        <div class="basic-border">
+        <div id="payment" class="basic-border">
 
-			
+			<button class="btn btn-success">네이버페이</button>
+			<button class="btn btn-warning">카카오페이</button>
+			<button class="btn btn-primary">결제하기</button>
 
         </div>
 
     </div>
+
+	<script>
+
+		$(() => {
+
+			$('.btn').click((e) => {
+				
+				console.log(e.target);
+
+				location.href = "#";
+
+			})
+
+		});
+
+	</script>
 </body>
 </html>
