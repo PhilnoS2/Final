@@ -35,4 +35,6 @@ public interface BoardMapper {
 
 	int insertReport(Report report);
 
+	int deleteBoard(int boardNo);
+
 }

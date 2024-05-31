@@ -38,14 +38,14 @@
 }
 #content-div {
 	width: 100%;
-	height: 400px;
+	height: auto;
 	padding : 10px;
 	border : 1px solid grey;
 	border-radius: 10px;
 }
 #content-div-boardcontent {
 	width:100%;
-	height: 150px;
+	height: auto;
 	margin-top: 20px;
 	padding: 10px;
 }
@@ -115,10 +115,10 @@
 					<h6>${ board.nickname }</h6>
 				</div>
 				<c:if test="${ sessionScope.loginMember ne null and sessionScope.loginMember.memberNo == board.memberNo
-				or sessionScope.loginMember.memLevel == 'A' }">
+				            or sessionScope.loginMember.memLevel == 'A' }">
 					<div id="btn-div">
 						<a class="btn btn-sm btn-warning" href="/goty/freeboards/update/${ boardNo }">수정</a>
-						<a class="btn btn-sm btn-danger" href="#">삭제</a>
+						<button class="btn btn-sm btn-danger m-1" data-toggle="modal" data-target="#delModal">삭제</button>
 					</div>
 				</c:if>
 			</div>
@@ -214,13 +214,38 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
         </div>
         
       </div>
     </div>
   </div>
+
+
+	<div class="modal fade" id="delModal">
+	    <div class="modal-dialog modal-sm">
+	      <div class="modal-content">
+	      
+	        <div class="modal-header">
+	          <h4 class="modal-title">게시글 삭제</h4>
+	          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        </div>
+	        
+	        <div class="modal-body">
+	         <div class="border border-danger p-2 rounded w-100 ">
+	         	<h3>게시글 삭제</h3>
+				<p>정말 삭제 하시겠습니까?</p>
+				<button class="btn btn-sm btn-danger" onclick="deleteBoard();" data-dismiss="modal" >삭제</button>
+	         </div>
+	        </div>
 	
+	        <div class="modal-footer">
+	          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+	        </div>
+	        
+	      </div>
+	    </div>
+	  </div>	
 	
 	
 	
@@ -353,6 +378,21 @@
 		
 		});
 	}
+	
+	function deleteBoard() {
+		
+		$.ajax({
+			url:'/goty/freeboards/delete/'+'${ boardNo }',
+			type: 'put',
+			success: (result)=> {
+				alert(result.message);
+				location.href="/goty/freeboards/all";
+			},
+			
+		});
+		
+	}
+	
 	
 	</script>
 	

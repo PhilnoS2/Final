@@ -14,10 +14,10 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -184,7 +184,7 @@ public class FreeBoardController {
 		Board board = boardService.updateBoardForm(boardNo);
 		
 		if(board != null) {
-			log.info("board = {}", board);
+			
 			mv.addObject("board", board)
 			  .setViewName("board/updateForm");
 		} else {
@@ -208,6 +208,7 @@ public class FreeBoardController {
 		}
 		
 		if(boardService.updateBoard(board) > 0) {
+			// log.info("board = {}", board);
 			mv.addObject("alertMsg", "게시글 수정에 성공했습니다.")
 			  .setViewName("redirect:select/"+board.getFreeBoardNo());
 		} else {
@@ -292,6 +293,7 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
+	
 	@PostMapping("/report")
 	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
 		// log.info("report = {}" , report);
@@ -318,6 +320,43 @@ public class FreeBoardController {
 		  	
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
+	
+	
+	@PutMapping("/delete/{boardNo}")
+	public ResponseEntity<ResponseData> deleteBoard(@PathVariable("boardNo") int boardNo){
+		ResponseData rd = null;
+		String rCode = "";
+		String message = "";
+		String result = "";
+		
+		try {
+			if(boardService.deleteBoard(boardNo)> 0) {
+				 result = "게시글 삭제 성공";
+				 rCode = "299";
+				 message =  "게시글 삭제에 성공했습니다.";
+			} else {
+				 result = "게시글 삭제 실패";
+				 rCode = "297";
+				 message =  "게시글 삭제에 실패했습니다.";
+			}
+			rd = RdTemplates.getRd(result, rCode, message); 
+			
+		} catch(Exception e) {
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+		}
+		
+		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

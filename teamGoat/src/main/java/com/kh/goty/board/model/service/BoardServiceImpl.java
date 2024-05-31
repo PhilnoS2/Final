@@ -85,6 +85,11 @@ public class BoardServiceImpl implements BoardService {
 	public int insertReport(Report report) {
 		return boardMapper.insertReport(report);
 	}
+
+	@Override
+	public int deleteBoard(int boardNo) {
+		return boardMapper.deleteBoard(boardNo);
+	}
 	
 	
 	

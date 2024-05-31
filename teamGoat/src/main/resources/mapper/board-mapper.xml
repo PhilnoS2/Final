@@ -331,7 +331,16 @@
 	
 	</insert>
 	
-	
+	<update id="deleteBoard"
+		    parameterType="_int"
+	>
+	UPDATE
+	      FREE_BOARD
+	   SET
+	      DELETE_YN = 'Y'
+	 WHERE
+	      FREE_BOARD_NO = #{boardNo}     
+	</update>
 	
 	
 	
