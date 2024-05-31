@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -93,7 +93,7 @@
 
 </head>
 <body>
-	<jsp:include page="../../common/menubar.jsp" />
+	<jsp:include page="../common/menubar.jsp" />
 
     <div id="question-wrap">
         <div class="question-title">
@@ -125,14 +125,16 @@
                         <tr>
                             <th colspan="10"><p>${question.questionContent }</p></th>
                         </tr>
-                        <c:choose>
-                      		<c:when test="${ attach eq null }">
-                       			<th colspan="10">첨부파일 : 없음</th>
-                       		</c:when>
-                       		<c:otherwise>
-	                       		<th colspan="10">첨부파일 : ${attach.fileOriginName }</th>
-                       		</c:otherwise>
-                       	</c:choose>
+                        <tr>
+                        	<c:choose>
+                        		<c:when test="${ attach eq null }">
+                        			<th colspan="10">첨부파일 : 없음</th>
+                        		</c:when>
+                        		<c:otherwise>
+		                       		<th colspan="10">첨부파일 : ${attach.fileOriginName }</th>
+                        		</c:otherwise>
+                        	</c:choose>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -142,32 +144,30 @@
         <div class="answer-area">
             <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
             <div>
-				<c:choose>
-					<c:when test="${empty answer }">
-		                <p style="background-color : rgb(241, 238, 238); width: 1000px; height : 100px; border : 1px solid black; padding-top : 5px; padding-left : 5px;">
-		                 	 빠른 시간 내에 답변을 드리겠습니다. 잠시만 기다려 주세요!
-		                </p> 
-					</c:when>
-					<c:otherwise>
-		                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
-		                    <thead>
-		                        <th width="100px;">답변자</th>
-		                        <td colspan="9">${ answer.answerWriter }</td>
-		                    </thead>
-		    
-		                    <tbody>
-		                        <tr>
-		                            <th>답변일시</th>
-		                            <td colspan="9">${ answer.createDate }</td>
-		                        </tr>
-		
-		                        <tr>
-		                            <th colspan="10"><p>${ answer.answerComment }</p></th>
-		                        </tr>
-		                    </tbody>
-		                </table>
-					</c:otherwise>
-				</c:choose>	
+				<form id="insert-form" action="/goty/admin/answer/insert" method="post">
+					<input type="hidden" name="questionNo" value="${ question.questionNo }">
+                	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
+                    <textarea style="width : 1000px; height : 200px;" id="content" name="answerComment" placeholder="내용을 입력해주세요" required></textarea>
+                </form>
+				<!-- 
+                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
+                    <thead>
+                        <th width="100px;">답변자</th>
+                        <td colspan="9">고티</td>
+                    </thead>
+    
+                    <tbody>
+                        <tr>
+                            <th>답변일시</th>
+                            <td colspan="9">2024-05-10</td>
+                        </tr>
+
+                        <tr>
+                            <th colspan="10"><p>소프라노가 작성한 답변입니다</p></th>
+                        </tr>
+                    </tbody>
+                </table>
+				 -->
 
             </div>
             <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
@@ -182,39 +182,21 @@
             <div class="button-area2">
                 <div>
                     <!--참조게시글이 없는 경우에만 버튼 활성화 시켜야 함-->
-                    <button class="btn btn-sm btn-warning" onclick="submit(0);">수정</button>
-                    <button class="btn btn-sm btn-danger" onclick="submit(1);">삭제</button>
+                    <button id="insert" class="btn btn-sm btn-warning" onclick="submit(0);">등록</button>
+                    <button class="btn btn-sm btn-danger" onclick="submit(1);">취소</button>
                 </div>
-
-                <form action="" method="post" id="update-form">
-                    <input type="hidden" name="questionNo" value="${ question.questionNo }">
-                    <input type="hidden" name="questionAttachPath" value="${ attach.fileChangeName }">
-                </form>
             </div>
         </div>
 
     </div>
 
     <script>
-        function submit(num){
-            if(num == 0){
-                $('#update-form').attr('action', '/goty/question/updateForm').submit();
-            }
-            else {
-            	if(confirm('게시글을 삭제하시겠습니까??')){
-                	$('#update-form').attr('action', '/goty/question/delete').submit();
-            	};
-            }
-        };
-        
-        $(function(){
-        	$('#backbtn').click(function(){
-            	location.href = '/goty/questions';
-        	})
-        })
+    	$(function(){
+    		$('#insert').click(function(){
+                $('#insert-form').submit();
+    		})
+    	})
     </script>
-
-
 
 
 </body>

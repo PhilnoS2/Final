@@ -96,7 +96,7 @@
                 <h3><a href="/goty/admin" style="color : rgb(231, 76, 60)">회원 관리</a></h3>
             </div>
             <div>
-                <h3><a href="/goty/management/board">게시판 관리</a></h3>
+                <h3><a href="/goty/management/boards">게시판 관리</a></h3>
             </div>
             <div>
                 <h3><a href="#">주문/배송 관리</a></h3>

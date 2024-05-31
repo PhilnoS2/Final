@@ -14,8 +14,23 @@
 		<result column="QUESTION_CONTENT" property="questionContent"/>
 		<result column="CATEGORY_NAME" property="categoryName"/>
 		<result column="CREATE_DATE" property="createDate"/>
+		<result column="ANSWER_YN" property="answerYn"/>
 	</resultMap>
-
+	
+	<resultMap id="questionAttachResultSet" type="questionAttach">
+		<result column="QUESTION_NO" property="questionNo"/>
+		<result column="FILE_ORIGIN_NAME" property="fileOriginName"/>
+		<result column="FILE_CHANGE_NAME" property="fileChangeName"/>
+		<result column="QUESTION_ATTACH_PATH" property="questionAttachPath"/>
+	</resultMap>
+	
+	<resultMap id="answerResultSet" type="answer">
+		<result column="QUESTION_NO" property="questionNo"/>
+		<result column="ANSWER_COMMENT" property="answerComment"/>
+		<result column="NICKNAME" property="answerWriter"/>
+		<result column="CREATE_DATE" property="createDate"/>
+	</resultMap>
+	
 	<insert id="insertQuestion" parameterType="hashmap">
 		INSERT ALL
 			  INTO
@@ -73,7 +88,8 @@
 		       CATEGORY_NAME,
 		       QUESTION_TITLE,
 		       QUESTION_CONTENT,
-		       CREATE_DATE
+		       CREATE_DATE,
+		       ANSWER_YN
 		  FROM
 		       QUESTION
 		  JOIN
@@ -82,8 +98,6 @@
 		       QUESTION_CATEGORY USING(CATEGORY_NO) 
 		 WHERE
 		       QUESTION.STATUS = 'Y'
-		    OR
-		       QUESTION.STATUS = 'E' 
 		 ORDER
 		    BY
 		       QUESTION_NO DESC   
@@ -96,7 +110,8 @@
 		       CATEGORY_NAME,
 		       QUESTION_TITLE,
 		       QUESTION_CONTENT,
-		       CREATE_DATE
+		       CREATE_DATE,
+		       ANSWER_YN
 		  FROM
 		       QUESTION
 		  JOIN
@@ -121,20 +136,24 @@
 		       QUESTION_NO = #{questionNo}
 	</update>
 	
-	<update id="deleteQuestion" parameterType="_int">
-		UPDATE
+	<delete id="deleteQuestion" parameterType="_int">
+		DELETE
+		  FROM 
 		       QUESTION
-		   SET
-		       STATUS = 'N'
 		 WHERE
 		       QUESTION_NO = #{questionNo}
-	</update>
+	</delete>
 	
-	<select id="selectAnswer" parameterType="int" resultType="question">
+	<select id="selectAnswer" parameterType="int" resultMap="answerResultSet">
 		SELECT
-      		   QUESTION_NO
+      		   QUESTION_NO,
+      		   ANSWER_COMMENT,
+      		   CREATE_DATE,
+      		   NICKNAME
  		  FROM
-     	       QUESTION_ATTACH
+     	       ANSWER
+     	  JOIN
+     	       MEMBER USING(MEMBER_NO) 
          WHERE 
                QUESTION_NO = #{questionNo}		
 	</select>	
@@ -191,7 +210,8 @@
 		       CATEGORY_NAME,
 		       QUESTION_TITLE,
 		       QUESTION_CONTENT,
-		       CREATE_DATE
+		       CREATE_DATE,
+		       ANSWER_YN
 		  FROM
 		       QUESTION
 		  JOIN
@@ -235,6 +255,7 @@
 		    BY
 		       QUESTION_NO DESC  
 	</select>
+	
 	<select id="selectCategoryListCount" parameterType="_int">
 		SELECT
 		       COUNT(*)
@@ -270,7 +291,8 @@
 		       CATEGORY_NAME,
 		       QUESTION_TITLE,
 		       QUESTION_CONTENT,
-		       CREATE_DATE
+		       CREATE_DATE,
+		       ANSWER_YN
 		  FROM
 		       QUESTION
 		  JOIN
@@ -302,7 +324,7 @@
 		       CREATE_DATE DESC 	
 	</select>
 	
-	<select id="selectQuestionAttach" parameterType="_int" resultType="questionAttach">
+	<select id="selectQuestionAttach" parameterType="_int" resultMap="questionAttachResultSet">
 		SELECT
 		       QUESTION_NO,
 		       FILE_ORIGIN_NAME,

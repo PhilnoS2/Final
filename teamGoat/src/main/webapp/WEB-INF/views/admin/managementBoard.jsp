@@ -89,7 +89,7 @@
                 <h3><a href="/goty/admin">회원 관리</a></h3>
             </div>
             <div>
-                <h3><a href="/goty/management/board" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
+                <h3><a href="/goty/management/boards" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
             </div>
             <div>
                 <h3><a href="#">주문/배송 관리</a></h3>
@@ -121,18 +121,13 @@
                     </thead>
 
                     <tbody id="search-area" align="center">
-                        
-                        <!--사용자가 문의한 내역이 존재하지 않을 경우-->
-                        <!-- <tr>
-                            <td colspan="6" align="center" style="height : 100px;"><b>답변 대기중인 게시물이 존재하지 않습니다.</b></td>
-                        </tr> -->
                         <c:choose>
                         	<c:when test="${ empty questionList }">
                         		<td colspan="6" align="center" style="height : 100px;"><b>답변 대기중인 게시물이 존재하지 않습니다.</b></td>
                         	</c:when>
                         	<c:otherwise>
 		                        <c:forEach items="${ questionList }" var="question">
-		                        	<tr class="board-list" style="height : 40px;">
+		                        	<tr id="question-list" class="board-list" style="height : 40px;">
 			                            <td style="color : rgb(46, 204, 113);">대기중</td>
 			                            <td>${question.questionNo }</td>
 			                            <td>${question.categoryName }</td>
@@ -178,7 +173,7 @@
 
     <script>
         $(function(){
-            $('#search-area tr').on('click', function(){
+            $('#question-list').on('click', function(){
                 console.log($(this))
                 location.href = 'board?boardNo='+$(this).children().eq(1).html();
             });

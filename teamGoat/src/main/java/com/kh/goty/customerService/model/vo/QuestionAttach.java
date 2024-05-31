@@ -7,20 +7,20 @@ public class QuestionAttach {
 	private int questionNo;
 	private String fileOriginName;
 	private String fileChangeName;
-	private String attachPath;
+	private String questionAttachPath;
 	
 	public QuestionAttach() {
 		super();
 	}
 
 	public QuestionAttach(int questionAttachNo, int questionNo, String fileOriginName, String fileChangeName,
-			String attachPath) {
+			String questionAttachPath) {
 		super();
 		this.questionAttachNo = questionAttachNo;
 		this.questionNo = questionNo;
 		this.fileOriginName = fileOriginName;
 		this.fileChangeName = fileChangeName;
-		this.attachPath = attachPath;
+		this.questionAttachPath = questionAttachPath;
 	}
 
 	public int getQuestionAttachNo() {
@@ -55,21 +55,22 @@ public class QuestionAttach {
 		this.fileChangeName = fileChangeName;
 	}
 
-	public String getAttachPath() {
-		return attachPath;
+	public String getQuestionAttachPath() {
+		return questionAttachPath;
 	}
 
-	public void setAttachPath(String attachPath) {
-		this.attachPath = attachPath;
+	public void setQuestionAttachPath(String questionAttachPath) {
+		this.questionAttachPath = questionAttachPath;
 	}
 
 	@Override
 	public String toString() {
 		return "QuestionAttach [questionAttachNo=" + questionAttachNo + ", questionNo=" + questionNo
-				+ ", fileOriginName=" + fileOriginName + ", fileChangeName=" + fileChangeName + ", attachPath="
-				+ attachPath + "]";
+				+ ", fileOriginName=" + fileOriginName + ", fileChangeName=" + fileChangeName + ", questionAttachPath="
+				+ questionAttachPath + "]";
 	}
 
+	
 	
 	
 	
