@@ -49,6 +49,4 @@ public class AdminController {
 		
 		return "admin/managementBoard";
 	}
-	
-
 }
