@@ -47,7 +47,7 @@ public class SocialLoginContorller {
 		} else {
 			if(memberService.insertMember(member) > 0) {
 				session.setAttribute("alertMsg", "카카오 아이디로 회원가입 성공!");
-				mv.setViewName("redirect:/");
+				mv.setViewName("redirect:/member/login");
 			}
 		}		
 		return mv;
@@ -83,7 +83,8 @@ public class SocialLoginContorller {
 	public ModelAndView naverlogin(String state, String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {
 		String accessToken = socialMemberService.getToken(code, state);
 		Member member = socialMemberService.getUserInfoNaver(accessToken);		
-
+		member.setStatus("NM");
+		
 		if(socialMemberService.checkNaverId(member.getMemberId()) > 0) {
 			Member nmember = socialMemberService.loginNaver(member.getMemberId());
 			nmember.setStatus("NM");
@@ -93,7 +94,7 @@ public class SocialLoginContorller {
 		} else {
 			if(memberService.insertMember(member) > 0) {
 				session.setAttribute("alertMsg", "네이버 아이디로 회원가입 성공!");
-				mv.setViewName("redirect:/");
+				mv.setViewName("redirect:/member/login");
 			}
 		}
 		

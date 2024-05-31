@@ -222,30 +222,30 @@
   </div>
 
 
-	<div class="modal fade" id="delModal">
-	    <div class="modal-dialog modal-sm">
-	      <div class="modal-content">
-	      
-	        <div class="modal-header">
-	          <h4 class="modal-title">게시글 삭제</h4>
-	          <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        </div>
-	        
-	        <div class="modal-body">
-	         <div class="border border-danger p-2 rounded w-100 ">
-	         	<h3>게시글 삭제</h3>
-				<p>정말 삭제 하시겠습니까?</p>
-				<button class="btn btn-sm btn-danger" onclick="deleteBoard();" data-dismiss="modal" >삭제</button>
-	         </div>
-	        </div>
-	
-	        <div class="modal-footer">
-	          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-	        </div>
-	        
-	      </div>
-	    </div>
-	  </div>	
+  <div class="modal fade" id="delModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h4 class="modal-title">게시글 삭제</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+         <div class="border border-danger p-2 rounded w-100 ">
+         	<h3>게시글 삭제</h3>
+			<p>정말 삭제 하시겠습니까?</p>
+			<button class="btn btn-sm btn-danger" onclick="deleteBoard();" data-dismiss="modal" >삭제</button>
+         </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>	
 	
 	
 	

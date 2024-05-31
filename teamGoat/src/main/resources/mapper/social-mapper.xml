@@ -14,8 +14,8 @@
   	      MEMBER
   	  WHERE
   	       MEMBER_ID = #{memberId}
-  	    AND
-  	       DELETE_YN = 'N'            
+  	   AND
+  	       DELETE_YN = 'N'             
   	</select>
   	
   	<select id="loginKakao"

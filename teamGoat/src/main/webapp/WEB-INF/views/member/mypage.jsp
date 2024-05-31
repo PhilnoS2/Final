@@ -219,7 +219,15 @@
 	
 	      <div class="modal-body">
 	        <p class="d-inline ">정말 <p class="d-inline text-danger font-italic">탈퇴</p> 하시겠습니까?</p>
-	        <button type="button" id="signoutMemberBtn" class="btn btn-danger" >탈퇴</button>
+	        <c:choose>
+	        	<c:when test="${ sessionScope.loginMember.status == 'KM' 
+	        	              or sessionScope.loginMember.status == 'NM'}">
+	        	    <button type="button" class="btn btn-danger" >탈퇴</button>          
+	        	</c:when>
+	        	<c:otherwise>
+	        		<button type="button" id="signoutMemberBtn" class="btn btn-danger" >탈퇴</button>
+	        	</c:otherwise>
+	        </c:choose>
 	      </div>
 	
 	      <div class="modal-footer">
@@ -241,16 +249,17 @@
 				url: '/goty/member/${sessionScope.loginMember.memberNo }',
 				type: 'patch',
 				success: (result) => {
-					
 					if(result.responseCode == '299'){
 						alert('탈퇴 완료!');
 						location.href = "/goty/member/logout";
 					}
-						
 				},
 				
 			});
 		});
+		
+		
+		
 	</script>
 	
 	
