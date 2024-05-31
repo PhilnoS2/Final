@@ -126,27 +126,16 @@
                         	<c:otherwise>
 								<c:forEach items="${ questionList }" var="question">
 									<tr style="height : 40px;" class="questionList">
-			                            <td>${question.questionNo }</td>
-			                            <td>${question.categoryName }</td>
-			                            <td>${question.questionTitle }</td>
-			                            <td>${question.questionWriter }</td>
-			                            <td>${question.createDate }</td>
-			                            <td>답변완료</td>
+			                            <td>${ question.questionNo }</td>
+			                            <td>${ question.categoryName }</td>
+			                            <td>${ question.questionTitle }</td>
+			                            <td>${ question.questionWriter }</td>
+			                            <td>${ question.createDate }</td>
+			                            <td>${ question.answerYn }</td>
 		                       		</tr>
 								</c:forEach>
                         	</c:otherwise>
                         </c:choose>
-                        
-                        <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
-                        <!-- <tr style="height : 40px;">
-                            <td>1</td>
-                            <td>상품문의</td>
-                            <td>상품 재입고 문의드려요</td>
-                            <td>최진영</td>
-                            <td>2024-05-10</td>
-                            <td>1</td>
-                        </tr>
-                        -->
                     </tbody>
                 </table>
                 <div align="center" style="margin-top : 20px;">

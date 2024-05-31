@@ -124,12 +124,12 @@
                         	<c:otherwise>
 								<c:forEach items="${ searchList }" var="question">
 									<tr style="height : 40px;" class="questionList">
-			                            <td>${question.questionNo }</td>
-			                            <td>${question.categoryName }</td>
-			                            <td>${question.questionTitle }</td>
-			                            <td>${question.questionWriter }</td>
-			                            <td>${question.createDate }</td>
-			                            <td>답변완료</td>
+			                            <td>${ question.questionNo }</td>
+			                            <td>${ question.categoryName }</td>
+			                            <td>${ question.questionTitle }</td>
+			                            <td>${ question.questionWriter }</td>
+			                            <td>${ question.createDate }</td>
+			                            <td>${ question.answerYn }</td>
 		                       		</tr>
 								</c:forEach>
                         	</c:otherwise>

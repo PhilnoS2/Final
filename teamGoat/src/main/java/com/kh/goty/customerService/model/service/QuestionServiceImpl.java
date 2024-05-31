@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.customerService.model.repository.QuestionRepository;
+import com.kh.goty.customerService.model.vo.Answer;
 import com.kh.goty.customerService.model.vo.Question;
 import com.kh.goty.customerService.model.vo.QuestionAttach;
 
@@ -21,7 +22,6 @@ public class QuestionServiceImpl implements QuestionService {
 	private final QuestionRepository questionRepository;
 
 	@Override
-	@Transactional
 	public int insertQuestion(HashMap<String, Object> map) {
 		return questionRepository.insertQuestion(map);
 	}
@@ -54,7 +54,7 @@ public class QuestionServiceImpl implements QuestionService {
 	}
 
 	@Override
-	public Question selectAnswer(int questionNo) {
+	public Answer selectAnswer(int questionNo) {
 		return questionRepository.selectAnswer(questionNo);
 	}
 
@@ -88,7 +88,7 @@ public class QuestionServiceImpl implements QuestionService {
 	public QuestionAttach selectQuestionAttach(int questionNo) {
 		return questionRepository.selectQuestionAttach(questionNo);
 	}
-	
+
 	
 
 

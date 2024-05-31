@@ -13,13 +13,14 @@ public class Question {
 	private String status;
 	private String questionWriter;
 	private String categoryName;
+	private String answerYn;
 	
 	public Question() {
 		super();
 	}
-
+	
 	public Question(int questionNo, int memberNo, int categoryNo, String questionTitle, String questionContent,
-			Date createDate, String status, String questionWriter, String categoryName) {
+			Date createDate, String status, String questionWriter, String categoryName, String answerYn) {
 		super();
 		this.questionNo = questionNo;
 		this.memberNo = memberNo;
@@ -30,6 +31,7 @@ public class Question {
 		this.status = status;
 		this.questionWriter = questionWriter;
 		this.categoryName = categoryName;
+		this.answerYn = answerYn;
 	}
 
 	public int getQuestionNo() {
@@ -104,11 +106,21 @@ public class Question {
 		this.categoryName = categoryName;
 	}
 
+	public String getAnswerYn() {
+		return answerYn;
+	}
+
+	public void setAnswerYn(String answerYn) {
+		this.answerYn = answerYn;
+	}
+
 	@Override
 	public String toString() {
 		return "Question [questionNo=" + questionNo + ", memberNo=" + memberNo + ", categoryNo=" + categoryNo
 				+ ", questionTitle=" + questionTitle + ", questionContent=" + questionContent + ", createDate="
 				+ createDate + ", status=" + status + ", questionWriter=" + questionWriter + ", categoryName="
-				+ categoryName + "]";
+				+ categoryName + ", answerYn=" + answerYn + "]";
 	}
+	
+	
 }

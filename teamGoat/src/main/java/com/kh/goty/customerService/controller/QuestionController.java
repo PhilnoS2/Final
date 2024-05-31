@@ -22,6 +22,7 @@ import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 import com.kh.goty.customerService.model.service.FaqService;
 import com.kh.goty.customerService.model.service.QuestionService;
+import com.kh.goty.customerService.model.vo.Answer;
 import com.kh.goty.customerService.model.vo.Question;
 import com.kh.goty.customerService.model.vo.QuestionAttach;
 import com.kh.goty.customerService.model.vo.QuestionCategory;
@@ -51,22 +52,15 @@ public class QuestionController {
 	@GetMapping("question")
 	public String selectQuestion(int questionNo, Model model) {
 		
-		// 답변여부
-		if(questionService.selectAnswer(questionNo) != null) {
-			model.addAttribute("answer", "완료");
-		} else {
-			model.addAttribute("answer", "대기중");
-		}
-		
-		
-		Question question = questionService.selectQuestion(questionNo);
-		QuestionAttach attachFile = questionService.selectQuestionAttach(questionNo);
-		System.out.println(questionNo);
-		System.out.println(attachFile);
-		
+		Question question = questionService.selectQuestion(questionNo);		
 		if(question != null) {
 			model.addAttribute("question", question);
-			
+			QuestionAttach attach = questionService.selectQuestionAttach(questionNo);
+			model.addAttribute("attach", attach);
+		}
+		Answer answer = questionService.selectAnswer(questionNo);
+		if(answer != null) {
+			model.addAttribute("answer", answer);
 		}
 		return "customerService/question/questionDetail";
 	}
@@ -117,7 +111,11 @@ public class QuestionController {
 	}
 	
 	@PostMapping("question/delete")
-	public String deleteQuestion(int questionNo, HttpSession session) {
+	public String deleteQuestion(int questionNo, HttpSession session, String questionAttachPath) {
+		
+		if(!questionAttachPath.equals("")) {
+			new File(session.getServletContext().getRealPath(questionAttachPath)).delete();
+		}
 		
 		if(questionService.deleteQuestion(questionNo) > 0) {
 			session.setAttribute("alertMsg", "게시물 삭제 완료");
@@ -147,9 +145,6 @@ public class QuestionController {
 			model.addAttribute("condition", condition);
 			model.addAttribute("keyword", keyword);
 		}
-		System.out.println(searchList);
-		
-		
 		return "customerService/question/questionSearchList";
 	}
 	
@@ -163,16 +158,6 @@ public class QuestionController {
 		
 		return new Gson().toJson(searchList);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public String saveFile(MultipartFile upfile, HttpSession session) {
 		
@@ -195,7 +180,5 @@ public class QuestionController {
 		}
 		return "resources/questionUpfiles/" + changeName;
 	}
-	
-	
 	
 }

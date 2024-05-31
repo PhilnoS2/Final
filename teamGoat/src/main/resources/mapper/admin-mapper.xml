@@ -45,4 +45,30 @@
 	           DELETE_YN = 'N'  
 	</select>
 	
+	<insert id="insertAnswer" parameterType="answer">
+		INSERT
+		  INTO
+		       ANSWER
+		       (
+		       QUESTION_NO,
+		       MEMBER_NO,
+		       ANSWER_COMMENT
+		       )
+		VALUES
+		       (
+		       #{questionNo},
+		       #{memberNo},
+		       #{answerComment}
+		       )
+	</insert>
+	
+	<update id="updateBoard" parameterType="_int">
+		UPDATE
+		       QUESTION
+		   SET
+		       ANSWER_YN = 'O' 
+         WHERE
+               QUESTION_NO = #{questionNo}	
+	</update>
+	
 </mapper>

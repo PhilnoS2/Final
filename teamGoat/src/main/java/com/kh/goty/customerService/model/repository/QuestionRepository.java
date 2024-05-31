@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
 
+import com.kh.goty.customerService.model.vo.Answer;
 import com.kh.goty.customerService.model.vo.Question;
 import com.kh.goty.customerService.model.vo.QuestionAttach;
 
@@ -23,7 +24,7 @@ public interface QuestionRepository {
 	
 	int deleteQuestion(int questionNo);
 	
-	Question selectAnswer(int questionNo);
+	Answer selectAnswer(int questionNo);
 	
 	int searchQuestionListCount(HashMap<String, String> map);
 	
@@ -34,4 +35,5 @@ public interface QuestionRepository {
 	List<Question> questionSearchList(int category, RowBounds rowBounds);
 	
 	QuestionAttach selectQuestionAttach(int questionNo);
+	
 }

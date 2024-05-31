@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.kh.goty.common.model.vo.PageInfo;
+import com.kh.goty.customerService.model.vo.Answer;
 import com.kh.goty.customerService.model.vo.Question;
 import com.kh.goty.customerService.model.vo.QuestionAttach;
 
@@ -21,7 +22,7 @@ public interface QuestionService {
 	
 	int deleteQuestion(int questionNo);
 	
-	Question selectAnswer(int questionNo);
+	Answer selectAnswer(int questionNo);
 	
 	int searchQuestionListCount(HashMap<String, String> map);
 	
@@ -32,5 +33,6 @@ public interface QuestionService {
 	List<Question> questionSearchList(int category, PageInfo pageInfo);
 	
 	QuestionAttach selectQuestionAttach(int questionNo);
+	
 	
 }
