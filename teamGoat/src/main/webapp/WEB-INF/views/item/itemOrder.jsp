@@ -109,7 +109,7 @@
 			</table>
 		</div>
 		
-		<form method="post" action="item.purchase">
+		<form method="post" action="item.process">
 	
 			<div class="delivery-form basic-border">
 				
