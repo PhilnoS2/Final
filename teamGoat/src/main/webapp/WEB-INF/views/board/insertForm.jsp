@@ -52,7 +52,7 @@
     	 
     	 // <p><br></p> 공백
     	 // <p>&nbsp;</p> 띄어쓰기만
-    	 if(str.length < 0 || str.includes('<p><br></p>') || str.includes('<p>&nbsp;</p>')) {
+    	 if(str.length < 0 || str.includes('<p>&nbsp;</p>')) {
     		 alert('올바른 입력이 아닙니다.' + str);
     		 return false;
     	 }

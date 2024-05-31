@@ -184,7 +184,7 @@ public class FreeBoardController {
 		Board board = boardService.updateBoardForm(boardNo);
 		
 		if(board != null) {
-			log.info("board = {}", board);
+			
 			mv.addObject("board", board)
 			  .setViewName("board/updateForm");
 		} else {
@@ -208,6 +208,7 @@ public class FreeBoardController {
 		}
 		
 		if(boardService.updateBoard(board) > 0) {
+			// log.info("board = {}", board);
 			mv.addObject("alertMsg", "게시글 수정에 성공했습니다.")
 			  .setViewName("redirect:select/"+board.getFreeBoardNo());
 		} else {
@@ -292,6 +293,7 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
+	
 	@PostMapping("/report")
 	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
 		// log.info("report = {}" , report);
@@ -318,6 +320,7 @@ public class FreeBoardController {
 		  	
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
+	
 	
 	@PutMapping("/delete/{boardNo}")
 	public ResponseEntity<ResponseData> deleteBoard(@PathVariable("boardNo") int boardNo){
