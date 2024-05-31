@@ -125,7 +125,7 @@
                             <th colspan="10"><p>${question.questionContent }</p></th>
                         </tr>
                         <tr>
-                        	<th colspan="10">첨부파일 : 없음</th>
+                        	<th colspan="10">첨부파일 : ${attach.fileOriginName }</th>
                         </tr>
                     </tbody>
                 </table>

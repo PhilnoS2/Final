@@ -57,7 +57,7 @@
 		SELECT * FROM DUAL	
 	</insert>
 	
-	<select id="selectQuestionListCount" resultType="int">
+	<select id="selectQuestionListCount" resultType="_int">
 		SELECT
 		       COUNT(*)
 		  FROM
@@ -121,7 +121,7 @@
 		       QUESTION_NO = #{questionNo}
 	</update>
 	
-	<update id="deleteQuestion" parameterType="int">
+	<update id="deleteQuestion" parameterType="_int">
 		UPDATE
 		       QUESTION
 		   SET
@@ -138,5 +138,181 @@
          WHERE 
                QUESTION_NO = #{questionNo}		
 	</select>	
+	<select id="searchQuestionListCount" parameterType="hashmap" resultType="_int">
+		SELECT
+			   COUNT(*)
+	      FROM
+	           QUESTION
+	      JOIN
+	           MEMBER USING(MEMBER_NO) 
+	     WHERE
+	           QUESTION.STATUS = 'Y' 
+		 <if test="date != ''">
+		 	 <if test="date == 'week'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 8   
+			 </if>
+			 
+			 <if test="date == 'month'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 32   
+			 </if>
+			 
+			 <if test="date == 'treeMonth'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 92   
+			 </if>
+		 </if>	           
+		 
+		 <if test="condition != ''">
+		 
+			 <if test="condition == 'subject'">
+			   AND
+			      QUESTION_TITLE LIKE '%' || #{keyword} || '%'
+			 </if>
+			 
+			 <if test="condition == 'content'">
+			   AND
+			      QUESTION_CONTENT LIKE '%' || #{keyword} || '%'
+			 </if> 
+			 
+			 <if test="condition == 'writer'">
+			   AND
+			      NICKNAME LIKE '%' || #{keyword} || '%'
+		 </if>   
+		   
+		 </if>
+		 ORDER
+		    BY
+		       CREATE_DATE DESC    
+	</select>
+	
+	<select id="searchQuestionList" parameterType="hashmap" resultMap="questionResultSet">
+		SELECT
+		       QUESTION_NO,
+		       NICKNAME,
+		       CATEGORY_NAME,
+		       QUESTION_TITLE,
+		       QUESTION_CONTENT,
+		       CREATE_DATE
+		  FROM
+		       QUESTION
+		  JOIN
+		       MEMBER USING(MEMBER_NO)
+		  JOIN
+		       QUESTION_CATEGORY USING(CATEGORY_NO) 
+		 WHERE
+		       QUESTION.STATUS = 'Y'   
+		 <if test="date != ''">
+		 	 <if test="date == 'week'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 8   
+			 </if>
+			 
+			 <if test="date == 'month'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 32   
+			 </if>
+			 
+			 <if test="date == 'treeMonth'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 92   
+			 </if>
+		 </if>	           
+		 
+		 <if test="condition != ''">
+		 
+			 <if test="condition == 'subject'">
+			   AND
+			      QUESTION_TITLE LIKE '%' || #{keyword} || '%'
+			 </if>
+			 
+			 <if test="condition == 'content'">
+			   AND
+			      QUESTION_CONTENT LIKE '%' || #{keyword} || '%'
+			 </if> 
+			 
+			 <if test="condition == 'writer'">
+			   AND
+			      NICKNAME LIKE '%' || #{keyword} || '%'
+		 	</if>
+		 </if>     
+		 ORDER
+		    BY
+		       QUESTION_NO DESC  
+	</select>
+	<select id="selectCategoryListCount" parameterType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       QUESTION
+		 WHERE
+		       STATUS = 'Y'
+		 <if test="category == 0">		 
+		 </if>
+		 <if test="category == 1">		 
+		   AND
+		       CATEGORY_NO = 1
+		 </if>
+		 <if test="category == 2">
+		   AND
+		       CATEGORY_NO = 2
+		 </if>
+		 <if test="category == 3">
+		   AND
+		       CATEGORY_NO = 3
+		 </if>
+		 <if test="category == 4">
+		   AND
+		       CATEGORY_NO = 4
+		 </if>         
+	</select>
+	
+	
+	<select id="questionSearchList" parameterType="_int" resultMap="questionResultSet">
+		SELECT
+		       QUESTION_NO,
+		       NICKNAME,
+		       CATEGORY_NAME,
+		       QUESTION_TITLE,
+		       QUESTION_CONTENT,
+		       CREATE_DATE
+		  FROM
+		       QUESTION
+		  JOIN
+		       MEMBER USING(MEMBER_NO)
+		  JOIN
+		       QUESTION_CATEGORY USING(CATEGORY_NO) 
+		 WHERE
+		       QUESTION.STATUS = 'Y'   
+		 <if test="category == 0">		 
+		 </if>		       
+		 <if test="category == 1">		 
+		   AND
+		       CATEGORY_NO = 1
+		 </if>
+		 <if test="category == 2">
+		   AND
+		       CATEGORY_NO = 2
+		 </if>
+		 <if test="category == 3">
+		   AND
+		       CATEGORY_NO = 3
+		 </if>
+		 <if test="category == 4">
+		   AND
+		       CATEGORY_NO = 4
+		 </if>         
+		 ORDER
+		    BY
+		       CREATE_DATE DESC 	
+	</select>
+	
+	<select id="selectQuestionAttach" parameterType="_int" resultType="questionAttach">
+		SELECT
+		       QUESTION_NO,
+		       FILE_ORIGIN_NAME,
+		       FILE_CHANGE_NAME,
+		       QUESTION_ATTACH_PATH
+		  FROM
+		       QUESTION_ATTACH
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+	</select>
+
 
 </mapper>
