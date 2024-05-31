@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -87,7 +89,7 @@
                 <h3><a href="/goty/admin">회원 관리</a></h3>
             </div>
             <div>
-                <h3><a href="/goty/manegement/board" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
+                <h3><a href="/goty/management/board" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
             </div>
             <div>
                 <h3><a href="#">주문/배송 관리</a></h3>
@@ -122,76 +124,53 @@
                         
                         <!--사용자가 문의한 내역이 존재하지 않을 경우-->
                         <!-- <tr>
-                            <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
+                            <td colspan="6" align="center" style="height : 100px;"><b>답변 대기중인 게시물이 존재하지 않습니다.</b></td>
                         </tr> -->
-
-                        <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>15</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
-
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>16</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>12</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>8</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>10</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>10</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
-                        <tr class="board-list" style="height : 40px;">
-                            <td style="color : rgb(46, 204, 113);">대기중</td>
-                            <td>10</td>
-                            <td>상품문의</td>
-                            <td>상품 문의드립니다</td>
-                            <td>상품에 대해서 궁금합니다</td>
-                            <td>2024-05-20</td>
-                        </tr>
+                        <c:choose>
+                        	<c:when test="${ empty questionList }">
+                        		<td colspan="6" align="center" style="height : 100px;"><b>답변 대기중인 게시물이 존재하지 않습니다.</b></td>
+                        	</c:when>
+                        	<c:otherwise>
+		                        <c:forEach items="${ questionList }" var="question">
+		                        	<tr class="board-list" style="height : 40px;">
+			                            <td style="color : rgb(46, 204, 113);">대기중</td>
+			                            <td>${question.questionNo }</td>
+			                            <td>${question.categoryName }</td>
+			                            <td>${question.questionTitle }</td>
+			                            <td>${question.questionContent }</td>
+			                            <td>${question.createDate }</td>
+		                        	</tr>
+		                        </c:forEach>
+                        	</c:otherwise>
+                        </c:choose>
+                        
+                        
                 </table>
             </div>
 
              <div class="board-button">
                 <div align="center" style="border-bottom:1px solid black; padding-bottom:30px;">
-                    <button type="button" class="btn btn-warning"> < </button>
-                    <button type="button" class="btn btn-light"> 1 </button>
-                    <button type="button" class="btn btn-light"> 2 </button>
-                    <button type="button" class="btn btn-info"> > </button>
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq  1}">
+	                    	<button type="button" class="btn btn-warning disabled"> < </button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" class="btn btn-warning"> < </button>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                   	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage }" var="p">
+                   		<a id="number${ p }" class="btn btn-light" href="/goty/management/board?page=${ p }">${ p }</a>
+                   	</c:forEach>
+                   	
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq pageInfo.endPage }">
+                    		<button type="button" class="btn btn-warning disabled"> > </button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" class="btn btn-warning"> > </button>
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
             </div>    
         </div>

@@ -178,7 +178,7 @@
                    			</tr>
                     	</c:when>
                     	<c:otherwise>
-		                    <c:forEach items="${noticeList}" var="notice">
+		                    <c:forEach items="${ noticeList }" var="notice">
 		                    	<tr class="noticeList">
 			                        <td>${ notice.noticeNo }</td>
 			                        <td>${ notice.noticeTitle }</td>
@@ -203,9 +203,18 @@
             		</c:otherwise>
             	</c:choose>
             	
-                <c:forEach begin="${ pageInfo.startPage}" end="${ pageInfo.endPage }" var="p">
-                	<a id="number${ p }" class="btn btn-light" href="/goty/notices?page=${ p }">${ p }</a>
-                </c:forEach>
+            	<c:choose>
+            		<c:when test="${ empty noticeList }">
+            			<a class="btn btn-light disabled">0</a>
+            		</c:when>
+            		<c:otherwise>
+		                <c:forEach begin="${ pageInfo.startPage}" end="${ pageInfo.endPage }" var="p">
+		                	<a id="number${ p }" class="btn btn-light" href="/goty/notices?page=${ p }">${ p }</a>
+		                </c:forEach>
+            		</c:otherwise>
+            	
+            	</c:choose>
+            	
                 
                 <c:choose>
                 	<c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
@@ -222,7 +231,7 @@
         <script>
         	$(function(){
 	        		$('.noticeList').click(function(){
-	        			location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).html();
+	        			location.href = '/goty/notice?noticeNo=' + $(this).children().eq(0).html();
 						/*location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).val();*/
 	        		})
         		
@@ -244,7 +253,7 @@
                     <option value="writer">글쓴이</option>
                 </select>
                 <input class="btn-find"  type="text" name="keyword" placeholder="내용을 입력해주세요"/>
-                <input class="btn-search" type="submit" class="btn btn-success" value="찾기"/>
+                <input class="btn-search" type="submit" value="찾기"/>
             </form>
         </div>
     </div>

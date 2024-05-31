@@ -5,49 +5,314 @@
   
 <mapper namespace="com.kh.goty.customerService.model.repository.QuestionRepository">
 
-	<insert id="insertQuestion" parameterType="question">
-		INSERT
-		  INTO
-		       QUESTION
-			  (
-			  QUESTION_NO,
-			  MEMBER_NO,
-			  CATEGORY_NO,
-			  QUESTION_TITLE,
-			  QUESTION_CONTENT
-			  )
-		VALUES
-		      (
-		      SEQ_QUESTION.NEXTVAL,
-		      #{memberNo},
-		      #{categoryNo},
-		      #{questionTitle},
-		      #{questionContent}
-		      )
-		<selectKey keyProperty="questionNo" resultType="int" order="AFTER">
-	    	SELECT SEQ_QUESTION.CURRVAL FROM DUAL
-	    </selectKey>		      
+	<resultMap id="questionResultSet" type="question">
+		<result column="QUESTION_NO" property="questionNo"/>
+		<result column="MEMBER_NO" property="memberNo"/>
+		<result column="NICKNAME" property="questionWriter"/>
+		<result column="CATEGORY_NO" property="categoryNo"/>
+		<result column="QUESTION_TITLE" property="questionTitle"/>
+		<result column="QUESTION_CONTENT" property="questionContent"/>
+		<result column="CATEGORY_NAME" property="categoryName"/>
+		<result column="CREATE_DATE" property="createDate"/>
+	</resultMap>
+
+	<insert id="insertQuestion" parameterType="hashmap">
+		INSERT ALL
+			  INTO
+			       QUESTION
+				   (
+				   QUESTION_NO,
+				   MEMBER_NO,
+				   CATEGORY_NO,
+				   QUESTION_TITLE,
+				   QUESTION_CONTENT
+				   )
+			VALUES
+			       (
+			       SEQ_QUESTION.NEXTVAL,
+			       #{memberNo},
+			       #{categoryNo},
+			       #{questionTitle},
+			       #{questionContent}
+			       )
+		<if test="fileOriginName != null">
+			  INTO
+			       QUESTION_ATTACH
+			       (
+			       QUESTION_ATTACH_NO,
+			       QUESTION_NO,
+			       FILE_ORIGIN_NAME,
+			       FILE_CHANGE_NAME,
+			       QUESTION_ATTACH_PATH
+			       )
+			VALUES
+			       (
+			       SEQ_QUESTION_ATTACH.NEXTVAL,
+			       SEQ_QUESTION.CURRVAL,
+			       #{fileOriginName},
+			       #{fileChangeName},
+			       #{attachPath}
+			       )           
+		</if>
+		SELECT * FROM DUAL	
 	</insert>
 	
-	<insert id="insertFile" parameterType="questionAttach">
-		INSERT
-		  INTO
+	<select id="selectQuestionListCount" resultType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       QUESTION  
+		 WHERE
+		       QUESTION.STATUS = 'Y'
+	</select>
+	
+	<select id="selectQuestionListAll" resultMap="questionResultSet">
+		SELECT
+		       QUESTION_NO,
+		       NICKNAME,
+		       CATEGORY_NAME,
+		       QUESTION_TITLE,
+		       QUESTION_CONTENT,
+		       CREATE_DATE
+		  FROM
+		       QUESTION
+		  JOIN
+		       MEMBER USING(MEMBER_NO)
+		  JOIN
+		       QUESTION_CATEGORY USING(CATEGORY_NO) 
+		 WHERE
+		       QUESTION.STATUS = 'Y'
+		    OR
+		       QUESTION.STATUS = 'E' 
+		 ORDER
+		    BY
+		       QUESTION_NO DESC   
+	</select>
+	
+	<select id="selectQuestion" resultMap="questionResultSet">
+		SELECT
+		       QUESTION_NO,
+		       NICKNAME,
+		       CATEGORY_NAME,
+		       QUESTION_TITLE,
+		       QUESTION_CONTENT,
+		       CREATE_DATE
+		  FROM
+		       QUESTION
+		  JOIN
+		       MEMBER USING(MEMBER_NO)
+		  JOIN
+		       QUESTION_CATEGORY USING(CATEGORY_NO) 
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+		 ORDER
+		    BY
+		       QUESTION_NO DESC  
+	</select>
+	
+	<update id="updateQuestion" parameterType="question">
+		UPDATE
+			   QUESTION
+		   SET
+		       QUESTION_TITLE = #{questionTitle},
+		       QUESTION_CONTENT = #{questionContent},
+		       CATEGORY_NO = #{categoryNo}
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+	</update>
+	
+	<update id="deleteQuestion" parameterType="_int">
+		UPDATE
+		       QUESTION
+		   SET
+		       STATUS = 'N'
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+	</update>
+	
+	<select id="selectAnswer" parameterType="int" resultType="question">
+		SELECT
+      		   QUESTION_NO
+ 		  FROM
+     	       QUESTION_ATTACH
+         WHERE 
+               QUESTION_NO = #{questionNo}		
+	</select>	
+	<select id="searchQuestionListCount" parameterType="hashmap" resultType="_int">
+		SELECT
+			   COUNT(*)
+	      FROM
+	           QUESTION
+	      JOIN
+	           MEMBER USING(MEMBER_NO) 
+	     WHERE
+	           QUESTION.STATUS = 'Y' 
+		 <if test="date != ''">
+		 	 <if test="date == 'week'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 8   
+			 </if>
+			 
+			 <if test="date == 'month'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 32   
+			 </if>
+			 
+			 <if test="date == 'treeMonth'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 92   
+			 </if>
+		 </if>	           
+		 
+		 <if test="condition != ''">
+		 
+			 <if test="condition == 'subject'">
+			   AND
+			      QUESTION_TITLE LIKE '%' || #{keyword} || '%'
+			 </if>
+			 
+			 <if test="condition == 'content'">
+			   AND
+			      QUESTION_CONTENT LIKE '%' || #{keyword} || '%'
+			 </if> 
+			 
+			 <if test="condition == 'writer'">
+			   AND
+			      NICKNAME LIKE '%' || #{keyword} || '%'
+		 </if>   
+		   
+		 </if>
+		 ORDER
+		    BY
+		       CREATE_DATE DESC    
+	</select>
+	
+	<select id="searchQuestionList" parameterType="hashmap" resultMap="questionResultSet">
+		SELECT
+		       QUESTION_NO,
+		       NICKNAME,
+		       CATEGORY_NAME,
+		       QUESTION_TITLE,
+		       QUESTION_CONTENT,
+		       CREATE_DATE
+		  FROM
+		       QUESTION
+		  JOIN
+		       MEMBER USING(MEMBER_NO)
+		  JOIN
+		       QUESTION_CATEGORY USING(CATEGORY_NO) 
+		 WHERE
+		       QUESTION.STATUS = 'Y'   
+		 <if test="date != ''">
+		 	 <if test="date == 'week'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 8   
+			 </if>
+			 
+			 <if test="date == 'month'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 32   
+			 </if>
+			 
+			 <if test="date == 'treeMonth'">
+			   AND SYSDATE - QUESTION.CREATE_DATE &lt; 92   
+			 </if>
+		 </if>	           
+		 
+		 <if test="condition != ''">
+		 
+			 <if test="condition == 'subject'">
+			   AND
+			      QUESTION_TITLE LIKE '%' || #{keyword} || '%'
+			 </if>
+			 
+			 <if test="condition == 'content'">
+			   AND
+			      QUESTION_CONTENT LIKE '%' || #{keyword} || '%'
+			 </if> 
+			 
+			 <if test="condition == 'writer'">
+			   AND
+			      NICKNAME LIKE '%' || #{keyword} || '%'
+		 	</if>
+		 </if>     
+		 ORDER
+		    BY
+		       QUESTION_NO DESC  
+	</select>
+	<select id="selectCategoryListCount" parameterType="_int">
+		SELECT
+		       COUNT(*)
+		  FROM
+		       QUESTION
+		 WHERE
+		       STATUS = 'Y'
+		 <if test="category == 0">		 
+		 </if>
+		 <if test="category == 1">		 
+		   AND
+		       CATEGORY_NO = 1
+		 </if>
+		 <if test="category == 2">
+		   AND
+		       CATEGORY_NO = 2
+		 </if>
+		 <if test="category == 3">
+		   AND
+		       CATEGORY_NO = 3
+		 </if>
+		 <if test="category == 4">
+		   AND
+		       CATEGORY_NO = 4
+		 </if>         
+	</select>
+	
+	
+	<select id="questionSearchList" parameterType="_int" resultMap="questionResultSet">
+		SELECT
+		       QUESTION_NO,
+		       NICKNAME,
+		       CATEGORY_NAME,
+		       QUESTION_TITLE,
+		       QUESTION_CONTENT,
+		       CREATE_DATE
+		  FROM
+		       QUESTION
+		  JOIN
+		       MEMBER USING(MEMBER_NO)
+		  JOIN
+		       QUESTION_CATEGORY USING(CATEGORY_NO) 
+		 WHERE
+		       QUESTION.STATUS = 'Y'   
+		 <if test="category == 0">		 
+		 </if>		       
+		 <if test="category == 1">		 
+		   AND
+		       CATEGORY_NO = 1
+		 </if>
+		 <if test="category == 2">
+		   AND
+		       CATEGORY_NO = 2
+		 </if>
+		 <if test="category == 3">
+		   AND
+		       CATEGORY_NO = 3
+		 </if>
+		 <if test="category == 4">
+		   AND
+		       CATEGORY_NO = 4
+		 </if>         
+		 ORDER
+		    BY
+		       CREATE_DATE DESC 	
+	</select>
+	
+	<select id="selectQuestionAttach" parameterType="_int" resultType="questionAttach">
+		SELECT
+		       QUESTION_NO,
+		       FILE_ORIGIN_NAME,
+		       FILE_CHANGE_NAME,
+		       QUESTION_ATTACH_PATH
+		  FROM
 		       QUESTION_ATTACH
-		       (
-		      QUESTION_ATTACH_NO,
-		      QUESTION_NO,
-		      FILE_ORIGIN_NAME,
-		      FILE_CHANGE_NAME,
-		      QUESTION_ATTACH_PATH
-		       )
-		VALUES
-		      (
-		      SEQ_QUESTION_ATTACH.NEXTVAL,
-		      #{questionNo},
-		      #{fileOriginName},
-		      #{fileChangeName},
-		      #{attachPath}
-		      )      
-	</insert>
+		 WHERE
+		       QUESTION_NO = #{questionNo}
+	</select>
+
 
 </mapper>

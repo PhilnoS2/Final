@@ -380,7 +380,7 @@
                     </div>
                     <div id="question-content2">
                         <div id="question-content2-1">
-                            <a><h6 style="font-size:15px; margin-top : 40px;">G.O.T.Y를 이용하며 궁금한 사항들이 있으신가요?</h6></a>
+                            <a href="/goty/questions"><h6 style="font-size:15px; margin-top : 40px;">G.O.T.Y를 이용하며 궁금한 사항들이 있으신가요?</h6></a>
                         </div>
                     </div>
                     <div id="question-content3">

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -150,6 +151,22 @@
                         </tr> -->
 
                         <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
+                        
+                        <c:forEach items="${ memberList }" var="member">
+                        	<tr style="height : 40px;">
+	                            <td><input type="checkbox"></td>
+	                            <td>${ member.memberNo }</td>
+	                            <td>${ member.enrollDate }</td>
+	                            <td>${ member.memberName }</td>
+	                            <td>${ member.memberId }</td>
+	                            <td>${ member.memLevel }</td>
+	                            <td>${ member.totalPrice }</td>
+	                            <td>${ member.memberPoint }</td>
+	                        </tr>
+                        </c:forEach>
+               
+                        
+                        <!-- 
                         <tr style="height : 40px;">
                             <td><input type="checkbox"></td>
                             <td>1</td>
@@ -250,7 +267,7 @@
                             <td>100,000</td>
                             <td>100</td>
                         </tr>
-                       
+                        -->
                 </table>
                 
 
@@ -263,10 +280,27 @@
 
                 </div>
                 <div align="center" style="border-bottom:1px solid black; padding-bottom:30px;">
-                    <button type="button" class="btn btn-warning"> < </button>
-                    <button type="button" class="btn btn-light"> 1 </button>
-                    <button type="button" class="btn btn-light"> 2 </button>
-                    <button type="button" class="btn btn-info"> > </button>
+                     <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq  1}">
+	                    	<button type="button" class="btn btn-warning disabled"> < </button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" class="btn btn-warning"> < </button>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                   	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage }" var="p">
+                   		<a id="number${ p }" class="btn btn-light" href="/goty/admin?page=${ p }">${ p }</a>
+                   	</c:forEach>
+                   	
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq pageInfo.endPage }">
+                    		<button type="button" class="btn btn-warning disabled"> > </button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" class="btn btn-warning"> > </button>
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>

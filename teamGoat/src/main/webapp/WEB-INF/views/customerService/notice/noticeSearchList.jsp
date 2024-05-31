@@ -198,20 +198,27 @@
 	                	<a  class="btn btn-warning disabled"><</a>
             		</c:when>
             		<c:otherwise>
-            			<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage -1 }"><</a>
+            			<a  class="btn btn-warning" href="/goty/notices/find?date=${ date }&condition=${ condition }&keyword=${ keyword }&page=${ pageInfo.currentPage - 1 }"><</a>
             		</c:otherwise>
             	</c:choose>
             	
-                <c:forEach begin="${ pageInfo.startPage}" end="${ pageInfo.endPage }" var="p">
-                	<a id="number${ p }" class="btn btn-light" href="/goty/notices/find?date=${ date }&condition=${ condition }&keyword=${ keyword }&page=${ p }">${ p }</a>
-                </c:forEach>
-                
+            	<c:choose>
+            		<c:when test="${empty searchList }">
+						<a class="btn btn-light disabled" >0</a>	            			
+            		</c:when>
+            		<c:otherwise>
+		                <c:forEach begin="${ pageInfo.startPage}" end="${ pageInfo.endPage }" var="p">
+		                	<a id="number${ p }" class="btn btn-light" href="/goty/notices/find?date=${ date }&condition=${ condition }&keyword=${ keyword }&page=${ p }">${ p }</a>
+		                </c:forEach>
+            		</c:otherwise>
+            	</c:choose>
+            	
                 <c:choose>
                 	<c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
                 		<a  class="btn btn-info disabled">></a>
                 	</c:when>
 					<c:otherwise>
-           				<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage + 1 }"><</a>
+           				<a  class="btn btn-warning" href="/goty/notices/find?date=${ date }&condition=${ condition }&keyword=${ keyword }&page=${ pageInfo.currentPage + 1 }">></a>
 					</c:otherwise>
                 </c:choose>
                 

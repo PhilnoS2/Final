@@ -118,23 +118,15 @@
                 </div>
             </div>
         </div>
-        
-        <script>
-        	$(function(){
-        		$('#insert-faq').click(function(){
-        			location.href = '/goty/faq/enroll';
-        		})
-        	})
-        
-        </script>
+       
         <div class="faq-search">
             <div>
                 <select id="select-area" name="select" style="width : 100px; height : 40px; margin-left: 90px;">
                     <option value="0">전체</option>
-                    <option value="1">주문/결제</option>
-                    <option value="2">기타문의</option>
-                    <option value="3">서비스</option>
-                    <option value="4">배송관련</option>
+                    <option value="1">상품문의</option>
+                    <option value="2">주문/결제문의</option>
+                    <option value="3">배송문의</option>
+                    <option value="4">기타</option>
                 </select>
             </div>
         </div>
@@ -153,6 +145,12 @@
     </div>
 
     <script>
+	    $(function(){
+			$('#insert-faq').click(function(){
+				location.href = '/goty/faq/enroll';
+			})
+		});
+    
         $(function(){
 
             $(function(){
@@ -166,7 +164,6 @@
                     	data : {category : category
                     	},
                     	success : function(result){
-                    		console.log(result[0]);
                     		let text = '<div style="margin-bottom:50px;"></div>';
                     		for(let i in result){
 								const faq = result[i];

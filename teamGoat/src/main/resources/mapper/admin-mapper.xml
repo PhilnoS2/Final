@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.kh.goty.customerService.model.repository.AdminRepository">														
+	<resultMap id="memberResultSet" type="member">
+		<result column="MEMBER_No" property="memberNo"/>
+		<result column="MEMBER_ID" property="memberId"/>
+		<result column="ENROLLDATE" property="enrollDate"/>
+		<result column="MEM_LEVEL" property="memLevel"/>
+		<result column="TOTAL_PRICE" property="totalPrice"/>
+		<result column="MEMBER_POINT" property="memberPoint"/>
+		<result column="NICKNAME" property="nickname"/>
+		<result column="MEMBER_NAME" property="memberName"/>
+	
+	</resultMap>
+
+
+	<select id="selectMember" resultMap="memberResultSet">
+		SELECT
+		       MEMBER_NO,
+		       MEMBER_ID,
+		       NICKNAME,
+		       MEMBER_NAME,
+		       ENROLLDATE,
+		       MEM_LEVEL,
+		       TOTAL_PRICE,
+		       MEMBER_POINT
+		  FROM
+		       MEMBER
+		 WHERE
+		       DELETE_YN = 'N'
+		 ORDER
+		    BY
+		       TOTAL_PRICE DESC
+	</select>
+	
+	<select id="selectMemberList" resultType="int">
+		SELECT
+			   COUNT(*)
+	      FROM
+	           MEMBER
+	     WHERE
+	           DELETE_YN = 'N'  
+	</select>
+	
+</mapper>

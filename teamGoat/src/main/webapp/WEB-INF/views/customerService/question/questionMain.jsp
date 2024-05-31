@@ -61,7 +61,15 @@
         .question-search{
             height : 15%;
         }
-
+		
+		tr:hover {
+            background-color : rgb(241, 238, 238);
+            cursor : pointer;
+             >td {
+             	font-weight : bolder;
+             }
+        }
+	
         
     </style>        
 
@@ -79,16 +87,17 @@
         </div>
         <div class="guide" style="border-bottom : 1px solid black;"> 
             <div>
-                <img src="resources/img/info.png">
+                <img src="/goty/resources/img/info.png">
             </div>
         </div>
         <div class="question-find" >
             <div>
                 <select id="category" name="category" style="margin-left : 48px; margin-top : 5px; height :30px;">
-                    <option value="1">주문/결제</option>
-                    <option value="2">기타문의</option>
-                    <option value="3">서비스</option>
-                    <option value="4">배송관련</option>
+                    <option value="0">전체</option>
+                    <option value="1">상품문의</option>
+                    <option value="2">주문/결제문의</option>
+                    <option value="3">배송문의</option>
+                    <option value="4">기타</option>
                 </select>
             </div>
         </div>
@@ -101,16 +110,33 @@
                         <th>제목</th>
                         <th>작성자</th>
                         <th>작성일</th>
-                        <th>조회수</th>
+                        <th>답변상태</th>
                     </thead>
 
                     <tbody align="center">
                         
                         <!--사용자가 문의한 내역이 존재하지 않을 경우-->
-                        <tr>
-                            <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
-                        </tr>
-
+                        
+                        <c:choose>
+                        	<c:when test="${ empty questionList }">
+		                        <tr>
+		                            <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
+		                        </tr>
+                        	</c:when>
+                        	<c:otherwise>
+								<c:forEach items="${ questionList }" var="question">
+									<tr style="height : 40px;" class="questionList">
+			                            <td>${question.questionNo }</td>
+			                            <td>${question.categoryName }</td>
+			                            <td>${question.questionTitle }</td>
+			                            <td>${question.questionWriter }</td>
+			                            <td>${question.createDate }</td>
+			                            <td>답변완료</td>
+		                       		</tr>
+								</c:forEach>
+                        	</c:otherwise>
+                        </c:choose>
+                        
                         <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
                         <!-- <tr style="height : 40px;">
                             <td>1</td>
@@ -120,29 +146,43 @@
                             <td>2024-05-10</td>
                             <td>1</td>
                         </tr>
-                        <tr style="height : 40px;">
-                            <td>1</td>
-                            <td>상품문의</td>
-                            <td>상품 재입고 문의드려요</td>
-                            <td>최진영</td>
-                            <td>2024-05-10</td>
-                            <td>1</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td>1</td>
-                            <td>상품문의</td>
-                            <td>상품 재입고 문의드려요</td>
-                            <td>최진영</td>
-                            <td>2024-05-10</td>
-                            <td>1</td>
-                        </tr> -->
+                        -->
                     </tbody>
                 </table>
                 <div align="center" style="margin-top : 20px;">
-                    <button type="button" class="btn btn-warning"> < </button>
-                    <button type="button" class="btn btn-light"> 1 </button>
-                    <button type="button" class="btn btn-light"> 2 </button>
-                    <button type="button" class="btn btn-info"> > </button>
+                    
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq  1}">
+	                    	<a class="btn btn-warning disabled"> < </a>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<a href="/goty/questions?page=${ pageInfo.currentPage - 1 }" class="btn btn-warning"> < </a>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <c:choose>
+                    	<c:when test="${ empty questionList }">
+							<a class="btn btn-light disabled">0</a>                    		
+                    	</c:when>
+                    	<c:otherwise>
+		                   	<c:forEach begin="${pageInfo.startPage}" end="${pageInfo.endPage }" var="p">
+		                   		<a id="number${ p }" class="btn btn-light" href="/goty/questions?page=${ p }">${ p }</a>
+		                   	</c:forEach>
+                    	</c:otherwise>
+                    
+                    </c:choose>
+                    
+                    
+                   	
+                    <c:choose>
+                    	<c:when test="${pageInfo.currentPage eq pageInfo.endPage }">
+                    		<a class="btn btn-warning disabled"> > </a>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<a href="/goty/questions?page=${ pageInfo.currentPage + 1 }" class="btn btn-warning"> > </a>
+                    	</c:otherwise>
+                    </c:choose>
+                
                 </div>
             </div>
         </div>
@@ -152,7 +192,7 @@
             </div>
         </div>
         <div class="question-search">
-            <form action="question-find" style="padding-left : 50px; padding-top:50px;">
+            <form action="/goty/questions/find" style="padding-left : 50px; padding-top:50px;">
                 <select name="date" style="height : 35px;">
                     <option value="all">전체</option>
                     <option value="week">일주일</option>
@@ -161,9 +201,9 @@
                 </select>
     
                 <select name="condition" style="height : 35px;">
-                    <option value="">제목</option>
-                    <option value="">내용</option>
-                    <option value="">글쓴이</option>
+                    <option value="subject">제목</option>
+                    <option value="content">내용</option>
+                    <option value="writer">글쓴이</option>
                 </select>
                 <input style="width : 300px; height : 35px;" type="text" name="keyword" placeholder="내용을 입력해주세요"/>
                 <input type="submit" class="btn btn-success" value="찾기"/>
@@ -182,8 +222,48 @@
     			}
     			
     		})
-    	})
-    
+    	});
+    	
+    	$(function(){
+    		$('.questionList').click(function(){
+    			location.href = '/goty/question?questionNo=' + $(this).children().eq(0).html();
+    			consol.log((this).children().eq(0).html());
+    		})
+    	});
+    	
+   		$(function(){
+   			$('#category').change(function(){
+   				const category = $('option:selected').val();
+                // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
+                $.ajax({
+                	url : 'question/category',
+                	type : 'get',
+                	data : {category : category
+                	},
+                	success : function(result){
+                		let text = ''; 
+                		for(let i in result){
+                			const question = result[0];
+							text += '<tr style="height : 40px;" class="questionList">'
+								  + '<td>' + question.questionNo + '</td>'
+								  + '<td>' + question.categoryName + '</td>'
+								  + '<td>' + question.questionTitle + '</td>'
+								  + '<td>' + question.questionWriter + '</td>'
+								  + '<td>' + question.createDate + '</td>'
+								  + '<td>답변완료</td>' 
+								  + '</tr>'
+                		};
+                		$('tbody').html(text);
+                		$('tbody').children().click(function(){
+                			location.href = '/goty/question?questionNo=' + $(this).children().eq(0).html();
+                		})
+                	}
+                });
+   			})
+   		}) 	
+   
+    	
+    	
     </script>
     
     

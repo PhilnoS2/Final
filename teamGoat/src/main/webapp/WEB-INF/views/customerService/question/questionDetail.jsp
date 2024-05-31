@@ -105,32 +105,27 @@
                 <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
                     <thead>
                         <th width="100px;">제목</th>
-                        <td colspan="9">제목입니다</td>
+                        <td colspan="9">${ question.questionTitle }</td>
                     </thead>
     
                     <tbody>
                         <tr>
                             <th>작성자</th>
-                            <td colspan="3">김진영</td>
-                            <th width="100px;">답변여부</th>
-                            <td colspan="5" width="200px;" style="padding-left : 30px;">X</td>
+                            <td colspan="3">${ question.questionWriter }</td>
+                            <th width="100px;">답변상태</th>
+                            <td colspan="5" width="200px;" style="padding-left : 30px;">${ answer }</td>
                         </tr>
                         
                         <tr>
                             <th>문의일시</th>
-                            <td colspan="9">2024-05-10</td>
+                            <td colspan="9">${ question.createDate }</td>
                         </tr>
 
                         <tr>
-                            <th colspan="10"><p>(서울=연합뉴스) 곽민서 기자 = 윤석열 대통령은 14일 기득권 세력의 정치적 반대 때문에 개혁 과제 추진이 어렵다는 인식을 밝히면서 노동·의료 등 4대 개혁에 대한 의지를 거듭 확인했다.
-
-                                윤 대통령은 이날 서울고용복지플러스센터에서 열린 스물다섯번째 '국민과 함께하는 민생토론회'에서 "우리 정부는 추상적인 어떤 무슨 경제 슬로건이 아니고 교육 개혁, 노동 개혁, 연금 개혁, 의료 개혁이라는 이 4가지 개혁을 추진하고 있다"고 말했다.
-                                
-                                윤 대통령은 "이 개혁이라고 하는 것은 지금 같은 세상에서는 적을 많이 만드는 일"이라며 "왜냐하면 개혁을 하게 되면 결국 많은 국민들에게 이롭지만, 또 누군가는 어떤 기득권을 뺏긴다"고 짚었다.
-                                
-                                이어 "이로움을 누리게 되는 사람들은 거기에 대해서 별로 인식을 못 하고, 조금씩 나아지는 걸 잘 못 느끼지만 뭔가를 빼앗기는 쪽에서는 정말 정권 퇴진 운동을 하게 되는 것"이라며 "그래서 정말 어떤 개혁을 해 나간다는 것이 대단히 어렵다"고 말했다.(서울=연합뉴스) 곽민서 기자 = 윤석열 대통령은 14일 기득권 세력의 정치적 반대 때문에 개혁 과제 추진이 어렵다는 인식을 밝히면서 노동·의료 등 4대 개혁에 대한 의지를 거듭 확인했다.
-
-                                잘 못 느끼지만 뭔가를 빼앗기는 쪽에서는 정말 정권 퇴진 운동을 하게 되는 것"이라며 "그래서 정말 어떤 개혁을 해 나간다는 것이 대단히 어렵다"고 말했다.</p></th>
+                            <th colspan="10"><p>${question.questionContent }</p></th>
+                        </tr>
+                        <tr>
+                        	<th colspan="10">첨부파일 : ${attach.fileOriginName }</th>
                         </tr>
                     </tbody>
                 </table>
@@ -173,7 +168,7 @@
 
         <div class="button-area">
             <div class="button-area1">
-                <button style="margin-left : 97px; width: 100px;">목록</button>
+                <button id="backbtn" style="margin-left : 97px; width: 100px;">목록</button>
             </div>
             <div class="button-area2">
                 <div>
@@ -183,7 +178,7 @@
                 </div>
 
                 <form action="" method="post" id="update-form">
-                    <input type="hidden" name="noticeNo" value="">
+                    <input type="hidden" name="questionNo" value="${ question.questionNo }">
                 </form>
             </div>
         </div>
@@ -193,13 +188,20 @@
     <script>
         function submit(num){
             if(num == 0){
-                $('#update-form').attr('action', 'update').submit();
+                $('#update-form').attr('action', '/goty/question/updateForm').submit();
             }
             else {
-                $('#update-form').attr('action', 'delete').submit();
+            	if(confirm('게시글을 삭제하시겠습니까??')){
+                	$('#update-form').attr('action', '/goty/question/delete').submit();
+            	};
             }
-        }
-
+        };
+        
+        $(function(){
+        	$('#backbtn').click(function(){
+            	location.href = '/goty/questions';
+        	})
+        })
     </script>
 
 
