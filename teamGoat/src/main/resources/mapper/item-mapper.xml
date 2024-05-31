@@ -271,6 +271,7 @@
 	<select id="findOrderList" parameterType="_int" resultMap="orderResultSet" >
 	
 		SELECT
+				ORDER_NO,
 		        MEMBER_NAME,
 		        ITEM_NAME,
 		        PLATFORM_NAME,

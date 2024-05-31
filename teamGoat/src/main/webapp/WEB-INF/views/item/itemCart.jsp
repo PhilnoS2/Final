@@ -113,7 +113,8 @@
 			
 		})
 		
-		console.log(JSON.stringify('${ itemList }'));
+		// console.log(JSON.stringify('${ itemList }'));
+		
 		function test() {
 			//location.href= "purchase.item?"+encodeURIComponent(JSON.stringify('${ itemList }'));
 		}

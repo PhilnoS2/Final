@@ -118,15 +118,7 @@
                 </div>
             </div>
         </div>
-        
-        <script>
-        	$(function(){
-        		$('#insert-faq').click(function(){
-        			location.href = '/goty/faq/enroll';
-        		})
-        	})
-        
-        </script>
+       
         <div class="faq-search">
             <div>
                 <select id="select-area" name="select" style="width : 100px; height : 40px; margin-left: 90px;">
@@ -153,6 +145,12 @@
     </div>
 
     <script>
+	    $(function(){
+			$('#insert-faq').click(function(){
+				location.href = '/goty/faq/enroll';
+			})
+		});
+    
         $(function(){
 
             $(function(){
@@ -166,7 +164,6 @@
                     	data : {category : category
                     	},
                     	success : function(result){
-                    		console.log(result[0]);
                     		let text = '<div style="margin-bottom:50px;"></div>';
                     		for(let i in result){
 								const faq = result[i];

@@ -51,9 +51,10 @@
 
     <jsp:include page="../common/menubar.jsp"/>
 
+
 	<div class="container">
 
-        <div class="basic-border">
+		<div class="basic-border">
 
 			<table class="table">
 
@@ -68,16 +69,15 @@
 				</thead>
 
 				<tbody>
+
 					<c:set var="total" value="0" />
 
 					<c:forEach items="${ orderList }" var="order">
 
-						<c:set var="totalPrice" value="${total + order.price}"/>
+						<c:set var="total" value="${total + order.price}"/>
 
-						<tr>
-							<td>
-								<img src="${ order.imgPath }/${ order.imgName }" alt=""/>
-							</td>
+						<tr class="orderList">
+							<td><img src="${ order.imgPath }/${ order.imgName }" alt=""/></td>
 							<td>${ order.itemName }</td>
 							<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
 							<td class="price"><fmt:formatNumber value="${ order.price * 0.01 }" type="number" />원</td>
@@ -87,39 +87,32 @@
 					</c:forEach>
 
 					<tr>
-						<td class="price" colspan="5"> Total Price = ${totalPrice} 원 </td>
+						<td class="price" colspan="5"> Total Price = ${total} 원 </td>
 					</tr>
-					
+
 				</tbody>
 
 			</table>
+			
+		</div>
+		
+		<form action="item.result" method="post">
 
-        </div>
-        
-        <div id="payment" class="basic-border">
+			<div id="payment" class="basic-border">
+				
+				<button class="btn btn-success">네이버페이</button>
+				<button class="btn btn-warning">카카오페이</button>
+				<button class="btn btn-primary normalPay">
+					<c:forEach items="${ orderList }" var="order">
+						<input type="hidden" name="orderNo" value="${ order.orderNo }" />
+					</c:forEach>
+					결제하기
+				</button>
+				
+			</div>
 
-			<button class="btn btn-success">네이버페이</button>
-			<button class="btn btn-warning">카카오페이</button>
-			<button class="btn btn-primary">결제하기</button>
-
-        </div>
-
+		</form>
     </div>
 
-	<script>
-
-		$(() => {
-
-			$('.btn').click((e) => {
-				
-				console.log(e.target);
-
-				location.href = "#";
-
-			})
-
-		});
-
-	</script>
 </body>
 </html>

@@ -1,7 +1,10 @@
 package com.kh.goty.item.controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
 
@@ -346,8 +349,7 @@ public class ItemController {
 	}
 	
 	// 결제 관련 페이지 - item.result까지 묶어서 
-	
-	@PostMapping("item.purchase")
+	@PostMapping("item.process")
 	public ModelAndView addOrder(int memberNo,
 								     int itemNo,
 								     String toName,
@@ -371,7 +373,7 @@ public class ItemController {
 		
 		if(itemService.addOrder(order) > 0) {
 			
-			mv.setViewName("redirect:item.result?memberNo="+memberNo);
+			mv.setViewName("redirect:item.purchase?memberNo="+memberNo);
 			
 			return mv;
 			
@@ -387,15 +389,47 @@ public class ItemController {
 
 	}
 
-	@GetMapping("item.result")
+	@GetMapping("item.purchase")
 	public ModelAndView findOrderList(int memberNo, 
 									  ModelAndView mv) {
 		
 		List<Order> orderList = itemService.findOrderList(memberNo);
 		
+		System.out.println(orderList);
+		
 		mv.addObject("orderList", orderList);
 		
 		mv.setViewName("item/itemPurchase");
+		
+		return mv;
+	}
+	
+	@PostMapping("item.result")
+	public ModelAndView insertAndUpdatePurchase(String orderNo,
+												ModelAndView mv) {
+		
+		String orderNoList = orderNo;
+		
+		StringTokenizer st = new StringTokenizer(orderNoList , ",");
+		
+		int[] dataArr = new int[st.countTokens()];
+		
+		int i = 0;
+		
+		List<Integer> list = new ArrayList<Integer>();
+		
+		while(st.hasMoreTokens()) {
+			
+			dataArr[i] = Integer.parseInt(st.nextToken());
+			list.add(dataArr[i]);
+			i++;
+			
+		}
+		
+		System.out.println(list);
+		
+		
+		mv.setViewName("");
 		
 		return mv;
 	}
