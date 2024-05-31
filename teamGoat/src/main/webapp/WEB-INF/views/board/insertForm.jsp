@@ -10,8 +10,8 @@
 	margin: auto;
 }	
 #form-area {
-	width:70%;
-	height: 80%;
+	width: 70%;
+	height: auto;
 	margin: auto;
 	margin-top: 82px;
 }
@@ -41,17 +41,24 @@
            })
        });
 
-    function submitContents(elClickedObj) {
+    function submitContents() {
     	 // 에디터의 내용이 textarea에 적용된다.
-    	 oEditors.getById["editorTxt0"].exec("UPDATE_CONTENTS_FIELD", []);
-
+    	  oEditors.getById["editorTxt0"].exec("UPDATE_CONTENTS_FIELD", []);
+    	  console.log(document.getElementById("editorTxt0").value);
+    	  const str = document.getElementById("editorTxt0").value;
+    	  
     	 // 에디터의 내용에 대한 값 검증은 이곳에서
     	 //document.getElementById("editorTxt0").value를 이용해서 처리한다.
-		 console.log(document.getElementById("editorTxt0").value);
-    	 try {
-    	     elClickedObj.form.submit();
-    	 } catch(e) {
-    		 
+    	 
+    	 // <p><br></p> 공백
+    	 // <p>&nbsp;</p> 띄어쓰기만
+    	 if(str.length < 0 || str.includes('<p><br></p>') || str.includes('<p>&nbsp;</p>')) {
+    		 alert('올바른 입력이 아닙니다.' + str);
+    		 return false;
+    	 }
+    	 else {
+    		 alert(str);
+    		 return true;
     	 }
     }
 	</script>
@@ -61,7 +68,7 @@
 	<jsp:include page="../common/menubar.jsp" />
 	
 	<div id="wrapper-div">
-		<form action="/goty/freeboards/inserts" onsubmit="submitContents();" method="post"  id="form-area"
+		<form action="/goty/freeboards/inserts" method="post"  id="form-area"
 		 class="shadow-lg p-4 mb-4 bg-white" enctype="multipart/form-data" >
 			<div class="form-group selects">
 				<label for="category" >카테고리</label>
@@ -87,7 +94,7 @@
 				<input type="file" id="upfile" name="upFile" >
 			</div>
 			<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
-			<button class="btn btn-md btn-success" type="submit">작성하기</button>
+			<button class="btn btn-md btn-success" type="submit" onclick="return submitContents();" >작성하기</button>
 		</form>
 	
 	</div>

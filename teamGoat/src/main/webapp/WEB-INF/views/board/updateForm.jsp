@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +55,9 @@
 			<div class="form-group clearfix">
 				<label for="upfile" style="display: block;">파일첨부</label>
 				<input type="file" id="upfile" name="upFile">
-				<img width="100px;" height="100px;" src="/goty/${ board.imagePath }">
+				<c:if test="${ board.imagePath ne null}">
+					<img width="100px;" height="100px;" src="/goty/${ board.imagePath }">
+				</c:if>
 				<button class="btn btn-md btn-success float-right" type="submit">수정하기</button>
 			</div>
 			

@@ -33,6 +33,8 @@ public interface BoardService {
 	public int replyCount(int boardNo);
 
 	public int insertReport(Report report);
+
+	public int deleteBoard(int boardNo);
 	
 
 }
