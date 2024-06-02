@@ -120,6 +120,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
+			return mv;
 		}
 		return mv;
 	}
@@ -156,6 +157,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
+			return mv;
 		}
 		
 		return mv;
@@ -198,6 +200,7 @@ public class MemberController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
+			return mv;
 		}
 		
 		return mv;
@@ -319,6 +322,7 @@ public class MemberController {
 	  } catch (Exception e) {
 		  e.printStackTrace();
 		  mv.addObject("errorMsg", "서버 오류, 관리자에게 문의하세요.").setViewName("common/errorPage");
+		  return mv;
 	  }
 	  return mv;
   }
@@ -336,6 +340,7 @@ public class MemberController {
 	  }catch (Exception e) {
 		e.printStackTrace();
 		mv.addObject("errorMsg", "서버 오류, 관리자에게 문의하세요.").setViewName("common/errorPage");
+		return mv;
 	  }  
 	  return mv;
   }
