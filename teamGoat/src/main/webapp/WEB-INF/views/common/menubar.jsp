@@ -126,7 +126,6 @@
 	</c:if>
 	
 	<div id="header">
-		
 		<div id="logoOpt">
 			<a href="/goty">
 				<img width="200px" height="200px" src="${pageContext.request.contextPath}/resources\img\logo2.png">

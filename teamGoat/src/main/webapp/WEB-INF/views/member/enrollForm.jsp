@@ -3,70 +3,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- jQuery 라이브러리 -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <!-- 부트스트랩에서 제공하고 있는 스타일 -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- 부트스트랩에서 제공하고 있는 스크립트 -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+	
+	<link rel="stylesheet" href="/goty/resources/member/css/enrollForm.css" />
 <meta charset="UTF-8">
 <title>enrollForm</title>
-<style>
-	#enrollForm-div{
-		width: 1200px;
-		height: auto;
-		margin: auto;
-	}
-	#inner-div {
-		width: 60%;
-		height: 80%;
-		margin: auto;
-		margin-top: 25px;
-		border: 1px solid grey;
-		border-radius: 5px;
-		padding: 10px;
-	}
-	#address-div{
-		width: 60%;
-		height: 5%;
-		margin: auto;
-		margin-top: 15px;
-		border: 1px solid grey;
-		border-radius: 5px;
-		padding: 10px;
-	}
-	#enroll-option{
-		width: 20%;
-		height: 5%;
-		margin: auto;
-		margin-top: 10px;
-		padding: 10px;
-	}
-	.regExRuleId,
-	.regExRulePwd,
-	.checkPwd,
-	.checkName,
-	.nickname,
-	.bornDate,
-	.email,
-	.phone {
-		margin: 3px;
-		font-size: 12px;
-		color: red;
-		display: none;
-	}
-	
-	.reAddr {
-		display: none;
-	}
-	.form-group, .address-div{
-		width: 80%;
-		margin: auto;
-	}
-</style>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
@@ -139,6 +83,8 @@
 			</div>
 		</form>
 	</div>
+	
+	
 	<script>
 	    function execDaumPostcode() {
 	        new daum.Postcode({
@@ -172,7 +118,6 @@
 	    }
 	</script>
 
-	
 	<script src="/goty/resources/member/Js/regExp.js"></script>
 </body>
 </html>

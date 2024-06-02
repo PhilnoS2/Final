@@ -4,67 +4,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link rel="stylesheet" href="/goty/resources/member/css/myPage.css" />
 <meta charset="UTF-8">
-<style>
-	#wrapper-div{
-		width: 900px;
-		height: 600px;
-		margin: auto;
-	}
-	#left-side{
-		width:20%;
-		height: 100%;
-		border-right: 1px solid grey;
-		display: inline-block;
-		float:left;
-	}
-	#right-side{
-		width:80%;
-		height: 100%;
-		display: inline-block;
-	}
-	#right-side h6 {
-		display: inline-block;
-		margin: 0px;
-		font-size: 20px;
-	}
-	#ul-userOpt{
-		height: 60%;
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		flex-direction: column;
-		padding: 0px;
-		margin: auto;
-		margin-top: 75px;
-	}
-	.li-option{
-		width: 120px;
-		margin: auto;
-		margin-top: 15px;
-		margin-bottom : 15px;
-	}
-	.side-title {
-		text-align: center;
-		margin-top: 15px;
-		margin-bottom: 0px;
-		padding-bottom: 10px;
-		border-bottom: 1px solid grey;
-	}
-	#userInfo{
-		width:80%;
-		margin: auto;
-		margin-top: 75px;
-		margin-bottom: 30px;
-	}
-	.userInfo-div{
-		width: 50%;
-		margin: auto;
-		margin-top: 10px;
-		margin-bottom: 10px;
-		text-align: center;
-	}
-</style>
 <title>myPage</title>
 </head>
 <body>
@@ -241,7 +182,6 @@
 
 	
 	<script>
-	
 		$('#signoutMemberBtn').click(() => {
 			console.log('${sessionScope.loginMember.memberNo }');
 			
@@ -257,9 +197,6 @@
 				
 			});
 		});
-		
-		
-		
 	</script>
 	
 	

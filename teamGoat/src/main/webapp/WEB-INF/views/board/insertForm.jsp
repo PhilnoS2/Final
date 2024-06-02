@@ -4,31 +4,14 @@
 <html>
 <head>
 <style>
-#wrapper-div{
-	width: 1200px;
-	height: 800px;
-	margin: auto;
-}	
-#form-area {
-	width: 70%;
-	height: auto;
-	margin: auto;
-	margin-top: 82px;
-}
 
-.titles {
-	width:50%;
-}
-.selects {
-	width: 20%;
-}
 
 </style>
 <meta charset="UTF-8">
 <title>insertForm</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/goty/resources/smartEditor/workspace/static/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-	
+	<link rel="stylesheet" href="/goty/resources/board/css/insertForm.css" >
 	<script type="text/javascript">
 	let oEditors = [];
 
@@ -95,10 +78,8 @@
 			</div>
 			<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
 			<button class="btn btn-md btn-success" type="submit" onclick="return submitContents();" >작성하기</button>
-		</form>
-	
+		</form>	
 	</div>
-	
 	
 </body>
 </html>
