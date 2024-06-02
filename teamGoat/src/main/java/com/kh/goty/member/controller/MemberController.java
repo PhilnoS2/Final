@@ -193,51 +193,60 @@ public class MemberController {
 	
 	@PostMapping("/findPwd")
 	public ModelAndView findPwd(Member member, ModelAndView mv, HttpSession session)  {
+		
 		if(memberService.findPwd(member) > 0) { // 입력한회원 존재함
-			JavaMailSenderImpl sender;
-			
-			JavaMailSenderImpl impl = new JavaMailSenderImpl();
-			
-			// - 계정 설정
-			impl.setHost("smtp.gmail.com");
-			impl.setPort(587);
-			impl.setUsername(env.getProperty("email"));
-			impl.setPassword(env.getProperty("password"));
-			
-			// - 옵션 설정
-			Properties prop = new Properties();
-			prop.put("mail.smtp.starttls.enable", true);
-			prop.put("mail.smtp.auth", true);
-			
-			impl.setJavaMailProperties(prop);
-			sender = impl;
-			
-			SimpleMailMessage message = new SimpleMailMessage();
-			
-			//코드 생성
-			StringBuilder sb = new StringBuilder();
-			Random rd = new Random();
+		
+			try {
+				JavaMailSenderImpl sender;
+				
+				JavaMailSenderImpl impl = new JavaMailSenderImpl();
+				
+				// - 계정 설정
+				impl.setHost("smtp.gmail.com");
+				impl.setPort(587);
+				impl.setUsername(env.getProperty("email"));
+				impl.setPassword(env.getProperty("password"));
+				
+				// - 옵션 설정
+				Properties prop = new Properties();
+				prop.put("mail.smtp.starttls.enable", true);
+				prop.put("mail.smtp.auth", true);
+				
+				impl.setJavaMailProperties(prop);
+				sender = impl;
+				
+				SimpleMailMessage message = new SimpleMailMessage();
+				
+				//코드 생성
+				StringBuilder sb = new StringBuilder();
+				Random rd = new Random();
 
-		    for(int i=0;i < 8;i++){
-		        if(rd.nextBoolean()){
-		            sb.append(rd.nextInt(10));
-		        }else {
-		            sb.append((char)(rd.nextInt(26)+65));
-		        }
-		    }
-			
-			message.setSubject("안녕하세요. goty 비밀번호 찾기 이메일입니다.");
-			message.setText("임시 비밀번호 : "+ sb);
+			    for(int i=0;i < 8;i++){
+			        if(rd.nextBoolean()){
+			            sb.append(rd.nextInt(10));
+			        }else {
+			            sb.append((char)(rd.nextInt(26)+65));
+			        }
+			    }
+				
+				message.setSubject("안녕하세요. goty 비밀번호 찾기 이메일입니다.");
+				message.setText("임시 비밀번호 : "+ sb);
 
-			String[] to = { member.getEmail() };
-			member.setMemberPwd(sb.toString());
-			
-			if(memberService.updatePwd(member) > 0) {
-				message.setTo(to);
-				sender.send(message);
-				session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
-			} else {
-				mv.addObject("errorMsg", "비밀번호 변경 실패").setViewName("common/errorPage");
+				String[] to = { member.getEmail() };
+				member.setMemberPwd(sb.toString());
+				
+				if(memberService.updatePwd(member) > 0) {
+					message.setTo(to);
+					sender.send(message);
+					session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
+				} else {
+					mv.addObject("errorMsg", "비밀번호 변경 실패").setViewName("common/errorPage");
+				}
+				
+			} catch (Exception e) {
+				 e.printStackTrace();
+				 mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
+				 return mv;
 			}
 			
 		} else {

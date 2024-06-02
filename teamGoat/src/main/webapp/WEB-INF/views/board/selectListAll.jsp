@@ -5,59 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<style>
-#wrapper-div{
-	width: 1200px;
-	height: 800px;
-	margin: auto;
-}	
-#btn-categoty-div {
-	width: 50%;
-	margin-left: auto;
-	height: 80px;	
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-}
-#freeboard-div{
-	width: 100%;
-	height: 90%;
-	border-top: 1px solid grey;
-}
-#freeboard-inner-div {
-	width: 80%;
-
-	border-bottom: 1px solid grey;
-	margin: auto;
-	margin-top: 20px;
-}
-
-thead th {
-	text-align: center;
-}
-.form-group {
-	width: 40%;
-	margin: auto;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-}
-
-#select-area{
-	width:30%;
-	display:inline-block;
-}
-#search-area{
- width:50%;
- display:inline-block;
-}
-
-#btn-list-option {
-	width:20%;
-	margin-bottom: 20px;
-}
- 
-</style>
+<link rel="stylesheet" href="/goty/resources/board/css/selectListAll.css" />
 <title>selectListAll</title>
 </head>
 <body>
@@ -255,8 +203,7 @@ thead th {
 			</c:if>
 
 		</div>
-		
-		
+
 	</div>
 	
 	<script>
@@ -273,33 +220,7 @@ thead th {
 			});	
 		});
 
-		
 	</script>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 </body>
 </html>

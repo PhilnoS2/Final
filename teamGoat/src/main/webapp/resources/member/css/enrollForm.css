@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+#enrollForm-div{
+		width: 1200px;
+		height: auto;
+		margin: auto;
+	}
+	#inner-div {
+		width: 60%;
+		height: 80%;
+		margin: auto;
+		margin-top: 25px;
+		border: 1px solid grey;
+		border-radius: 5px;
+		padding: 10px;
+	}
+	#address-div{
+		width: 60%;
+		height: 5%;
+		margin: auto;
+		margin-top: 15px;
+		border: 1px solid grey;
+		border-radius: 5px;
+		padding: 10px;
+	}
+	#enroll-option{
+		width: 20%;
+		height: 5%;
+		margin: auto;
+		margin-top: 10px;
+		padding: 10px;
+	}
+	.regExRuleId,
+	.regExRulePwd,
+	.checkPwd,
+	.checkName,
+	.nickname,
+	.bornDate,
+	.email,
+	.phone {
+		margin: 3px;
+		font-size: 12px;
+		color: red;
+		display: none;
+	}
+	
+	.reAddr {
+		display: none;
+	}
+	.form-group, .address-div{
+		width: 80%;
+		margin: auto;
+	}

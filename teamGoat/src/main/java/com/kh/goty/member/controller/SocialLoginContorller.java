@@ -70,7 +70,8 @@ public class SocialLoginContorller {
 			= new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		
 		String responseData = br.readLine();
-
+		System.out.println(responseData);
+		
 		session.removeAttribute("loginMember");
 		session.setAttribute("alertMsg", "로그아웃합니다.");
 		mv.setViewName("redirect:/");

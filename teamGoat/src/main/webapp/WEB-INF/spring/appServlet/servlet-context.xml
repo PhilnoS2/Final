@@ -31,4 +31,5 @@
 			com.kh.goty.item.model.dao,
 			com.kh.goty.board.model.dao" />		
 	
+	
 </beans:beans>

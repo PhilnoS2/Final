@@ -4,34 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-#wrapper-div{
-	width: 1200px;
-	height: 800px;
-	margin: auto;
-}	
-#form-area {
-	width:70%;
-	height: 80%;
-	margin: auto;
-	margin-top: 82px;
-}
-
-.titles {
-	width:50%;
-}
-.selects {
-	width: 20%;
-}
-
-</style>
+<link rel="stylesheet" href="/goty/resources/board/css/updateForm.css" />
 <meta charset="UTF-8">
 <title>updateForm</title>
 </head>
 <body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript" src="/goty/resources/smartEditor/workspace/static/js/service/HuskyEZCreator.js" charset="utf-8"></script>
-	
 	<script type="text/javascript">
 	let oEditors = [];
 
