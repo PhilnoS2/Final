@@ -1,7 +1,6 @@
 package com.kh.goty.item.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -395,8 +394,6 @@ public class ItemController {
 		
 		List<Order> orderList = itemService.findOrderList(memberNo);
 		
-		System.out.println(orderList);
-		
 		mv.addObject("orderList", orderList);
 		
 		mv.setViewName("item/itemPurchase");
@@ -405,8 +402,18 @@ public class ItemController {
 	}
 	
 	@PostMapping("item.result")
-	public ModelAndView insertAndUpdatePurchase(String orderNo,
+	public ModelAndView insertAndUpdatePurchase(int totalPrice,
+												int memberNo,
+												int usePoint,
+												String orderNo,
 												ModelAndView mv) {
+	
+		System.out.println(orderNo);
+		System.out.println(totalPrice);
+		System.out.println(memberNo);
+		System.out.println(usePoint);
+		
+		//----------Order Bridge------------------------
 		
 		String orderNoList = orderNo;
 		
@@ -426,10 +433,7 @@ public class ItemController {
 			
 		}
 		
-		System.out.println(list);
-		
-		
-		mv.setViewName("");
+		mv.setViewName("item/itemResult");
 		
 		return mv;
 	}

@@ -54,64 +54,72 @@
 
 	<div class="container">
 
-		<div class="basic-border">
 
-			<table class="table">
+			<div class="basic-border">
 
-				<thead>
-					<tr>
-						<th>이미지</th>
-						<th>제품 이름</th>
-						<th class="price">제품 가격</th>
-						<th class="price">적립금</th>
-						<th class="price">합계</th>
-					</tr>
-				</thead>
+				<table class="table">
 
-				<tbody>
+					<thead>
+						<tr>
+							<th>이미지</th>
+							<th>제품 이름</th>
+							<th class="price">제품 가격</th>
+							<th class="price">적립금</th>
+							<th class="price">합계</th>
+						</tr>
+					</thead>
 
-					<c:set var="total" value="0" />
+					<tbody>
 
-					<c:forEach items="${ orderList }" var="order">
+						<c:set var="total" value="0" />
+						<c:set var="add" value="0" />
 
-						<c:set var="total" value="${total + order.price}"/>
+						<c:forEach items="${ orderList }" var="order">
 
-						<tr class="orderList">
-							<td><img src="${ order.imgPath }/${ order.imgName }" alt=""/></td>
-							<td>${ order.itemName }</td>
-							<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
-							<td class="price"><fmt:formatNumber value="${ order.price * 0.01 }" type="number" />원</td>
-							<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
+							<c:set var="total" value="${total + order.price}" />
+							<c:set var="addPoint" value="${ add + order.price * 0.01 }" />
+
+							<tr class="orderList">
+								<td><img src="${ order.imgPath }/${ order.imgName }" alt=""/></td>
+								<td>${ order.itemName }</td>
+								<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
+								<td class="price"><fmt:formatNumber value="${ order.price * 0.01 }" type="number" />원</td>
+								<td class="price"><fmt:formatNumber value="${ order.price }" type="number" />원</td>
+							</tr>
+
+						</c:forEach>
+
+						<tr>
+							<td class="price" colspan="5"> 
+								Total Point = <fmt:formatNumber value="${ addPoint }" type="number" /> Point <br>
+								Total Price = <fmt:formatNumber value="${ total }" type="number" /> 원 
+							</td>
+
 						</tr>
 
-					</c:forEach>
+					</tbody>
 
-					<tr>
-						<td class="price" colspan="5"> Total Price = ${total} 원 </td>
-					</tr>
-
-				</tbody>
-
-			</table>
+				</table>
+				
+			</div>
 			
-		</div>
-		
 		<form action="item.result" method="post">
 
 			<div id="payment" class="basic-border">
-				
 				<button class="btn btn-success">네이버페이</button>
 				<button class="btn btn-warning">카카오페이</button>
-				<button class="btn btn-primary normalPay">
+				<button class="btn btn-primary normalPay"> 결제하기 
 					<c:forEach items="${ orderList }" var="order">
 						<input type="hidden" name="orderNo" value="${ order.orderNo }" />
 					</c:forEach>
-					결제하기
+	
+					<input type="hidden" name="addPoint" value="${ addPoint }" />
+					<input type="hidden" name="totalPrice" value="${ total }" />
 				</button>
-				
 			</div>
 
 		</form>
+		
     </div>
 
 </body>
