@@ -31,5 +31,14 @@
 			com.kh.goty.item.model.dao,
 			com.kh.goty.board.model.dao" />		
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/member/mypage" />
+			<mapping path="/member/updateForm/*" />
+			<mapping path="/freeboards/insertsForm"/>
+			<mapping path="/freeboards/update/*"/>
+			<beans:bean class="com.kh.goty.common.interceptor.LoginInterceptor" id="LoginInterceptor" />
+		</interceptor>
+	</interceptors>
 	
 </beans:beans>

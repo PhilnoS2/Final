@@ -71,51 +71,56 @@ public class MemberController {
 							  ModelAndView mv,
 							  HttpServletRequest req,
 							  HttpServletResponse res) {
-		Member loginMember = memberService.login(member);
+		try {
+			Member loginMember = memberService.login(member);
+			
+			// 임시코드발급상태확인
+			if(loginMember != null 
+			   && loginMember.getEmptyCodeYn().equals("Y")
+			   && loginMember.getMemberPwd().equals(member.getMemberPwd())) {
+				mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
+				return mv;
+			}
 		
-		// 임시코드발급상태확인
-		if(loginMember != null 
-		   && loginMember.getEmptyCodeYn().equals("Y")
-		   && loginMember.getMemberPwd().equals(member.getMemberPwd())) {
-			mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
-			return mv;
-		}
-	
-		if(loginMember != null 
-				&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
-			session.setAttribute("loginMember", loginMember);
-			session.setAttribute("alertMsg", "로그인 성공");
-			
-			String uri = "";
-					
-			// 쿠키에서 확인하기
-			Cookie[] cookies = req.getCookies();
-			if(cookies != null){
-		        for (Cookie c : cookies) {
-		        	String name = c.getName();   // 쿠키 이름 가져오기
-		        	String value = c.getValue(); // 쿠키 값 가져오기
-					
-		            if (name.equals("reqUri")) {
-		            	uri = value;
-		            }
-		        }
-		    }
-			
-			Cookie cookie = new Cookie("reqUri", "");
-			cookie.setMaxAge(0);
-			cookie.setPath("/");
-			res.addCookie(cookie); 
-			
-			if(!uri.equals("")) {
-				mv.setViewName("redirect:/"+uri);
+			if(loginMember != null 
+					&& bcryptPasswordEncoder.matches(member.getMemberPwd(), loginMember.getMemberPwd())) {
+				
+				session.setAttribute("loginMember", loginMember);
+				session.setAttribute("alertMsg", "로그인 성공");
+				String uri = "";
+						
+				// 쿠키에서 확인하기
+				Cookie[] cookies = req.getCookies();
+				if(cookies != null){
+			        for (Cookie c : cookies) {
+			        	String name = c.getName();   // 쿠키 이름 가져오기
+			        	String value = c.getValue(); // 쿠키 값 가져오기
+						
+			            if (name.equals("reqUri")) {
+			            	uri = value;
+			            }
+			        }
+			    }
+				
+				Cookie cookie = new Cookie("reqUri", "");
+				cookie.setMaxAge(0);
+				cookie.setPath("/");
+				res.addCookie(cookie); 
+				
+				if(!uri.equals("")) {
+					mv.setViewName("redirect:/"+uri);
+				} else {
+					mv.setViewName("redirect:/");
+				}
+				
 			} else {
-				mv.setViewName("redirect:/");
+				mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
 			}
 			
-		} else {
-			mv.addObject("errorMsg", "로그인 실패했습니다.").setViewName("common/errorPage");
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
 		}
-	
 		return mv;
 	}
 	
@@ -140,13 +145,19 @@ public class MemberController {
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
 		member.setStatus("GT");
-		if(memberService.insertMember(member) > 0) {
-			session.setAttribute("alertMsg", "회원가입 성공");
-			mv.setViewName("redirect:/");
-		} else {
-			mv.addObject("errorMsg", "회원가입 실패")
-			  .setViewName("common/errorPage");
-		}		
+		try {
+			if(memberService.insertMember(member) > 0) {
+				session.setAttribute("alertMsg", "회원가입 성공");
+				mv.setViewName("redirect:/");
+			} else {
+				mv.addObject("errorMsg", "회원가입 실패")
+				  .setViewName("common/errorPage");
+			}		
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
+		}
+		
 		return mv;
 	}
 	
@@ -173,15 +184,22 @@ public class MemberController {
 	
 	@PostMapping("/findId")
 	public ModelAndView findId(Member member, ModelAndView mv, HttpSession session) {
-		String findId = memberService.findId(member);
-		
-		if( findId != null) {
-			session.setAttribute("findId", findId);
-			mv.setViewName("member/loginForm");
+		try {
+			String findId = memberService.findId(member);
 			
-		} else {
-			mv.addObject("errorMsg", "아이디 찾기 실패했습니다.").setViewName("common/errorPage");
+			if(findId != null) {
+				session.setAttribute("findId", findId);
+				mv.setViewName("member/loginForm");
+				
+			} else {
+				mv.addObject("errorMsg", "아이디 찾기 실패했습니다.").setViewName("common/errorPage");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
 		}
+		
 		return mv;
 	}
 	
@@ -233,11 +251,11 @@ public class MemberController {
 				message.setText("임시 비밀번호 : "+ sb);
 
 				String[] to = { member.getEmail() };
-				member.setMemberPwd(sb.toString());
+				message.setTo(to);
+				sender.send(message);
 				
+				member.setMemberPwd(sb.toString());
 				if(memberService.updatePwd(member) > 0) {
-					message.setTo(to);
-					sender.send(message);
 					session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
 				} else {
 					mv.addObject("errorMsg", "비밀번호 변경 실패").setViewName("common/errorPage");
@@ -262,14 +280,21 @@ public class MemberController {
 		
 		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
 		member.setMemberPwd(encPwd);
-		
-		if(memberService.changePwd(member) > 0) {
-			session.setAttribute("alertMsg", "비밀번호 변경이 완료되었습니다.");
-			mv.setViewName("redirect:login");			
-		} else {
-			mv.addObject("errorMsg", "비밀번호 변경이 실패했습니다.").setViewName("common/errorPage");
-    }
+		try{
+			
+			if(memberService.changePwd(member) > 0) {
+				session.setAttribute("alertMsg", "비밀번호 변경이 완료되었습니다.");
+				mv.setViewName("redirect:login");			
+			} else {
+				mv.addObject("errorMsg", "비밀번호 변경이 실패했습니다.").setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			 e.printStackTrace();
+			 mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
+			 return mv;
+		}
 		return mv;
+		
   }
 	
   @GetMapping("/mypage")
@@ -281,25 +306,37 @@ public class MemberController {
   @GetMapping("/updateForm/{memberNo}")
   public ModelAndView updateForm(@PathVariable("memberNo") int memberNo, 
 		  						 ModelAndView mv) {
-	  Member member = memberService.findUpdateMember(memberNo);
-	  
-	  if(member != null) {
-		  mv.addObject("member", member).setViewName("member/updateForm");
-	  } else {
-		  mv.addObject("errorMsg", "회원의 정보가 존재하지 않습니다.").setViewName("common/errorPage");
+	  Member member = null;
+	  try {
+		  member = memberService.findUpdateMember(memberNo);
+		  
+		  if(member != null) {
+			  mv.addObject("member", member).setViewName("member/updateForm");
+		  } else {
+			  mv.addObject("errorMsg", "회원의 정보가 존재하지 않습니다.").setViewName("common/errorPage");
+		  }
+		  
+	  } catch (Exception e) {
+		  e.printStackTrace();
+		  mv.addObject("errorMsg", "서버 오류, 관리자에게 문의하세요.").setViewName("common/errorPage");
 	  }
 	  return mv;
   }
  
   @PostMapping("/update")
   public ModelAndView updateMember(Member member, ModelAndView mv, HttpSession session) {
-	  if(memberService.updateMember(member) > 0) {
-		  session.setAttribute("alertMsg", "정보 수정이 성공했습니다.");
-		  session.removeAttribute("loginMember");
-		  mv.setViewName("redirect:member/login");
-	  } else {
-		  mv.addObject("errorMsg", "정보 수정에 실패했습니다.").setViewName("common/errorPage");
-	  }
+	  try {
+		  if(memberService.updateMember(member) > 0) {
+			  session.setAttribute("alertMsg", "정보 수정이 성공했습니다.");
+			  session.removeAttribute("loginMember");
+			  mv.setViewName("redirect:member/login");
+		  } else {
+			  mv.addObject("errorMsg", "정보 수정에 실패했습니다.").setViewName("common/errorPage");
+		  }
+	  }catch (Exception e) {
+		e.printStackTrace();
+		mv.addObject("errorMsg", "서버 오류, 관리자에게 문의하세요.").setViewName("common/errorPage");
+	  }  
 	  return mv;
   }
   
