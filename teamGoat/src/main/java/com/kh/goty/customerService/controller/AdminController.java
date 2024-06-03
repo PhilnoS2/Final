@@ -3,10 +3,13 @@ package com.kh.goty.customerService.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.goty.common.model.vo.PageInfo;
@@ -97,5 +100,26 @@ public class AdminController {
 		
 		return "redirect:/management/boards";
 	}
+	
+	@PostMapping(value="admin/member/delete")
+	public String deleteMember(@RequestParam("memberNo") List<Integer> memberNo, HttpSession session) {
+		
+		if(adminService.chekedMemberDelete(memberNo) > 0) {
+			session.setAttribute("alertMsg", "선택 회원 탈퇴 성공!");
+		} else {
+			session.setAttribute("alertMsg", "선택 회원 탈퇴 실패");
+		}
+		return "redirect:/admin";
+	}
+	
+	@PostMapping(value="admin/member/update/point")
+	public String updateMemberPoint (@RequestParam("memberNo") List<Integer> memberNo, HttpSession session) {
+		
+		adminService.checkedMemberPointUpdate();
+		
+		return "redirect:/admin";
+	}
+	
+	
 	
 }

@@ -2,7 +2,6 @@ package com.kh.goty.customerService.model.repository;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,5 +24,9 @@ public interface AdminRepository {
 
 	List<Member> findMember(HashMap<String, String> map);
 	
+	int chekedMemberDelete(List<Integer> memberNo);
+	
+	int checkedMemberPointUpdate(List<Integer> memberNo);
+
 
 }

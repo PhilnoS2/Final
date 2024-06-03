@@ -19,5 +19,9 @@ public interface AdminService {
 	int SearchMemberListCount(HashMap<String, String> map);
 
 	List<Member> findMember(HashMap<String, String> map);
+	
+	int chekedMemberDelete(List<Integer> memberNo);
+	
+	int checkedMemberPointUpdate(List<Integer> memberNo);
 
 }

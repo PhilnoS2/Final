@@ -1,6 +1,5 @@
 package com.kh.goty.customerService.model.service;
 
-import java.util.List;
 
 import org.springframework.stereotype.Service;
 
