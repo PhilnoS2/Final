@@ -215,7 +215,7 @@
             	
                 <c:choose>
                 	<c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
-                		<a  class="btn btn-info disabled">></a>
+                		<a  class="btn btn-warning disabled">></a>
                 	</c:when>
 					<c:otherwise>
            				<a  class="btn btn-warning" href="/goty/notices/find?date=${ date }&condition=${ condition }&keyword=${ keyword }&page=${ pageInfo.currentPage + 1 }">></a>

@@ -1,5 +1,6 @@
 package com.kh.goty.customerService.model.service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,5 +37,17 @@ public class AdminServiceImpl implements AdminService {
 	public int updateBoard(int questionNo) {
 		return adminRepository.updateBoard(questionNo);
 	}
+
+	@Override
+	public List<Member> findMember(HashMap<String, String> map) {
+		return adminRepository.findMember(map);
+	}
+
+	@Override
+	public int SearchMemberListCount(HashMap<String, String> map) {
+		return adminRepository.SearchMemberListCount(map);
+	}
+
+	
 
 }

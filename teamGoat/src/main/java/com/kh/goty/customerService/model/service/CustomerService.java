@@ -11,7 +11,6 @@ import com.kh.goty.customerService.model.vo.QuestionCategory;
 public interface CustomerService {
 
 	
-	//------------------------------------------------
-	
+
 	
 }

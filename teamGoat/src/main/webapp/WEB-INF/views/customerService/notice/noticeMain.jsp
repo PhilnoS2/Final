@@ -218,7 +218,7 @@
                 
                 <c:choose>
                 	<c:when test="${ pageInfo.currentPage eq pageInfo.endPage }">
-                		<a  class="btn btn-info disabled">></a>
+                		<a  class="btn btn-warning disabled">></a>
                 	</c:when>
 					<c:otherwise>
            				<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage + 1 }"><</a>
@@ -232,8 +232,7 @@
         	$(function(){
 	        		$('.noticeList').click(function(){
 	        			location.href = '/goty/notice?noticeNo=' + $(this).children().eq(0).html();
-						/*location.href = '/goty/notice?noticeNo='+$(this).children().eq(0).val();*/
-	        		})
+	        		});
         		
         	})
         </script>

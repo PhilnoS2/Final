@@ -309,4 +309,8 @@
 	
 	</select>
 	
+	<insert id="" parameterType="purchase">
+	 
+	</insert>
+	
 </mapper>

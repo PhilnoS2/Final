@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.vo.Item;
 import com.kh.goty.item.model.vo.Order;
+import com.kh.goty.item.model.vo.Purchase;
 
 public interface ItemService {
 	
@@ -34,6 +35,8 @@ public interface ItemService {
 	int addOrder(Order order);
 	
 	List<Order> findOrderList(int memberNo);
+	
+	int addPurchase(Purchase purchase);
 	
 	
 }

@@ -38,7 +38,7 @@
 	
 	<select id="selectMemberList" resultType="int">
 		SELECT
-			   COUNT(*)
+			   COUNT(MEMBER_NO)
 	      FROM
 	           MEMBER
 	     WHERE
@@ -70,5 +70,54 @@
          WHERE
                QUESTION_NO = #{questionNo}	
 	</update>
+	
+	<select id="SearchMemberListCount" parameterType="hashmap" resultType="_int">
+		SELECT
+		       COUNT(MEMBER_NO)
+		  FROM
+		       MEMBER
+		 WHERE
+	     <if test="condition == 'name'">
+	           MEMBER_NAME LIKE '%' || #{keyword} || '%'	
+         </if> 
+	     <if test="condition == 'nickname'">
+	           NICKNAME = #{keyword}
+	     </if>	       
+		 <if test="condtion == 'id'">
+		       MEMBER_ID = #{keyword}
+		 </if>      
+		 ORDER
+		    BY
+		       TOTAL_PRICE DESC		  
+	
+	</select>
+	
+	<select id="findMember" parameterType="hashmap" resultMap="memberResultSet">
+		SELECT
+		       MEMBER_NO,
+		       MEMBER_ID,
+		       NICKNAME,
+		       MEMBER_NAME,
+		       ENROLLDATE,
+		       MEM_LEVEL,
+		       TOTAL_PRICE,
+		       MEMBER_POINT
+		  FROM
+		       MEMBER
+		 WHERE
+		       DELETE_YN = 'N'    
+         <if test="condition == 'name'">
+	       AND MEMBER_NAME LIKE '%' || #{keyword} || '%'	
+         </if> 
+	     <if test="condition == 'nickname'">
+	       AND NICKNAME = #{keyword}
+	     </if>	       
+		 <if test="condtion == 'id'">
+		   AND MEMBER_ID = #{keyword}
+		 </if>      
+		 ORDER
+		    BY
+		       TOTAL_PRICE DESC		
+	</select>
 	
 </mapper>
