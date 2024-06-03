@@ -402,16 +402,19 @@ public class ItemController {
 	}
 	
 	@PostMapping("item.result")
-	public ModelAndView insertAndUpdatePurchase(int totalPrice,
-												int memberNo,
+	public ModelAndView insertAndUpdatePurchase(int memberNo,
 												int usePoint,
+												int addPoint,
+												int totalPrice,
 												String orderNo,
 												ModelAndView mv) {
-	
-		System.out.println(orderNo);
+		/*
+		*/
 		System.out.println(totalPrice);
-		System.out.println(memberNo);
+		System.out.println(addPoint);
 		System.out.println(usePoint);
+		System.out.println(memberNo);
+		System.out.println(orderNo);
 		
 		//----------Order Bridge------------------------
 		

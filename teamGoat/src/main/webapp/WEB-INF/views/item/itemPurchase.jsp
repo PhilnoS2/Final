@@ -51,9 +51,13 @@
 
     <jsp:include page="../common/menubar.jsp"/>
 
+						<c:set var="total" value="0" />
+						<c:set var="add" value="0" />
 
-	<div class="container">
-
+	<form action="item.result" method="post">
+	
+		
+		<div class="container">	
 
 			<div class="basic-border">
 
@@ -71,9 +75,6 @@
 
 					<tbody>
 
-						<c:set var="total" value="0" />
-						<c:set var="add" value="0" />
-
 						<c:forEach items="${ orderList }" var="order">
 
 							<c:set var="total" value="${total + order.price}" />
@@ -88,7 +89,7 @@
 							</tr>
 
 						</c:forEach>
-
+							
 						<tr>
 							<td class="price" colspan="5"> 
 								Total Point = <fmt:formatNumber value="${ addPoint }" type="number" /> Point <br>
@@ -103,24 +104,25 @@
 				
 			</div>
 			
-		<form action="item.result" method="post">
-
+			<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
+			<input type="hidden" name="usePoint" value="0"/>
+			<input type="hidden" name="addPoint" value="2500"/>
+			<input type="hidden" name="totalPrice" value="${ total }"/>
+			
+			<c:forEach items="${ orderList }" var="order">
+				<input type="hidden" name="orderNo" value="${ order.orderNo }" />
+			</c:forEach>
+			
 			<div id="payment" class="basic-border">
 				<button class="btn btn-success">네이버페이</button>
 				<button class="btn btn-warning">카카오페이</button>
-				<button class="btn btn-primary normalPay"> 결제하기 
-					<c:forEach items="${ orderList }" var="order">
-						<input type="hidden" name="orderNo" value="${ order.orderNo }" />
-					</c:forEach>
-	
-					<input type="hidden" name="addPoint" value="${ addPoint }" />
-					<input type="hidden" name="totalPrice" value="${ total }" />
-				</button>
+				<button type="submit" class="btn btn-primary normalPay"> 결제하기  </button>
 			</div>
 
-		</form>
 		
-    </div>
+    	</div>
+    	
+	</form>
 
 </body>
 </html>
