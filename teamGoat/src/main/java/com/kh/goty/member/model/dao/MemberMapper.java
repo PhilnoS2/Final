@@ -32,6 +32,8 @@ public interface MemberMapper {
 	public int updateMember(Member member);
 
 	public int deleteMember(int memberNo);
+
+	public int deleteSocialMember(int memberNo);
 	
 	
 }

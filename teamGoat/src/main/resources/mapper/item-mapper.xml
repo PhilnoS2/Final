@@ -43,6 +43,18 @@
 	
 	</resultMap>
 	
+	<resultMap id="purchaseResultSet" type="purchase">
+
+		<result column="PURCHASE_NO" 	property="purchaseNo" />
+		<result column="MEMBER_NO" 		property="memberNo" />
+		<result column="TOTAL_PRICE" 	property="totalPrice" />
+		<result column="USE_POINT" 		property="usePoint" />
+		<result column="ADD_POINT" 		property="addPoint" />
+		<result column="REFUND" 		property="refund" />
+		<result column="PURCHASE_DATE" 	property="purchaseDate" />
+	
+	</resultMap>
+	
 	<sql id="commonSql">
 	
 		SELECT 
@@ -309,8 +321,52 @@
 	
 	</select>
 	
-	<insert id="" parameterType="purchase">
+	<insert id="addPurchase" parameterType="purchase">
+	 	
+	 	INSERT
+		  INTO
+		        PURCHASE
+		VALUES
+		        (
+		        SEQ_PURCHASE.NEXTVAL,
+		        #{memberNo},
+		       	#{totalPrice},
+		        #{usePoint},
+		        #{addPoint},
+		        DEFAULT,
+		        SYSDATE
+		        )
 	 
 	</insert>
+
+	<insert id="addOrderPurchaseBridge" parameterType="hashmap">
 	
+		INSERT ALL
+			<foreach collection="list" item="item">
+				INTO 	ORDER_PURCHASE_BRIDGE	
+				VALUES
+				(
+				#{item.orderNo},
+				#{item.purchaseNo}
+				)
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<select id="findPurchase" parameterType="_int" resultMap="purchaseResultSet">
+	
+		SELECT
+				PURCHASE_NO,
+				MEMBER_NO,
+				TOTAL_PRICE,
+				USE_POINT,
+				ADD_POINT,
+				REFUND,
+				PURCHASE_DATE
+		  FROM
+		  		PURCHASE
+		 WHERE
+		 		MEMBER_NO = #{memberNo}
+		 		
+	</select>
 </mapper>
