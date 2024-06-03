@@ -2,7 +2,6 @@ package com.kh.goty.customerService.model.service;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -47,7 +46,17 @@ public class AdminServiceImpl implements AdminService {
 	public int SearchMemberListCount(HashMap<String, String> map) {
 		return adminRepository.SearchMemberListCount(map);
 	}
-
 	
+	
+	@Override
+	public int chekedMemberDelete(List<Integer> memberNo) {
+		return adminRepository.chekedMemberDelete(memberNo);
+	}
+
+	@Override
+	public int checkedMemberPointUpdate(List<Integer> memberNo) {
+		return adminRepository.checkedMemberPointUpdate(memberNo);
+	}
+
 
 }

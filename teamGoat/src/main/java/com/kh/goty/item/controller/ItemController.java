@@ -491,7 +491,10 @@ public class ItemController {
 	}
 	
 	@PostMapping("item.update")
-	public ModelAndView updateOrderAndPurchase(ModelAndView mv) {
+	public ModelAndView updateOrderAndPurchase(int memberNo,
+											   List<Integer> orderNo,
+											   int purchaseNo,
+											   ModelAndView mv) {
 		
 		
 		mv.setViewName("item/itemResult");

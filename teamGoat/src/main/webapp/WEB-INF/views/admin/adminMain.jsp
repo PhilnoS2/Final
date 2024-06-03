@@ -144,140 +144,52 @@
                     </thead>
 
                     <tbody id="search-area" align="center">
-                        
-                        <!--사용자가 문의한 내역이 존재하지 않을 경우-->
-                        <!-- <tr>
-                            <td colspan="9" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
-                        </tr> -->
-
-                        <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
-                        
-                        <c:forEach items="${ memberList }" var="member">
-                        	<tr style="height : 40px;">
-	                            <td><input type="checkbox"></td>
-	                            <td>${ member.memberNo }</td>
-	                            <td>${ member.enrollDate }</td>
-	                            <td>${ member.memberName }</td>
-	                            <td>${ member.memberId }</td>
-	                            <td>${ member.memLevel }</td>
-	                            <td>${ member.totalPrice }</td>
-	                            <td>${ member.memberPoint }</td>
-	                        </tr>
-                        </c:forEach>
-               
-                        
-                        <!-- 
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>GOLD</td>
-                            <td>100,100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        <tr style="height : 40px;">
-                            <td><input type="checkbox"></td>
-                            <td>1</td>
-                            <td>2024-03-10</td>
-                            <td>최진영</td>
-                            <td>cjy1234</td>
-                            <td>gold</td>
-                            <td>100,000</td>
-                            <td>100</td>
-                        </tr>
-                        -->
+                        <c:choose>
+                        	<c:when test="${ empty memberList }">
+	                            <td colspan="9" align="center" style="height : 100px;"><b>등록된 회원이 존재하지 않습니다.</b></td>
+                        	</c:when>
+                        	<c:otherwise>
+	                        	<form id="update" action="" method="post">
+		                       	 	<c:forEach items="${ memberList }" var="member">
+			                        	<tr style="height : 40px;">
+			                            	<td><input class="check-option" type="checkbox" name="memberNo" value="${ member.memberNo }"></td>
+				                            <td>${ member.memberNo }</td>
+				                            <td>${ member.enrollDate }</td>
+				                            <td>${ member.memberName }</td>
+				                            <td>${ member.memberId }</td>
+				                            <td>${ member.memLevel }</td>
+				                            <td>${ member.totalPrice }</td>
+				                            <td>${ member.memberPoint }</td>
+				                        </tr>
+		                        	</c:forEach>
+                        		</form>
+                        	</c:otherwise>
+                        </c:choose>
                 </table>
-                
-
             </div>
+			<script>
+				$(function(){
+					$('#delete-btn').click(function(){
+						$('#update').attr('action', '/goty/admin/member/delete');
+						$('#update').submit();
+					});
+					
+					$('#point-btn').click(function(){
+						prompt('적립금을 입력해주세요');
+						/*
+						$('#update').attr('action', '/goty/admin/member/update/point');
+						$('#update').submit();
+						*/
+					})
+				})
+			</script>
+
+
 
             <!-- 관리자 기능 버튼 + 페이징 버튼 영역-->
             <div class="admin-button">
                 <div style="margin-left : 20px;">
-                    <button class="btn btn-sm btn-danger" style="margin-right : 15px;">선택 탈퇴</button><button class="btn btn-sm btn-success">선택 적립금 지급</button>
-
+                    <button id="delete-btn" class="btn btn-sm btn-danger" style="margin-right : 15px;">선택 탈퇴</button><button id="point-btn" class= "btn btn-sm btn-success">선택 적립금 지급</button>
                 </div>
                 <div align="center" style="border-bottom:1px solid black; padding-bottom:30px;">
                      <c:choose>
@@ -305,16 +217,13 @@
             </div>
         </div>
     </div>
-
     <script>
         $(function(){
             $('#select-all').on('click', function(){
-                $('#search-area input').attr('checked', true);
-            })
+              	$('.check-option').prop('checked', true);
+            });
         });
     </script>
-
-
 
 </body>
 </html>
