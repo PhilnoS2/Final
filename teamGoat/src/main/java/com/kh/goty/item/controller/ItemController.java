@@ -18,6 +18,7 @@ import com.kh.goty.common.template.Pagination;
 import com.kh.goty.item.model.service.ItemService;
 import com.kh.goty.item.model.vo.Item;
 import com.kh.goty.item.model.vo.Order;
+import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -408,13 +409,13 @@ public class ItemController {
 												int totalPrice,
 												String orderNo,
 												ModelAndView mv) {
-		/*
-		*/
-		System.out.println(totalPrice);
-		System.out.println(addPoint);
-		System.out.println(usePoint);
-		System.out.println(memberNo);
-		System.out.println(orderNo);
+		
+		Purchase purchase = new Purchase();
+		
+		purchase.setMemberNo(memberNo);
+		purchase.setUsePoint(usePoint);
+		purchase.setAddPoint(addPoint);
+		purchase.setTotalPrice(totalPrice);
 		
 		//----------Order Bridge------------------------
 		
