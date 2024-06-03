@@ -8,6 +8,7 @@ import org.apache.ibatis.session.RowBounds;
 
 import com.kh.goty.item.model.vo.Item;
 import com.kh.goty.item.model.vo.Order;
+import com.kh.goty.item.model.vo.Purchase;
 
 @Mapper
 public interface ItemMapper {
@@ -38,5 +39,6 @@ public interface ItemMapper {
 	
 	List<Order> findOrderList(int memberNo);
 	
+	int addPurchase(Purchase purchase);
 	
 }
