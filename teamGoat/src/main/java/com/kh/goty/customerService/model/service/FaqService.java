@@ -19,4 +19,5 @@ public interface FaqService {
 	// FAQ 카테고리별 리스트 조회
 	List<Faq> faqSearchList(int category);
 	
+	List<Faq> selectMainPageFaqList();
 }

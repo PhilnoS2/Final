@@ -1,5 +1,6 @@
 package com.kh.goty.customerService.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,21 @@ public class AdminController {
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("pageInfo", pageInfo);
 		return "admin/adminMain";
+	}
+	
+	@GetMapping("admin/member/find")
+	public String findMember(@RequestParam(value="page", defaultValue="1") int page, String condition, String keyword, Model model) {
+		
+		HashMap<String, String> map = new HashMap();
+		map.put("condition", condition);
+		map.put("keyword", keyword);
+	
+		PageInfo pageInfo = Pagination.getPageInfo(adminService.SearchMemberListCount(map), page, 10, 5);
+		
+		model.addAttribute("searchMemberList", adminService.findMember(map));
+		model.addAttribute("pageInfo", pageInfo);
+		
+		return "admin/searchMemberList";
 	}
 	
 	@GetMapping("management/boards")

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../common/menubar.jsp" />
 
 
@@ -287,7 +288,6 @@
 
 </head>
 <body>	
-	
     <div id="cs-wrap"> <!--전체를 감싸는 div-->
         <div id="cs-title"> <!-- 고객서비스 타이틀 영역-->
             <div id="cs-title-text">
@@ -306,18 +306,16 @@
 
                     </div>
                     <div id="notice-content2">
-                        <li><a>[공지]2025년 설 연휴 배송 안내</a></li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
+                    	<c:forEach items="${ noticeList }" var="notice">
+                    		<li><a href="/goty/notice?noticeNo=${notice.noticeNo }">[공지]${ notice.noticeTitle }</a></li>
+                    	</c:forEach>
                     </div>
                     <div id="notice-content3">
                         <div id="notice-content3-1">
 
                         </div>
                         <div id="notice-content3-2" align="right">
-                            <button type="button" class="btn btn-light">+더보기</button>
+                            <a type="button" class="btn btn-light" href="/goty/notices">+더보기</a>
                         </div>
                     </div>
                     
@@ -355,16 +353,14 @@
 
                     </div>
                     <div id="FAQ-content2">
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
-                        <li>[공지]2025년 설 연휴 배송 안내</li>
+                    	<c:forEach items="${ faqList }" var="faq">
+                    		<li><a href="/goty/faqs">Q.${ faq.faqQuestion }</a></li>
+                    	</c:forEach>
                     </div>
                     <div id="FAQ-content3">
                         <div id="FAQ-content3-1"></div>
                         <div id="FAQ-content3-2" align="right">
-                            <button type="button" class="btn btn-light">+더보기</button>
+                            <a type="button" class="btn btn-light" href="/goty/faqs">+더보기</a>
                         </div>
                     </div>
                 </div>

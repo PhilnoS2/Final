@@ -29,5 +29,7 @@ public interface MemberService {
 	public int updateMember(Member member);
 
 	public int deleteMember(int memberNo);
+
+	public int deleteSocialMember(int memberNo);
 	 
 }

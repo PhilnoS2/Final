@@ -74,7 +74,7 @@
 	
 	<select id="selectQuestionListCount" resultType="_int">
 		SELECT
-		       COUNT(*)
+		       COUNT(QUESTION_NO)
 		  FROM
 		       QUESTION  
 		 WHERE
@@ -100,7 +100,7 @@
 		       QUESTION.STATUS = 'Y'
 		 ORDER
 		    BY
-		       QUESTION_NO DESC   
+		       QUESTION.QUESTION_NO DESC   
 	</select>
 	
 	<select id="selectQuestion" resultMap="questionResultSet">
@@ -122,7 +122,7 @@
 		       QUESTION_NO = #{questionNo}
 		 ORDER
 		    BY
-		       QUESTION_NO DESC  
+		       QUESTION.QUESTION_NO DESC  
 	</select>
 	
 	<update id="updateQuestion" parameterType="question">
@@ -159,7 +159,7 @@
 	</select>	
 	<select id="searchQuestionListCount" parameterType="hashmap" resultType="_int">
 		SELECT
-			   COUNT(*)
+			   COUNT(QUESTION_NO)
 	      FROM
 	           QUESTION
 	      JOIN
@@ -200,7 +200,7 @@
 		 </if>
 		 ORDER
 		    BY
-		       CREATE_DATE DESC    
+		       QUESTION.CREATE_DATE DESC    
 	</select>
 	
 	<select id="searchQuestionList" parameterType="hashmap" resultMap="questionResultSet">
@@ -253,12 +253,12 @@
 		 </if>     
 		 ORDER
 		    BY
-		       QUESTION_NO DESC  
+		       QUESTION.QUESTION_NO DESC  
 	</select>
 	
 	<select id="selectCategoryListCount" parameterType="_int">
 		SELECT
-		       COUNT(*)
+		       COUNT(QUESTION_NO)
 		  FROM
 		       QUESTION
 		 WHERE
@@ -321,7 +321,7 @@
 		 </if>         
 		 ORDER
 		    BY
-		       CREATE_DATE DESC 	
+		       QUESTION.CREATE_DATE DESC 	
 	</select>
 	
 	<select id="selectQuestionAttach" parameterType="_int" resultMap="questionAttachResultSet">

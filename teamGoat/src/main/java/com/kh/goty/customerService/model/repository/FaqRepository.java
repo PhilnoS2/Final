@@ -18,5 +18,5 @@ public interface FaqRepository {
 	
 	List<QuestionCategory> selectCategoryList();
 
-	
+	List<Faq> selectMainPageFaqList();
 }

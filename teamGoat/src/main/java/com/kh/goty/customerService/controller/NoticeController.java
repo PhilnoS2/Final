@@ -28,8 +28,6 @@ public class NoticeController {
 	public String forwardNotices(@RequestParam(value="page", defaultValue="1") int page, Model model) {
 		PageInfo pageInfo = Pagination.getPageInfo(noticeService.selectNoticeListCount(), page, 5, 5);
 		
-		noticeService.selectNoticeListAll(pageInfo);
-		
 		model.addAttribute("noticeList", noticeService.selectNoticeListAll(pageInfo));
 		model.addAttribute("pageInfo", pageInfo);
 		

@@ -228,7 +228,16 @@
   		 WHERE
   		      MEMBER_NO = #{memberNo} 	
   	</update>
-  
+  	
+  	<delete id="deleteSocialMember"
+  		parameterType="_int"
+  	>
+  	DELETE
+      FROM 	
+   	       MEMBER
+  	 WHERE
+  	       MEMBER_NO = #{memberNo}    
+  	</delete>
   
   
   

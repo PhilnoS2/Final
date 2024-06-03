@@ -152,7 +152,7 @@
 
                         <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
                         
-                        <c:forEach items="${ memberList }" var="member">
+                        <c:forEach items="${ searchMemberList }" var="member">
                         	<tr style="height : 40px;">
 	                            <td><input type="checkbox"></td>
 	                            <td>${ member.memberNo }</td>
