@@ -26,10 +26,35 @@
 	.cart-price{
 		text-align : right;
 	}
+
+	.basic-border{
+		border : 1px solid black;
+		margin : 20px; 
+		padding : 20px;
+	}
+
 </style>
 </head>
 
 <body>
     
+	<div class="container">
+
+		<div class="basic-border">
+
+		</div>
+
+		<div class="basic-border">
+
+
+		</div>
+
+	</div>
+
+	<script>
+
+
+	</script>
+
 </body>
 </html>

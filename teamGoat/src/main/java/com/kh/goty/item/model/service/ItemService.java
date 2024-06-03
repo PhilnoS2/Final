@@ -2,6 +2,7 @@ package com.kh.goty.item.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.vo.Item;
@@ -36,7 +37,10 @@ public interface ItemService {
 	
 	List<Order> findOrderList(int memberNo);
 	
-	int addPurchase(Purchase purchase);
+	int addPurchase(Purchase purchaseInt);
 	
+	int addOrderPurchaseBridge(List<Map<String, Object>> mapList);
+	
+	Purchase findPurchase(int memberNo);
 	
 }

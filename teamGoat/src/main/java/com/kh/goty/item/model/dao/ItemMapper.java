@@ -2,6 +2,7 @@ package com.kh.goty.item.model.dao;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.RowBounds;
@@ -40,5 +41,10 @@ public interface ItemMapper {
 	List<Order> findOrderList(int memberNo);
 	
 	int addPurchase(Purchase purchase);
+
+	int addOrderPurchaseBridge(List<Map<String, Object>> mapList);
+
+	Purchase findPurchase(int memberNo);
+
 	
 }

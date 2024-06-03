@@ -76,9 +76,10 @@
 					<tbody>
 
 						<c:forEach items="${ orderList }" var="order">
-
-							<c:set var="total" value="${total + order.price}" />
-							<c:set var="addPoint" value="${ add + (order.price * 0.01) }" />
+							
+							<c:set var="total" value="${ total + order.price }" />
+							<c:set var="point" value="${ order.price * 0.01 }" />
+							<c:set var="add" value="${ add + point }" />
 
 							<tr class="orderList">
 								<td><img src="${ order.imgPath }/${ order.imgName }" alt=""/></td>
@@ -92,7 +93,7 @@
 							
 						<tr>
 							<td class="price" colspan="5"> 
-								Total Point = <fmt:formatNumber value="${ addPoint }" type="number" /> Point <br>
+								Total Point = <fmt:formatNumber value="${ add }" type="number" /> Point <br>
 								Total Price = <fmt:formatNumber value="${ total }" type="number" /> 원 
 							</td>
 
@@ -104,9 +105,11 @@
 				
 			</div>
 			
+			${ add }
+			
 			<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
 			<input type="hidden" name="usePoint" value="0"/>
-			<input type="hidden" name="addPoint" value="${ addPoint }"/>
+			<input type="hidden" name="addPoint" value="${ add }"/>
 			<input type="hidden" name="totalPrice" value="${ total }"/>
 			
 			<c:forEach items="${ orderList }" var="order">
