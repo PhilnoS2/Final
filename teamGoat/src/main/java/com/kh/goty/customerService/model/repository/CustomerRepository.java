@@ -10,5 +10,4 @@ import com.kh.goty.customerService.model.vo.Faq;
 
 public interface CustomerRepository {
 	
-	
 }

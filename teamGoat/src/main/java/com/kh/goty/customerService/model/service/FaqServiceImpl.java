@@ -35,5 +35,10 @@ public class FaqServiceImpl implements FaqService {
 	public List<QuestionCategory> selectCategoryList() {
 		return faqRepository.selectCategoryList();
 	}
+
+	@Override
+	public List<Faq> selectMainPageFaqList() {
+		return faqRepository.selectMainPageFaqList();
+	}
 	
 }

@@ -177,7 +177,7 @@
 	                    	</c:when>
 	                    	<c:otherwise>
 									<a id="previous" href="/goty/notice?noticeNo=${preNotice.noticeNo }" class="btn btn-sm btn-warning">▲이전글</a> 
-		                     		<a href="/goty/notice?noticeNo=${preNotice.noticeNo }">${ preNotice.noticeTitle }</a>
+		                     		<a href="/goty/notice?noticeNo=${preNotice.noticeNo }">[공지] ${ preNotice.noticeTitle }</a>
 	                    	</c:otherwise>
 	                    </c:choose>
                     </div>
@@ -188,7 +188,7 @@
                     		</c:when>
                     		<c:otherwise>
 								<a id="next" href="/goty/notice?noticeNo=${ nextNotice.noticeNo }" class="btn btn-sm btn-danger">▼다음글</a>	
-		                        <a href="/goty/notice?noticeNo=${ nextNotice.noticeNo }">${ nextNotice.noticeTitle }</a>
+		                        <a href="/goty/notice?noticeNo=${ nextNotice.noticeNo }">[공지] ${ nextNotice.noticeTitle }</a>
                     		</c:otherwise>
                     	</c:choose>
                     

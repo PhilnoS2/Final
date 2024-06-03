@@ -18,6 +18,32 @@
 		<result column="FAQ_ANSWER" property="faqAnswer"/>
 		<result column="CREATE_DATE" property="createDate"/>
 	</resultMap>
+	
+	
+	<select id="selectMainPageFaqList" resultMap="faqResultSet">
+		SELECT            
+		      FAQ_NO,
+		      MEMBER_NO,
+		      CATEGORY_NO,
+		      FAQ_QUESTION,
+		      FAQ_ANSWER,
+		      CREATE_DATE
+          FROM 
+		        (SELECT
+				       FAQ_NO,
+				       MEMBER_NO,
+				       CATEGORY_NO,
+				       FAQ_QUESTION,
+				       FAQ_ANSWER,
+				       TO_CHAR(CREATE_DATE, 'YYYY-MM-DD') as "CREATE_DATE"
+				  FROM
+				       FAQ
+				 ORDER
+				    BY
+				       FAQ.CREATE_DATE DESC)
+          WHERE ROWNUM BETWEEN 1 AND 5
+	</select>
+	
 
 	<select id="selectCategoryList" resultMap="categoryResultSet">
 		SELECT
@@ -60,7 +86,7 @@
 		       FAQ
 		 ORDER
 		    BY
-		       CREATE_DATE DESC 		       
+		       FAQ.CREATE_DATE DESC 		       
 	</select>
 	
 	<select id="faqSearchList" parameterType="_int" resultMap="faqResultSet">
@@ -93,7 +119,7 @@
 		 </if>         
 		 ORDER
 		    BY
-		       CREATE_DATE DESC 		       
+		       FAQ.CREATE_DATE DESC 	
 	</select>
 	
 	

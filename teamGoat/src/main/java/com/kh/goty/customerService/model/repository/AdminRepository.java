@@ -1,5 +1,6 @@
 package com.kh.goty.customerService.model.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,4 +21,9 @@ public interface AdminRepository {
 	
 	int updateBoard(int questionNo);
 	
+	int SearchMemberListCount(HashMap<String, String> map);
+
+	List<Member> findMember(HashMap<String, String> map);
+	
+
 }
