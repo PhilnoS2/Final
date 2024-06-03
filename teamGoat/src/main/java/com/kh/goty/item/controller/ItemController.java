@@ -1,9 +1,9 @@
 package com.kh.goty.item.controller;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpSession;
@@ -22,7 +22,6 @@ import com.kh.goty.item.model.vo.Order;
 import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -412,12 +411,18 @@ public class ItemController {
 									String orderNo,
 									ModelAndView mv) {
 
-		Purchase purchase = new Purchase();
+		Purchase purchaseInt = new Purchase();
 		
-		purchase.setMemberNo(memberNo);
-		purchase.setUsePoint(usePoint);
-		purchase.setAddPoint((int)Math.ceil(addPoint));
-		purchase.setTotalPrice(totalPrice);
+		purchaseInt.setMemberNo(memberNo);
+		purchaseInt.setUsePoint(usePoint);
+		purchaseInt.setAddPoint((int)Math.ceil(addPoint));
+		purchaseInt.setTotalPrice(totalPrice);
+		
+		// Purchase Insert용
+		int insertResult = itemService.addPurchase(purchaseInt);
+		
+		// Purchase Select용
+		Purchase purchase = itemService.findPurchase(memberNo);
 		
 		//----------Order Bridge------------------------
 		
@@ -436,16 +441,38 @@ public class ItemController {
 			dataArr[i] = Integer.parseInt(st.nextToken());
 			list.add(dataArr[i]);
 			i++;
-			
 		}
 		
-		if(itemService.addPurchase(purchase)> 0) {
+		if(insertResult > 0) {
 			
-			Purchase pc = itemService.findPurchase(memberNo);
-			int purchaseNo = pc.getMemberNo();
-			mv.setViewName("redirect:item.addOrderBridge?purchaseNo="+ purchaseNo + "&orderNo=" + list);
+			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 			
-			return mv;
+			for(int j = 0; list.size() > j; j++) {
+				
+				Map<String, Object> map = new HashMap<String, Object>();	
+				map.put("purchaseNo", purchase.getPurchaseNo());
+				map.put("orderNo", list.get(j));
+				mapList.add(map);
+				
+			}
+			
+			int bridgeResult = itemService.addOrderPurchaseBridge(mapList);
+			
+			if(bridgeResult > 0) {
+				
+				mv.setViewName("item/itemResult");
+				
+				return mv;
+				
+			} else {
+				
+				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
+				mv.setViewName("common/errorPage");
+				
+				return mv;
+				
+			}
+			
 			
 		} else {
 			
@@ -457,14 +484,4 @@ public class ItemController {
 		
 	}
 	
-	@PostMapping("item.addOrderBridge")
-	public ModelAndView addOrderBridge(int purchaseNo,
-									   int[] list,
-									   ModelAndView mv) {
-		
-		mv.setViewName("item/itemResult");
-		
-		return mv;
-		
-	}
 }

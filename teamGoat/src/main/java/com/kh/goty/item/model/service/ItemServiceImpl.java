@@ -2,6 +2,7 @@ package com.kh.goty.item.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.stereotype.Service;
@@ -109,9 +110,16 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
+	public int addOrderPurchaseBridge(List<Map<String, Object>> mapList) {
+		return itemMapper.addOrderPurchaseBridge(mapList);
+	}
+
+	@Override
 	public Purchase findPurchase(int memberNo) {
 		return itemMapper.findPurchase(memberNo);
 	}
+
+
 	
 	
 

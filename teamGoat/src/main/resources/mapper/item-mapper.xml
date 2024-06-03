@@ -338,9 +338,34 @@
 		        )
 	 
 	</insert>
+
+	<insert id="addOrderPurchaseBridge" parameterType="hashmap">
 	
-	<select id="findPurchase" parameterType="_int" resultMap="purchaseResultMap">
+		INSERT ALL
+			<foreach collection="list" item="item">
+				INTO 	ORDER_PURCHASE_BRIDGE	
+				VALUES
+				(
+				#{item.orderNo},
+				#{item.purchaseNo}
+				)
+			</foreach>
+		SELECT * FROM DUAL
+	</insert>
 	
+	<select id="findPurchase" parameterType="_int" resultMap="purchaseResultSet">
+	
+		SELECT
+				PURCHASE_NO,
+				MEMBER_NO,
+				TOTAL_PRICE,
+				USE_POINT,
+				ADD_POINT,
+				REFUND,
+				PURCHASE_DATE
+		  FROM
+		  		PURCHASE
+		 WHERE
+		 		MEMBER_NO = #{memberNo}
 	</select>
-	
 </mapper>
