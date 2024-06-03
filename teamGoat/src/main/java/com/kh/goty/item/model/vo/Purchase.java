@@ -15,7 +15,6 @@ public class Purchase {
 
 	private int purchaseNo;
 	private int memberNo;
-	private int orderNo;
 	private int totalPrice;
 	private int usePoint;
 	private int addPoint;

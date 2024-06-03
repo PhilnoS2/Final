@@ -417,6 +417,8 @@ public class ItemController {
 		purchase.setAddPoint(addPoint);
 		purchase.setTotalPrice(totalPrice);
 		
+		System.out.println(itemService.addPurchase(purchase));
+		
 		//----------Order Bridge------------------------
 		
 		String orderNoList = orderNo;

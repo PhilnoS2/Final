@@ -11,6 +11,7 @@ import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.item.model.dao.ItemMapper;
 import com.kh.goty.item.model.vo.Item;
 import com.kh.goty.item.model.vo.Order;
+import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
 
@@ -100,6 +101,11 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public List<Order> findOrderList(int memberNo) {
 		return itemMapper.findOrderList(memberNo);
+	}
+
+	@Override
+	public int addPurchase(Purchase purchase) {
+		return itemMapper.addPurchase(purchase);
 	}
 	
 	

@@ -78,7 +78,7 @@
 						<c:forEach items="${ orderList }" var="order">
 
 							<c:set var="total" value="${total + order.price}" />
-							<c:set var="addPoint" value="${ add + order.price * 0.01 }" />
+							<c:set var="addPoint" value="${ add + (order.price * 0.01) }" />
 
 							<tr class="orderList">
 								<td><img src="${ order.imgPath }/${ order.imgName }" alt=""/></td>
@@ -106,7 +106,7 @@
 			
 			<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
 			<input type="hidden" name="usePoint" value="0"/>
-			<input type="hidden" name="addPoint" value="2500"/>
+			<input type="hidden" name="addPoint" value="${ addPoint }"/>
 			<input type="hidden" name="totalPrice" value="${ total }"/>
 			
 			<c:forEach items="${ orderList }" var="order">
