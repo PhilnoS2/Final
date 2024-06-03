@@ -160,15 +160,15 @@
 	
 	      <div class="modal-body">
 	        <p class="d-inline ">정말 <p class="d-inline text-danger font-italic">탈퇴</p> 하시겠습니까?</p>
-	        <c:choose>
-	        	<c:when test="${ sessionScope.loginMember.status == 'KM' 
-	        	              or sessionScope.loginMember.status == 'NM'}">
-	        	    <button type="button" class="btn btn-danger" >탈퇴</button>          
-	        	</c:when>
-	        	<c:otherwise>
-	        		<button type="button" id="signoutMemberBtn" class="btn btn-danger" >탈퇴</button>
-	        	</c:otherwise>
-	        </c:choose>
+	        
+        	<c:if test="${ sessionScope.loginMember.status == 'KM' 
+        	              or sessionScope.loginMember.status == 'NM'}">
+        	    <button type="button" id="signoutSocialMember" class="btn btn-danger" >탈퇴</button>          
+        	</c:if>
+        	<c:if test="${ sessionScope.loginMember.status == 'GT' }">
+        		<button type="button" id="signoutMemberBtn" class="btn btn-danger" >탈퇴</button>
+        	</c:if>
+	        
 	      </div>
 	
 	      <div class="modal-footer">
@@ -190,13 +190,32 @@
 				type: 'patch',
 				success: (result) => {
 					if(result.responseCode == '299'){
-						alert('탈퇴 완료!');
+						alert(result.message);
 						location.href = "/goty/member/logout";
 					}
 				},
 				
 			});
 		});
+		
+		$('#signoutSocialMember').click(() => {
+			console.log('${sessionScope.loginMember.memberNo }');
+			
+			$.ajax({
+				url: '/goty/member/${sessionScope.loginMember.memberNo }',
+				type: 'delete',
+				success: (result) => {
+					if(result.responseCode == '299'){
+						alert(result.message);
+						location.href = "/goty/member/logout";
+					}
+				},
+				
+			});
+		});
+		
+		
+		
 	</script>
 	
 	

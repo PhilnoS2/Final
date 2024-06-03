@@ -1,9 +1,7 @@
 package com.kh.goty.member.controller;
 
 import java.math.BigInteger;
-import java.nio.charset.Charset;
 import java.security.SecureRandom;
-import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
@@ -14,13 +12,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.goty.board.model.vo.Reply;
 import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.common.template.RdTemplates;
 import com.kh.goty.member.model.service.MemberService;
@@ -353,19 +349,36 @@ public class MemberController {
 	  
 	  try {
 		  result = memberService.deleteMember(memberNo);
+		  rd = RdTemplates.getRd("회원 탈퇴 성공", "299", "회원 탈퇴 성공");
 	  }
 	  catch(Exception e) {
 		  // 서버쪽 오류
-		  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "600", "실수 실수");
+		  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "600", "서버 오류");
 	  }
 	  
-	  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "299", "성공 성공");
-
 	  return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	 
  }
 	
-	
+
+ @DeleteMapping("/{memberNo}")
+ public ResponseEntity<ResponseData> deleteSocialMember(@PathVariable("memberNo") int memberNo) {
+	 
+	  int result = 0;
+	  ResponseData rd = null;
+	  
+	  try {
+		  result = memberService.deleteSocialMember(memberNo);
+		  rd = RdTemplates.getRd("회원 탈퇴 성공", "299", "소셜 회원 탈퇴 성공");
+	  }
+	  catch(Exception e) {
+		  // 서버쪽 오류
+		  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "600", "서버 오류");
+	  }
+
+	  return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
+	 
+ }
 	
 	
 	

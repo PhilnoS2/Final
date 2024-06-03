@@ -44,5 +44,22 @@
 	</div>
 	
 	<script src="/goty/resources/member/Js/loginForm.js" ></script>
+	<script type="text/javascript">
+		$('#kakao-login-btn').click(() =>{
+			location.href= 'https://kauth.kakao.com/oauth/authorize'
+			+'?client_id=${kakao_client_id}'
+			+'&redirect_uri=http://localhost:8083/goty/kakaologin'
+			+'&response_type=code'
+			+'&scope=profile_image,profile_nickname';
+		});
+		
+		$('#naver-login-btn').click(() => {
+					  location.href = 'https://nid.naver.com/oauth2.0/authorize'
+		 			  + '?response_type=code'
+		 			  + '&client_id=${naver_client_id}'
+		 			  + '&state=${state}'
+		 			  + '&redirect_uri=http://localhost:8083/goty/naverlogin';
+		});
+	</script>
 </body>
 </html>
