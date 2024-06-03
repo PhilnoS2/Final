@@ -424,6 +424,8 @@ public class ItemController {
 		// Purchase Select용
 		Purchase purchase = itemService.findPurchase(memberNo);
 		
+		System.out.println(purchase);
+		
 		//----------Order Bridge------------------------
 		
 		String orderNoList = orderNo;
@@ -460,7 +462,11 @@ public class ItemController {
 			
 			if(bridgeResult > 0) {
 				
-				mv.setViewName("item/itemResult");
+				mv.addObject("purchaseNo", purchase.getPurchaseNo());
+				mv.addObject("memberNo", memberNo);
+				mv.addObject("orderNo", list);
+				
+				mv.setViewName("redirect:item.update");
 				
 				return mv;
 				
@@ -482,6 +488,15 @@ public class ItemController {
 			return mv;
 		}
 		
+	}
+	
+	@PostMapping("item.update")
+	public ModelAndView updateOrderAndPurchase(ModelAndView mv) {
+		
+		
+		mv.setViewName("item/itemResult");
+		
+		return mv;
 	}
 	
 }

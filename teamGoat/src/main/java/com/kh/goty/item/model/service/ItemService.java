@@ -37,7 +37,7 @@ public interface ItemService {
 	
 	List<Order> findOrderList(int memberNo);
 	
-	int addPurchase(Purchase purchase);
+	int addPurchase(Purchase purchaseInt);
 	
 	int addOrderPurchaseBridge(List<Map<String, Object>> mapList);
 	
