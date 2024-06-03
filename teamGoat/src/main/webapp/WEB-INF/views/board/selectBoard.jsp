@@ -71,10 +71,10 @@
 						<div id="review-area-div">
 							<textarea id="reviewArea" class="form-control mb-1" rows="3"
 						  	 placeholder="댓글을 입력해주세요."></textarea>
-						  </div>
-						  <div id="reveiw-btn-div">
-						 	<button class="btn btn-sm btn-dark " onclick="insertReply();">댓글등록</button>
-						 </div>
+						</div>
+						<div id="reveiw-btn-div">
+							<button class="btn btn-sm btn-dark " onclick="insertReply();">댓글등록</button>
+						</div>
 					</div>
 				</c:when>
 				
