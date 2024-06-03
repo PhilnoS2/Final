@@ -107,6 +107,11 @@ public class ItemServiceImpl implements ItemService{
 	public int addPurchase(Purchase purchase) {
 		return itemMapper.addPurchase(purchase);
 	}
+
+	@Override
+	public Purchase findPurchase(int memberNo) {
+		return itemMapper.findPurchase(memberNo);
+	}
 	
 	
 

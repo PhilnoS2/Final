@@ -1,5 +1,6 @@
 package com.kh.goty.item.controller;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +22,7 @@ import com.kh.goty.item.model.vo.Order;
 import com.kh.goty.item.model.vo.Purchase;
 
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -403,21 +405,19 @@ public class ItemController {
 	}
 	
 	@PostMapping("item.result")
-	public ModelAndView insertAndUpdatePurchase(int memberNo,
-												int usePoint,
-												int addPoint,
-												int totalPrice,
-												String orderNo,
-												ModelAndView mv) {
-		
+	public ModelAndView addPurchase(int memberNo,
+									int usePoint,
+									double addPoint,
+									int totalPrice,
+									String orderNo,
+									ModelAndView mv) {
+
 		Purchase purchase = new Purchase();
 		
 		purchase.setMemberNo(memberNo);
 		purchase.setUsePoint(usePoint);
-		purchase.setAddPoint(addPoint);
+		purchase.setAddPoint((int)Math.ceil(addPoint));
 		purchase.setTotalPrice(totalPrice);
-		
-		System.out.println(itemService.addPurchase(purchase));
 		
 		//----------Order Bridge------------------------
 		
@@ -439,9 +439,32 @@ public class ItemController {
 			
 		}
 		
+		if(itemService.addPurchase(purchase)> 0) {
+			
+			Purchase pc = itemService.findPurchase(memberNo);
+			int purchaseNo = pc.getMemberNo();
+			mv.setViewName("redirect:item.addOrderBridge?purchaseNo="+ purchaseNo + "&orderNo=" + list);
+			
+			return mv;
+			
+		} else {
+			
+			mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
+			mv.setViewName("common/errorPage");
+			
+			return mv;
+		}
+		
+	}
+	
+	@PostMapping("item.addOrderBridge")
+	public ModelAndView addOrderBridge(int purchaseNo,
+									   int[] list,
+									   ModelAndView mv) {
+		
 		mv.setViewName("item/itemResult");
 		
 		return mv;
+		
 	}
-	
 }

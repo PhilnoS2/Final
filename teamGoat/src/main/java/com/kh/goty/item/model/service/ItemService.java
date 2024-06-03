@@ -38,5 +38,7 @@ public interface ItemService {
 	
 	int addPurchase(Purchase purchase);
 	
+	Purchase findPurchase(int memberNo);
+	
 	
 }

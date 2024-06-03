@@ -41,4 +41,6 @@ public interface ItemMapper {
 	
 	int addPurchase(Purchase purchase);
 	
+	Purchase findPurchase(int memberNo);
+	
 }
