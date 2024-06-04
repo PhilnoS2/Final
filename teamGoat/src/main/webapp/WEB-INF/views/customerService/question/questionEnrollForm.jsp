@@ -165,9 +165,8 @@
 
         <div class="list-page">
             <div>
-                <button id="list-btn" class="back-btn" onclick="history.back();">목록</button>
+                <button class="back-btn" onclick="history.back();">목록</button>
             </div>
-
         </div>
 
         <div class="button-area">
@@ -175,13 +174,6 @@
         </div>
     </div>
     <script>
-        $(function(){
-            $('#list-btn').click(function(){
-                // 1:1문의 메인페이지로 이동
-                location.href = '';
-            })
-        })
-
         $(function(){
             $('#submit-btn').click(function(){
                 if(!confirm('게시글을 등록하시겠습니까?')){
@@ -197,8 +189,6 @@
                 }
             })
         })
-
-
     </script>
 
     
