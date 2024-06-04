@@ -42,10 +42,13 @@
 
 		<div class="basic-border">
 
+			${ update }
+
 		</div>
 
 		<div class="basic-border">
 
+			${ update }
 
 		</div>
 

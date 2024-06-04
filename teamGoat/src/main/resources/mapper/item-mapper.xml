@@ -275,7 +275,8 @@
 		        #{toEmail},
 		        #{address},
 		        #{detailAddress},
-		        #{message}
+		        #{message},
+		        DEFAULT
 		        )
 		        
 	</insert>
@@ -315,6 +316,8 @@
 		    ON (G.PLATFORM_NO = P.PLATFORM_NO)
 		 WHERE
 		        O.MEMBER_NO = #{memberNo}
+		   AND
+		   		O.STATUS = 'N'
 		 ORDER
 		 	BY
 		 		ORDER_NO DESC
@@ -333,8 +336,8 @@
 		       	#{totalPrice},
 		        #{usePoint},
 		        #{addPoint},
-		        DEFAULT,
-		        SYSDATE
+		        SYSDATE,
+		        DEFAULT
 		        )
 	 
 	</insert>
@@ -361,12 +364,42 @@
 				TOTAL_PRICE,
 				USE_POINT,
 				ADD_POINT,
-				REFUND,
 				PURCHASE_DATE
 		  FROM
 		  		PURCHASE
 		 WHERE
 		 		MEMBER_NO = #{memberNo}
+		   AND
+		   		STATUS = 'N'
 		 		
 	</select>
+	
+	<update id="updateOrder" parameterType="list"> 
+	
+		UPDATE
+				TB_ORDER
+		   SET
+		 		STATUS = 'Y'
+		 WHERE
+		 		ORDER_NO
+		 	IN
+		 		(
+		 		<foreach collection="list" item="orderNo">
+		 			#{orderNo}
+		 		</foreach>
+		 		)
+	
+	</update>
+	
+	<update id="updatePurchase" parameterType="_int">
+	
+		UPDATE
+				PURCHASE
+		   SET
+		 		STATUS = 'Y'
+		 WHERE
+		 		PURCHASE_NO = #{purchaseNo}
+		   AND
+		   		STATUS = 'N'
+	</update>
 </mapper>

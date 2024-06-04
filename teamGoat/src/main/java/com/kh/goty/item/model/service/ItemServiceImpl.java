@@ -76,10 +76,12 @@ public class ItemServiceImpl implements ItemService{
 
 	// Basket Insert
 	@Override
+	@Transactional
 	public int addItemInCart(HashMap<String, Integer> map) {
 		return itemMapper.addItemInCart(map);
 	}
 	@Override
+	@Transactional
 	public int deleteItemInCart(HashMap<String, Integer> map) {
 		return itemMapper.deleteItemInCart(map);
 	}
@@ -95,6 +97,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
+	@Transactional
 	public int addOrder(Order order) {
 		return itemMapper.addOrder(order);
 	}
@@ -105,11 +108,13 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
+	@Transactional
 	public int addPurchase(Purchase purchase) {
 		return itemMapper.addPurchase(purchase);
 	}
 
 	@Override
+	@Transactional
 	public int addOrderPurchaseBridge(List<Map<String, Object>> mapList) {
 		return itemMapper.addOrderPurchaseBridge(mapList);
 	}
@@ -117,6 +122,16 @@ public class ItemServiceImpl implements ItemService{
 	@Override
 	public Purchase findPurchase(int memberNo) {
 		return itemMapper.findPurchase(memberNo);
+	}
+
+	@Override
+	@Transactional
+	public int updatePurchaseAndOrder(int purchaseNo, List<Integer> list) {
+		
+		int result1 = itemMapper.updateOrder(list);
+		int result2 = itemMapper.updatePurchase(purchaseNo);
+		
+		return (result1 + result2) / 2;
 	}
 
 

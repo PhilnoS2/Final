@@ -43,4 +43,6 @@ public interface ItemService {
 	
 	Purchase findPurchase(int memberNo);
 	
+	int updatePurchaseAndOrder(int purchaseNo, List<Integer> list);
+	
 }
