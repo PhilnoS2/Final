@@ -46,10 +46,11 @@
 	<resultMap id="purchaseResultSet" type="purchase">
 
 		<result column="PURCHASE_NO" 	property="purchaseNo" />
-		<result column="MEMBER_NO" 		property="memberNo" />
-		<result column="TOTAL_PRICE" 	property="totalPrice" />
 		<result column="USE_POINT" 		property="usePoint" />
 		<result column="ADD_POINT" 		property="addPoint" />
+		<result column="TOTAL_PRICE" 	property="totalPrice" />
+		<result column="MEMBER_NO" 		property="memberNo" />
+		<result column="MEMBER_NAME" 	property="memberName" />
 		<result column="PURCHASE_DATE" 	property="purchaseDate" />
 		<result column="STATUS" 		property="status" />
 	
@@ -383,11 +384,9 @@
 		 WHERE
 		 		ORDER_NO
 		 	IN
-		 		(
-		 		<foreach collection="list" item="orderNo">
-		 			#{orderNo}
-		 		</foreach>
-		 		)
+	 		<foreach collection="list" item="orderNo" open="(" close=")" separator=",">
+	 			#{orderNo}
+	 		</foreach>
 	
 	</update>
 	
@@ -406,7 +405,17 @@
 	<select id="findPurchaseDetail" parameterType="_int" resultMap="purchaseResultSet">
 	
 		SELECT
+		        PURCHASE_NO,
+		        MEMBER_NAME,
+		        P.TOTAL_PRICE,
+		        PURCHASE_DATE
 		  FROM
+		        PURCHASE P
+		  JOIN
+		        MEMBER M
+		    ON  (P.MEMBER_NO = M.MEMBER_NO)
+		 WHERE
+		        PURCHASE_NO = #{purchaseNo}
 	
 	</select>
 	
