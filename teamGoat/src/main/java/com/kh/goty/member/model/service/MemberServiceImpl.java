@@ -1,6 +1,7 @@
 package com.kh.goty.member.model.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.goty.member.model.dao.MemberMapper;
 import com.kh.goty.member.model.vo.Member;
@@ -79,6 +80,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	@Transactional
 	public int deleteSocialMember(int memberNo) {
 		return memberMapper.deleteSocialMember(memberNo);
 	}

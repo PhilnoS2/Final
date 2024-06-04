@@ -270,10 +270,11 @@
 	}
 	
 	function report(reviewNo){
-		
-		if(!regReportCheck()) {
+		const classNameCheck = $('#report-input').attr('class');
+	
+		if(!classNameCheck.includes('invisible') && !regReportCheck()) {
 			return;
-		}
+		}	
 
 		const data = 
 		{	'reviewNo' : seletReplyNo,

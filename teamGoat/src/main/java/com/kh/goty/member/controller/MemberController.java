@@ -363,7 +363,6 @@ public class MemberController {
 
  @DeleteMapping("/{memberNo}")
  public ResponseEntity<ResponseData> deleteSocialMember(@PathVariable("memberNo") int memberNo) {
-	 
 	  int result = 0;
 	  ResponseData rd = null;
 	  

@@ -27,7 +27,7 @@
     	 // 에디터의 내용이 textarea에 적용된다.
     	 oEditors.getById["editorTxt0"].exec("UPDATE_CONTENTS_FIELD", []);
     	 const str = document.getElementById("editorTxt0").value;
-    	 const regReply = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{1,900}$/;
+    	 const regReply = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\s\S\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{1,900}$/;
     	  
     	 if(str.length < 0 || str.includes('<p>&nbsp;</p>') || str.includes('<p><br></p>')) {
     		 alert('올바른 입력이 아닙니다.' + str + str.length);

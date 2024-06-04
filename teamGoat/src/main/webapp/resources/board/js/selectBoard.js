@@ -1,10 +1,12 @@
 	 const regReply = /^[ㄱ-ㅎ가-힣a-zA-Z0-9?!@#$%^&*()\s]{1,200}$/;
 	 const $replyArea = $('#replyArea');
 	 
-	 const regReport = /^[ㄱ-ㅎ가-힣a-zA-Z0-9?!@#$%^&*()\s]{1,30}$/;
+	 const regReport = /^[ㄱ-ㅎ가-힣a-zA-Z0-9?!@#$%^&*()\s\S]{1,30}$/;
 	 const $reportInput = $('#reportInput');
 	 
 	 function regReplyCheck(){
+	 
+	 	 
 		 if(regReply.test($replyArea.val())){
 				return true;	
 		 }
@@ -16,6 +18,8 @@
 	 }
 	 
 	 function regReportCheck(){
+	 	 
+	   
 		 if(regReport.test($reportInput.val())){
 				return true;	
 		 }
