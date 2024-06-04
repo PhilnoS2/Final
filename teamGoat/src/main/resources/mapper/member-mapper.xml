@@ -237,7 +237,7 @@
       FROM 	
    	       MEMBER
   	 WHERE
-  	       MEMBER_NO = #{memberNo}    
+  	       MEMBER_NO = #{memberNo}  
   	</delete>
   
   
