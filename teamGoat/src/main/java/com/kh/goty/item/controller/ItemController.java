@@ -462,7 +462,7 @@ public class ItemController {
 				
 				if(itemService.updatePurchaseAndOrder(purchaseNo, orderNum) > 0) {
 					
-					mv.addObject("memberNo", memberNo);
+					mv.addObject("purchaseNo", purchaseNo);
 					mv.setViewName("redirect:item.paid");
 					return mv;
 					
@@ -490,14 +490,12 @@ public class ItemController {
 	}
 	
 	@GetMapping("item.paid")
-	public ModelAndView findPurchase(int memberNo,
+	public ModelAndView findPurchase(int purchaseNo,
 									 ModelAndView mv) {
 		
-		Purchase purchase = itemService.findPurchase(memberNo);
+		itemService.findPurchaseDetail(purchaseNo);
 		
-		mv.addObject("update", "개이득");
 		mv.setViewName("item/itemResult");
-		
 		return mv;
 	}
 	

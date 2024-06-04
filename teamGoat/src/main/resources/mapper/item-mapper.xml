@@ -50,8 +50,8 @@
 		<result column="TOTAL_PRICE" 	property="totalPrice" />
 		<result column="USE_POINT" 		property="usePoint" />
 		<result column="ADD_POINT" 		property="addPoint" />
-		<result column="REFUND" 		property="refund" />
 		<result column="PURCHASE_DATE" 	property="purchaseDate" />
+		<result column="STATUS" 		property="status" />
 	
 	</resultMap>
 	
@@ -402,4 +402,9 @@
 		   AND
 		   		STATUS = 'N'
 	</update>
+	
+	<select id="findPurchaseDetail" parameterType="_int" resultMap="">
+	</select>
+	
+	
 </mapper>

@@ -105,8 +105,6 @@
 				
 			</div>
 			
-			${ add }
-			
 			<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }"/>
 			<input type="hidden" name="usePoint" value="0"/>
 			<input type="hidden" name="addPoint" value="${ add }"/>

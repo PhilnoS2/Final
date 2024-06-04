@@ -50,5 +50,7 @@ public interface ItemMapper {
 
 	int updatePurchase(int purchaseNo);
 
+	int findPurchaseDetail(int purchaseNo);
+
 	
 }

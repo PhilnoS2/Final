@@ -134,6 +134,11 @@ public class ItemServiceImpl implements ItemService{
 		return (result1 + result2) / 2;
 	}
 
+	@Override
+	public int findPurchaseDetail(int purchaseNo) {
+		return itemMapper.findPurchaseDetail(purchaseNo);
+	}
+
 
 	
 	
