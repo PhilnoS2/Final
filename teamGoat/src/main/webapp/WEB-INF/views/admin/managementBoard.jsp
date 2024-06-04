@@ -138,8 +138,6 @@
 		                        </c:forEach>
                         	</c:otherwise>
                         </c:choose>
-                        
-                        
                 </table>
             </div>
 
@@ -177,7 +175,7 @@
                 console.log($(this))
                 location.href = 'board?boardNo='+$(this).children().eq(1).html();
             });
-        })
+        });
     </script>
 
     

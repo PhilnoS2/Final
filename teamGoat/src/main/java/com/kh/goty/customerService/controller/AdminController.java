@@ -1,5 +1,6 @@
 package com.kh.goty.customerService.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,10 +22,12 @@ import com.kh.goty.customerService.model.vo.QuestionAttach;
 import com.kh.goty.member.model.vo.Member;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class AdminController {
 
 	private final AdminService adminService;
@@ -36,6 +39,7 @@ public class AdminController {
 		PageInfo pageInfo = Pagination.getPageInfo(adminService.selectMemberList(), page, 10, 10);
 		
 		List<Member> memberList = adminService.selectMember();
+		
 		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("pageInfo", pageInfo);
@@ -87,7 +91,7 @@ public class AdminController {
 	}
 	
 	@PostMapping("admin/answer/insert")
-	public String insertAnswer(int questionNo, int memberNo, Answer answer) {
+	public String insertAnswer(int questionNo, int memberNo, Answer answer, HttpSession session) {
 		
 		answer.setQuestionNo(questionNo);
 		answer.setMemberNo(memberNo);
@@ -95,6 +99,7 @@ public class AdminController {
 		
 		if(adminService.insertAnswer(answer) > 0) {
 			adminService.updateBoard(questionNo);
+			session.setAttribute("alertMsg", "답변 작성 성공");
 		};
 		
 		return "redirect:/management/boards";
@@ -112,17 +117,14 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="admin/member/update/point")
-	public String updateMemberPoint (@RequestParam("memberNo") List<Integer> memberNo, List<String> point, HttpSession session) {
+	public String updateMemberPoint (@RequestParam("memberNo") List<Integer> memberNo, String point, HttpSession session) {
 		
-		
-		HashMap<String, Object> map = new HashMap();
-		map.put("memberNo", memberNo);
-		map.put("point", point);
-		
-		System.out.println(map);
-		
-		
-		//adminService.checkedMemberPointUpdate(memberNo);
+		int addPoint = Integer.parseInt(point);
+		if(adminService.checkedMemberPointUpdate(memberNo, addPoint) > 0) {
+			session.setAttribute("alertMsg", "선택한 회원에게 적립금 부여 성공!");
+		} else {
+			session.setAttribute("alertMsg", "선택한 회원에게 적립금 부여 실패");
+		}
 		
 		return "redirect:/admin";
 	}

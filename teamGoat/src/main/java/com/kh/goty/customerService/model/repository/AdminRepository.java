@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import com.kh.goty.customerService.model.vo.Answer;
 import com.kh.goty.member.model.vo.Member;
@@ -26,7 +27,6 @@ public interface AdminRepository {
 	
 	int chekedMemberDelete(List<Integer> memberNo);
 	
-	int checkedMemberPointUpdate(List<Integer> memberNo);
-
+	int checkedMemberPointUpdate(@Param("memberNo") List<Integer> memberNo, @Param("addPoint") int addPoint);
 
 }

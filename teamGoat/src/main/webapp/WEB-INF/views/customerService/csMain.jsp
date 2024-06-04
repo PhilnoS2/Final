@@ -306,9 +306,18 @@
 
                     </div>
                     <div id="notice-content2">
-                    	<c:forEach items="${ noticeList }" var="notice">
-                    		<li><a href="/goty/notice?noticeNo=${notice.noticeNo }">[공지]${ notice.noticeTitle }</a></li>
-                    	</c:forEach>
+                    	<c:choose>
+                    		<c:when test="${ empty noticeList }">
+             			    	<li>등록된 게시물이 존재하지 않습니다</li>
+                    		</c:when>
+                    		<c:otherwise>
+		                    	<c:forEach items="${ noticeList }" var="notice">
+		                    		<li><a href="/goty/notice?noticeNo=${notice.noticeNo }">[공지]${ notice.noticeTitle }</a></li>
+		                    	</c:forEach>
+                    		</c:otherwise>
+                    	</c:choose>
+                    	
+                    
                     </div>
                     <div id="notice-content3">
                         <div id="notice-content3-1">
@@ -353,9 +362,18 @@
 
                     </div>
                     <div id="FAQ-content2">
-                    	<c:forEach items="${ faqList }" var="faq">
-                    		<li><a href="/goty/faqs">Q.${ faq.faqQuestion }</a></li>
-                    	</c:forEach>
+                    	<c:choose>
+                    		<c:when test="${ empty faqList }">
+             			    	<li>등록된 게시물이 존재하지 않습니다</li>
+                    		</c:when>
+                    		<c:otherwise>
+		                    	<c:forEach items="${ faqList }" var="faq">
+		                    		<li><a href="/goty/faqs">Q.${ faq.faqQuestion }</a></li>
+		                    	</c:forEach>
+                    		</c:otherwise>
+                    	</c:choose>
+                    
+                    
                     </div>
                     <div id="FAQ-content3">
                         <div id="FAQ-content3-1"></div>

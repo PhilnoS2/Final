@@ -147,28 +147,8 @@
 				<form id="insert-form" action="/goty/admin/answer/insert" method="post">
 					<input type="hidden" name="questionNo" value="${ question.questionNo }">
                 	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
-                    <textarea style="width : 1000px; height : 200px;" id="content" name="answerComment" placeholder="내용을 입력해주세요" required></textarea>
+                    <textarea id="content" name="answerComment" style="width: 1000px; height: 200px;" placeholder="내용을 입력해주세요" required></textarea>
                 </form>
-				<!-- 
-                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
-                    <thead>
-                        <th width="100px;">답변자</th>
-                        <td colspan="9">고티</td>
-                    </thead>
-    
-                    <tbody>
-                        <tr>
-                            <th>답변일시</th>
-                            <td colspan="9">2024-05-10</td>
-                        </tr>
-
-                        <tr>
-                            <th colspan="10"><p>소프라노가 작성한 답변입니다</p></th>
-                        </tr>
-                    </tbody>
-                </table>
-				 -->
-
             </div>
             <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
         </div>
@@ -182,8 +162,8 @@
             <div class="button-area2">
                 <div>
                     <!--참조게시글이 없는 경우에만 버튼 활성화 시켜야 함-->
-                    <button id="insert" class="btn btn-sm btn-warning" onclick="submit(0);">등록</button>
-                    <button class="btn btn-sm btn-danger" onclick="submit(1);">취소</button>
+                    <button id="insert" class="btn btn-sm btn-warning">등록</button>
+                    <button class="btn btn-sm btn-danger">취소</button>
                 </div>
             </div>
         </div>
@@ -194,6 +174,10 @@
     	$(function(){
     		$('#insert').click(function(){
                 $('#insert-form').submit();
+    		});
+    		
+    		$('#backbtn').click(function(){
+    			location.href = '/goty/management/boards';
     		})
     	})
     </script>

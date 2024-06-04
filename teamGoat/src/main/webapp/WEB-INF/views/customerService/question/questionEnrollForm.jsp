@@ -9,6 +9,42 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+   	<script type="text/javascript" src="/goty/resources/smartEditor/workspace/static/js/service/HuskyEZCreator.js" charset="utf-8"></script>
+    <script type="text/javascript">
+	let oEditors = [];
+
+    	$(() => {
+           nhn.husky.EZCreator.createInIFrame({
+               oAppRef: oEditors,
+               elPlaceHolder: "content", //textarea에 부여한 아이디와 동일해야한다.
+               sSkinURI: "/goty/resources/smartEditor/workspace/static/SmartEditor2Skin.html", //자신의 프로젝트에 맞게 경로 수
+               fCreator: "createSEditor2"
+           })
+       });
+
+    function submitContents() {
+    	 // 에디터의 내용이 textarea에 적용된다.
+    	  oEditors.getById["content"].exec("UPDATE_CONTENTS_FIELD", []);
+    	  //console.log(document.getElementById("content").value);
+    	  const str = document.getElementById("content").value;
+    	  
+    	 // 에디터의 내용에 대한 값 검증은 이곳에서
+    	 //document.getElementById("editorTxt0").value를 이용해서 처리한다.
+    	 
+    	 // <p><br></p> 공백
+    	 // <p>&nbsp;</p> 띄어쓰기만
+    	 if(str.length < 0 || str.includes('<p>&nbsp;</p>')) {
+    		 alert('올바른 입력이 아닙니다.' + str);
+    		 return false;
+    	 }
+    	 else {
+    		 //alert(str);
+    		 return true;
+    	 }
+    }
+	</script>
+    
+    
 
     <style>
         div{
@@ -120,7 +156,7 @@
                     <div style="width: 1000px; border-bottom : 1px solid black; margin-top : 20px; margin-bottom : 20px;"></div>
 
                     <div align="right" style="padding-right : 70px;">
-                        <input id="submit-btn" type="submit" value="등록" style="width: 70px;">
+                        <input id="submit-btn" type="submit" value="등록" onclick="return submitContents();" style="width: 70px;">
                         <input class="back-btn" type="button" value="취소" style="width: 70px;" onclick="history.back();">
                     </div>
                 </form>
@@ -129,9 +165,8 @@
 
         <div class="list-page">
             <div>
-                <button id="list-btn" class="back-btn" onclick="history.back();">목록</button>
+                <button class="back-btn" onclick="history.back();">목록</button>
             </div>
-
         </div>
 
         <div class="button-area">
@@ -139,13 +174,6 @@
         </div>
     </div>
     <script>
-        $(function(){
-            $('#list-btn').click(function(){
-                // 1:1문의 메인페이지로 이동
-                location.href = '';
-            })
-        })
-
         $(function(){
             $('#submit-btn').click(function(){
                 if(!confirm('게시글을 등록하시겠습니까?')){
@@ -161,8 +189,6 @@
                 }
             })
         })
-
-
     </script>
 
     

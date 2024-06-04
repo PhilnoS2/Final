@@ -22,6 +22,6 @@ public interface AdminService {
 	
 	int chekedMemberDelete(List<Integer> memberNo);
 	
-	int checkedMemberPointUpdate(List<Integer> memberNo);
+	int checkedMemberPointUpdate(List<Integer> memberNo, int addPoint);
 
 }

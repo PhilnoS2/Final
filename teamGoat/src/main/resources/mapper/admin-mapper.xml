@@ -118,15 +118,29 @@
 		       TOTAL_PRICE DESC		
 	</select>
 	<update id="chekedMemberDelete" parameterType="list">
-			UPDATE
-			       MEMBER
-		       SET
-		       	   DELETE_YN = 'Y'
-		    WHERE
-		         MEMBER_NO IN(
+		UPDATE
+		       MEMBER
+	       SET
+	       	   DELETE_YN = 'Y'
+	    WHERE
+	         MEMBER_NO IN(
 		<foreach collection="list" item="item" separator=", ">
 		          #{item}
 		</foreach>
 		)
 	</update>
+	
+	<update id="checkedMemberPointUpdate">
+      UPDATE
+            MEMBER
+         SET
+             MEMBER_POINT = MEMBER_POINT + #{addPoint} 
+       WHERE
+             MEMBER_NO IN(
+       <foreach collection="memberNo" item="item" separator=", ">
+                #{item}
+      </foreach>
+      )       
+   </update>
+	
 </mapper>

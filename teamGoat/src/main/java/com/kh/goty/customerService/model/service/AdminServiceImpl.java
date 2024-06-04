@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kh.goty.customerService.model.repository.AdminRepository;
 import com.kh.goty.customerService.model.vo.Answer;
@@ -54,9 +55,12 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int checkedMemberPointUpdate(List<Integer> memberNo) {
-		return adminRepository.checkedMemberPointUpdate(memberNo);
+	public int checkedMemberPointUpdate(List<Integer> memberNo, int addPoint) {
+		return adminRepository.checkedMemberPointUpdate(memberNo, addPoint);
 	}
+
+	
+	
 
 
 }
