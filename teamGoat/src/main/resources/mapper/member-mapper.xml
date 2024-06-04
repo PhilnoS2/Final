@@ -213,7 +213,8 @@
   	      BORNDATE = #{bornDate},
   	      PHONE = #{phone},
   	      ADDRESS = #{address},
-  	      ADDR_DETAIL = #{addrDetail}  
+  	      ADDR_DETAIL = #{addrDetail},
+  	      MODIFYDATE = SYSDATE  
   	 WHERE
   	      MEMBER_NO = #{memberNo}     
   	   AND
