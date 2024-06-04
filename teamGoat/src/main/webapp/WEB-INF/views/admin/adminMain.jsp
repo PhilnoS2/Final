@@ -152,7 +152,9 @@
 	                        	<form id="update" action="" method="post">
 		                       	 	<c:forEach items="${ memberList }" var="member">
 			                        	<tr style="height : 40px;">
-			                            	<td><input class="check-option" type="checkbox" name="memberNo" value="${ member.memberNo }"></td>
+			                            	<td><input class="check-option" type="checkbox" name="memberNo" value="${ member.memberNo }">
+			                            		<input class="add-point" type="hidden" name="point" value="">
+			                            	</td>
 				                            <td>${ member.memberNo }</td>
 				                            <td>${ member.enrollDate }</td>
 				                            <td>${ member.memberName }</td>
@@ -175,11 +177,12 @@
 					});
 					
 					$('#point-btn').click(function(){
-						prompt('적립금을 입력해주세요');
-						/*
+						let point = prompt('적립금을 입력해주세요');
+						$('.add-point').val(point);
+					
 						$('#update').attr('action', '/goty/admin/member/update/point');
 						$('#update').submit();
-						*/
+					
 					})
 				})
 			</script>

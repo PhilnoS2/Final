@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.goty.common.model.vo.PageInfo;
@@ -113,9 +112,17 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="admin/member/update/point")
-	public String updateMemberPoint (@RequestParam("memberNo") List<Integer> memberNo, HttpSession session) {
+	public String updateMemberPoint (@RequestParam("memberNo") List<Integer> memberNo, List<String> point, HttpSession session) {
 		
-		adminService.checkedMemberPointUpdate();
+		
+		HashMap<String, Object> map = new HashMap();
+		map.put("memberNo", memberNo);
+		map.put("point", point);
+		
+		System.out.println(map);
+		
+		
+		//adminService.checkedMemberPointUpdate(memberNo);
 		
 		return "redirect:/admin";
 	}
