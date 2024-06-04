@@ -29,19 +29,20 @@
     	  oEditors.getById["editorTxt0"].exec("UPDATE_CONTENTS_FIELD", []);
     	  console.log(document.getElementById("editorTxt0").value);
     	  const str = document.getElementById("editorTxt0").value;
-    	  
+    	  const regReply = /^[ㄱ-ㅎ가-힣a-zA-Z0-9\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]{1,900}$/;
     	 // 에디터의 내용에 대한 값 검증은 이곳에서
     	 //document.getElementById("editorTxt0").value를 이용해서 처리한다.
     	 
     	 // <p><br></p> 공백
     	 // <p>&nbsp;</p> 띄어쓰기만
-    	 if(str.length < 0 || str.includes('<p>&nbsp;</p>')) {
-    		 alert('올바른 입력이 아닙니다.' + str);
-    		 return false;
-    	 }
-    	 else {
+    	 
+    	 if(regReply.test(str)) {
     		 alert(str);
     		 return true;
+    	 }
+    	 else {
+    		 alert('올바른 입력이 아닙니다.');
+    		 return false;	 
     	 }
     }
 	</script>
