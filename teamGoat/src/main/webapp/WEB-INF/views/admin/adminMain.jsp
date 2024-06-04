@@ -121,7 +121,7 @@
                             <option value="id">아이디</option>
                             <option value="nickname">닉네임</option>
                         </select>
-                        <input type="text" name="keyword" style="width : 350px; height: 40px;" placeholder="내용을 입력해주세요">
+                        <input type="text" name="keyword" style="width : 350px; height: 40px;" placeholder="조회할 내용을 입력해주세요">
                         <input type="submit" value="검색" style="height : 40px;">
                     </form>
                     <input id="select-all" style="margin-top : 20px;" type="button" value="전체 선택">
@@ -150,10 +150,10 @@
                         	</c:when>
                         	<c:otherwise>
 	                        	<form id="update" action="" method="post">
+                            		<input class="add-point" type="hidden" name="point" value="">
 		                       	 	<c:forEach items="${ memberList }" var="member">
 			                        	<tr style="height : 40px;">
 			                            	<td><input class="check-option" type="checkbox" name="memberNo" value="${ member.memberNo }">
-			                            		<input class="add-point" type="hidden" name="point" value="">
 			                            	</td>
 				                            <td>${ member.memberNo }</td>
 				                            <td>${ member.enrollDate }</td>
@@ -169,26 +169,7 @@
                         </c:choose>
                 </table>
             </div>
-			<script>
-				$(function(){
-					$('#delete-btn').click(function(){
-						$('#update').attr('action', '/goty/admin/member/delete');
-						$('#update').submit();
-					});
-					
-					$('#point-btn').click(function(){
-						let point = prompt('적립금을 입력해주세요');
-						$('.add-point').val(point);
-					
-						$('#update').attr('action', '/goty/admin/member/update/point');
-						$('#update').submit();
-					
-					})
-				})
-			</script>
-
-
-
+		
             <!-- 관리자 기능 버튼 + 페이징 버튼 영역-->
             <div class="admin-button">
                 <div style="margin-left : 20px;">
@@ -226,6 +207,37 @@
               	$('.check-option').prop('checked', true);
             });
         });
+        
+    	$(function(){
+			$('#delete-btn').click(function(){
+				if($('input:checkbox[class="check-option"]').is(":checked") == true){
+					if(confirm('선택한 회원을 정말 탈퇴시키겠습니까?')){
+						$('#update').attr('action', '/goty/admin/member/delete');
+						$('#update').submit();
+					}
+				}
+				else {
+					alert('선택된 회원이 없습니다');
+				}
+			});
+			$('#point-btn').click(function(){
+				if($('input:checkbox[class="check-option"]').is(":checked") == true){
+					let point;
+					do {
+						point = prompt("부여할 적립금을 입력해주세요(숫자만 입력 가능)");
+					}
+					while(isNaN(point));
+					if(point != null){
+						$('.add-point').val(point);
+						$('#update').attr('action', '/goty/admin/member/update/point');
+						$('#update').submit();
+					}
+				}
+				else{
+					alert('선택된 회원이 없습니다');
+				}
+			});
+		});
     </script>
 
 </body>
