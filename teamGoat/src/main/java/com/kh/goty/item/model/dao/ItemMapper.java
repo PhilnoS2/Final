@@ -46,5 +46,11 @@ public interface ItemMapper {
 
 	Purchase findPurchase(int memberNo);
 
+	int updateOrder(List<Integer> list);
+
+	int updatePurchase(int purchaseNo);
+
+	int findPurchaseDetail(int purchaseNo);
+
 	
 }

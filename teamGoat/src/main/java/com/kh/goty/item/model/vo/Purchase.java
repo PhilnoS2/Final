@@ -18,7 +18,7 @@ public class Purchase {
 	private int totalPrice;
 	private int usePoint;
 	private int addPoint;
-	private String refund;
+	private String status;
 	private Date purchaseDate;
 
 }
