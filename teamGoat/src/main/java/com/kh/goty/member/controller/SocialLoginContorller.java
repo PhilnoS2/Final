@@ -25,11 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class SocialLoginContorller {
 	
-	
 	private final MemberService memberService;
 	
-	private final SocialMemberService socialMemberService;	
-	
+	private final SocialMemberService socialMemberService;
 	
 	@GetMapping("/kakaologin")
 	public ModelAndView kakaologin(String code, HttpSession session, ModelAndView mv) throws IOException, ParseException {
