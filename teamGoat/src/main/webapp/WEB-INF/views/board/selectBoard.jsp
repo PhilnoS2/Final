@@ -69,7 +69,7 @@
 				<c:when test="${ sessionScope.loginMember ne null  }">
 					<div class="form-group w-75 mx-auto d-flex justify-content-between">
 						<div id="review-area-div">
-							<textarea id="reviewArea" class="form-control mb-1" rows="3"
+							<textarea id="replyArea" class="form-control mb-1" rows="3"
 						  	 placeholder="댓글을 입력해주세요."></textarea>
 						</div>
 						<div id="reveiw-btn-div">
@@ -159,19 +159,24 @@
     </div>
   </div>	
 	
+	<script src="/goty/resources/board/js/selectBoard.js"></script>
 	<script>
-	let seletReplyNo;
+	 let seletReplyNo;
+	 
 	$(() => {
 		replyList(1);
 	});
 	
 	function insertReply() {
-	
+		if(!regReplyCheck()){
+			return;
+		}
+		
 		const data = 
 			{
 				'freeBoardNo': '${ board.freeBoardNo }',
 				'memberNo': '${ sessionScope.loginMember.memberNo }',
-				'reviewContent': $('#reviewArea').val()
+				'reviewContent': $('#replyArea').val()
 			};
 		
 		$.ajax({
@@ -182,7 +187,7 @@
 			contentType : 'application/json; charset=utf-8',
 			success: (result) => {
 					alert(result.message);
-					$('#reviewArea').val('');
+					$('#replyArea').val('');
 					replyList(1);
 			},
 			
@@ -266,6 +271,10 @@
 	
 	function report(reviewNo){
 		
+		if(!regReportCheck()) {
+			return;
+		}
+
 		const data = 
 		{	'reviewNo' : seletReplyNo,
 			'reportUser': '${ sessionScope.loginMember.memberNo }',

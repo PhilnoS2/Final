@@ -329,7 +329,7 @@ public class MemberController {
 		  if(memberService.updateMember(member) > 0) {
 			  session.setAttribute("alertMsg", "정보 수정이 성공했습니다.");
 			  session.removeAttribute("loginMember");
-			  mv.setViewName("redirect:member/login");
+			  mv.setViewName("redirect:login");
 		  } else {
 			  mv.addObject("errorMsg", "정보 수정에 실패했습니다.").setViewName("common/errorPage");
 		  }

@@ -14,11 +14,14 @@ import lombok.ToString;
 public class Purchase {
 
 	private int purchaseNo;
-	private int memberNo;
-	private int totalPrice;
 	private int usePoint;
 	private int addPoint;
-	private String refund;
+	private int totalPrice;
+	
+	private int memberNo;
+	private String memberName;
+	
+	private String status;
 	private Date purchaseDate;
 
 }

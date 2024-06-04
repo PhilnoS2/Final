@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
@@ -420,13 +421,11 @@ public class ItemController {
 		
 		// Purchase Insert용
 		int insertResult = itemService.addPurchase(purchaseInt);
-		
 		// Purchase Select용
 		Purchase purchase = itemService.findPurchase(memberNo);
+		int purchaseNo = purchase.getPurchaseNo(); 
 		
-		System.out.println(purchase);
-		
-		//----------Order Bridge------------------------
+ 		//----------Order Bridge------------------------
 		
 		String orderNoList = orderNo;
 		
@@ -436,69 +435,68 @@ public class ItemController {
 		
 		int i = 0;
 		
-		List<Integer> list = new ArrayList<Integer>();
+		List<Integer> orderNum = new ArrayList<Integer>();
 		
 		while(st.hasMoreTokens()) {
 			
 			dataArr[i] = Integer.parseInt(st.nextToken());
-			list.add(dataArr[i]);
+			orderNum.add(dataArr[i]);
 			i++;
+			
 		}
 		
 		if(insertResult > 0) {
 			
 			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 			
-			for(int j = 0; list.size() > j; j++) {
-				
+			for(int j = 0; orderNum.size() > j; j++) {
 				Map<String, Object> map = new HashMap<String, Object>();	
-				map.put("purchaseNo", purchase.getPurchaseNo());
-				map.put("orderNo", list.get(j));
+				map.put("purchaseNo", purchaseNo);
+				map.put("orderNo", orderNum.get(j));
 				mapList.add(map);
-				
 			}
 			
 			int bridgeResult = itemService.addOrderPurchaseBridge(mapList);
 			
 			if(bridgeResult > 0) {
 				
-				mv.addObject("purchaseNo", purchase.getPurchaseNo());
-				mv.addObject("memberNo", memberNo);
-				mv.addObject("orderNo", list);
+				if(itemService.updatePurchaseAndOrder(purchaseNo, orderNum) > 0) {
+					
+					mv.addObject("purchaseNo", purchaseNo);
+					mv.setViewName("redirect:item.paid");
+					return mv;
+					
+				}
 				
-				mv.setViewName("redirect:item.update");
-				
+				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
+				mv.setViewName("common/errorPage");
 				return mv;
 				
 			} else {
 				
 				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
 				mv.setViewName("common/errorPage");
-				
 				return mv;
 				
 			}
-			
 			
 		} else {
 			
 			mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
 			mv.setViewName("common/errorPage");
-			
 			return mv;
 		}
 		
 	}
 	
-	@PostMapping("item.update")
-	public ModelAndView updateOrderAndPurchase(int memberNo,
-											   List<Integer> orderNo,
-											   int purchaseNo,
-											   ModelAndView mv) {
+	@GetMapping("item.paid")
+	public ModelAndView findPurchase(int purchaseNo,
+									 ModelAndView mv) {
 		
+		Purchase purchase = itemService.findPurchaseDetail(purchaseNo);
 		
+		System.out.println(purchase);
 		mv.setViewName("item/itemResult");
-		
 		return mv;
 	}
 	

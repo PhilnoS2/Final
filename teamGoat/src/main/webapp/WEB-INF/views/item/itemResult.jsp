@@ -37,22 +37,41 @@
 </head>
 
 <body>
+	
+	<jsp:include page="../common/menubar.jsp" />
     
 	<div class="container">
 
 		<div class="basic-border">
 
-		</div>
-
-		<div class="basic-border">
+			<h2>결제가 완료되었습니다.</h2>
 
 
 		</div>
 
 	</div>
 
+	<div class="container">
+		<button id="toCart" class="btn btn-primary">장바구니</button>
+		<button id="home" class="btn btn-secondary">홈으로</button>
+	</div>
+
 	<script>
 
+		$(()=> {
+
+			$('#toCart').click(() => {
+				location.href="cart?memberNo=${memberNo}";
+			})
+
+		});
+		$(()=> {
+
+			$('#toCart').click(() => {
+				location.href="/goty";
+			})
+
+		});
 
 	</script>
 
