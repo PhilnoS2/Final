@@ -135,7 +135,7 @@ public class ItemServiceImpl implements ItemService{
 	}
 
 	@Override
-	public int findPurchaseDetail(int purchaseNo) {
+	public Purchase findPurchaseDetail(int purchaseNo) {
 		return itemMapper.findPurchaseDetail(purchaseNo);
 	}
 

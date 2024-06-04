@@ -42,13 +42,13 @@
 
 		<div class="basic-border">
 
-			${ purchaseNo }
+			${  }
 
 		</div>
 
 		<div class="basic-border">
 
-			${ purchaseNo }
+			${  }
 
 		</div>
 

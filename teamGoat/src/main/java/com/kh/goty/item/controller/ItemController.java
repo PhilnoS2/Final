@@ -493,7 +493,7 @@ public class ItemController {
 	public ModelAndView findPurchase(int purchaseNo,
 									 ModelAndView mv) {
 		
-		itemService.findPurchaseDetail(purchaseNo);
+		Purchase purchase = itemService.findPurchaseDetail(purchaseNo);
 		
 		mv.setViewName("item/itemResult");
 		return mv;

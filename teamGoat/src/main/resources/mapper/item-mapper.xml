@@ -403,7 +403,11 @@
 		   		STATUS = 'N'
 	</update>
 	
-	<select id="findPurchaseDetail" parameterType="_int" resultMap="">
+	<select id="findPurchaseDetail" parameterType="_int" resultMap="purchaseResultSet">
+	
+		SELECT
+		  FROM
+	
 	</select>
 	
 	

@@ -45,5 +45,5 @@ public interface ItemService {
 	
 	int updatePurchaseAndOrder(int purchaseNo, List<Integer> list);
 	
-	int findPurchaseDetail(int purchaseNo);
+	Purchase findPurchaseDetail(int purchaseNo);
 }
