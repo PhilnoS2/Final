@@ -98,6 +98,14 @@
         .faq-q:hover {
             background-color : yellowgreen;
         }
+        #select-area {
+        	width : 100px; 
+        	height : 40px; 
+        	margin-left: 90px;
+        }
+        .margin-area {
+        	margin-bottom:50px;
+        }
     </style>
 </head>
 <body>
@@ -121,7 +129,7 @@
        
         <div class="faq-search">
             <div>
-                <select id="select-area" name="select" style="width : 100px; height : 40px; margin-left: 90px;">
+                <select id="select-area" name="select">
                     <option value="0">전체</option>
                     <option value="1">상품문의</option>
                     <option value="2">주문/결제문의</option>
@@ -134,7 +142,7 @@
 
         <div class="faq-content">
             
-            <div style="margin-bottom:50px;"></div>
+            <div class="margin-area"></div>
             
             <c:forEach items="${ faqList }" var="faq">
             	
@@ -157,7 +165,6 @@
                 $('#select-area').change(function(){
                     //console.log($('option:selected').val());
                     const category = $('option:selected').val();
-                    // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
                     $.ajax({
                     	url : 'faq/category',
                     	type : 'get',

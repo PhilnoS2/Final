@@ -77,8 +77,47 @@
             margin-top : 30px;
             height : 10%;
         }
-
-
+		
+		#search-area {
+			width : 100px; 
+			height: 40px;
+		}
+		.input-keyword {
+			width : 350px; 
+			height: 40px;" 
+		}
+		.input-submit {
+			height : 40px;"
+		}
+		#select-all{
+			margin-top : 20px; 
+		}
+		.table {
+			width : 800px; 
+			height : 20px;
+			margin-left : 30px;
+		}
+		.thead {
+			height : 40px; 
+			background-color : lightgrey;
+		}
+		#delete-btn {
+			margin-right : 15px;
+		}
+		.margin-area {
+			border-bottom:1px solid black; 
+			padding-bottom:30px;
+		}
+		.table-td {
+			height : 100px;
+		}
+		
+		.table-tr {
+			height : 40px;
+		}
+		.management-member {
+			color : rgb(231, 76, 60);
+		}
 
     </style>
 
@@ -93,7 +132,7 @@
         <!--관리자 사용탭-->
         <div class="admin-function" align="center">
             <div>
-                <h3><a href="/goty/admin" style="color : rgb(231, 76, 60)">회원 관리</a></h3>
+                <h3><a href="/goty/admin" class="management-member">회원 관리</a></h3>
             </div>
             <div>
                 <h3><a href="/goty/management/boards">게시판 관리</a></h3>
@@ -116,23 +155,23 @@
             <div class="admin-search">
                 <div>
                     <form action="/goty/admin/member/find">
-                        <select name="condition" id="search-area" style="width : 130px; height: 40px;">
+                        <select name="condition" id="search-area">
                             <option value="name">이름</option>
                             <option value="id">아이디</option>
                             <option value="nickname">닉네임</option>
                         </select>
-                        <input type="text" name="keyword" style="width : 350px; height: 40px;" placeholder="조회할 내용을 입력해주세요">
-                        <input type="submit" value="검색" style="height : 40px;">
+                        <input class="input-keyword" type="text" name="keyword" placeholder="조회할 내용을 입력해주세요">
+                        <input class="input-submit" type="submit" value="검색">
                     </form>
-                    <input id="select-all" style="margin-top : 20px;" type="button" value="전체 선택">
+                    <input id="select-all" type="button" value="전체 선택">
 
                 </div>
             </div>
 
             <!-- 조회된 컨텐트 영역-->
             <div class="admin-contents">
-                <table border="1" align="center" style="width : 800px; height : 20px;">
-                    <thead align="center" style="height : 40px; background-color : lightgrey;">
+                <table class="table" border="1" align="center">
+                    <thead align="center" class="thead">
                         <th>선택</th>
                         <th>회원 번호</th>
                         <th>가입일</th>
@@ -146,13 +185,13 @@
                     <tbody id="search-area" align="center">
                         <c:choose>
                         	<c:when test="${ empty memberList }">
-	                            <td colspan="9" align="center" style="height : 100px;"><b>등록된 회원이 존재하지 않습니다.</b></td>
+	                            <td class="table-td" colspan="9" align="center"><b>등록된 회원이 존재하지 않습니다.</b></td>
                         	</c:when>
                         	<c:otherwise>
 	                        	<form id="update" action="" method="post">
                             		<input class="add-point" type="hidden" name="point" value="">
 		                       	 	<c:forEach items="${ memberList }" var="member">
-			                        	<tr style="height : 40px;">
+			                        	<tr class="table-tr">
 			                            	<td><input class="check-option" type="checkbox" name="memberNo" value="${ member.memberNo }">
 			                            	</td>
 				                            <td>${ member.memberNo }</td>
@@ -173,9 +212,9 @@
             <!-- 관리자 기능 버튼 + 페이징 버튼 영역-->
             <div class="admin-button">
                 <div style="margin-left : 20px;">
-                    <button id="delete-btn" class="btn btn-sm btn-danger" style="margin-right : 15px;">선택 탈퇴</button><button id="point-btn" class= "btn btn-sm btn-success">선택 적립금 지급</button>
+                    <button id="delete-btn" class="btn btn-sm btn-danger">선택 탈퇴</button><button id="point-btn" class= "btn btn-sm btn-success">선택 적립금 지급</button>
                 </div>
-                <div align="center" style="border-bottom:1px solid black; padding-bottom:30px;">
+                <div align="center" class="margin-area">
                      <c:choose>
                     	<c:when test="${pageInfo.currentPage eq  1}">
 	                    	<button type="button" class="btn btn-warning disabled"> < </button>

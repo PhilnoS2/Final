@@ -84,7 +84,7 @@
             left : 1350px;
             top : 400px;
         }
-        .table {
+        .notice-table {
         	width: 1000px; 
         	height:200px; 
         	background-color : rgb(241, 238, 238); 
@@ -92,6 +92,32 @@
         	>th, tr, td {
         		border : 1px solid black;
         	}
+        }
+        .margin-area {
+        	width: 1000px; 
+        	border-bottom : 1px solid black; 
+        	margin-bottom : 20px; 
+        	margin-left : 100px;
+        }
+        .th3 {
+        	width : 100px; 
+        	padding-left : 15px;
+        }
+        .td3 {
+        	width: 650px; 
+        	padding-left : 15px;
+        }
+        #back-btn {
+        	margin-left : 97px; 
+        	width : 100px; 
+        	border:1px solid grey;
+        }
+        .margin-area2 {
+        	border:1px solid grey; 
+        	border-bottom: none;
+        }
+        .margin-area3 {
+        	border:1px solid grey;
         }
     </style>
 
@@ -126,11 +152,11 @@
             }
         </script>
 
-        <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom : 20px; margin-left : 100px;"></div>
+        <div class="margin-area"></div>
 
         <div class="notice-content">
             <div align="center">
-                <table class="table">
+                <table class="notice-table">
                     <thead>
                         <th>제목</th>
                         <td colspan="9">${notice.noticeTitle }</td>
@@ -145,8 +171,8 @@
                         <tr>
                             <th>작성일</th>
                             <td>${ notice.createDate }</td>
-                            <th style="width : 100px;" padding-left : 15px;>조회수</th>
-                            <td style="width: 650px; padding-left : 15px;">${ notice.count }</td>
+                            <th class="th3">조회수</th>
+                            <td class="td3">${ notice.count }</td>
                         </tr>
 
                         <tr>
@@ -166,11 +192,11 @@
 
         <div class="button-area">
             <div class="button-area1">
-                <button id="back-btn" style="margin-left : 97px; width : 100px; border:1px solid grey;">목록</button>
+                <button id="back-btn">목록</button>
             </div>
             <div class="button-area2">
                 <div>
-                    <div style="border:1px solid grey; border-bottom: none;">
+                    <div class="margin-area2">
 	                    <c:choose>
 	                    	<c:when test="${ preNotice eq null }">
 	                    		<a id="previous" class="btn btn-sm btn-warning disabled">▲이전글</a> 
@@ -181,7 +207,7 @@
 	                    	</c:otherwise>
 	                    </c:choose>
                     </div>
-                    <div style="border:1px solid grey;">
+                    <div class="margin-area3">
                     	<c:choose>
                     		<c:when test="${ nextNotice eq null }">
 		                        <a id="next" class="btn btn-sm btn-danger disabled">▼다음글</a>
@@ -191,8 +217,6 @@
 		                        <a href="/goty/notice?noticeNo=${ nextNotice.noticeNo }">[공지] ${ nextNotice.noticeTitle }</a>
                     		</c:otherwise>
                     	</c:choose>
-                    
-                    
                     </div>
                 </div>
             </div>

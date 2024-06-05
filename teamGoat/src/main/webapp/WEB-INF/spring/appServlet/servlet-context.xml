@@ -37,6 +37,21 @@
 			<mapping path="/member/updateForm/*" />
 			<mapping path="/freeboards/insertsForm"/>
 			<mapping path="/freeboards/update/*"/>
+			<mapping path="/notice/update/*"/>
+			<mapping path="/notice/enroll"/>
+			<mapping path="/notice/insert"/>
+			<mapping path="/notice/delete"/>
+			<mapping path="/question/eorll"/>
+			<mapping path="/question/insert"/>
+			<mapping path="/question/updateForm"/>
+			<mapping path="/question/update"/>
+			<mapping path="/question/delete"/>
+			<mapping path="/faq/enroll"/>
+			<mapping path="/faq/insert"/>
+			<mapping path="/admin"/>
+			<mapping path="/admin/*"/>
+			<mapping path="/management/*"/>
+			
 			<beans:bean class="com.kh.goty.common.interceptor.LoginInterceptor" id="LoginInterceptor" />
 		</interceptor>
 	</interceptors>

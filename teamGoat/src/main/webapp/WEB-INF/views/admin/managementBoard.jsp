@@ -54,6 +54,7 @@
             }
         }
         .board-title {
+        	border-bottom : 1px solid black;
             height : 10%;
             position : relative;
             > div {
@@ -76,6 +77,33 @@
             font-weight : bold;
             resize : none;
         }
+        .board-a {
+        	color : rgb(231, 76, 60);
+        }
+        .board-table {
+        	width : 800px; 
+        	height : 20px;
+        }
+        .table-thead {
+        	height : 40px; 
+        	background-color : lightgrey;
+        }
+        .tbody-td1 {
+        	height : 100px;
+        }
+        .tbody-td2 {
+        	color : rgb(46, 204, 113);
+        }
+        
+        .board-list {
+        	height : 40px;
+        }
+        
+        .board-button-area {
+        	border-bottom:1px solid black; 
+        	padding-bottom:30px;
+        }
+        
     </style>
 
 </head>
@@ -89,7 +117,7 @@
                 <h3><a href="/goty/admin">회원 관리</a></h3>
             </div>
             <div>
-                <h3><a href="/goty/management/boards" style="color : rgb(231, 76, 60)">게시판 관리</a></h3>
+                <h3><a class="board-a" href="/goty/management/boards">게시판 관리</a></h3>
             </div>
             <div>
                 <h3><a href="#">주문/배송 관리</a></h3>
@@ -104,14 +132,14 @@
 
         </div>
         <div class="board-content">
-            <div class="board-title" style="border-bottom : 1px solid black">
+            <div class="board-title">
                 <div><H3>게시판 관리</H3></div>
             </div>
 
             <div class="board-contents">
                 
-                <table border="1" align="center" style="width : 800px; height : 20px;">
-                    <thead align="center" style="height : 40px; background-color : lightgrey;">
+                <table border="1" align="center" class="board-table">
+                    <thead align="center" class="table-thead">
                         <th>처리 상태</th>
                         <th>글번호</th>
                         <th>카테고리</th>
@@ -123,12 +151,12 @@
                     <tbody id="search-area" align="center">
                         <c:choose>
                         	<c:when test="${ empty questionList }">
-                        		<td colspan="6" align="center" style="height : 100px;"><b>답변 대기중인 게시물이 존재하지 않습니다.</b></td>
+                        		<td colspan="6" align="center" class="tbody-td1"><b>답변 대기중인 게시물이 존재하지 않습니다.</b></td>
                         	</c:when>
                         	<c:otherwise>
 		                        <c:forEach items="${ questionList }" var="question">
-		                        	<tr id="question-list" class="board-list" style="height : 40px;">
-			                            <td style="color : rgb(46, 204, 113);">대기중</td>
+		                        	<tr id="question-list" class="board-list">
+			                            <td class="tbody-td2">대기중</td>
 			                            <td>${question.questionNo }</td>
 			                            <td>${question.categoryName }</td>
 			                            <td>${question.questionTitle }</td>
@@ -142,7 +170,7 @@
             </div>
 
              <div class="board-button">
-                <div align="center" style="border-bottom:1px solid black; padding-bottom:30px;">
+                <div align="center" class="board-button-area">
                     <c:choose>
                     	<c:when test="${pageInfo.currentPage eq  1}">
 	                    	<button type="button" class="btn btn-warning disabled"> < </button>
