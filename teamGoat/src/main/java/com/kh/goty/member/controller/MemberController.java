@@ -61,6 +61,7 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@PostMapping("/login")
 	public ModelAndView login(Member member,
 							  HttpSession session,
@@ -121,6 +122,7 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@GetMapping("/logout")
 	public ModelAndView logout(HttpSession session, ModelAndView mv) {
 		session.removeAttribute("loginMember");
@@ -128,11 +130,13 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@GetMapping("/enrollForm")
 	public ModelAndView enrollForm(ModelAndView mv) {
 		mv.setViewName("member/enrollForm");
 		return mv;
 	}
+	
 	
 	@PostMapping("/insert")
 	public ModelAndView insertMember(Member member, 
@@ -159,26 +163,31 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@GetMapping("/idCheck")
 	public String idCheck(String checkId) {
 		return memberService.idCheck(checkId) > 0 ? "YD": "ND";
 	}
+	
 	
 	@GetMapping("/emailCheck")
 	public String emailCheck(String checkEmail) {
 		return memberService.emailCheck(checkEmail) > 0 ? "YD": "ND";
 	}
 	
+	
 	@GetMapping("/phoneCheck")
 	public String phoneCheck(String checkPhone) {
 		return memberService.phoneCheck(checkPhone) > 0 ? "YD": "ND";
 	}
+	
 	
 	@GetMapping("/findIdForm")
 	public ModelAndView findId(ModelAndView mv) {
 		mv.setViewName("member/findId");
 		return mv;
 	}
+	
 	
 	@PostMapping("/findId")
 	public ModelAndView findId(Member member, ModelAndView mv, HttpSession session) {
@@ -202,11 +211,13 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@GetMapping("/findPwdForm")
 	public ModelAndView findPwd(ModelAndView mv) {
 		mv.setViewName("member/findPwd");
 		return mv;
 	}
+	
 	
 	@PostMapping("/findPwd")
 	public ModelAndView findPwd(Member member, ModelAndView mv, HttpSession session)  {
@@ -274,6 +285,7 @@ public class MemberController {
 		return mv;
 	}
 	
+	
 	@PostMapping("/changePwd")
 	public ModelAndView updatePwd(ModelAndView mv, Member member, HttpSession session) {
 		
@@ -296,11 +308,13 @@ public class MemberController {
 		
   }
 	
+	
   @GetMapping("/mypage")
   public ModelAndView mypage(ModelAndView mv, HttpSession session) {
 	  mv.setViewName("member/mypage");
 	  return mv;
   }
+  
   
   @GetMapping("/updateForm/{memberNo}")
   public ModelAndView updateForm(@PathVariable("memberNo") int memberNo, 
@@ -323,6 +337,7 @@ public class MemberController {
 	  return mv;
   }
  
+  
   @PostMapping("/update")
   public ModelAndView updateMember(Member member, ModelAndView mv, HttpSession session) {
 	  try {
@@ -340,6 +355,7 @@ public class MemberController {
 	  }  
 	  return mv;
   }
+  
   
  @PatchMapping("/{memberNo}")
  public ResponseEntity<ResponseData> deleteMember(@PathVariable("memberNo") int memberNo) {
