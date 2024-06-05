@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-
     <Style>
         div{
             box-sizing : border-box;
@@ -69,7 +68,36 @@
              	font-weight : bolder;
              }
         }
-	
+        #category {
+        	margin-left : 48px; 
+        	margin-top : 5px; 
+        	height :30px;
+        }
+		.question-table {
+			width : 1100px; 
+			height : 20px;
+		}
+		.question-table-thead {
+			height : 40px; 
+			background-color : lightgrey;
+		}
+		.td1 {
+			height : 100px;
+		}
+		.questionList {
+			height : 40px; 
+		}
+		.question-form {
+			padding-left : 50px; 
+			padding-top:50px;
+		}
+		.form-select {
+			height : 35px;
+		}
+		.input-keyword {
+			width : 300px; 
+			height : 35px; 
+		}
         
     </style>        
 
@@ -92,7 +120,7 @@
         </div>
         <div class="question-find" >
             <div>
-                <select id="category" name="category" style="margin-left : 48px; margin-top : 5px; height :30px;">
+                <select id="category" name="category">
                     <option value="0">전체</option>
                     <option value="1">상품문의</option>
                     <option value="2">주문/결제문의</option>
@@ -103,8 +131,8 @@
         </div>
         <div class="question-list">   
             <div>
-                <table border="1" align="center" style="width : 1100px; height : 20px;">
-                    <thead align="center" style="height : 40px; background-color : lightgrey;">
+                <table border="1" align="center" class="question-table">
+                    <thead align="center" class="question-table-thead">
                         <th>번호</th>
                         <th>카테고리</th>
                         <th>제목</th>
@@ -120,12 +148,12 @@
                         <c:choose>
                         	<c:when test="${ empty questionList }">
 		                        <tr>
-		                            <td colspan="6" align="center" style="height : 100px;"><b>문의한 내역이 존재하지 않습니다.</b></td>
+		                            <td colspan="6" align="center" class="td1"><b>문의한 내역이 존재하지 않습니다.</b></td>
 		                        </tr>
                         	</c:when>
                         	<c:otherwise>
 								<c:forEach items="${ questionList }" var="question">
-									<tr style="height : 40px;" class="questionList">
+									<tr class="questionList">
 			                            <td>${ question.questionNo }</td>
 			                            <td>${ question.categoryName }</td>
 			                            <td>${ question.questionTitle }</td>
@@ -139,7 +167,6 @@
                     </tbody>
                 </table>
                 <div align="center" style="margin-top : 20px;">
-                    
                     <c:choose>
                     	<c:when test="${pageInfo.currentPage eq  1}">
 	                    	<a class="btn btn-warning disabled"> < </a>
@@ -158,11 +185,8 @@
 		                   		<a id="number${ p }" class="btn btn-light" href="/goty/questions?page=${ p }">${ p }</a>
 		                   	</c:forEach>
                     	</c:otherwise>
-                    
                     </c:choose>
                     
-                    
-                   	
                     <c:choose>
                     	<c:when test="${pageInfo.currentPage eq pageInfo.endPage }">
                     		<a class="btn btn-warning disabled"> > </a>
@@ -171,18 +195,18 @@
                     		<a href="/goty/questions?page=${ pageInfo.currentPage + 1 }" class="btn btn-warning"> > </a>
                     	</c:otherwise>
                     </c:choose>
-                
                 </div>
             </div>
         </div>
+        
         <div class="question-insert">
             <div align="right">
                 <button id="btn1" type="button" class="btn btn-secondary"> 글쓰기 </button>
             </div>
         </div>
         <div class="question-search">
-            <form action="/goty/questions/find" style="padding-left : 50px; padding-top:50px;">
-                <select name="date" style="height : 35px;">
+            <form action="/goty/questions/find" class="question-form">
+                <select name="date" class="form-select">
                     <option value="all">전체</option>
                     <option value="week">일주일</option>
                     <option value="moth">한달</option>
@@ -194,7 +218,7 @@
                     <option value="content">내용</option>
                     <option value="writer">글쓴이</option>
                 </select>
-                <input style="width : 300px; height : 35px;" type="text" name="keyword" placeholder="내용을 입력해주세요"/>
+                <input class="input-keyword" type="text" name="keyword" placeholder="내용을 입력해주세요"/>
                 <input type="submit" class="btn btn-success" value="찾기"/>
             </form>
         </div>
@@ -210,20 +234,19 @@
 	    			location.href = '/goty/question/enroll';
     			}
     			
-    		})
+    		});
     	});
     	
     	$(function(){
     		$('.questionList').click(function(){
     			location.href = '/goty/question?questionNo=' + $(this).children().eq(0).html();
-    			consol.log((this).children().eq(0).html());
+    			//consol.log((this).children().eq(0).html());
     		})
     	});
     	
    		$(function(){
    			$('#category').change(function(){
    				const category = $('option:selected').val();
-                // choice 값을 비동기통신의 데이터로 넘긴다, 넘긴 데이터를 Controller에서 VO의 카테고리 필드값에 대입한다.
                 $.ajax({
                 	url : 'question/category',
                 	type : 'get',
@@ -250,9 +273,6 @@
                 });
    			})
    		}) 	
-   
-    	
-    	
     </script>
     
     

@@ -81,6 +81,32 @@
             width : 1000px;
             height : 100px;
         }
+        .margin-area {
+        	width: 1000px; 
+        	border-bottom : 1px solid black; 
+        	margin-bottom : 20px; 
+        	margin-left : 100px;
+        }
+        #select-area {
+        	width : 100px; 
+        	height : 30px;
+        }
+        .margin-area2 {
+        	width: 1000px; 
+        	border-bottom : 1px solid black; 
+        	margin-top : 20px; 
+        	margin-bottom : 20px;
+        }
+        .margin-area3 {
+        	padding-right : 70px; 
+        	margin-top : 50px;
+        }
+        .submit-btn {
+        	width: 70px;
+        }
+        .back-btn {
+        	width: 70px;
+        }
     </style>
 
 </head>
@@ -91,27 +117,27 @@
         <div class="question-title">
             <div><h3>FAQ</h3></div>
         </div>
-        <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom : 20px; margin-left : 100px;"></div>
+        <div class="margin-area"></div>
 
         <div class="question-content">
             <div>
                 <form action="/goty/faq/insert" method="post">
                 	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
                     <label for="faq-a" >질문</label>
-                    <select id="select-area" name="categoryNo" style="width : 100px; height : 30px;">
+                    <select id="select-area" name="categoryNo">
                     	<c:forEach items="${ categoryList }" var="category" varStatus="status">
                     		<option value="${ status.index + 1 }">${ category.categoryName }</option>
                     	</c:forEach>
                     </select>
                     <textarea id="faq-q" name="faqQuestion" placeholder="질문 내용을 입력해주세요" required></textarea>
-                    <div style="width: 1000px; border-bottom : 1px solid black; margin-top : 20px; margin-bottom : 20px;"></div>
+                    <div class="margin-area2"></div>
 
                     <textarea id="faq-a" name="faqAnswer" placeholder="답변 내용을 입력해주세요" required></textarea>
 
 
-                    <div align="right" style="padding-right : 70px; margin-top : 50px;">
-                        <input id="submit-btn" type="submit" value="등록" style="width: 70px;">
-                        <input class="back-btn" type="button" value="취소" style="width: 70px;" onclick="history.back();">
+                    <div class="margin-area3" align="right">
+                        <input id="submit-btn" type="submit" value="등록" class="submit-btn">
+                        <input class="back-btn" type="button" value="취소" onclick="history.back();">
                     </div>
                 </form>
             </div>

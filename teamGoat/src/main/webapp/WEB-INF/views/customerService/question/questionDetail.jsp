@@ -87,8 +87,60 @@
                 right : 97px;
             }
         }
-
-
+		.margin-area {
+			width: 1000px; 
+			border-bottom : 1px solid black; 
+			margin-bottom : 20px; 
+			margin-left : 100px;
+		}
+		.question-table {
+			width: 1000px; 
+			height:200px; 
+			background-color : rgb(241, 238, 238); 
+		}
+		.th1 {
+			width : 100px;
+		}
+		.th3 {
+			width : 100px;
+		}
+		.td3 {
+			width : 200px;" 
+			padding-left : 30px;
+		}
+		.margin-area2 {
+			width: 1000px; 
+			border-bottom : 1px solid black; 
+			margin-bottom: 10px; 
+			margin-left : 100px;
+		}
+		.answer-area-p {
+			background-color : rgb(241, 238, 238); 
+			width: 1000px; 
+			height : 100px; 
+			border : 1px solid black; 
+			padding-top : 5px; 
+			padding-left : 5px;
+		}
+		.answer-table {
+			border : 1px solid black;
+			width: 1000px; 
+			height:200px; 
+			background-color : rgb(241, 238, 238); 
+		}
+		.answer-th1 {
+		 	width : 100px;
+		}
+		.margin-area3 {
+			width: 1000px; 
+			border-bottom : 1px solid black; 
+			margin-bottom: 10px; 
+			margin-left : 100px;
+		}
+		#back-btn {
+			margin-left : 97px; 
+			width: 100px;
+		}
     </style>
 
 </head>
@@ -99,22 +151,21 @@
         <div class="question-title">
             <div><h3>1:1문의</h3></div>
         </div>
-        <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom : 20px; margin-left : 100px;"></div>
+        <div class="margin-area"></div>
 
         <div class="question-content">
             <div align="center">
-                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
+                <table border="1" class="question-table">
                     <thead>
-                        <th width="100px;">제목</th>
+                        <th class="th1">제목</th>
                         <td colspan="9">${ question.questionTitle }</td>
                     </thead>
-    
                     <tbody>
                         <tr>
                             <th>작성자</th>
                             <td colspan="3">${ question.questionWriter }</td>
-                            <th width="100px;">답변상태</th>
-                            <td colspan="5" width="200px;" style="padding-left : 30px;">${ question.answerYn }</td>
+                            <th class="th3">답변상태</th>
+                            <td colspan="5" class="td3">${ question.answerYn }</td>
                         </tr>
                         
                         <tr>
@@ -138,20 +189,19 @@
             </div>
         </div>
 
-
         <div class="answer-area">
-            <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
+            <div class="margin-area2"></div>
             <div>
 				<c:choose>
 					<c:when test="${empty answer }">
-		                <p style="background-color : rgb(241, 238, 238); width: 1000px; height : 100px; border : 1px solid black; padding-top : 5px; padding-left : 5px;">
+		                <p class="answer-area-p">
 		                 	 빠른 시간 내에 답변을 드리겠습니다. 잠시만 기다려 주세요!
 		                </p> 
 					</c:when>
 					<c:otherwise>
-		                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
+		                <table class="answer-table">
 		                    <thead>
-		                        <th width="100px;">답변자</th>
+		                        <th class="answer-th1">답변자</th>
 		                        <td colspan="9">${ answer.answerWriter }</td>
 		                    </thead>
 		    
@@ -160,7 +210,6 @@
 		                            <th>답변일시</th>
 		                            <td colspan="9">${ answer.createDate }</td>
 		                        </tr>
-		
 		                        <tr>
 		                            <th colspan="10"><p>${ answer.answerComment }</p></th>
 		                        </tr>
@@ -168,31 +217,26 @@
 		                </table>
 					</c:otherwise>
 				</c:choose>	
-
             </div>
-            <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
+            <div class="margin-area3"></div>
         </div>
 
         <br clear="both">
-
         <div class="button-area">
             <div class="button-area1">
-                <button id="backbtn" style="margin-left : 97px; width: 100px;">목록</button>
+                <button id="backbtn">목록</button>
             </div>
             <div class="button-area2">
                 <div>
-                    <!--참조게시글이 없는 경우에만 버튼 활성화 시켜야 함-->
                     <button class="btn btn-sm btn-warning" onclick="submit(0);">수정</button>
                     <button class="btn btn-sm btn-danger" onclick="submit(1);">삭제</button>
                 </div>
-
                 <form action="" method="post" id="update-form">
                     <input type="hidden" name="questionNo" value="${ question.questionNo }">
                     <input type="hidden" name="questionAttachPath" value="${ attach.fileChangeName }">
                 </form>
             </div>
         </div>
-
     </div>
 
     <script>
@@ -213,9 +257,6 @@
         	})
         })
     </script>
-
-
-
 
 </body>
 </html>

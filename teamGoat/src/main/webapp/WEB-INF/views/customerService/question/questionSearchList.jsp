@@ -68,8 +68,39 @@
              	font-weight : bolder;
              }
         }
-	
-        
+        #category {
+        	margin-left : 48px; 
+        	margin-top : 5px; 
+        	height :30px;
+        }
+		.question-table {
+			width : 1100px; 
+			height : 20px;
+		}
+		.question-table-thead {
+			height : 40px; 
+			background-color : lightgrey;
+		}
+		.td1 {
+			height : 100px;
+		}
+        .questionList {
+        	height : 40px; 
+        }
+        .margin-area {
+        	margin-top : 20px;
+        }
+        .search-form {
+        	padding-left : 50px; 
+        	padding-top:50px;
+        }
+        .form-select {
+        	height : 35px;
+        }
+        .input-keyword {
+        	width : 300px; 
+        	height : 35px; 
+        }
     </style>        
 
 
@@ -91,7 +122,7 @@
         </div>
         <div class="question-find" >
             <div>
-                <select id="category" name="category" style="margin-left : 48px; margin-top : 5px; height :30px;">
+                <select id="category" name="category">
                     <option value="1">주문/결제</option>
                     <option value="2">기타문의</option>
                     <option value="3">서비스</option>
@@ -101,8 +132,8 @@
         </div>
         <div class="question-list">   
             <div>
-                <table border="1" align="center" style="width : 1100px; height : 20px;">
-                    <thead align="center" style="height : 40px; background-color : lightgrey;">
+                <table border="1" align="center" class="question-table">
+                    <thead align="center" class="question-table-thead">
                         <th>번호</th>
                         <th>카테고리</th>
                         <th>제목</th>
@@ -118,12 +149,12 @@
                         <c:choose>
                         	<c:when test="${ empty searchList }">
 		                        <tr>
-		                            <td colspan="6" align="center" style="height : 100px;"><b>검색된 게시물이 존재하지 않습니다</b></td>
+		                            <td colspan="6" align="center" class="td1"><b>검색된 게시물이 존재하지 않습니다</b></td>
 		                        </tr>
                         	</c:when>
                         	<c:otherwise>
 								<c:forEach items="${ searchList }" var="question">
-									<tr style="height : 40px;" class="questionList">
+									<tr class="questionList">
 			                            <td>${ question.questionNo }</td>
 			                            <td>${ question.categoryName }</td>
 			                            <td>${ question.questionTitle }</td>
@@ -134,21 +165,9 @@
 								</c:forEach>
                         	</c:otherwise>
                         </c:choose>
-                        
-                        <!--사용자가 문의한 내역이 존재할 경우 for문을 통해 리스트 출력-->
-                        <!-- <tr style="height : 40px;">
-                            <td>1</td>
-                            <td>상품문의</td>
-                            <td>상품 재입고 문의드려요</td>
-                            <td>최진영</td>
-                            <td>2024-05-10</td>
-                            <td>1</td>
-                        </tr>
-                        -->
                     </tbody>
                 </table>
-                <div align="center" style="margin-top : 20px;">
-                    
+                <div align="center" class="margin-area">
                     <c:choose>
                     	<c:when test="${pageInfo.currentPage eq  1}">
 	                    	<button type="button" class="btn btn-warning disabled"> < </button>
@@ -177,7 +196,6 @@
                     		<button type="button" class="btn btn-warning"> > </button>
                     	</c:otherwise>
                     </c:choose>
-                
                 </div>
             </div>
         </div>
@@ -187,20 +205,20 @@
             </div>
         </div>
         <div class="question-search">
-            <form action="/goty/questions/find" style="padding-left : 50px; padding-top:50px;">
-                <select name="date" style="height : 35px;">
+            <form action="/goty/questions/find" class="search-form">
+                <select name="date" class="form-select">
                     <option value="all">전체</option>
                     <option value="week">일주일</option>
                     <option value="moth">한달</option>
                     <option value="threeMonth">세달</option>
                 </select>
     
-                <select name="condition" style="height : 35px;">
+                <select name="condition" class="form-select">
                     <option value="subject">제목</option>
                     <option value="content">내용</option>
                     <option value="writer">글쓴이</option>
                 </select>
-                <input style="width : 300px; height : 35px;" type="text" name="keyword" placeholder="내용을 입력해주세요"/>
+                <input class="input-keyword" type="text" name="keyword" placeholder="내용을 입력해주세요"/>
                 <input type="submit" class="btn btn-success" value="찾기"/>
             </form>
         </div>
@@ -216,20 +234,16 @@
 	    			location.href = '/goty/question/enroll';
     			}
     			
-    		})
+    		});
     	});
     	
     	$(function(){
     		$('.questionList').click(function(){
     			location.href = '/goty/question?questionNo=' + $(this).children().eq(0).html();
     			consol.log((this).children().eq(0).html());
-    		})
-    	})
-    	
-    	
-    	
+    		});
+    	});
     </script>
-    
     
 </body>
 </html>

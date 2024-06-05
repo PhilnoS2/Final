@@ -87,7 +87,41 @@
                 right : 97px;
             }
         }
-
+        .margin-area {
+        	width: 1000px; 
+        	border-bottom : 1px solid black;
+        }
+        .margin-area2 {
+        	width: 1000px; 
+        	border-bottom : 1px solid black; 
+        	margin-bottom: 10px; 
+        	margin-left : 100px;
+        }
+		.question-table {
+			width: 1000px; 
+			height:200px; 
+			background-color : rgb(241, 238, 238);
+		}
+		
+		.th1 {
+			width : 100px;
+		}
+		.th2 {
+			width : 100px;
+		}
+		.td3 {
+			width : 200px; 
+			padding-left : 30px;
+		}
+		#content {
+			width: 1000px; 
+			height: 200px; 
+		}
+		#back-btn {
+			margin-left : 97px; 
+			width: 100px;
+		}
+	
 
     </style>
 
@@ -99,13 +133,13 @@
         <div class="question-title">
             <div><h3>1:1문의</h3></div>
         </div>
-        <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom : 20px; margin-left : 100px;"></div>
+        <div class="margin-area"></div>
 
         <div class="question-content">
             <div align="center">
-                <table border="1" style="width: 1000px; height:200px; background-color : rgb(241, 238, 238)" >
+                <table class="question-table" border="1">
                     <thead>
-                        <th width="100px;">제목</th>
+                        <th class="th1">제목</th>
                         <td colspan="9">${ question.questionTitle }</td>
                     </thead>
     
@@ -113,8 +147,8 @@
                         <tr>
                             <th>작성자</th>
                             <td colspan="3">${ question.questionWriter }</td>
-                            <th width="100px;">답변상태</th>
-                            <td colspan="5" width="200px;" style="padding-left : 30px;">${ question.answerYn }</td>
+                            <th class="th2">답변상태</th>
+                            <td class="td3" colspan="5">${ question.answerYn }</td>
                         </tr>
                         
                         <tr>
@@ -140,24 +174,23 @@
             </div>
         </div>
 
-
         <div class="answer-area">
-            <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
+            <div class="margin-area2"></div>
             <div>
 				<form id="insert-form" action="/goty/admin/answer/insert" method="post">
 					<input type="hidden" name="questionNo" value="${ question.questionNo }">
                 	<input type="hidden" name="memberNo" value="${ sessionScope.loginMember.memberNo }">
-                    <textarea id="content" name="answerComment" style="width: 1000px; height: 200px;" placeholder="내용을 입력해주세요" required></textarea>
+                    <textarea id="content" name="answerComment" placeholder="내용을 입력해주세요" required></textarea>
                 </form>
             </div>
-            <div style="width: 1000px; border-bottom : 1px solid black; margin-bottom: 10px; margin-left : 100px;"></div>
+            <div class="margin-area2"></div>
         </div>
 
         <br clear="both">
 
         <div class="button-area">
             <div class="button-area1">
-                <button id="backbtn" style="margin-left : 97px; width: 100px;">목록</button>
+                <button id="backbtn">목록</button>
             </div>
             <div class="button-area2">
                 <div>
