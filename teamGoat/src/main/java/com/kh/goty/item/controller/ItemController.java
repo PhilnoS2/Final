@@ -278,9 +278,7 @@ public class ItemController {
 		if(itemService.findCartList(map) > 0) {
 			
 			session.setAttribute("alertMsg", "이미 장바구니에 포함된 상품입니다.");
-			
 			mv.setViewName("redirect:detail.item?platformNo=" + platformNo + "&itemNo=" + itemNo);
-			
 			return mv;
 			
 		} else {
@@ -288,15 +286,12 @@ public class ItemController {
 			if(itemService.addItemInCart(map) > 0) {
 				
 				mv.setViewName("redirect:cart?memberNo=" + memberNo);
-				
 				return mv;
 				
 			} else {
 				
-				mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.");
-				
-				mv.setViewName("common/errorPage");
-				
+				mv.addObject("errorMsg", "장바구니 목록 추가에 실패했습니다.")
+				  .setViewName("common/errorPage");
 				return mv;
 			}
 			
@@ -320,14 +315,12 @@ public class ItemController {
 		if(itemService.deleteItemInCart(map) > 0) {
 			
 			mv.setViewName("redirect:cart?memberNo=" + memberNo);
-			
 			return mv;
 			
 		} else {
 			
 			mv.addObject("errorMsg", "장바구니 목록 삭제에 실패했습니다.")
 			  .setViewName("common/errorPage");
-			
 			return mv;
 		}
 		
@@ -346,7 +339,6 @@ public class ItemController {
 		
 		mv.addObject(itemService.findItemDetail(map))
 		  .setViewName("item/itemOrder");
-
 		return mv;
 	}
 	
@@ -376,15 +368,12 @@ public class ItemController {
 		if(itemService.addOrder(order) > 0) {
 			
 			mv.setViewName("redirect:item.purchase?memberNo="+memberNo);
-			
 			return mv;
 			
 		} else {
 			
-			mv.addObject("errorMsg", "ㅈ댐");
-			
-			mv.setViewName("common/errorPage");
-			
+			mv.addObject("errorMsg", "ㅈ댐")
+			  .setViewName("common/errorPage");
 			return mv;
 			
 		}
@@ -397,10 +386,8 @@ public class ItemController {
 		
 		List<Order> orderList = itemService.findOrderList(memberNo);
 		
-		mv.addObject("orderList", orderList);
-		
-		mv.setViewName("item/itemPurchase");
-		
+		mv.addObject("orderList", orderList)
+		  .setViewName("item/itemPurchase");
 		return mv;
 	}
 	
@@ -462,28 +449,28 @@ public class ItemController {
 				
 				if(itemService.updatePurchaseAndOrder(purchaseNo, orderNum) > 0) {
 					
-					mv.addObject("purchaseNo", purchaseNo);
-					mv.setViewName("redirect:item.paid");
+					mv.addObject("purchaseNo", purchaseNo)
+					  .setViewName("redirect:item.paid");
 					return mv;
 					
 				}
 				
-				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
-				mv.setViewName("common/errorPage");
+				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.")
+				  .setViewName("common/errorPage");
 				return mv;
 				
 			} else {
 				
-				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
-				mv.setViewName("common/errorPage");
+				mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.")
+				  .setViewName("common/errorPage");
 				return mv;
 				
 			}
 			
 		} else {
 			
-			mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.");
-			mv.setViewName("common/errorPage");
+			mv.addObject("errorMsg", "제품 구매에 실패하셨습니다.")
+			  .setViewName("common/errorPage");
 			return mv;
 		}
 		
@@ -496,6 +483,7 @@ public class ItemController {
 		Purchase purchase = itemService.findPurchaseDetail(purchaseNo);
 		
 		System.out.println(purchase);
+		
 		mv.setViewName("item/itemResult");
 		return mv;
 	}

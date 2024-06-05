@@ -24,6 +24,9 @@
 
 	<jsp:include page="common/menubar.jsp" />
 	<div id="wrapper-div">
+		<div  >
+			<h3>신작</h3>
+		</div> 
 		<div class="swiper-container">
 		  	<div class="swiper-wrapper"></div>
 		</div>
@@ -80,7 +83,12 @@
 	  }
 		
 		const mySwiper = new Swiper('.swiper-container', {
-		  	autoplay: { delay: 1500 },
+			loop : false,
+			spaceBetween : 3,
+		  	autoplay: {
+		  		delay: 3000,
+		  		disableOnInteraction : false,
+			},
 		  	speed: 500,
 		  	slidesPerView: 2
 		});
