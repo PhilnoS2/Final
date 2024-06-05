@@ -154,7 +154,6 @@
         			location.href = '/goty/notice/enroll';
         		})
         	})
-        
         </script>
         
         <div class="notice-content">
