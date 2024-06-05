@@ -155,6 +155,9 @@
         .back-btn {
         	width: 70px;
         }
+        .margin-area3 {
+        	padding-right : 70px;
+        }
     </style>
 
 </head>
@@ -185,7 +188,7 @@
                     <input type="file" class="file-area" name="upfile1"> <br>
                     <div class="margin-area2"></div>
 
-                    <div align="right" style="padding-right : 70px;">
+                    <div align="right">
                         <input id="submit-btn" type="submit" value="수정" onclick="return submitContents();">
                         <input class="back-btn" type="button" value="취소" onclick="history.back();">
                     </div>
