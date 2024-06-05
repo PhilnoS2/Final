@@ -221,7 +221,7 @@
                 		<a  class="btn btn-warning disabled">></a>
                 	</c:when>
 					<c:otherwise>
-           				<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage + 1 }"><</a>
+           				<a  class="btn btn-warning" href="/goty/notices?page=${ pageInfo.currentPage + 1 }">></a>
 					</c:otherwise>
                 </c:choose>
                 

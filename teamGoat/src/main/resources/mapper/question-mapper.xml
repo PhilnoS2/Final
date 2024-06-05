@@ -98,8 +98,6 @@
 		       QUESTION_CATEGORY USING(CATEGORY_NO) 
 		 WHERE
 		       QUESTION.STATUS = 'Y'
-		   AND
-		       ANSWER_YN = 'X' 
 		 ORDER
 		    BY
 		       QUESTION.QUESTION_NO DESC   
