@@ -395,7 +395,7 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
-	
+	/*
 	@ExceptionHandler
 	public ResponseEntity<ResponseData> errHandler(IOException ex){
 		ResponseData rd = null;
@@ -413,7 +413,7 @@ public class FreeBoardController {
 		
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
-	
+	*/
 	
 	
 	
