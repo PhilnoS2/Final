@@ -114,9 +114,7 @@
 		$(() => {
 			
 			$('.items').click((e) => {
-				
 				location.href = 'detail.item?platformNo=2&itemNo=' + $(e.currentTarget).children().eq(0)[0].value;
-					
 			})
 			
 		});
