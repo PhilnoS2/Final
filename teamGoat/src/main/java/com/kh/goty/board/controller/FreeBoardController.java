@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -57,24 +58,29 @@ public class FreeBoardController {
 	@GetMapping("/all")
 	public ModelAndView selectListAll(@RequestParam(value="page", defaultValue="1") int page,
 									 ModelAndView mv) {
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		// 동적sql 조건
-		map.put("categoryNo", 0);
-		
-		PageInfo pageInfo = 
-				Pagination.getPageInfo(boardService.selectListCount(map),
-												  page,
-												  5,
-												  3);
-		
-		ArrayList<Board> listAll =
-				(ArrayList<Board>)boardService.selectListAll(pageInfo, map);
-		
-		mv.addObject("listAll", listAll)
-		  .addObject("pi", pageInfo)
-		  .setViewName("board/selectListAll");
+		try {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			
+			map.put("categoryNo", 0);
+			PageInfo pageInfo = 
+					Pagination.getPageInfo(boardService.selectListCount(map),
+													  page,
+													  5,
+													  3);
+			
+			ArrayList<Board> listAll =
+					(ArrayList<Board>)boardService.selectListAll(pageInfo, map);
+			
+			mv.addObject("listAll", listAll)
+			  .addObject("pi", pageInfo)
+			  .setViewName("board/selectListAll");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
+			  .setViewName("common/errorPage");
+			return mv;
+		}
 		return mv;
 	}
 	
@@ -89,20 +95,27 @@ public class FreeBoardController {
 								Board board, 
 								MultipartFile upFile, 
 								HttpSession session) {
-		
-		// 첨부 파일 확인
-		if(!upFile.getOriginalFilename().equals("")) {
-			board.setOriginName(upFile.getOriginalFilename());
-			board.setChangeName(saveFile(upFile, session));
-			board.setImagePath("resources/uploadFiles/" + board.getChageName());
-		}
-		
-		if(boardService.insert(board) > 0) {
-			mv.addObject("alertMsg", "게시글 작성 성공")
-			  .setViewName("redirect:all");
-		} else {
-			mv.addObject("errorMsg", "게시글 작성 실패")
+		try {
+			// 첨부 파일 확인
+			if(!upFile.getOriginalFilename().equals("")) {
+				board.setOriginName(upFile.getOriginalFilename());
+				board.setChangeName(saveFile(upFile, session));
+				board.setImagePath("resources/uploadFiles/" + board.getChageName());
+			}
+			
+			if(boardService.insert(board) > 0) {
+				mv.addObject("alertMsg", "게시글 작성 성공")
+				  .setViewName("redirect:all");
+			} else {
+				mv.addObject("errorMsg", "게시글 작성 실패")
+				  .setViewName("common/errorPage");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
 			  .setViewName("common/errorPage");
+			return mv;
 		}
 		
 		return mv;
@@ -129,21 +142,31 @@ public class FreeBoardController {
 	public ModelAndView selectCategory(@RequestParam("categoryNo") int categoryNo,
 									   @RequestParam(value="page", defaultValue="1") int page,
 									   ModelAndView mv) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("categoryNo", categoryNo);
 		
-		PageInfo pageInfo = 
-				Pagination.getPageInfo(boardService.selectListCount(map),
-												  page,
-												  5,
-												  3);
-		ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, map);
-		
-		mv.addObject("listAll", listAll)
-		  .addObject("pi", pageInfo)
-		  .addObject("categoryNo", categoryNo)
-		  .setViewName("board/selectListAll");
-		
+		try {
+			
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("categoryNo", categoryNo);
+			
+			PageInfo pageInfo = 
+					Pagination.getPageInfo(boardService.selectListCount(map),
+													  page,
+													  5,
+													  3);
+			ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, map);
+			
+			mv.addObject("listAll", listAll)
+			  .addObject("pi", pageInfo)
+			  .addObject("categoryNo", categoryNo)
+			  .setViewName("board/selectListAll");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
+			  .setViewName("common/errorPage");
+			return mv;
+		}
+
 		return mv;
 	}
 	
@@ -154,42 +177,58 @@ public class FreeBoardController {
 									@RequestParam("keyword") String keyword,
 									@RequestParam(value="page", defaultValue="1") int page,
 									ModelAndView mv) {
+		try {
+			HashMap<String, Object> map = new HashMap<String, Object>();
+			map.put("condition", condition);
+			map.put("keyword", keyword);
+			map.put("categoryNo", 0);
+			
+			// 서치 데이터 페이지네이션하기
+			PageInfo pageInfo = 
+					Pagination.getPageInfo(boardService.selectListCount(map),
+													  page,
+													  5,
+													  3);
 
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("condition", condition);
-		map.put("keyword", keyword);
-		map.put("categoryNo", 0);
+			ArrayList<Board> listAll =
+					(ArrayList<Board>)boardService.selectListAll(pageInfo, map);
+			
+			mv.addObject("listAll", listAll)
+			  .addObject("pi", pageInfo)
+			  .addObject("condition", condition)
+			  .addObject("keyword", keyword)
+			  .setViewName("board/selectListAll");
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
+			  .setViewName("common/errorPage");
+			return mv;
+		}
 		
-		// 서치 데이터 페이지네이션하기
-		PageInfo pageInfo = 
-				Pagination.getPageInfo(boardService.selectListCount(map),
-												  page,
-												  5,
-												  3);
-
-		ArrayList<Board> listAll =
-				(ArrayList<Board>)boardService.selectListAll(pageInfo, map);
-		
-		mv.addObject("listAll", listAll)
-		  .addObject("pi", pageInfo)
-		  .addObject("condition", condition)
-		  .addObject("keyword", keyword)
-		  .setViewName("board/selectListAll");
 		return mv;
 	}
 	
 	@GetMapping("/update/{boardNo}")
 	public ModelAndView updateBoardForm(@PathVariable("boardNo") int boardNo,
 								       ModelAndView mv) {
-		Board board = boardService.updateBoardForm(boardNo);
-		
-		if(board != null) {
+		try {
+			Board board = boardService.updateBoardForm(boardNo);
 			
-			mv.addObject("board", board)
-			  .setViewName("board/updateForm");
-		} else {
-			mv.addObject("errorMsg", "게시글을 찾을 수 없습니다.")
+			if(board != null) {
+				
+				mv.addObject("board", board)
+				  .setViewName("board/updateForm");
+			} else {
+				mv.addObject("errorMsg", "게시글을 찾을 수 없습니다.")
+				  .setViewName("common/errorPage");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
 			  .setViewName("common/errorPage");
+			return mv;
 		}
 		return mv;
 	}
@@ -199,23 +238,30 @@ public class FreeBoardController {
 									ModelAndView mv,
 									MultipartFile upFile, 
 									HttpSession session) {
-		
-		// 첨부 파일 확인
-		if(!upFile.getOriginalFilename().equals("")) {
-			board.setOriginName(upFile.getOriginalFilename());
-			board.setChangeName(saveFile(upFile, session));
-			board.setImagePath("resources/uploadFiles/" + board.getChageName());
-		}
-		
-		if(boardService.updateBoard(board) > 0) {
-			// log.info("board = {}", board);
-			mv.addObject("alertMsg", "게시글 수정에 성공했습니다.")
-			  .setViewName("redirect:select/"+board.getFreeBoardNo());
-		} else {
-			mv.addObject("errorMsg", "게시글 수정에 실패했습니다.")
-			  .setViewName("common/errorPage");
-		}
+		try{
+			// 첨부 파일 확인
+			if(!upFile.getOriginalFilename().equals("")) {
+				board.setOriginName(upFile.getOriginalFilename());
+				board.setChangeName(saveFile(upFile, session));
+				board.setImagePath("resources/uploadFiles/" + board.getChageName());
+			}
+			
+			if(boardService.updateBoard(board) > 0) {
+				// log.info("board = {}", board);
+				mv.addObject("alertMsg", "게시글 수정에 성공했습니다.")
+				  .setViewName("redirect:select/"+board.getFreeBoardNo());
+			} else {
+				mv.addObject("errorMsg", "게시글 수정에 실패했습니다.")
+				  .setViewName("common/errorPage");
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
+			  .setViewName("common/errorPage");
+			return mv;
+		}
+		
 		return mv;
 	}
 	
@@ -232,9 +278,11 @@ public class FreeBoardController {
 		  try {
 			  result = boardService.save(reply);
 			  if(result > 0) {
+				  data = result;
 				  rCode = "299";
 				  message =  "댓글 작성 성공!";
 			  } else {
+				  data = "댓글 찾기 실패 ";
 				  rCode = "598";
 				  message = "댓글을 찾지 못했습니다.";
 			  }
@@ -296,7 +344,6 @@ public class FreeBoardController {
 	
 	@PostMapping("/report")
 	public ResponseEntity<ResponseData> reportReply(@RequestBody Report report) {
-		// log.info("report = {}" , report);
 		ResponseData rd = null;
 		String rCode = "";
 		String message = "";
@@ -348,6 +395,24 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
+	
+	@ExceptionHandler
+	public ResponseEntity<ResponseData> errHandler(IOException ex){
+		ResponseData rd = null;
+		Object data = null;
+		String rCode = "";
+		String message = "";
+
+		// 어떤 예외인지에 따라 반환해주는 값 변경
+		
+		ex.printStackTrace();
+		log.info("err = {}", ex);
+		
+		
+		rd = RdTemplates.getRd(data, rCode, message); 
+		
+		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
+	}
 	
 	
 	

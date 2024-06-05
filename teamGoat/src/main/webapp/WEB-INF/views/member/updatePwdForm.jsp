@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<link rel="stylesheet" href="/goty/resources/member/css/updatePwdForm.css" >
 <meta charset="UTF-8">
 <title>update Pwd Form</title>
 </head>
