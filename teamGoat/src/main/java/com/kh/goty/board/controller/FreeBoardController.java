@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,7 @@ import com.kh.goty.board.model.vo.ResponseData;
 import com.kh.goty.common.model.vo.PageInfo;
 import com.kh.goty.common.template.Pagination;
 import com.kh.goty.common.template.RdTemplates;
+import com.kh.goty.member.model.vo.Member;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +59,7 @@ public class FreeBoardController {
 
 	@GetMapping("/all")
 	public ModelAndView selectListAll(@RequestParam(value="page", defaultValue="1") int page,
-									 ModelAndView mv) {
+									  ModelAndView mv) {
 		try {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			
@@ -174,9 +176,9 @@ public class FreeBoardController {
 	
 	@GetMapping("/search")
 	public ModelAndView searchBoards(@RequestParam("condition") String condition,
-									@RequestParam("keyword") String keyword,
-									@RequestParam(value="page", defaultValue="1") int page,
-									ModelAndView mv) {
+									 @RequestParam("keyword") String keyword,
+									 @RequestParam(value="page", defaultValue="1") int page,
+									 ModelAndView mv) {
 		try {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("condition", condition);
@@ -211,11 +213,21 @@ public class FreeBoardController {
 	
 	@GetMapping("/update/{boardNo}")
 	public ModelAndView updateBoardForm(@PathVariable("boardNo") int boardNo,
-								       ModelAndView mv) {
+								       ModelAndView mv,
+								       HttpSession session) {
+		
 		try {
+			Member member = (Member)session.getAttribute("loginMember");
+			
 			Board board = boardService.updateBoardForm(boardNo);
 			
 			if(board != null) {
+				
+				if(member.getMemberNo() != board.getMemberNo()) {
+					mv.addObject("errorMsg", "올바른 접근이 아닙니다.")
+					  .setViewName("common/errorPage");
+					return mv;
+				}
 				
 				mv.addObject("board", board)
 				  .setViewName("board/updateForm");
@@ -311,9 +323,9 @@ public class FreeBoardController {
 		count = boardService.replyCount(boardNo);
 		
 		PageInfo pi = Pagination.getPageInfo(count,
-											page,
-											3,
-											3);
+											 page,
+											 3,
+											 3);
 		
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
@@ -395,25 +407,27 @@ public class FreeBoardController {
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
-	/*
+	
+	
 	@ExceptionHandler
-	public ResponseEntity<ResponseData> errHandler(IOException ex){
+	public ResponseEntity<ResponseData> illegalExHandler(IOException ex){
 		ResponseData rd = null;
 		Object data = null;
 		String rCode = "";
 		String message = "";
 
 		// 어떤 예외인지에 따라 반환해주는 값 변경
-		
 		ex.printStackTrace();
 		log.info("err = {}", ex);
 		
+		data = "illegal_input";
+		rCode = "590";
+		message = "올바른 입력이 아닙니다.";
 		
 		rd = RdTemplates.getRd(data, rCode, message); 
 		
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
-	*/
 	
 	
 	
