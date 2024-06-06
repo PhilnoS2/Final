@@ -482,8 +482,7 @@ public class ItemController {
 		
 		Purchase purchase = itemService.findPurchaseDetail(purchaseNo);
 		
-		System.out.println(purchase);
-		
+		mv.addObject("purchase", purchase);
 		mv.setViewName("item/itemResult");
 		return mv;
 	}

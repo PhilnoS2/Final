@@ -32,6 +32,15 @@
 		margin : 20px; 
 		padding : 20px;
 	}
+	
+	#result{
+		border-bottom : 1px solid;
+		padding-bottom : 20px;
+	}
+	
+	.container > div {
+		text-align : center;
+	}
 
 </style>
 </head>
@@ -44,31 +53,41 @@
 
 		<div class="basic-border">
 
-			<h2>결제가 완료되었습니다.</h2>
-
+			<h2 id="result">결제가 완료되었습니다.</h2>
+			
+			<div class="basic-border">
+			
+				<p> 구매자 정보 </p>
+			
+				<p>구매 번호 - ${ purchase.purchaseNo }</p>
+				<p>구매자 이름 - ${ purchase.memberName }</p>
+				<p>구매 일자 - ${ purchase.purchaseDate }</p>
+				<p>구매 가격 - <fmt:formatNumber value="${ purchase.totalPrice }" type="number" />원</p>
+				
+			</div>
+			
+			<button id="toCart" class="btn btn-primary">장바구니</button>
+			<button id="home" class="btn btn-secondary">홈으로</button>
 
 		</div>
 
 	</div>
 
-	<div class="container">
-		<button id="toCart" class="btn btn-primary">장바구니</button>
-		<button id="home" class="btn btn-secondary">홈으로</button>
-	</div>
 
 	<script>
 
 		$(()=> {
 
-			$('#toCart').click(() => {
-				location.href="cart?memberNo=${memberNo}";
+			$('#home').click(() => {
+				location.href="/goty";
 			})
 
 		});
+		
 		$(()=> {
 
 			$('#toCart').click(() => {
-				location.href="/goty";
+				location.href="cart?memberNo=${sessionScope.loginMember.memberNo}";
 			})
 
 		});
