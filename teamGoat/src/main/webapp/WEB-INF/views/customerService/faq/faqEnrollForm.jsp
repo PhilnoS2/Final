@@ -172,7 +172,7 @@
             $('.back-btn').click(function(){
                 if(!(($('#faq-q').val() == '') && ($('#faq-a').val() == ''))){
                     if(confirm('작성중인 글을 저장되지 않습니다 취소하시겠습니까?')){
-                        location.href = 'http://naver.com';
+                        location.href = '/goty/faqs';
                     }
                 }
             })

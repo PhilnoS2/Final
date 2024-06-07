@@ -266,11 +266,13 @@
 						point = prompt("부여할 적립금을 입력해주세요(숫자만 입력 가능)");
 					}
 					while(isNaN(point));
+					
 					if(point != null){
 						$('.add-point').val(point);
 						$('#update').attr('action', '/goty/admin/member/update/point');
 						$('#update').submit();
 					}
+					
 				}
 				else{
 					alert('선택된 회원이 없습니다');
