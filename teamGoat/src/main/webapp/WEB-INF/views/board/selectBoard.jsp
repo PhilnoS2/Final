@@ -162,6 +162,7 @@
 	<script src="/goty/resources/board/js/selectBoard.js"></script>
 	<script>
 	 let seletReplyNo;
+
 	 
 	$(() => {
 		replyList(1);
@@ -196,6 +197,8 @@
 	
 	
 	function replyList(value) {
+		const flag = '${ sessionScope.loginMember ne null}';
+			 
 		$.ajax({
 			url: '/goty/freeboards/replyList',
 			data: {
@@ -204,49 +207,65 @@
 			},
 			type: 'get',
 			success: (result) => {
-				
 				if(result.data != null){
 					$('#replyList-area').empty();
 					$('#pg').empty();
+					let content = '';
 					
 					pi = result.data.pi;
 					replies = result.data.replies;
-					let content = '';
 					
-					console.log(replies);
-					replies.forEach((item) => {
-						$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
-													 +'<div class="d-flex p-1 m-1 justify-content-between">'
-														+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
-														+'<div class="d-flex justify-content-between"><p class="mb-0 mr-1 inline">신고('+item.reportCount+')</p>'
-														+'<c:if test="${ sessionScope.loginMember ne null}" >'
-															+'<button class="btn btn-sm btn-danger"'
-															+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')";>신고</button>'
-											            +'</c:if></div>'
-										             +'</div>'
-										             +'<p id="review-content" class="pl-2">'+item.reviewContent+'</p>'
-										             +'<h5 id="review-writer">'+item.reviewWriter+'</h5>'
-													 +'<div>'
-													);
-					});
-					
-					
-					if(pi.currentPage > 1){
-						$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+(pi.currentPage-1)+')" >이전</button/></li>');	
+					if(replies != null){
+						replies.forEach((item) => {
+							
+							if(item.reviewWriter == null){
+								item.reviewWriter = '(카카오)'+item.nickname;
+							}
+							
+							if(item.status == 'NM'){
+								item.reviewWriter = '(네이버)'+item.nickname;
+							}
+							
+							$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
+														 +'<div class="d-flex p-1 m-1 justify-content-between">'
+															+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
+															+'<div class="d-flex justify-content-between"><p class="mb-0 mr-1 inline">신고('+item.reportCount+')</p>'
+																+'<button id='+item.reviewNo+' class="btn btn-sm btn-danger" '
+																+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')";>신고</button>'
+												            +'</div>'
+											             +'</div>'
+											             +'<p id="review-content" class="pl-2">'+item.reviewContent+'</p>'
+											             +'<h5 id="review-writer">'+item.reviewWriter+'</h5>'
+														 +'<div>'
+														);
+						
+							if(flag == 'false'){
+								$('#'+item.reviewNo).attr('disabled', true);
+							} else {
+								$('#'+item.reviewNo).attr('disabled', false);
+							}
+						});
+						
 					}
 					
-					for(let i = pi.startPage; i <= pi.endPage; i++){
-						if(pi.currentPage != i){
-							$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+i+')">'+ i +'</button></li')
-						}else {
-							$('#pg').append('<li class="page-item active"><button class="page-link" onclick="replyList('+i+')">'+ i +'</button></li')
-						}						
+					if(pi != null){
+						if(pi.currentPage > 1){
+							$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+(pi.currentPage-1)+')" >이전</button/></li>');	
+						}
+						
+						for(let i = pi.startPage; i <= pi.endPage; i++){
+							if(pi.currentPage != i){
+								$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+i+')">'+ i +'</button></li')
+							}else {
+								$('#pg').append('<li class="page-item active"><button class="page-link" onclick="replyList('+i+')">'+ i +'</button></li')
+							}						
+						}
+						
+						if((pi.currentPage != pi.maxPage) && pi.currentPage != 1){
+							$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+(pi.currentPage+1)+')" >다음</button/></li>')
+						}
 					}
-					
-					if((pi.currentPage != pi.maxPage) && pi.currentPage != 1){
-						$('#pg').append('<li class="page-item"><button class="page-link" onclick="replyList('+(pi.currentPage+1)+')" >다음</button/></li>')
-					}
-					
+		
 				} else {
 					console.log(result);
 					$('#replyList-area').append('<p class="mx-auto font-italic font-weight-bold" style="width:250px">'+result.message+'</p>');

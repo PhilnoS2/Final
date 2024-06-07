@@ -192,6 +192,8 @@
 					if(result.responseCode == '299'){
 						alert(result.message);
 						location.href = "/goty/member/logout";
+					} else {
+						alert(result.message);
 					}
 				},
 				
@@ -208,9 +210,10 @@
 					if(result.responseCode == '299'){
 						alert(result.message);
 						location.href = "/goty/member/logout";
+					} else {
+						alert(result.message);
 					}
 				},
-				
 			});
 		});
 		

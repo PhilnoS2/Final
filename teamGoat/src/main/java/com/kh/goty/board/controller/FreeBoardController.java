@@ -300,7 +300,7 @@ public class FreeBoardController {
 			  }
 			  
 		  } catch(Exception e) {
-			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "죄송합니다."); 
+			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
 		  }
 		  
 		  rd = RdTemplates.getRd(data, rCode, message);
@@ -312,42 +312,40 @@ public class FreeBoardController {
 	@GetMapping("/replyList")
 	public ResponseEntity<ResponseData> replyList(@RequestParam("boardNo") int boardNo,
 												  @RequestParam("page") int page) {
-
+		
 		ResponseData rd = null;
 		String rCode = "";
 		String message = "";
 		int count = 0;
 		Map<String, Object> map = null;		
 		List<Reply> replies = null;
-		
-		count = boardService.replyCount(boardNo);
-		
-		PageInfo pi = Pagination.getPageInfo(count,
-											 page,
-											 3,
-											 3);
-		
-		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
+			
 		try {
-			  
-			  if(count > 0) {
-				  replies = boardService.findAllReply(boardNo,rowBounds);
-				  map =  new HashMap<String, Object>();
-				  map.put("pi", pi);
-				  map.put("replies", replies);
+			count = boardService.replyCount(boardNo);
+			PageInfo pi = Pagination.getPageInfo(count,
+												 page,
+												 3,
+												 3);
+			
+			int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+			RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+			if(count > 0) {
+				replies = boardService.findAllReply(boardNo,rowBounds);
 				  
-				  rCode = "299";
-				  message =  "성공성공!";
-			  } else {
-				  rCode = "298";
-				  message = "댓글이 존재하지 않습니다.";
-			  }
+				map =  new HashMap<String, Object>();
+				map.put("pi", pi);
+				map.put("replies", replies);
+				rCode = "299";
+				message =  "성공성공!";
+			} else {
+				rCode = "298";
+				message = "댓글이 존재하지 않습니다.";
+			}
 			  
-			  rd = RdTemplates.getRd(map, rCode, message); 
+			rd = RdTemplates.getRd(map, rCode, message); 
 		  } catch(Exception e) {
-			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+			  e.printStackTrace();
+			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
 		  }	 
 		  
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
@@ -374,7 +372,7 @@ public class FreeBoardController {
 			rd = RdTemplates.getRd(result, rCode, message); 
 			
 		} catch(Exception e) {
-			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
 		}
 		  	
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
@@ -401,14 +399,14 @@ public class FreeBoardController {
 			rd = RdTemplates.getRd(result, rCode, message); 
 			
 		} catch(Exception e) {
-			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "미안;"); 
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
 		}
 		
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
 	}
 	
 	
-	
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler
 	public ResponseEntity<ResponseData> illegalExHandler(IOException ex){
 		ResponseData rd = null;

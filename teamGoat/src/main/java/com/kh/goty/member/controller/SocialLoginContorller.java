@@ -39,6 +39,7 @@ public class SocialLoginContorller {
 			
 			if(socialMemberService.checkKakaoId(member.getMemberId()) > 0) {
 				Member kmember = socialMemberService.loginKakao(member.getMemberId());
+				
 				kmember.setStatus("KM");
 				session.setAttribute("loginMember", kmember);
 				session.setAttribute("alertMsg", "로그인 성공");
