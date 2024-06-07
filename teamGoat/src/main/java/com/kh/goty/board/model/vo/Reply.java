@@ -8,6 +8,8 @@ public class Reply {
 	private int freeBoardNo;
 	private int memberNo;
 	private int reportCount;
+	private String nickname;
+	private String status;
 	private String reviewWriter;
 	private String reviewContent;
 	private Date createDate;
@@ -27,6 +29,22 @@ public class Reply {
 		this.createDate = createDate;
 	}
 	
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public int getReportCount() {
 		return reportCount;
 	}
@@ -75,8 +93,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [reviewNo=" + reviewNo + ", freeBoardNo=" + freeBoardNo + ", memberNo=" + memberNo
-				+ ", reportCount=" + reportCount + ", reviewWriter=" + reviewWriter + ", reviewContent=" + reviewContent
-				+ ", createDate=" + createDate + "]";
+				+ ", reportCount=" + reportCount + ", nickname=" + nickname + ", status=" + status + ", reviewWriter="
+				+ reviewWriter + ", reviewContent=" + reviewContent + ", createDate=" + createDate + "]";
 	}
-
 }

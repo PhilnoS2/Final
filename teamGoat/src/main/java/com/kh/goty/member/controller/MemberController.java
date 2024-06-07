@@ -75,8 +75,9 @@ public class MemberController {
 			if(loginMember != null 
 			   && loginMember.getEmptyCodeYn().equals("Y")
 			   && loginMember.getMemberPwd().equals(member.getMemberPwd())) {
-				mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
-				return mv;
+				
+					mv.addObject("loginMember", loginMember).setViewName("member/updatePwdForm");
+			   return mv;
 			}
 		
 			if(loginMember != null 
@@ -142,11 +143,11 @@ public class MemberController {
 	public ModelAndView insertMember(Member member, 
 									 ModelAndView mv, 
 									 HttpSession session) {
-		
-		String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
-		member.setMemberPwd(encPwd);
-		member.setStatus("GT");
 		try {
+			String encPwd = bcryptPasswordEncoder.encode(member.getMemberPwd());
+			member.setMemberPwd(encPwd);
+			member.setStatus("GT");
+	
 			if(memberService.insertMember(member) > 0) {
 				session.setAttribute("alertMsg", "회원가입 성공");
 				mv.setViewName("redirect:/");
@@ -269,7 +270,7 @@ public class MemberController {
 					if(memberService.updatePwd(member) > 0) {
 						session.setAttribute("alertMsg", "임시 코드가 이메일로 발송되었습니다.");
 					} else {
-						mv.addObject("errorMsg", "비밀번호 변경 실패").setViewName("common/errorPage");
+						mv.addObject("errorMsg", "임시 코드 이메일로 발송 실패").setViewName("common/errorPage");
 						return mv;
 					}
 					
@@ -307,9 +308,7 @@ public class MemberController {
 			 e.printStackTrace();
 			 mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.").setViewName("common/errorPage");
 			 return mv;
-		}
-	
-		
+		}	
   }
 	
 	
@@ -323,8 +322,9 @@ public class MemberController {
   @GetMapping("/updateForm/{memberNo}")
   public ModelAndView updateForm(@PathVariable("memberNo") int memberNo, 
 		  						 ModelAndView mv) {
-	  Member member = null;
+	
 	  try {
+		  Member member = null;
 		  member = memberService.findUpdateMember(memberNo);
 		  
 		  if(member != null) {
@@ -363,10 +363,8 @@ public class MemberController {
   
  @PatchMapping("/{memberNo}")
  public ResponseEntity<ResponseData> deleteMember(@PathVariable("memberNo") int memberNo) {
-	 
 	  int result = 0;
 	  ResponseData rd = null;
-	  
 	  try {
 		  result = memberService.deleteMember(memberNo);
 		  rd = RdTemplates.getRd("회원 탈퇴 성공", "299", "회원 탈퇴 성공");
@@ -377,7 +375,6 @@ public class MemberController {
 	  }
 	  
 	  return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
-	 
  }
 	
 
@@ -392,6 +389,7 @@ public class MemberController {
 	  }
 	  catch(Exception e) {
 		  // 서버쪽 오류
+		  e.printStackTrace();
 		  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "600", "서버 오류");
 	  }
 

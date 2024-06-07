@@ -274,6 +274,8 @@
 		  REVIEW_CONTENT reviewContent,
 		  CREATE_DATE createDate,
           MEMBER.MEMBER_NAME AS "REVIEWWRITER",
+          MEMBER.NICKNAME nickname,
+          MEMBER.STATUS status,
           COUNT(REPORT_NO) reportCount
 	  FROM
 	      FREE_BOARD_REVIEW
@@ -295,7 +297,9 @@
 		   FREE_BOARD_REVIEW.MEMBER_NO ,
 		   REVIEW_CONTENT ,
 		   CREATE_DATE ,
-           MEMBER.MEMBER_NAME     
+           MEMBER.MEMBER_NAME,
+           MEMBER.STATUS,
+           NICKNAME     
 	 ORDER
 	    BY REVIEW_NO DESC
 	</select>
