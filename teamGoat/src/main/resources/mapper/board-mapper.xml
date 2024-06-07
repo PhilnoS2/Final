@@ -276,6 +276,7 @@
           MEMBER.MEMBER_NAME AS "REVIEWWRITER",
           MEMBER.NICKNAME nickname,
           MEMBER.STATUS status,
+          REPLY_REPORT.REPORT_USER reportUser,
           COUNT(REPORT_NO) reportCount
 	  FROM
 	      FREE_BOARD_REVIEW
@@ -299,6 +300,7 @@
 		   CREATE_DATE ,
            MEMBER.MEMBER_NAME,
            MEMBER.STATUS,
+            REPLY_REPORT.REPORT_USER,
            NICKNAME     
 	 ORDER
 	    BY REVIEW_NO DESC

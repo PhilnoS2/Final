@@ -198,7 +198,7 @@
 	
 	function replyList(value) {
 		const flag = '${ sessionScope.loginMember ne null}';
-			 
+		const loginUserNo = '${ sessionScope.loginMember.memberNo}';	 
 		$.ajax({
 			url: '/goty/freeboards/replyList',
 			data: {
@@ -216,6 +216,8 @@
 					replies = result.data.replies;
 					
 					if(replies != null){
+						console.log(replies);
+						console.log(loginUserNo);
 						replies.forEach((item) => {
 							
 							if(item.reviewWriter == null){
@@ -239,7 +241,7 @@
 														 +'<div>'
 														);
 						
-							if(flag == 'false'){
+							if(flag == 'false' || loginUserNo == item.reportUser){
 								$('#'+item.reviewNo).attr('disabled', true);
 							} else {
 								$('#'+item.reviewNo).attr('disabled', false);

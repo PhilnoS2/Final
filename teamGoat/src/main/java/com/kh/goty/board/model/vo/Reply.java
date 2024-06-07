@@ -8,6 +8,7 @@ public class Reply {
 	private int freeBoardNo;
 	private int memberNo;
 	private int reportCount;
+	private int reportUser;
 	private String nickname;
 	private String status;
 	private String reviewWriter;
@@ -29,6 +30,14 @@ public class Reply {
 		this.createDate = createDate;
 	}
 	
+	public int getReportUser() {
+		return reportUser;
+	}
+
+	public void setReportUser(int reportUser) {
+		this.reportUser = reportUser;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -93,7 +102,9 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [reviewNo=" + reviewNo + ", freeBoardNo=" + freeBoardNo + ", memberNo=" + memberNo
-				+ ", reportCount=" + reportCount + ", nickname=" + nickname + ", status=" + status + ", reviewWriter="
-				+ reviewWriter + ", reviewContent=" + reviewContent + ", createDate=" + createDate + "]";
+				+ ", reportCount=" + reportCount + ", reportUser=" + reportUser + ", nickname=" + nickname + ", status="
+				+ status + ", reviewWriter=" + reviewWriter + ", reviewContent=" + reviewContent + ", createDate="
+				+ createDate + "]";
 	}
+
 }
