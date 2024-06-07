@@ -35,12 +35,9 @@ public class SocialLoginContorller {
 			String accessToken = socialMemberService.getToken(code);
 			Member member = socialMemberService.getUserInfoKakao(accessToken);
 			member.setAccessToken(accessToken);
-			member.setStatus("KM");
 			
 			if(socialMemberService.checkKakaoId(member.getMemberId()) > 0) {
 				Member kmember = socialMemberService.loginKakao(member.getMemberId());
-				
-				kmember.setStatus("KM");
 				session.setAttribute("loginMember", kmember);
 				session.setAttribute("alertMsg", "로그인 성공");
 				mv.setViewName("redirect:/");
@@ -64,11 +61,8 @@ public class SocialLoginContorller {
 	public ModelAndView kakaologout(HttpSession session, ModelAndView mv) throws IOException, ParseException {
 		try {
 			Member km = (Member)session.getAttribute("loginMember");
-			
 			String logoutUrl = "https://kapi.kakao.com/v1/user/logout";
-			
 			URL url = new URL(logoutUrl);
-			
 			HttpURLConnection urlConnection = (HttpURLConnection)url.openConnection();
 			
 			urlConnection.setRequestMethod("GET");
@@ -78,7 +72,6 @@ public class SocialLoginContorller {
 				= new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 			
 			String responseData = br.readLine();
-			System.out.println(responseData);
 			
 			session.removeAttribute("loginMember");
 			session.setAttribute("alertMsg", "로그아웃합니다.");
@@ -100,11 +93,10 @@ public class SocialLoginContorller {
 		try {
 			String accessToken = socialMemberService.getToken(code, state);
 			Member member = socialMemberService.getUserInfoNaver(accessToken);		
-			member.setStatus("NM");
 			
 			if(socialMemberService.checkNaverId(member.getMemberId()) > 0) {
 				Member nmember = socialMemberService.loginNaver(member.getMemberId());
-				nmember.setStatus("NM");
+				
 				session.setAttribute("loginMember", nmember);
 				session.setAttribute("alertMsg", "로그인 성공!");
 				mv.setViewName("redirect:/");

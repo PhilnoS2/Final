@@ -95,7 +95,7 @@ public class SocialMemberServiceImpl implements SocialMemberService {
 		JSONObject propObj = (JSONObject)responseObj.get("properties");
 		member.setNickname(propObj.get("nickname").toString());
 		member.setThumbnailImage(propObj.get("thumbnail_image").toString());
-		
+		member.setStatus("KM");
 		return member;
 	}
 
@@ -169,7 +169,7 @@ public class SocialMemberServiceImpl implements SocialMemberService {
 		String phone = res.get("mobile").toString().replaceAll("-", "");
 		nm.setPhone(phone);
 		nm.setBornDate(res.get("birthyear").toString());
-		
+		nm.setStatus("NM");
 		return nm;
 	}
 

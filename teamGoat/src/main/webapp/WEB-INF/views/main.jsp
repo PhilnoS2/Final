@@ -105,8 +105,8 @@
 						item = result.result.item;
 						for(i of item){
 							$('.swiper-wrapper').append('<div class="swiper-slide mt-1">'
-									             +'<div class="card w-75">'
-												    +'<div class="card-body">'
+									             +'<div class="card w-75 h-50">'
+												    +'<div class="card-body ">'
 												      +'<h4 class="card-title">게임명 : '+i.gametitle+'</h4>'
 												      +'<p class="card-text">회사명 : '+ i.entname +'</p>'
 												      +'<p class="card-text">장르 :'+ i.genre +'</a>'

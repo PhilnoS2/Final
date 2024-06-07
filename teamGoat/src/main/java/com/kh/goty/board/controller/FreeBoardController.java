@@ -126,16 +126,21 @@ public class FreeBoardController {
 	@GetMapping("/select/{boardNo}")
 	public ModelAndView selectBoard(@PathVariable("boardNo") int boardNo,
 									ModelAndView mv) {
-		
-		if(boardService.increaseCount(boardNo) > 0) {
-			Board board = boardService.selectBoard(boardNo);
-			mv.addObject("board",board)
-			  .setViewName("board/selectBoard");
-		} else {
-			mv.addObject("errorMsg", "게시글을 조회하지 못했습니다.")
-			.setViewName("common/errorPage");
+		try {
+			if(boardService.increaseCount(boardNo) > 0) {
+				Board board = boardService.selectBoard(boardNo);
+				mv.addObject("board",board)
+				  .setViewName("board/selectBoard");
+			} else {
+				mv.addObject("errorMsg", "게시글을 조회하지 못했습니다.")
+				.setViewName("common/errorPage");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			mv.addObject("errorMsg", "서버 오류, 관리자에게 문의 하세요.")
+			  .setViewName("common/errorPage");
+			return mv;
 		}
-		
 		return mv;
 	}
 	
@@ -155,6 +160,7 @@ public class FreeBoardController {
 													  page,
 													  5,
 													  3);
+			
 			ArrayList<Board> listAll = (ArrayList<Board>)boardService.selectListAll(pageInfo, map);
 			
 			mv.addObject("listAll", listAll)
