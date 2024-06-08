@@ -1,6 +1,7 @@
 package com.kh.goty.board.model.vo;
 
 import java.sql.Date;
+import java.util.List;
 
 public class Reply {
 	
@@ -9,6 +10,7 @@ public class Reply {
 	private int memberNo;
 	private int reportCount;
 	private int reportUser;
+	private String deleteYn;
 	private String nickname;
 	private String status;
 	private String reviewWriter;
@@ -29,7 +31,15 @@ public class Reply {
 		this.reviewContent = reviewContent;
 		this.createDate = createDate;
 	}
-	
+
+	public String getDeleteYn() {
+		return deleteYn;
+	}
+
+	public void setDeleteYn(String deleteYn) {
+		this.deleteYn = deleteYn;
+	}
+
 	public int getReportUser() {
 		return reportUser;
 	}
@@ -102,9 +112,9 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [reviewNo=" + reviewNo + ", freeBoardNo=" + freeBoardNo + ", memberNo=" + memberNo
-				+ ", reportCount=" + reportCount + ", reportUser=" + reportUser + ", nickname=" + nickname + ", status="
-				+ status + ", reviewWriter=" + reviewWriter + ", reviewContent=" + reviewContent + ", createDate="
-				+ createDate + "]";
+				+ ", reportCount=" + reportCount + ", reportUser=" + reportUser + ", deleteYn=" + deleteYn
+				+ ", nickname=" + nickname + ", status=" + status + ", reviewWriter=" + reviewWriter
+				+ ", reviewContent=" + reviewContent + ", createDate=" + createDate + "]";
 	}
 
 }

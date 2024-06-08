@@ -37,4 +37,6 @@ public interface BoardMapper {
 
 	int deleteBoard(int boardNo);
 
+	int deleteReply(int replyNo);
+
 }

@@ -90,6 +90,11 @@ public class BoardServiceImpl implements BoardService {
 	public int deleteBoard(int boardNo) {
 		return boardMapper.deleteBoard(boardNo);
 	}
+
+	@Override
+	public int deleteReply(int replyNo) {
+		return boardMapper.deleteReply(replyNo);
+	}
 	
 	
 	

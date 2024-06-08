@@ -306,7 +306,8 @@ public class FreeBoardController {
 			  }
 			  
 		  } catch(Exception e) {
-			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
+			  e.printStackTrace();
+			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "서버 오류, 빠르게 조치 하겠습니다."); 
 		  }
 		  
 		  rd = RdTemplates.getRd(data, rCode, message);
@@ -337,7 +338,6 @@ public class FreeBoardController {
 			RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 			if(count > 0) {
 				replies = boardService.findAllReply(boardNo,rowBounds);
-				  
 				map =  new HashMap<String, Object>();
 				map.put("pi", pi);
 				map.put("replies", replies);
@@ -351,7 +351,7 @@ public class FreeBoardController {
 			rd = RdTemplates.getRd(map, rCode, message); 
 		  } catch(Exception e) {
 			  e.printStackTrace();
-			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
+			  rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "서버 오류, 빠르게 조치 하겠습니다."); 
 		  }	 
 		  
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
@@ -378,7 +378,8 @@ public class FreeBoardController {
 			rd = RdTemplates.getRd(result, rCode, message); 
 			
 		} catch(Exception e) {
-			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
+			e.printStackTrace();
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "서버 오류, 빠르게 조치 하겠습니다."); 
 		}
 		  	
 		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
@@ -405,6 +406,34 @@ public class FreeBoardController {
 			rd = RdTemplates.getRd(result, rCode, message); 
 			
 		} catch(Exception e) {
+			e.printStackTrace();
+			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
+		}
+		
+		return new ResponseEntity<ResponseData>(rd, RdTemplates.getHeader(), HttpStatus.OK);
+	}
+	
+	@PutMapping("/deleteReply/{replyNo}")
+	public ResponseEntity<ResponseData> deleteReply(@PathVariable("replyNo") int replyNo){
+		ResponseData rd = null;
+		String rCode = "";
+		String message = "";
+		String result = "";
+		
+		try {
+			if(boardService.deleteReply(replyNo)> 0) {
+				 result = "댓글 삭제 성공";
+				 rCode = "299";
+				 message =  "댓글 삭제에 성공했습니다.";
+			} else {
+				 result = "댓글 삭제 실패";
+				 rCode = "297";
+				 message =  "댓글 삭제에 실패했습니다.";
+			}
+			rd = RdTemplates.getRd(result, rCode, message); 
+			
+		} catch(Exception e) {
+			e.printStackTrace();
 			rd = RdTemplates.getRd("서버쪽에 문제가 생겼습니다.", "599", "빠르게 조치 하겠습니다."); 
 		}
 		

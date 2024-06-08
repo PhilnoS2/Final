@@ -133,6 +133,35 @@
     </div>
   </div>
 
+ <div class="modal fade" id="deleteReplyModal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+      
+        <div class="modal-header">
+          <h4 class="modal-title">댓글삭제하기</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <div class="modal-body">
+         <div class="border border-danger p-2 rounded w-100 ">
+         	<h3>댓글 삭제</h3>
+
+			<div class="modal-body">
+		         <div class="p-2 rounded w-100 ">
+					<p>정말 삭제 하시겠습니까?</p>
+					<button class="btn btn-sm btn-danger" onclick="deleteRepley();" data-dismiss="modal" >삭제</button>
+		         </div>
+	        </div>
+         </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>	
 
   <div class="modal fade" id="delModal">
     <div class="modal-dialog modal-sm">
@@ -163,7 +192,6 @@
 	<script>
 	 let seletReplyNo;
 
-	 
 	$(() => {
 		replyList(1);
 	});
@@ -228,24 +256,40 @@
 								item.reviewWriter = '(네이버)'+item.nickname;
 							}
 							
+							if(item.deleteYn == "Y") {
+								item.reviewContent = '삭제된 댓글입니다.';
+							}
+							
 							$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
 														 +'<div class="d-flex p-1 m-1 justify-content-between">'
 															+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
 															+'<div class="d-flex justify-content-between"><p class="mb-0 mr-1 inline">신고('+item.reportCount+')</p>'
-																+'<button id='+item.reviewNo+' class="btn btn-sm btn-danger" '
-																+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')";>신고</button>'
+																+'<button id='+item.reviewNo+' class="btn btn-sm btn-danger m-1" '
+																+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')">신고</button>'
+																+'<button id='+item.reviewNo+'_del class="btn btn-sm btn-danger m-1" '
+																+'data-toggle="modal" data-target="#deleteReplyModal" onclick="getReplyNo('+item.reviewNo+')">댓글 삭제</button>'
 												            +'</div>'
 											             +'</div>'
 											             +'<p id="review-content" class="pl-2">'+item.reviewContent+'</p>'
 											             +'<h5 id="review-writer">'+item.reviewWriter+'</h5>'
 														 +'<div>'
 														);
-						
-							if(flag == 'false' || loginUserNo == item.reportUser){
-								$('#'+item.reviewNo).attr('disabled', true);
-							} else {
+							//신고버튼
+							if(flag == 'true' && loginUserNo != item.memberNo){
 								$('#'+item.reviewNo).attr('disabled', false);
 							}
+							else {
+								$('#'+item.reviewNo).attr('disabled', true);
+							}
+							
+							// 댓글삭제 버튼
+							if(flag == 'true' && loginUserNo == item.memberNo && item.deleteYn == "N"){
+								$('#'+item.reviewNo+"_del").attr('disabled', false);
+							}
+							else {
+								$('#'+item.reviewNo+"_del").attr('disabled', true);
+							}
+							
 						});
 						
 					}
@@ -312,6 +356,7 @@
 			data: JSON.stringify(data),
 			success: (result) => {
 				alert(result.message);
+				getReplyNo(0);
 				replyList(1);
 			},
 		
@@ -319,17 +364,50 @@
 	}
 	
 	function deleteBoard() {
-		
 		$.ajax({
 			url:'/goty/freeboards/delete/'+'${ boardNo }',
 			type: 'put',
 			success: (result)=> {
 				alert(result.message);
+				getReplyNo(0);
 				location.href="/goty/freeboards/all";
 			},
 			
 		});
+	}
+	
+	function reportCheck(){
+		const data = 
+			{	'reviewNo' : seletReplyNo,
+				'reportUser': '${ sessionScope.loginMember.memberNo }',
+			};
 		
+		$.ajax({
+			url:'/goty/freeboards/reportCheck',
+			type:'GET',
+			dataType:'json',
+			contentType : 'application/json; charset=utf-8',
+			data: JSON.stringify(data),
+			success: (result) => {
+				alert(result.message);
+				getReplyNo(0);
+				replyList(1);
+			},
+		
+		});
+	}
+	
+	function deleteRepley() {
+		$.ajax({
+			url:'/goty/freeboards/deleteReply/'+ seletReplyNo,
+			type: 'put',
+			success: (result)=> {
+				alert(result.message);
+				getReplyNo(0);
+				replyList(1);
+			},
+			
+		});
 	}
 	</script>
 	

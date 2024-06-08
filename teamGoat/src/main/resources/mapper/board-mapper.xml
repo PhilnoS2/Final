@@ -51,8 +51,6 @@
 	 JOIN MEMBER
        ON MEMBER.MEMBER_NO = FREE_BOARD.MEMBER_NO
 	WHERE
-	      FREE_BOARD.DELETE_YN = 'N'
-	  AND
 	      MEMBER.DELETE_YN = 'N'   
 	 <if test="categoryNo != null and categoryNo > 0">
 	 	AND PLATFORM_NO = #{categoryNo}
@@ -87,8 +85,6 @@
                  COUNT(FREE_BOARD_NO) AS "RCOUNT"
                  FROM    
                      FREE_BOARD_REVIEW         
-                WHERE
-                     DELETE_YN = 'N'
                 GROUP     
                    BY FREE_BOARD_NO) R
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO          
@@ -191,8 +187,6 @@
                    BY REVIEW_NO DESC) R
         ON FREE_BOARD.FREE_BOARD_NO = R.FREE_BOARD_NO
 	 WHERE
-	      FREE_BOARD.DELETE_YN = 'N'
-       AND
           MEMBER.DELETE_YN = 'N'
 	   AND
 	      FREE_BOARD.FREE_BOARD_NO  = #{boardNo}            
@@ -216,8 +210,6 @@
       JOIN PLATFORM_CATEGORY
         ON PLATFORM_CATEGORY.PLATFORM_NO = FREE_BOARD.PLATFORM_NO
      WHERE
-	       FREE_BOARD.DELETE_YN = 'N'
-       AND
            MEMBER.DELETE_YN = 'N'
 	   AND
 	       FREE_BOARD.FREE_BOARD_NO  = #{boardNo}
@@ -242,8 +234,6 @@
       
       </set>
 	 WHERE
-	      DELETE_YN = 'N'
-	   AND
    	      FREE_BOARD_NO = #{freeBoardNo}
 	</update>
 	
@@ -273,10 +263,11 @@
 		  FREE_BOARD_REVIEW.MEMBER_NO memberNo,
 		  REVIEW_CONTENT reviewContent,
 		  CREATE_DATE createDate,
+		  FREE_BOARD_REVIEW.DELETE_YN deleteYn,
           MEMBER.MEMBER_NAME AS "REVIEWWRITER",
           MEMBER.NICKNAME nickname,
           MEMBER.STATUS status,
-          REPLY_REPORT.REPORT_USER reportUser,
+          REPLY_REPORT.REPORT_USER reportUsers,
           COUNT(REPORT_NO) reportCount
 	  FROM
 	      FREE_BOARD_REVIEW
@@ -287,9 +278,7 @@
       JOIN REPLY_REPORT
         ON REPLY_REPORT.REPORT_NO = FREE_BOARD_REVIEW.REVIEW_NO       
 	 WHERE      		  
-		  FREE_BOARD_REVIEW.DELETE_YN = 'N'
-	   AND
-	      MEMBER.DELETE_YN = 'N'   	  
+	       MEMBER.DELETE_YN = 'N'   	  
 	   AND
 	       FREE_BOARD_NO = #{freeBoardNo}
 	  GROUP
@@ -298,9 +287,10 @@
 		   FREE_BOARD_REVIEW.MEMBER_NO ,
 		   REVIEW_CONTENT ,
 		   CREATE_DATE ,
+		   FREE_BOARD_REVIEW.DELETE_YN,
            MEMBER.MEMBER_NAME,
            MEMBER.STATUS,
-            REPLY_REPORT.REPORT_USER,
+           REPLY_REPORT.REPORT_USER,
            NICKNAME     
 	 ORDER
 	    BY REVIEW_NO DESC
@@ -315,10 +305,7 @@
 	  FROM
 	      FREE_BOARD_REVIEW
 	 WHERE
-	      FREE_BOARD_NO = #{boardNo}
-	   AND
-	      DELETE_YN = 'N'         
-	
+	      FREE_BOARD_NO = #{boardNo}     
 	</select>
 	
 	<insert id="insertReport"
@@ -348,7 +335,16 @@
 	      FREE_BOARD_NO = #{boardNo}     
 	</update>
 	
-	
+	<update id="deleteReply"
+		    parameterType="_int"
+	>
+	UPDATE
+	      FREE_BOARD_REVIEW
+	   SET
+	      DELETE_YN = 'Y'
+	 WHERE
+	      REVIEW_NO = #{replyNo}     
+	</update>
 	
 	
 	

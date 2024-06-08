@@ -35,6 +35,8 @@ public interface BoardService {
 	public int insertReport(Report report);
 
 	public int deleteBoard(int boardNo);
+
+	public int deleteReply(int replyNo);
 	
 
 }
