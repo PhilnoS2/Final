@@ -9,7 +9,8 @@ public class Reply {
 	private int freeBoardNo;
 	private int memberNo;
 	private int reportCount;
-	private int reportUser;
+	// private int reportUser;
+	private List<Integer> reportUsers;
 	private String deleteYn;
 	private String nickname;
 	private String status;
@@ -39,7 +40,17 @@ public class Reply {
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
 	}
+	
+	
+	public List<Integer> getReportUsers() {
+		return reportUsers;
+	}
 
+	public void setReportUsers(List<Integer> reportUsers) {
+		this.reportUsers = reportUsers;
+	}
+
+	/*
 	public int getReportUser() {
 		return reportUser;
 	}
@@ -47,7 +58,7 @@ public class Reply {
 	public void setReportUser(int reportUser) {
 		this.reportUser = reportUser;
 	}
-
+	 */
 	public String getStatus() {
 		return status;
 	}
@@ -112,7 +123,7 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [reviewNo=" + reviewNo + ", freeBoardNo=" + freeBoardNo + ", memberNo=" + memberNo
-				+ ", reportCount=" + reportCount + ", reportUser=" + reportUser + ", deleteYn=" + deleteYn
+				+ ", reportCount=" + reportCount + ", reportUsers=" + reportUsers + ", deleteYn=" + deleteYn
 				+ ", nickname=" + nickname + ", status=" + status + ", reviewWriter=" + reviewWriter
 				+ ", reviewContent=" + reviewContent + ", createDate=" + createDate + "]";
 	}

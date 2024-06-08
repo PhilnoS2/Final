@@ -282,6 +282,13 @@
 								$('#'+item.reviewNo).attr('disabled', true);
 							}
 							
+							for(user of item.reportUsers) {
+								console.log(user);
+								if(loginUserNo == user) {
+									$('#'+item.reviewNo).attr('disabled', true);
+								}
+							}
+							
 							// 댓글삭제 버튼
 							if(flag == 'true' && loginUserNo == item.memberNo && item.deleteYn == "N"){
 								$('#'+item.reviewNo+"_del").attr('disabled', false);

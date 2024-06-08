@@ -29,6 +29,23 @@
 		</collection>
 	</resultMap>
 	
+	<resultMap type="reply" id="replyResultSet">
+		<result column="REVIEW_NO" property="reviewNo" />
+	 	<result column="MEMBER_NO" property="memberNo" />
+		<result column="REVIEW_CONTENT" property="reviewContent" />
+		<result column="CREATE_DATE" property="createDate" />   
+		<result column="DELETE_YN" property="deleteYn" />
+		<result column="REVIEWWRITER" property="reviewWriter" />
+        <result column="NICKNAME" property="nickname" /> 
+        <result column="STATUS" property="status" />
+        <result column="REPORTCOUNT" property="reportCount" />
+        
+       <collection property="reportUsers" ofType="_int">
+       	<result column="REPORTUSERS" property="reportUsers" />
+       </collection>   
+           
+	</resultMap>
+	
 	<sql id="board">
 	 SELECT
 	       FREE_BOARD.FREE_BOARD_NO,
@@ -256,19 +273,19 @@
 	
 	<select id="findAllReply"
 		parameterType="_int"
-		resultType="reply"
+		resultMap="replyResultSet"
 	>
 	SELECT
-		  REVIEW_NO reviewNo,
-		  FREE_BOARD_REVIEW.MEMBER_NO memberNo,
-		  REVIEW_CONTENT reviewContent,
-		  CREATE_DATE createDate,
-		  FREE_BOARD_REVIEW.DELETE_YN deleteYn,
+		  REVIEW_NO,
+		  FREE_BOARD_REVIEW.MEMBER_NO,
+		  REVIEW_CONTENT ,
+		  CREATE_DATE ,
+		  FREE_BOARD_REVIEW.DELETE_YN ,
           MEMBER.MEMBER_NAME AS "REVIEWWRITER",
           MEMBER.NICKNAME nickname,
           MEMBER.STATUS status,
           REPLY_REPORT.REPORT_USER reportUsers,
-          COUNT(REPORT_NO) reportCount
+          COUNT(REPORT_NO) AS "REPORTCOUNT"
 	  FROM
 	      FREE_BOARD_REVIEW
 	  JOIN
