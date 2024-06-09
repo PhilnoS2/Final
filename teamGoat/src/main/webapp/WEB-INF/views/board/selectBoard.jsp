@@ -120,7 +120,7 @@
 					<input class="form-control w-100 d-inline" id="reportInput" name="report"
 					 placeholder="사유를 적어주세요." />
 				</div>
-				<button class="btn btn-sm btn-danger" onclick="report();" data-dismiss="modal" >신고</button>
+				<button class="btn btn-sm btn-danger" onclick="reportReply();" data-dismiss="modal" >신고</button>
 			</div>
          </div>
         </div>
@@ -242,7 +242,7 @@
 					
 					pi = result.data.pi;
 					replies = result.data.replies;
-					
+					console.log(replies);
 					if(replies != null){
 						replies.forEach((item) => {
 							
@@ -343,7 +343,7 @@
 		seletReplyNo = reviewNo; 
 	}
 	
-	function report(reviewNo){
+	function reportReply(){
 		const classNameCheck = $('#report-input').attr('class');
 	
 		if(!classNameCheck.includes('invisible') && !regReportCheck()) {
@@ -382,27 +382,6 @@
 				location.href="/goty/freeboards/all";
 			},
 			
-		});
-	}
-	
-	function reportCheck(){
-		const data = 
-			{	'reviewNo' : seletReplyNo,
-				'reportUser': '${ sessionScope.loginMember.memberNo }',
-			};
-		
-		$.ajax({
-			url:'/goty/freeboards/reportCheck',
-			type:'GET',
-			dataType:'json',
-			contentType : 'application/json; charset=utf-8',
-			data: JSON.stringify(data),
-			success: (result) => {
-				alert(result.message);
-				getReplyNo(0);
-				replyList(1);
-			},
-		
 		});
 	}
 	
