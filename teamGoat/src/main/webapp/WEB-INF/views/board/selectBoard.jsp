@@ -244,8 +244,6 @@
 					replies = result.data.replies;
 					
 					if(replies != null){
-						console.log(replies);
-						console.log(loginUserNo);
 						replies.forEach((item) => {
 							
 							if(item.reviewWriter == null){
@@ -263,7 +261,7 @@
 							$('#replyList-area').append('<div class="w-75 p-2 shadow mx-auto mb-2 bg-white border border-warning rounded-lg">'
 														 +'<div class="d-flex p-1 m-1 justify-content-between">'
 															+'<p class="mb-0 w-25 inline">'+item.createDate+'</p>'
-															+'<div class="d-flex justify-content-between"><p class="mb-0 mr-1 inline">신고('+item.reportCount+')</p>'
+															+'<div id='+item.reviewNo+'_div class="d-flex justify-content-between"><p class="mb-0 mr-1 inline">신고('+item.reportUsers.length+')</p>'
 																+'<button id='+item.reviewNo+' class="btn btn-sm btn-danger m-1" '
 																+'data-toggle="modal" data-target="#myModal" onclick="getReplyNo('+item.reviewNo+')">신고</button>'
 																+'<button id='+item.reviewNo+'_del class="btn btn-sm btn-danger m-1" '
@@ -274,17 +272,21 @@
 											             +'<h5 id="review-writer">'+item.reviewWriter+'</h5>'
 														 +'<div>'
 														);
+							// 로그인 하지 않았을경우
+							if(flag == 'false') {
+								$('#'+item.reviewNo+'_div').addClass('invisible');
+							}
+							
 							//신고버튼
-							if(flag == 'true' && loginUserNo != item.memberNo){
+							if(flag == 'true' && loginUserNo != item.memberNo && item.deleteYn == "N"){
 								$('#'+item.reviewNo).attr('disabled', false);
 							}
 							else {
 								$('#'+item.reviewNo).attr('disabled', true);
 							}
 							
-							for(user of item.reportUsers) {
-								console.log(user);
-								if(loginUserNo == user) {
+							for(report of item.reportUsers) {
+								if(loginUserNo == report) {
 									$('#'+item.reviewNo).attr('disabled', true);
 								}
 							}

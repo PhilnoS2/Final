@@ -284,8 +284,7 @@
           MEMBER.MEMBER_NAME AS "REVIEWWRITER",
           MEMBER.NICKNAME nickname,
           MEMBER.STATUS status,
-          REPLY_REPORT.REPORT_USER reportUsers,
-          COUNT(REPORT_NO) AS "REPORTCOUNT"
+          REPLY_REPORT.REPORT_USER reportUsers
 	  FROM
 	      FREE_BOARD_REVIEW
 	  JOIN
@@ -298,17 +297,6 @@
 	       MEMBER.DELETE_YN = 'N'   	  
 	   AND
 	       FREE_BOARD_NO = #{freeBoardNo}
-	  GROUP
-         BY 
-           REVIEW_NO ,
-		   FREE_BOARD_REVIEW.MEMBER_NO ,
-		   REVIEW_CONTENT ,
-		   CREATE_DATE ,
-		   FREE_BOARD_REVIEW.DELETE_YN,
-           MEMBER.MEMBER_NAME,
-           MEMBER.STATUS,
-           REPLY_REPORT.REPORT_USER,
-           NICKNAME     
 	 ORDER
 	    BY REVIEW_NO DESC
 	</select>
